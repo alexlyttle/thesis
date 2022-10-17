@@ -61,14 +61,14 @@
 
 % Examples of custom units commonly used in astronomy
 %
-% \DeclareSIUnit\year{yr}
-% \DeclareSIUnit\solarmass{\ensuremath{\mathrm{M}_\odot}}
-% \DeclareSIUnit\solarradius{\ensuremath{\mathrm{R}_\odot}}
-% \DeclareSIUnit\solarluminosity{\ensuremath{\mathrm{L}_\odot}}
-% \DeclareSIUnit\parsec{pc}
-% \DeclareSIUnit\dex{dex}
-% \DeclareSIUnit\mag{mag}
-% \DeclareSIUnit\arcsec{as}
+\DeclareSIUnit\year{yr}
+\DeclareSIUnit\solarmass{\ensuremath{\mathrm{M}_\odot}}
+\DeclareSIUnit\solarradius{\ensuremath{\mathrm{R}_\odot}}
+\DeclareSIUnit\solarluminosity{\ensuremath{\mathrm{L}_\odot}}
+\DeclareSIUnit\parsec{pc}
+\DeclareSIUnit\dex{dex}
+\DeclareSIUnit\magnitude{mag}
+\DeclareSIUnit\aarcsec{as}
 
 
 %% CITATIONS
@@ -78,6 +78,8 @@
   natbib=true
   ]{biblatex}
 
+\newcommand{\serenelli}{S17}
+\defcitealias{Serenelli.Johnson.ea2017}{\serenelli}
 
 %% FIGURES & TABLES
 %
@@ -105,3 +107,8 @@
 % Define your new commands here, e.g.
 %
 % \newcommand{\dd}{\mathrm{d}}  % For the derivative 'd'
+\newcommand{\numax}{\ensuremath{{\nu_\mathrm{max}}}}
+\newcommand{\dnu}{\ensuremath{\Delta\nu}}
+\newcommand{\metallicity}{\ensuremath{[\mathrm{M}/\mathrm{H}]}}
+\newcommand{\teff}{\ensuremath{T_\mathrm{eff}}}
+\newcommand{\mlt}{\ensuremath{{\alpha_\mathrm{MLT}}}}
