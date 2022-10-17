@@ -287,3 +287,6 @@ TSWLatexianTemp*
 
 # Build
 build/
+
+# Thesis
+thesis.pdf
