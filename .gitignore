@@ -290,3 +290,8 @@ build/
 
 # Thesis
 thesis.pdf
+
+# Python
+.python-version
+__pycache__/
+.ipynb_checkpoints/
