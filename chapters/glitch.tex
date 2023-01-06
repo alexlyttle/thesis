@@ -1,0 +1,77 @@
+% chapters/glitch.tex
+%
+% Copyright 2023 Alexander Lyttle.
+%
+% This work may be distributed and/or modified under the conditions of the
+% LaTeX Project Public License (LPPL) version 1.3 or later.
+%
+% The latest version of this license is in
+% https://www.latex-project.org/lppl.txt and version 1.3 or later is part of
+% all distributions of LaTeX version 2005/12/01 or later.
+%
+%
+\chapter[Acoustic glitches]{Acoustic glitches as a signature of helium abundance}\label{chap:glitch}
+
+A glitch arises from a sharp structural variation in the star.
+
+Explain that glitches can be a signature of helium abundance. If we can model the glitch consistently between models and observed stars, we can add parameters to the HBM which contain information about helium.
+
+In this chapter, we explore the theoretical background of acoustic glitches
+
+\section{Theory of the glitch}
+
+\subsection[1D example]{A one-dimensional example of a glitch}
+
+Here we go through an example of a change in density on a string, or in an organ pipe.
+
+Start with the standing wave modes for a uniform density string
+
+Then, introduce a structural perturbation and compute the wave functions in each section of the string
+
+Solve for the boundary conditions.
+
+
+
+\subsection{Helium glitch}\label{sec:helium-glitch}
+
+Where does the helium glitch come from?
+
+How Tassoul's asymptotic approximation assumes adiabatic exponent of 5/3 but this is not correct for a star. In a star, gamma is effected by the ionisation of elements. This effects the speed of sound,
+
+\begin{equation}
+    c = \sqrt{\gamma \frac{p}{\rho}},
+\end{equation}
+
+where \(p\) is pressure, \(\rho\) is density, and \(\gamma\) is the first adiabatic exponent,
+
+\begin{equation}
+    \gamma \equiv \Gamma_1 = \left( \frac{\partial \ln p}{\partial \ln \rho} \right)_s,
+\end{equation}
+
+where \(s\) is specific entropy.
+
+We can simplify the problem to consider a star of just hydrogen and helium. Using the approach of Houdeyer we can derive an apporximation for \(\gamma\) in terms of temperature and density in the star
+
+Reference Houdeyer's paper with plots to show the depression in the first adiabatic exponent with temperature and pressure. 
+
+\begin{figure}
+    \centering
+    \includegraphics{example-image-a}
+    \caption{Multi-panel figure showing \(\gamma\) as a function of \(\rho\) and \(T\) for different values of helium abundance.}
+    \label{fig:gamma-temp-density}
+\end{figure}
+
+Now we look at the radial order kernels and how they are sensitive to different region
+
+
+One approach is in Houdek and Gough, to take a perturbation in gamma and propagate this to a perturbation in frequency.
+
+\subsection{Base of the convective zone glitch}\label{sec:bcz-glitch}
+
+Other glitches are present. Sharp structure variation
+
+\section{Modelling glitches in stellar oscillations}
+
+
+\subsection{Gaussian processes }\label{sec:glitch-gp}
+
