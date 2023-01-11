@@ -22,13 +22,35 @@ In this chapter, we explore the theoretical background of acoustic glitches
 
 \subsection[1D example]{A one-dimensional example of a glitch}
 
-Here we go through an example of a change in density on a string, or in an organ pipe.
+A rapid variation in the structure of a medium induces an oscillation in the eigenfrequencies, \(\delta\omega\) . To demonstrate this, we consider a simple one-dimensional example. Consider a medium bound from \(x=0\) to \(x=L\) in which pressure waves can propagate at speed \(c\). The longitudinal displacement of the wave \(\xi\) must obey the wave equation,
 
-Start with the standing wave modes for a uniform density string
+\begin{equation}
+    \frac{\partial^2\xi(x, t)}{\partial t^2} = c^2 \frac{\partial^2\xi(x, t)}{\partial x^2},
+\end{equation}
 
-Then, introduce a structural perturbation and compute the wave functions in each section of the string
+at any given time \(t\). If \(c\) is constant, the solution to the wave equation is,
 
-Solve for the boundary conditions.
+\begin{equation}
+    \xi(x, t) = r \sin k x \cos(\omega t + \phi),
+\end{equation}
+
+where \(r\) and \(\phi\) are the amplitude and temporal phase of the wave. Solutions for \(\omega\) which satisfy \(\xi(L, t)=0\) may be derived as,
+
+\begin{equation}
+    \omega_n = c \frac{n \pi}{L},
+\end{equation}
+
+where \(n\) is a non-zero integer (the \(n=0\) solution would give \(\xi=0\) everywhere).
+
+where \(\omega\) is the angular frequency and \(k\) is the wave-number, such that \(\omega = c k\).
+
+\begin{figure}
+    \centering
+    \includegraphics{figures/glitch-1d-example-diagram.pdf}
+    \caption[A diagram showing a one-dimensional medium with a small structural perturbation.]{A diagram showing a one-dimensional medium split into three regions. 1: Fixed at \(x=0\) with a constant speed of sound \(c_0\); 2: A small structural perturbation starting at \(x=x_0\) with width \(\delta x\) with constant speed of sound \(c + \delta c\); 3: Fixed at \(x=L\) with a constant speed of sound \(c\).}
+    \label{fig:1d-diagram}
+\end{figure}
+
 
 
 
