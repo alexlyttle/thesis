@@ -103,8 +103,8 @@ for which the real solution is,
 However, this does not satisfy the boundary condition that \(\xi_1(0, t) = 0\). To satisfy this, we introduce a small displacement phase \(\epsilon\) and let \(x \rightarrow x + \epsilon\). Solving equation \ref{eq:xi1-real} for \(\epsilon\) at \(x=0\) gives,
 %
 \begin{align}
-    \epsilon &= \frac{1}{k} \tan^{-1}\left( \frac{(r_A / 2) \sin(\phi_A)}{1 - (r_A/2) \cos(\phi_A)} \right), \\
-    &= \frac{1}{k} \tan^{-1}\left( \frac{\imag[A]}{1 - \real[A]} \right)
+    \epsilon &= \frac{1}{k} \tan^{-1}\left( \frac{(r_A / 2) \sin(\phi_A)}{1 - (r_A/2) \cos(\phi_A)} \right), \notag\\
+    &= \frac{1}{k} \tan^{-1}\left( \frac{\imag[A]}{1 - \real[A]} \right) \label{eq:1d-phase}
 \end{align}
 %
 
@@ -133,7 +133,7 @@ Finally, we must impose the boundary condition \(\xi_3(L, t) = 0\) to solve for 
 %
 Solving equation \ref{eq:1d-glitch-sol} for \(\omega\) is not possible analytically. However, we can find individual modes \(\omega_n\) numerically, using equation \ref{eq:omega-n} as initial guesses.
 
-We find the roots \(\omega_n\) of equation \ref{eq:1d-glitch-sol} using Newton's method for \(n = 1,\dots,50\) with \(c=1\), \(L=1\), and several values of \(x_0, \delta x, \delta c\). The difference between the solutions for \(\omega_n\) and those from a linear medium (equation \ref{eq:omega-n}) are shown in Figure \ref{fig:1d-results}. We can see that the change in frequency, \(\delta \omega\) induced by the glitch oscillates. As the location of the glitch, \(x_0\) moves towards the center of the system, \(\delta\omega\) oscillates at a higher frequency. Increasing the width of the glitch, \(\delta x\), modulates the amplitude of \(\delta\omega\), and increasing \(\delta c\) increases the amplitude of \(\delta\omega\).
+We find the roots \(\omega_n\) of equation \ref{eq:1d-glitch-sol} using Newton's method for \(n = 1,\dots,50\) with \(c=1\), \(L=1\), and several values of \(x_0, \delta x, \delta c\). The difference between the solutions for \(\omega_n\) and those from a linear medium (equation \ref{eq:omega-n}) are shown in Figure \ref{fig:1d-results}. We can see that the change in frequency, \(\delta \omega\) induced by the glitch oscillates. As the location of the glitch, \(x_0\) moves towards the center of the system, \(\delta\omega\) oscillates with a shorter period. Increasing the width of the glitch, \(\delta x\), increases the slope and decreases the amplitude modulation period of \(\delta\omega\). We also see that a larger change in sound speed, \(\delta c\) increases the amplitude of \(\delta\omega\).
 
 \begin{figure}
     \centering
@@ -146,7 +146,7 @@ We find the roots \(\omega_n\) of equation \ref{eq:1d-glitch-sol} using Newton's
 
 %This may be interpreted as the nodes of each standing wave passing in and out of region 2 with increasing \(n\). Where there is a node, the wave is least sensitive to a change in structure, and 
 
-Now write some stuff about the phase offset \(epsilon\).
+The small phase offset \(\epsilon\) in equation \ref{eq:1d-phase} is required for the wave function to satisfy the boundary conditions at \(x = 0\). However, adding \(\epsilon\) shifts the effective location of \(x_0\). We plot \(\epsilon\) against \(\omega\) in Figure \ref{fig:1d-phase} and show that its magnitude is \(\sim 10^{-4}\), much smaller than the location and size of region 2. The oscillation caused by the glitch also shows up in Figure \ref{fig:1d-phase}, with its properties affected in a similar way to Figure \ref{fig:1d-results}.
 
 \begin{figure}
     \centering
@@ -155,8 +155,11 @@ Now write some stuff about the phase offset \(epsilon\).
     \label{fig:1d-phase}
 \end{figure}
 
-
 It would not be hard to believe that a similar oscillation could be found in the mode frequencies of a star, although its structure is more complicated. We can see from Figure \ref{fig:1d-results} that measuring \(\delta\omega\) could help characterise the structural glitch.
+
+% NOTES: Go slowly through this. The next step is to fit a simple mode to theses oscillations and show that we can find x0 and dx. And show how the amplitude scales with dc.
+
+% NOTES: When it comes to fitting the helium glitch, consider first fitting a GP to the modes with a free noise term. Fix the kernel scale to a series of values and show that we can see the glitch in the residuals. Of course, this leaves the question of what kernel scale to use. Well, we could just model everything at once!
 
 \subsection{Helium glitch}\label{sec:helium-glitch}
 
