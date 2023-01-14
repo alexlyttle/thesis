@@ -48,7 +48,7 @@ where \(r\) and \(\phi\) are the amplitude and temporal phase respectively. Solu
 %
 where \(n\) is a non-zero integer (the \(n=0\) solution would give \(\xi=0\) everywhere).
 
-Now, let us suppose there is a small structural perturbation (or glitch) in the medium at position \(x_0\) with width \(\delta x\). Figure \ref{fig:1d-diagram} shows this system divided into 3 regions, with region 2 containing the perturbation. In region 2, the speed of sound is \(c + \delta c\) and the corresponding wave number is \(k + \delta k\). Firstly, we will propose solutions to the right-travelling wave (\(\xi\{k, \delta k\}\)) for each region by considering reflection and transmission of the wave at each boundary. These are,
+Now, let us suppose there is a small structural perturbation (or glitch) in the medium at position \(x_0\) with half-width \(\delta x\). Figure \ref{fig:1d-diagram} shows this system divided into 3 regions, with region 2 containing the perturbation. In region 2, the speed of sound is \(c + \delta c\) and the corresponding wave number is \(k + \delta k\). Firstly, we will propose solutions to the right-travelling wave (\(\xi\{k, \delta k\}\)) for each region by considering reflection and transmission of the wave at each boundary. These are,
 %
 \begin{align}
     \xi_1(x, t) &= e^{i(\omega t - k x)} + A e^{i(\omega t + k x)}, \label{eq:xi1-r} \\
@@ -56,40 +56,40 @@ Now, let us suppose there is a small structural perturbation (or glitch) in the 
     \xi_3(x, t) &= D e^{i(\omega t - k x)}, \label{eq:xi3-r}
 \end{align}
 %
-where complex coefficients \(A\) and \(C\) represent reflections, and \(B\) and \(D\) represent transmissions, at \(x_0\) and \(x_0 + \delta x\) respectively. Later, we will substitute the left-travelling wave (\(- \xi\{-k, -\delta k\}\)) after determining the values of the coefficients.
+where complex coefficients \(A\) and \(C\) represent reflections, and \(B\) and \(D\) represent transmissions, at \(x_0 \pm \delta x\) respectively. Later, we will substitute the left-travelling wave (\(- \xi\{-k, -\delta k\}\)) after determining the values of the coefficients.
 
 \begin{figure}
     \centering
     \includegraphics{figures/glitch-1d-example-diagram.pdf}
-    \caption[A diagram showing a one-dimensional medium with a small structural perturbation.]{A diagram showing a one-dimensional medium split into three regions. 1: Fixed at \(x=0\) with a constant speed of sound \(c\); 2: A small structural perturbation starting at \(x=x_0\) with width \(\delta x\) with constant speed of sound \(c + \delta c\); 3: Fixed at \(x=L\) with a constant speed of sound \(c\).}
+    \caption[A diagram showing a one-dimensional medium with a small structural perturbation.]{A diagram showing a one-dimensional medium split into three regions. 1: Fixed at \(x=0\) with a constant speed of sound \(c\); 2: A small structural perturbation centred at \(x=x_0\) with width \(2\delta x\) with constant speed of sound \(c + \delta c\); 3: Fixed at \(x=L\) with a constant speed of sound \(c\).}
     \label{fig:1d-diagram}
 \end{figure}
 
 Initially neglecting the fixed points at \(x = 0, L\), the boundary conditions for this system are,
 %
 \begin{align}
-    \xi_1(x_0, t) &= \xi_2(x_0, t), \\
-    \xi_2(x_0 + \delta x) &= \xi_3(x_0 + \delta x), \\
-    \frac{\partial \xi_1}{\partial x}(x_0, t) &= \frac{\partial \xi_2}{\partial x}(x_0, t), \\
-    \frac{\partial \xi_1}{\partial x}(x_0 + \delta x, t) &= \frac{\partial \xi_2}{\partial x}(x_0 + \delta x, t).
+    \xi_1(x_0 - \delta x, t) &= \xi_2(x_0 - \delta x, t), \\
+    \xi_2(x_0 + \delta x, t) &= \xi_3(x_0 + \delta x, t), \\
+    \frac{\partial \xi_1}{\partial x}(x_0 - \delta x, t) &= \frac{\partial \xi_2}{\partial x}(x_0 - \delta x, t), \\
+    \frac{\partial \xi_2}{\partial x}(x_0 + \delta x, t) &= \frac{\partial \xi_3}{\partial x}(x_0 + \delta x, t).
 \end{align}
 %
 Solving these simultaneously gives the following equations for the complex coefficients,
 %
 \begin{align}
-    A &= \delta k (2k + \delta k) (1 - e^{2i \delta x (k + \delta k)}) e^{- 2i k x_0} \alpha^{-1}, \\
-    B &= 2 k (2k + \delta_k) e^{2i \delta x (k + \delta k)} e^{i \delta k x_0} \alpha^{-1}, \\
-    C &= 2 k \delta k e^{- i x_0 (2k + \delta k)} \alpha^{-1}, \\
-    D &= 4 k (k + \delta k) e^{i \delta x (2k + \delta k)} \alpha^{-1},
+    A &= \delta k (2k + \delta k) (1 - e^{4i \delta x (k + \delta k)}) e^{- 2i k (x_0 - \delta x)} \alpha^{-1}, \\
+    B &= 2 k (2k + \delta_k) e^{4i \delta x (k + \delta k)} e^{i \delta k (x_0 - \delta x)} \alpha^{-1}, \\
+    C &= 2 k \delta k e^{- i (x_0 - \delta x) (2k + \delta k)} \alpha^{-1}, \\
+    D &= 4 k (k + \delta k) e^{2 i \delta x (2k + \delta k)} \alpha^{-1},
 \end{align}
 %
 where,
 \begin{equation}
-    \alpha = (2k + \delta k)^2 e^{2 i \delta x (k + \delta k)} - \delta k^2.
+    \alpha = (2k + \delta k)^2 e^{4 i \delta x (k + \delta k)} - \delta k^2.
 \end{equation}
 %
 
-Now we have solutions for the coefficients, we can superpose the right-travelling wave, \(\xi\{k, \delta k\} \rightarrow - \xi\{-k, -\delta k\}\) to get the full solution for the wave function. Substituting \(k, \delta k \rightarrow -k, -\delta k\) into the coefficients yields their complex conjugates. Then, substituting Euler's formula, \(A = (r_A/2) e^{i\phi_A}\), equation \ref{eq:xi1-r} now becomes,
+Now we have solutions for the coefficients, we can superpose the right-travelling wave, \(\xi\{k, \delta k\} \rightarrow - \xi\{-k, -\delta k\}\) to get the full solution for the wave function. Substituting \(k, \delta k \rightarrow -k, -\delta k\) into the coefficients yields their complex conjugates, \((\overline{A},\overline{B},\overline{C},\overline{D})\). Substituting Euler's formula, \(A = (r_A/2) e^{i\phi_A}\) and \(\overline{A} = (r_A/2) e^{-i\phi_A}\), equation \ref{eq:xi1-r} now becomes,
 %
 \begin{equation}
     \xi_1(x, t) = e^{i \omega t} \left[ \frac{r_A}{2} \left( e^{i(kx + \phi_A)} - e^{-i(kx + \phi_A)} \right) - \left( e^{ikx} - e^{-ikx} \right) \right] \label{eq:xi1}
@@ -97,18 +97,10 @@ Now we have solutions for the coefficients, we can superpose the right-travellin
 %
 for which the real solution is,
 \begin{equation}
-    \real\left[\xi_1(x, t)\right] = \sin \omega t \left[2 \sin kx - r_A \sin(kx + \phi_A)\right]. \label{eq:xi1-real}
+    \real\left[\xi_1(x, t)\right] = \sin \omega t \left[2 \sin kx - r_A \sin(kx + \phi_A)\right].
 \end{equation}
 %
-However, this does not satisfy the boundary condition that \(\xi_1(0, t) = 0\). To satisfy this, we introduce a small displacement phase \(\epsilon\) and let \(x \rightarrow x + \epsilon\). Solving equation \ref{eq:xi1-real} for \(\epsilon\) at \(x=0\) gives,
-%
-\begin{align}
-    \epsilon &= \frac{1}{k} \tan^{-1}\left( \frac{(r_A / 2) \sin(\phi_A)}{1 - (r_A/2) \cos(\phi_A)} \right), \notag\\
-    &= \frac{1}{k} \tan^{-1}\left( \frac{\imag[A]}{1 - \real[A]} \right) \label{eq:1d-phase}
-\end{align}
-%
-
-We may now write solutions to the wave function in each region. Superposing the right-travelling wave and substituting Euler's formula in a similar way to \ref{eq:xi1} for Equations \ref{eq:xi2-r} and \ref{eq:xi3-r}, we can write the real components of the displacement in each region as,
+However, this does not satisfy the boundary condition that \(\xi_1(0, t) = 0\). To satisfy this, we must introduce a small displacement phase \(\epsilon\) and let \(x \rightarrow x + \epsilon\). Superposing the right-travelling wave and substituting Euler's formula in a similar way to \ref{eq:xi1} for equations \ref{eq:xi2-r} and \ref{eq:xi3-r}, we can write the real components of the displacement in each region as,
 %
 % \begin{align}
 %     \xi_3(x, t) = \frac{r_A}{2} e^{i \omega t} \left[ e^{i(k(x + \epsilon) + \phi_A)} - e^{-i(k(x + \epsilon) + \phi_A)} \right],
@@ -117,29 +109,36 @@ We may now write solutions to the wave function in each region. Superposing the 
 % with a real solution in trigonometric form,
 %
 \begin{align}
-    \real[\xi_1(x, t)] &= \sin \omega t \left\{2 \sin[k (x + \epsilon)] - r_A \sin[k(x + \epsilon) - \phi_A]\right\} \\
+    \real[\xi_1(x, t)] &= \sin \omega t \left\{2 \sin[k (x + \epsilon)] - r_A \sin[k(x + \epsilon) - \phi_A]\right\} \label{eq:xi1-real} \\
     \real[\xi_2(x, t)] &= \sin \omega t \left\{ r_B \sin[(k + \delta k)(x + \epsilon) - \phi_B] - r_C \sin[(k + \delta k)(x + \epsilon) - \phi_C]\right\} \\
     \real[\xi_3(x, t)] &= \sin \omega t \left\{r_D \sin[k(x + \epsilon) - \phi_D]\right\}
 \end{align}
 %
-
-Finally, we must impose the boundary condition \(\xi_3(L, t) = 0\) to solve for \(\omega\).
+Now, we can use the boundary condition at \(x=0\) to find \(\epsilon\). Solving equation \ref{eq:xi1-real} for \(\epsilon\) at \(x=0\) gives,
 %
 \begin{align}
-    \sin \omega t \left\{r_D \sin[k(L + \epsilon) - \phi_D]\right\} &= 0, \quad (\div \sin \omega t)\\
-    r_D \cos \phi_D \sin[k(L + \epsilon)] - r_D \sin \phi_D \cos[k(L + \epsilon)] &= 0,\\
+    \epsilon &= \frac{1}{k} \tan^{-1}\left( \frac{(r_A / 2) \sin(\phi_A)}{1 - (r_A/2) \cos(\phi_A)} \right), \notag\\
+    &= \frac{1}{k} \tan^{-1}\left( \frac{\imag[A]}{1 - \real[A]} \right) \label{eq:1d-phase}
+\end{align}
+%
+
+Finally, we can impose the boundary condition \(\xi_3(L, t) = 0\) to solve for \(\omega\).
+%
+\begin{align}
+    \sin \omega t \left\{r_D \sin[k(L + \epsilon) - \phi_D]\right\} &= 0, \quad (\div \sin \omega t) \notag \\
+    r_D \cos \phi_D \sin[k(L + \epsilon)] - r_D \sin \phi_D \cos[k(L + \epsilon)] &= 0, \notag \\
     \real[D] \sin[k(L + \epsilon)] - \imag[D] \cos[k(L + \epsilon)] &=0. \label{eq:1d-glitch-sol}
 \end{align}
 %
-Solving equation \ref{eq:1d-glitch-sol} for \(\omega\) is not possible analytically. However, we can find individual modes \(\omega_n\) numerically, using equation \ref{eq:omega-n} as initial guesses.
+Unfortunately, solving equation \ref{eq:1d-glitch-sol} for \(\omega\) is not possible analytically. However, we can find individual modes \(\omega_n\) numerically, using equation \ref{eq:omega-n} as initial guesses.
 
-We find the roots \(\omega_n\) of equation \ref{eq:1d-glitch-sol} using Newton's method for \(n = 1,\dots,50\) with \(c=1\), \(L=1\), and several values of \(x_0, \delta x, \delta c\). The difference between the solutions for \(\omega_n\) and those from a linear medium (equation \ref{eq:omega-n}) are shown in Figure \ref{fig:1d-results}. We can see that the change in frequency, \(\delta \omega\) induced by the glitch oscillates. As the location of the glitch, \(x_0\) moves towards the center of the system, \(\delta\omega\) oscillates with a shorter period. Increasing the width of the glitch, \(\delta x\), increases the slope and decreases the amplitude modulation period of \(\delta\omega\). We also see that a larger change in sound speed, \(\delta c\) increases the amplitude of \(\delta\omega\).
+We find the roots \(\omega_n\) of equation \ref{eq:1d-glitch-sol} using Newton's method for \(n = 1,\dots,50\) with \(c=1\), \(L=1\), and several values of \(x_0\), \(\delta x\), and \(\delta c\). The difference between the solutions for \(\omega_n\) and those from the homogeneous medium (equation \ref{eq:omega-n}) are shown in Figure \ref{fig:1d-results}. We can see that the change in frequency, \(\delta \omega\) induced by the glitch oscillates. As the location of the glitch, \(x_0\) moves towards the center of the system, \(\delta\omega\) oscillates with a shorter period. Increasing the half-width of the glitch, \(\delta x\), increases the slope and decreases the amplitude modulation period of \(\delta\omega\). We also see that a larger change in sound speed, \(\delta c\) increases the amplitude of \(\delta\omega\).
 
 \begin{figure}
     \centering
     \includegraphics{figures/glitch-1d-example-results.pdf}
     \caption{The change in mode frequency induced by a change in sound speed of \(\delta c\) from \(x=x_0\) to \(x=x_0 + \delta x\) in a one-dimensional medium, bound such that \(x \in [0, 1]\) (see Figure \ref{fig:1d-diagram}). Outside of the perturbation the speed of sound, \(c=1\).
-    % The frequencies in the each panel are offset by \(\omega_0\), given in the legend of the top panel.
+    The frequencies in the top panel are offset by \(\omega_0\).
     }
     \label{fig:1d-results}
 \end{figure}
@@ -154,6 +153,29 @@ The small phase offset \(\epsilon\) in equation \ref{eq:1d-phase} is required fo
     \caption{The same as Figure \ref{fig:1d-results} but showing the phase offset \(\epsilon\) required to satisfy the boundary conditions.}
     \label{fig:1d-phase}
 \end{figure}
+
+Finding an approximate solution for \(\delta\omega\) is beyond the scope of this simple example. However, we can show that by modelling \(\delta\omega\), we can recover information about the structural glitch. Let us build a model \(\delta\omega = f(\omega)\). Looking at Figure \ref{fig:1d-results}, we propose a form for \(f\),
+%
+\begin{equation}
+    f(\omega) = a_1 + a_2 \omega + a_3 \sin (\tau_1 \omega) \sin (\tau_2 \omega + \phi), \label{eq:1d-domega-func}
+\end{equation}
+%
+where \(a_i\) are arbitrary coefficients, \(\tau_i\) are the angular `frequencies' (units of time) of \(f\), and \(\phi\) is an arbitrary phase term.
+
+We fit equation \ref{eq:1d-domega-func} to \(\delta\omega_n\) from a glitch located at \(x_0 = 0.9\), with half-width \(\delta x = 0.02\), and change in sound speed \(\delta c = 0.03\). The best fitting line is shown in Figure \ref{fig:1d-fit}. Repeating this for different glitch parameters, it can be shown empirically how the `frequencies' \(\tau_1\) and \(\tau_2\) relate to the half-width and location of the glitch respectively. It emerges that \(\tau_1 \approx 2\delta\tau\), where \(\delta\tau\) is half the acoustic width of the glitch (i.e. the time at which sound takes to transverse the region). The second `frequency' \(\tau_2 \approx 2\tau_0\), where \(\tau_0\) is the acoustic depth from \(x=L\) to the centre of the glitch, \(x=x_0\). Since the speed of sound \(c(x) \approx 1\) throughout the medium, \(x_0 \approx L - \tau_0\). Our example fit yields \(\tau_1 \approx \SI{0.0389}{\second\per\radian}\) and \(\tau_2 \approx \SI{0.199}{\second\per\radian}\), approximately recovering the input glitch half-width of \num{0.02} and location of \num{0.9}.
+
+% NOTE: It would have made sense to center the glitch at x_0 and have delta_x be the half width, consider modifying so x_0 is now x_0 - delta_x and delta_x = delta_x / 2.
+
+\begin{figure}
+    \centering
+    \includegraphics{figures/glitch-1d-fit.pdf}
+    \caption{Best fit of equation \ref{eq:1d-domega-func} to \(\delta\omega_n\) for \(n=1,\dots,50\), \(L=1\), and \(c=1\).}
+    \label{fig:1d-fit}
+\end{figure}
+
+
+
+
 
 It would not be hard to believe that a similar oscillation could be found in the mode frequencies of a star, although its structure is more complicated. We can see from Figure \ref{fig:1d-results} that measuring \(\delta\omega\) could help characterise the structural glitch.
 
