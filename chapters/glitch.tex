@@ -18,9 +18,7 @@ Explain that glitches can be a signature of helium abundance. If we can model th
 
 In this chapter, we explore the theoretical background of acoustic glitches
 
-\section{Theory of the glitch}
-
-\subsection[1D example]{A one-dimensional example of a glitch}
+\section[1D example]{A one-dimensional example of a glitch}
 
 A rapid variation in the structure of a medium induces an oscillation in the eigenfrequencies, \(\delta\omega\). To demonstrate this, we will explore a simple one-dimensional example. Consider a medium bound from \(x=0\) to \(x=L\) in which pressure waves can propagate at constant speed \(c\). The longitudinal displacement of the wave \(\xi\) must obey the wave equation,
 %
@@ -48,7 +46,9 @@ where \(r\) and \(\phi\) are the amplitude and temporal phase respectively. Solu
 %
 where \(n\) is a non-zero integer (the \(n=0\) solution would give \(\xi=0\) everywhere).
 
-Now, let us suppose there is a small structural perturbation (or glitch) in the medium at position \(x_0\) with half-width \(\delta x\). Figure \ref{fig:1d-diagram} shows this system divided into 3 regions, with region 2 containing the perturbation. In region 2, the speed of sound is \(c + \delta c\) and the corresponding wave number is \(k + \delta k\). Firstly, we will propose solutions to the right-travelling wave (\(\xi\{k, \delta k\}\)) for each region by considering reflection and transmission of the wave at each boundary. These are,
+Now, let us suppose there is a small structural perturbation (or glitch) in the medium at position \(x_0\) with half-width \(\delta x\). Figure \ref{fig:1d-diagram} shows this system divided into 3 regions, with region 2 containing the perturbation. In region 2, the speed of sound is \(c + \delta c\) and the corresponding wave number is \(k + \delta k\). We want to find the frequencies which correspond to standing waves in this system and compare them to that of the homogeneous medium above. We will show that the resulting eigenfrequencies oscillate with an amplitude and period that relates to the properties of the glitch.
+
+Firstly, we propose solutions to the wave for each region by considering reflection and transmission at each boundary. Initially ignoring the wave superposed by a reflection at \(x=L\),
 %
 \begin{align}
     \xi_1(x, t) &= e^{i(\omega t - k x)} + A e^{i(\omega t + k x)}, \label{eq:xi1-r} \\
@@ -65,7 +65,7 @@ where complex coefficients \(A\) and \(C\) represent reflections, and \(B\) and 
     \label{fig:1d-diagram}
 \end{figure}
 
-Initially neglecting the fixed points at \(x = 0, L\), the boundary conditions for this system are,
+The boundary conditions for this system are,
 %
 \begin{align}
     \xi_1(x_0 - \delta x, t) &= \xi_2(x_0 - \delta x, t), \\
@@ -89,18 +89,18 @@ where,
 \end{equation}
 %
 
-Now we have solutions for the coefficients, we can superpose the right-travelling wave, \(\xi\{k, \delta k\} \rightarrow - \xi\{-k, -\delta k\}\) to get the full solution for the wave function. Substituting \(k, \delta k \rightarrow -k, -\delta k\) into the coefficients yields their complex conjugates, \((\overline{A},\overline{B},\overline{C},\overline{D})\). Substituting Euler's formula, \(A = (r_A/2) e^{i\phi_A}\) and \(\overline{A} = (r_A/2) e^{-i\phi_A}\), equation \ref{eq:xi1-r} now becomes,
+Now we have solutions for the coefficients, we can superpose the right-travelling wave, \(\xi\{k, \delta k\} \rightarrow - \xi\{-k, -\delta k\}\) to get the full solution for the wave function. Substituting \(k \rightarrow -k\) and \(\delta k \rightarrow -\delta k\) into the coefficients yields their complex conjugates, \((\overline{A},\overline{B},\overline{C},\overline{D})\). This allows us to rewrite the wave functions into a more flexible form. For example, substituting Euler's formula, \(A = (r_A/2) e^{i\phi_A}\) and \(\overline{A} = (r_A/2) e^{-i\phi_A}\), Equation \ref{eq:xi1-r} now becomes,
 %
 \begin{equation}
     \xi_1(x, t) = e^{i \omega t} \left[ \frac{r_A}{2} \left( e^{i(kx + \phi_A)} - e^{-i(kx + \phi_A)} \right) - \left( e^{ikx} - e^{-ikx} \right) \right] \label{eq:xi1}
 \end{equation}
 %
-for which the real solution is,
+where its real component is,
 \begin{equation}
     \real\left[\xi_1(x, t)\right] = \sin \omega t \left[2 \sin kx - r_A \sin(kx + \phi_A)\right].
 \end{equation}
 %
-However, this does not satisfy the boundary condition that \(\xi_1(0, t) = 0\). To satisfy this, we must introduce a small displacement phase \(\epsilon\) and let \(x \rightarrow x + \epsilon\). Superposing the right-travelling wave and substituting Euler's formula in a similar way to \ref{eq:xi1} for equations \ref{eq:xi2-r} and \ref{eq:xi3-r}, we can write the real components of the displacement in each region as,
+However, this does not satisfy the boundary condition that \(\xi_1(0, t) = 0\). To do so, we must introduce a small displacement phase \(\epsilon\) and let \(x \rightarrow x + \epsilon\). We will determine \(\epsilon\) shortly. In the meantime, superposing the right-travelling wave and substituting Euler's formula into Equations \ref{eq:xi2-r} and \ref{eq:xi3-r}, we get the real components of the wave functions,
 %
 % \begin{align}
 %     \xi_3(x, t) = \frac{r_A}{2} e^{i \omega t} \left[ e^{i(k(x + \epsilon) + \phi_A)} - e^{-i(k(x + \epsilon) + \phi_A)} \right],
@@ -111,18 +111,18 @@ However, this does not satisfy the boundary condition that \(\xi_1(0, t) = 0\). 
 \begin{align}
     \real[\xi_1(x, t)] &= \sin \omega t \left\{2 \sin[k (x + \epsilon)] - r_A \sin[k(x + \epsilon) - \phi_A]\right\} \label{eq:xi1-real} \\
     \real[\xi_2(x, t)] &= \sin \omega t \left\{ r_B \sin[(k + \delta k)(x + \epsilon) - \phi_B] - r_C \sin[(k + \delta k)(x + \epsilon) - \phi_C]\right\} \\
-    \real[\xi_3(x, t)] &= \sin \omega t \left\{r_D \sin[k(x + \epsilon) - \phi_D]\right\}
+    \real[\xi_3(x, t)] &= \sin \omega t \left\{r_D \sin[k(x + \epsilon) - \phi_D]\right\} \label{eq:xi3-real}
 \end{align}
 %
-Now, we can use the boundary condition at \(x=0\) to find \(\epsilon\). Solving equation \ref{eq:xi1-real} for \(\epsilon\) at \(x=0\) gives,
+Imposing the boundary condition \(\xi_1(0, t) = 0\), we solve Equation \ref{eq:xi1-real} for \(\epsilon\) at \(x=0\),
 %
 \begin{align}
     \epsilon &= \frac{1}{k} \tan^{-1}\left( \frac{(r_A / 2) \sin(\phi_A)}{1 - (r_A/2) \cos(\phi_A)} \right), \notag\\
-    &= \frac{1}{k} \tan^{-1}\left( \frac{\imag[A]}{1 - \real[A]} \right) \label{eq:1d-phase}
+    &= \frac{1}{k} \tan^{-1}\left( \frac{\imag[A]}{1 - \real[A]} \right). \label{eq:1d-phase}
 \end{align}
 %
 
-Finally, we can impose the boundary condition \(\xi_3(L, t) = 0\) to solve for \(\omega\).
+Finally, we can impose the boundary condition \(\xi_3(L, t) = 0\) to solve for \(\omega\). Setting Equation \ref{eq:xi3-real} to zero, we can rewrite it in terms of the real and imaginary components of \(D\),
 %
 \begin{align}
     \sin \omega t \left\{r_D \sin[k(L + \epsilon) - \phi_D]\right\} &= 0, \quad (\div \sin \omega t) \notag \\
@@ -130,9 +130,9 @@ Finally, we can impose the boundary condition \(\xi_3(L, t) = 0\) to solve for \
     \real[D] \sin[k(L + \epsilon)] - \imag[D] \cos[k(L + \epsilon)] &=0. \label{eq:1d-glitch-sol}
 \end{align}
 %
-Unfortunately, solving equation \ref{eq:1d-glitch-sol} for \(\omega\) is not possible analytically. However, we can find individual modes \(\omega_n\) numerically, using equation \ref{eq:omega-n} as initial guesses.
+Unfortunately, solving Equation \ref{eq:1d-glitch-sol} for \(\omega\) is not possible analytically. However, we can find individual modes (\(\omega_n\)) numerically.
 
-We find the roots \(\omega_n\) of equation \ref{eq:1d-glitch-sol} using Newton's method for \(n = 1,\dots,50\) with \(c=1\), \(L=1\), and several values of \(x_0\), \(\delta x\), and \(\delta c\). The difference between the solutions for \(\omega_n\) and those from the homogeneous medium (equation \ref{eq:omega-n}) are shown in Figure \ref{fig:1d-results}. We can see that the change in frequency, \(\delta \omega\) induced by the glitch oscillates. As the location of the glitch, \(x_0\) moves towards the center of the system, \(\delta\omega\) oscillates with a shorter period. Increasing the half-width of the glitch, \(\delta x\), increases the slope and decreases the amplitude modulation period of \(\delta\omega\). We also see that a larger change in sound speed, \(\delta c\) increases the amplitude of \(\delta\omega\).
+We find \(\omega_n\) by solving Equation \ref{eq:1d-glitch-sol} using Newton's method for \(n = 1,\dots,50\), with \(c=1\), \(L=1\), and several values of \(x_0\), \(\delta x\), and \(\delta c\). Initial guesses are obtained from the homogeneous medium solutions in Equation \ref{eq:omega-n}. The difference between the solutions for \(\omega_n\) and those from the homogeneous medium are shown in Figure \ref{fig:1d-results}. We can see that the change in frequency (\(\delta \omega\)) induced by the glitch oscillates. There appears to be a linear component and a short period oscillation modulated by a longer period. As the location of the glitch (\(x_0\)) increases towards the edge of the system, the short-period oscillation of \(\delta\omega\) increases. Similarly, as the the half-width of the glitch (\(\delta x\)) increases, the longer modulation period increases. Furthermore, an increasing change in sound speed (\(\delta c\)) increases the amplitude of \(\delta\omega\). Finally, increasing both \(\delta x\) and \(\delta c\) increases the slope of \(\delta\omega\).
 
 \begin{figure}
     \centering
@@ -145,7 +145,7 @@ We find the roots \(\omega_n\) of equation \ref{eq:1d-glitch-sol} using Newton's
 
 %This may be interpreted as the nodes of each standing wave passing in and out of region 2 with increasing \(n\). Where there is a node, the wave is least sensitive to a change in structure, and 
 
-The small phase offset \(\epsilon\) in equation \ref{eq:1d-phase} is required for the wave function to satisfy the boundary conditions at \(x = 0\). However, adding \(\epsilon\) shifts the effective location of \(x_0\). We plot \(\epsilon\) against \(\omega\) in Figure \ref{fig:1d-phase} and show that its magnitude is \(\sim 10^{-4}\), much smaller than the location and size of region 2. The oscillation caused by the glitch also shows up in Figure \ref{fig:1d-phase}, with its properties affected in a similar way to Figure \ref{fig:1d-results}.
+The small phase offset \(\epsilon\) in Equation \ref{eq:1d-phase} is required for the wave function to satisfy the boundary conditions at \(x = 0\). However, adding \(\epsilon\) shifts the effective location of \(x_0\). We plot \(\epsilon\) against \(\omega\) in Figure \ref{fig:1d-phase} and show that its magnitude is \(\sim 10^{-4}\), much smaller than the location and size of region 2. The oscillation caused by the glitch also shows up in Figure \ref{fig:1d-phase}, with its properties affected in a similar way to Figure \ref{fig:1d-results}.
 
 \begin{figure}
     \centering
@@ -157,37 +157,41 @@ The small phase offset \(\epsilon\) in equation \ref{eq:1d-phase} is required fo
 Finding an approximate solution for \(\delta\omega\) is beyond the scope of this simple example. However, we can show that by modelling \(\delta\omega\), we can recover information about the structural glitch. Let us build a model \(\delta\omega = f(\omega)\). Looking at Figure \ref{fig:1d-results}, we propose a form for \(f\),
 %
 \begin{equation}
-    f(\omega) = a_1 + a_2 \omega + a_3 \sin (\tau_1 \omega) \sin (\tau_2 \omega + \phi), \label{eq:1d-domega-func}
+    f(\omega) = a_1 \omega + a_2 \sin (\tau_1 \omega) \cos (\tau_2 \omega), \label{eq:1d-domega-func}
 \end{equation}
 %
-where \(a_i\) are arbitrary coefficients, \(\tau_i\) are the angular `frequencies' (units of time) of \(f\), and \(\phi\) is an arbitrary phase term.
+where \(a_1\) and \(a_2\) are coefficients which are both functions of \(\delta x\) and \(\delta c\). Parameters \(\tau_1\) and \(\tau_2\) are the `frequencies' (units of time)\footnote{A frequency in \(\omega\) would have units of time, but shouldn't be confused with a periodicity in \(\omega\).} of oscillations in \(\delta\omega\), which are functions of \(\delta x\) and \(x_0\) respectively.
 
-We fit equation \ref{eq:1d-domega-func} to \(\delta\omega_n\) from a glitch located at \(x_0 = 0.9\), with half-width \(\delta x = 0.02\), and change in sound speed \(\delta c = 0.03\). The best fitting line is shown in Figure \ref{fig:1d-fit}. Repeating this for different glitch parameters, it can be shown empirically how the `frequencies' \(\tau_1\) and \(\tau_2\) relate to the half-width and location of the glitch respectively. It emerges that \(\tau_1 \approx 2\delta\tau\), where \(\delta\tau\) is half the acoustic width of the glitch (i.e. the time at which sound takes to transverse the region). The second `frequency' \(\tau_2 \approx 2\tau_0\), where \(\tau_0\) is the acoustic depth from \(x=L\) to the centre of the glitch, \(x=x_0\). Since the speed of sound \(c(x) \approx 1\) throughout the medium, \(x_0 \approx L - \tau_0\). Our example fit yields \(\tau_1 \approx \SI{0.0389}{\second\per\radian}\) and \(\tau_2 \approx \SI{0.199}{\second\per\radian}\), approximately recovering the input glitch half-width of \num{0.02} and location of \num{0.9}.
+We fit Equation \ref{eq:1d-domega-func} to \(\delta\omega_n\) obtained from a glitch located at \(x_0 = 0.9\), with half-width \(\delta x = 0.02\), and change in sound speed \(\delta c = 0.03\). The best fitting line is shown in Figure \ref{fig:1d-fit}. Repeating this for different glitch parameters, it can be shown empirically how the `frequencies' \(\tau_1\) and \(\tau_2\) relate to the half-width and location of the glitch respectively. It emerges that \(\tau_1 \approx 2\delta\tau\), where \(\delta\tau\) is half the acoustic width of the glitch (i.e. the time at which sound takes to transverse the region). The second `frequency' \(\tau_2 \approx 2\tau_0\), where \(\tau_0\) is the acoustic depth from \(x=L\) to the centre of the glitch, \(x=x_0\),
+%
+\begin{equation}
+    \tau_0 = \int_L^{x_0} \frac{\dd x}{c(x)}.
+\end{equation}
+%
+Since the speed of sound \(c(x) \approx 1\) throughout the medium, \(x_0 \approx L - \tau_0\). Our example fit yields \(\tau_1 \approx \SI{0.0389}{\second\per\radian}\) and \(\tau_2 \approx \SI{0.199}{\second\per\radian}\), approximately recovering the input glitch half-width of \num{0.02} and location of \num{0.9}.
 
 % NOTE: It would have made sense to center the glitch at x_0 and have delta_x be the half width, consider modifying so x_0 is now x_0 - delta_x and delta_x = delta_x / 2.
 
 \begin{figure}
     \centering
     \includegraphics{figures/glitch-1d-fit.pdf}
-    \caption{Best fit of equation \ref{eq:1d-domega-func} to \(\delta\omega_n\) for \(n=1,\dots,50\), \(L=1\), and \(c=1\).}
+    \caption{Best fit of Equation \ref{eq:1d-domega-func} to \(\delta\omega_n\) for \(n=1,\dots,50\), \(L=1\), and \(c=1\).}
     \label{fig:1d-fit}
 \end{figure}
 
-
-
-
-
-It would not be hard to believe that a similar oscillation could be found in the mode frequencies of a star, although its structure is more complicated. We can see from Figure \ref{fig:1d-results} that measuring \(\delta\omega\) could help characterise the structural glitch.
+It would not be hard to believe that a similar oscillation could be found in the mode frequencies of a star, although its structure is more complicated. We showed that fitting to \(\delta\omega\) we may can recover properties of a glitch. In the next section, we will explore glitches in stars.
 
 % NOTES: Go slowly through this. The next step is to fit a simple mode to theses oscillations and show that we can find x0 and dx. And show how the amplitude scales with dc.
 
 % NOTES: When it comes to fitting the helium glitch, consider first fitting a GP to the modes with a free noise term. Fix the kernel scale to a series of values and show that we can see the glitch in the residuals. Of course, this leaves the question of what kernel scale to use. Well, we could just model everything at once!
 
+\section{Acoustic glitches in stars}
+
 \subsection{Helium glitch}\label{sec:helium-glitch}
 
 Where does the helium glitch come from?
 
-How Tassoul's asymptotic approximation assumes adiabatic exponent of 5/3 but this is not correct for a star. In a star, gamma is effected by the ionisation of elements. This effects the speed of sound,
+In a star, gamma is effected by the ionisation of elements. This effects the speed of sound,
 
 \begin{equation}
     c = \sqrt{\gamma \frac{p}{\rho}},
