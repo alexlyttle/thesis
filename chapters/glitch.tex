@@ -46,7 +46,7 @@ where \(r\) and \(\phi\) are the amplitude and temporal phase respectively. Solu
 %
 where \(n\) is a non-zero integer (the \(n=0\) solution would give \(\xi=0\) everywhere).
 
-Now, let us suppose there is a small structural perturbation (or glitch) in the medium at position \(x_0\) with half-width \(\delta x\). Figure \ref{fig:1d-diagram} shows this system divided into 3 regions, with region 2 containing the perturbation. In region 2, the speed of sound is \(c + \delta c\) and the corresponding wave number is \(k + \delta k\). We want to find the frequencies which correspond to standing waves in this system and compare them to that of the homogeneous medium above. We will show that the resulting eigenfrequencies oscillate with an amplitude and period that relates to the properties of the glitch.
+Now, let us suppose there is a small structural perturbation (or glitch) in the medium at position \(x_0\) with half-width \(\delta x\). Figure \ref{fig:1d-diagram} shows this system divided into 3 regions, with region 2 containing the glitch. In region 2, the speed of sound is \(c + \delta c\) and the corresponding wave number is \(k + \delta k\). We want to find the frequencies which correspond to standing waves in this system and compare them to that of the homogeneous medium above. We will show that the resulting eigenfrequencies oscillate with an amplitude and period that relates to the properties of the glitch.
 
 Firstly, we propose solutions to the wave for each region by considering reflection and transmission at each boundary. Initially ignoring the wave superposed by a reflection at \(x=L\),
 %
@@ -61,18 +61,18 @@ where complex coefficients \(A\) and \(C\) represent reflections, and \(B\) and 
 \begin{figure}
     \centering
     \includegraphics{figures/glitch-1d-example-diagram.pdf}
-    \caption[A diagram showing a one-dimensional medium with a small structural perturbation.]{A diagram showing a one-dimensional medium split into three regions. 1: Fixed at \(x=0\) with a constant speed of sound \(c\); 2: A small structural perturbation centred at \(x=x_0\) with width \(2\delta x\) with constant speed of sound \(c + \delta c\); 3: Fixed at \(x=L\) with a constant speed of sound \(c\).}
+    \caption[A diagram showing a one-dimensional medium with a small structural perturbation.]{A diagram showing a one-dimensional medium split into three regions. 1: Fixed at \(x=0\) with a constant speed of sound \(c\); 2: A small structural perturbation centred at \(x=x_0\) with width \(2\delta x\) and constant speed of sound \(c + \delta c\); 3: Fixed at \(x=L\) with a constant speed of sound \(c\).}
     \label{fig:1d-diagram}
 \end{figure}
 
 The boundary conditions for this system are,
 %
-\begin{align}
+\begin{align*}
     \xi_1(x_0 - \delta x, t) &= \xi_2(x_0 - \delta x, t), \\
     \xi_2(x_0 + \delta x, t) &= \xi_3(x_0 + \delta x, t), \\
     \frac{\partial \xi_1}{\partial x}(x_0 - \delta x, t) &= \frac{\partial \xi_2}{\partial x}(x_0 - \delta x, t), \\
     \frac{\partial \xi_2}{\partial x}(x_0 + \delta x, t) &= \frac{\partial \xi_3}{\partial x}(x_0 + \delta x, t).
-\end{align}
+\end{align*}
 %
 Solving these simultaneously gives the following equations for the complex coefficients,
 %
@@ -157,20 +157,20 @@ The small phase offset \(\epsilon\) in Equation \ref{eq:1d-phase} is required fo
 Finding an approximate solution for \(\delta\omega\) is beyond the scope of this simple example. However, we can show that by modelling \(\delta\omega\), we can recover information about the structural glitch. Let us build a model \(\delta\omega = f(\omega)\). Looking at Figure \ref{fig:1d-results}, we propose a form for \(f\),
 %
 \begin{equation}
-    f(\omega) = a_1 \omega + a_2 \sin (\tau_1 \omega) \cos (\tau_2 \omega), \label{eq:1d-domega-func}
+    f(\omega) = a_1 \omega - a_2 \sin (\tau_1 \omega) \cos (\tau_2 \omega), \label{eq:1d-domega-func}
 \end{equation}
 %
-where \(a_1\) and \(a_2\) are coefficients which are both functions of \(\delta x\) and \(\delta c\). Parameters \(\tau_1\) and \(\tau_2\) are the `frequencies' (units of time)\footnote{A frequency in \(\omega\) would have units of time, but shouldn't be confused with a periodicity in \(\omega\).} of oscillations in \(\delta\omega\), which are functions of \(\delta x\) and \(x_0\) respectively.
+where \(a_1\) and \(a_2\) are coefficients which are both functions of \(\delta x\) and \(\delta c\). Parameters \(\tau_1\) and \(\tau_2\) are the `frequencies' (units of time\footnote{A frequency in \(\omega\) would have units of time, but shouldn't be confused with a periodicity in \(\omega\).}) of oscillations in \(\delta\omega\), which are functions of \(\delta x\) and \(x_0\) respectively.
 
-We fit Equation \ref{eq:1d-domega-func} to \(\delta\omega_n\) obtained from a glitch located at \(x_0 = 0.9\), with half-width \(\delta x = 0.02\), and change in sound speed \(\delta c = 0.03\). The best fitting line is shown in Figure \ref{fig:1d-fit}. Repeating this for different glitch parameters, it can be shown empirically how the `frequencies' \(\tau_1\) and \(\tau_2\) relate to the half-width and location of the glitch respectively. It emerges that \(\tau_1 \approx 2\delta\tau\), where \(\delta\tau\) is half the acoustic width of the glitch (i.e. the time at which sound takes to transverse the region). The second `frequency' \(\tau_2 \approx 2\tau_0\), where \(\tau_0\) is the acoustic depth from \(x=L\) to the centre of the glitch, \(x=x_0\),
+We fit Equation \ref{eq:1d-domega-func} to \(\delta\omega_n\) obtained from a glitch located at \(x_0 = 0.9\), with half-width \(\delta x = 0.02\), and change in sound speed \(\delta c = 0.03\). The best fitting line is shown in Figure \ref{fig:1d-fit}. Repeating this for different glitch parameters, it can be shown empirically how the `frequencies' \(\tau_1\) and \(\tau_2\) relate to the half-width and location of the glitch respectively. It emerges that \(\tau_1 \approx 2\delta\tau\), where \(\delta\tau\) is half the acoustic width of the glitch (i.e. the time at which sound takes to transverse the region). The second `frequency' \(\tau_2 \approx 2\tau_0\), where \(\tau_0\) is the acoustic depth from the nearest edge to the centre of the glitch, \(x_0\),
 %
 \begin{equation}
-    \tau_0 = \int_L^{x_0} \frac{\dd x}{c(x)}.
+    \tau_0 = \int_0^{x_0'} \frac{\dd x}{c(x)},
 \end{equation}
 %
-Since the speed of sound \(c(x) \approx 1\) throughout the medium, \(x_0 \approx L - \tau_0\). Our example fit yields \(\tau_1 \approx \SI{0.0389}{\second\per\radian}\) and \(\tau_2 \approx \SI{0.199}{\second\per\radian}\), approximately recovering the input glitch half-width of \num{0.02} and location of \num{0.9}.
+where \(x_0' = L/2 - | L/2 - x_0 |\) is the relative location of the glitch from the nearest edge of the system. Since the speed of sound \(c(x) \approx 1\) throughout the medium, \(x_0 \approx L - \tau_0\). Our example fit yields \(\tau_1 \approx \SI{0.0389}{\second\per\radian}\) and \(\tau_2 \approx \SI{0.199}{\second\per\radian}\), approximately recovering the input glitch half-width of \num{0.02} and location of \num{0.9}.
 
-% NOTE: It would have made sense to center the glitch at x_0 and have delta_x be the half width, consider modifying so x_0 is now x_0 - delta_x and delta_x = delta_x / 2.
+% NOTE: Could take this further to show a1 = 2 dc dtau / L and a2 = dc / L
 
 \begin{figure}
     \centering
