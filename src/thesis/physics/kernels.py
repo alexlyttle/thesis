@@ -1,7 +1,10 @@
 import numpy as np
 
-from ..xarray_utils import gradient, integrate, cumulative_integrate, complement
 from .constants import G
+
+from ..calculus import (
+    differentiate, integrate, cumulative_integrate, complement
+)
 
 # move this to a gyre utils module
 def to_rad_per_sec(freq, freq_units, mass, radius):
@@ -14,8 +17,8 @@ def to_rad_per_sec(freq, freq_units, mass, radius):
     }
     return factor[freq_units] * freq 
 
-def kernel(pulse, model):
-    """Returns a dict of structural kernels.
+def structure_kernel(pulse, model):
+    """Returns a dict of stellar structural kernels.
     """
     # Constants
     M = model.attrs["M"]
@@ -41,10 +44,9 @@ def kernel(pulse, model):
 
     ell = pulse["l"]
     L2 = ell * (ell + 1)
-    L = np.sqrt(L2)
     
-    drho_dr = gradient(rho, r)
-    dxi_r_dr = gradient(xi_r, r, axis=0)
+    drho_dr = differentiate(rho, r)
+    dxi_r_dr = differentiate(xi_r, r, axis=0)
     
     chi = dxi_r_dr + 2*xi_r * u - L2*xi_h * u
     
@@ -81,7 +83,8 @@ def kernel(pulse, model):
     )
 
     # Next do helium, where we need some Gamma derivatives from EOS
+    
     return {
-        ("c2", "rho"): (K_c2_rho, K_rho_c2),
-        ("G1", "rho"): (K_G1_rho, K_rho_G1),
+        "c2_rho": (K_c2_rho, K_rho_c2),
+        "G1_rho": (K_G1_rho, K_rho_G1),
     }

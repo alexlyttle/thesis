@@ -1,7 +1,8 @@
 import numpy as np
 
-from ..xarray_utils import complement
 from .constants import K_B, M_E, M_H, H_BAR, CHI_H, CHI_HEI, CHI_HEII
+
+from ..calculus import complement
 
 def debroglie_wavelength_squared(temperature, mass):
     return 2 * np.pi * H_BAR**2 / mass / K_B / temperature
@@ -70,7 +71,7 @@ def sound_speed(gamma, pressure, density):
     return np.sqrt(gamma * pressure / density)
 
 def acoustic_depth(radius, csound, axis=-1):
-    return complement(radius, csound, axis=axis, initial=0.0)
+    return complement(1/csound, radius, axis=axis, initial=0.0)
     # if tau0 is None:
         # tau0 = trapezoid(1/csound, radius)
     # return tau0 - cumulative_trapezoid(1/csound, radius, initial=0)
