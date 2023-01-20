@@ -3,7 +3,7 @@ import xarray as xr
 
 from scipy.integrate import trapezoid, cumulative_trapezoid
 
-from .xarray_utils import is_data_array
+from .utils import is_data_array
 
 def differentiate(y, *varargs, axis=None, edge_order=1):
     """Returns the gradient of y given varargs using np.gradient.
