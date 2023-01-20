@@ -1,3 +1,7 @@
+import xarray as xr
+
+from tomso import fgong as _fgong
+
 GLOBAL_KEYS = [
     "M",
     "R",
@@ -17,7 +21,7 @@ GLOBAL_KEYS = [
 ]
 
 VARIABLE_KEYS = [
-    "R_minus_r",  # from surface to centre
+    "r",  # from surface to centre
     "ln_q",
     "T",
     "P",
@@ -34,7 +38,7 @@ VARIABLE_KEYS = [
     "AA",
     "nuc_X_rate",
     "Z",
-    "r",  # from centre to surface
+    "R_minus_r",  # from centre to surface
     "eps_g",
     "L_g",
     "X_He3",
@@ -55,6 +59,15 @@ VARIABLE_KEYS = [
     "X_Ne20",
 ]
 
-
-
-# How about a star format where only certain variables are included?
+def load_fgong(filename):
+    gong = _fgong.load_fgong(filename)
+    attrs = {k: gong.glob[i] for i, k in enumerate(GLOBAL_KEYS)}
+    
+    r = gong.var[::-1, 0]
+    coords = {"x": r/attrs["R"]}
+    dims = ("x",)
+    data_vars = {}
+    for i, k in enumerate(VARIABLE_KEYS):
+        data_vars[k] = xr.DataArray(gong.var[::-1, i], coords, dims)
+    
+    return xr.Dataset(data_vars, attrs=attrs)
