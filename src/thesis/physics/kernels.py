@@ -17,32 +17,32 @@ def to_rad_per_sec(freq, freq_units, mass, radius):
     }
     return factor[freq_units] * freq 
 
-def structure_kernel(pulse, model):
+def structure_kernels(model):
     """Returns a dict of stellar structural kernels.
     """
     # Constants
-    M = model.attrs["M"]
-    R = model.attrs["R"]
+    M = model.M
+    R = model.R
 
     # Profile data
-    r = model["r"]             # radial co-ordinate
-    m = model["m"]             # mass co-ordinate
-    P = model["P"]             # pressure
-    rho = model["rho"]         # density
-    Gamma1 = model["Gamma_1"]  # first adiabatic index
+    r = model.r             # radial co-ordinate
+    m = np.exp(model.ln_q)*M             # mass co-ordinate
+    P = model.P             # pressure
+    rho = model.rho         # density
+    Gamma1 = model.Gamma_1  # first adiabatic index
     c2 = Gamma1*P/rho          # square of the sound speed
     
     u = 1/r
     u[0] = 0.0  # need better solution to this!
 
     # Pulsation data
-    xi_r = pulse["xi_r"].real  # radial component of eigenfunction
-    xi_h = pulse["xi_h"].real  # horiz. component of eigenfunction
+    xi_r = model.xi_r.real  # radial component of eigenfunction
+    xi_h = model.xi_h.real  # horiz. component of eigenfunction
     
 #     omega = 2.*np.pi*pulse["freq"].real*1e-6  # convert to angular frequency
-    omega = to_rad_per_sec(pulse["freq"].real, pulse.attrs["freq_units"], M, R)
+    omega = to_rad_per_sec(model.freq.real, model.freq_units, M, R)
 
-    ell = pulse["l"]
+    ell = model["l"]
     L2 = ell * (ell + 1)
     
     drho_dr = differentiate(rho, r)
@@ -83,8 +83,44 @@ def structure_kernel(pulse, model):
     )
 
     # Next do helium, where we need some Gamma derivatives from EOS
+    dG1_Y = model.dGamma_1_Y
+    # dG1_rho = model.dGamma_1_rho
+    # dG1_P = model.dGamma_1_P
+    
+    # Where u = p / rho
+    K_Y_u = dG1_Y * K_G1_rho
+    K_u_Y = None
+
+#     F = (dG1_P + dG1_rho) * K_G1_rho + K_rho_G1
+    
+#     rho_r = interp1d(r, rho)
+#     P_r = interp1d(r, P)
+
+#     def solve_phi(_F):
+#         F_r = interp1d(r, _F)
+
+#         def bvp_fun(t, y):
+#             v = 1/t**2
+#             v[0] = 0.0
+#             dy1 = F_r(t) + t**2 * rho_r(t) * y[1]
+#             dy2 = - 4 * np.pi * G * rho_r(t) * v**2 / P_r(t) * y[0]
+#             return np.vstack([dy1, dy2])
+
+#         sol = solve_bvp(bvp_fun, lambda ya, yb: np.array([ya[0], yb[0]]),
+#                         x=r, y=np.zeros((2, len(r))))
+
+#         if not sol.success:
+#             raise ValueError("No solution found")
+
+#         return interp1d(sol.x, sol.y[0, :])(r)
+    
+#     psi = xr.apply_ufunc(solve_phi, F.stack(index=["n_pg", "l"]), input_core_dims=[["index"]])
+#     psi = psi.unstack("index")
+    
+#     K_rho_Y = dG1_P * K_G1_rho - P * differentiate(psi / P, r)
     
     return {
         "c2_rho": (K_c2_rho, K_rho_c2),
         "G1_rho": (K_G1_rho, K_rho_G1),
+        "Y_u": (K_Y_u, K_u_Y),
     }
