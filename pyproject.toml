@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"  # the function to use to build the pack
 [project]
 name = "thesis"
 version = "0.0.1"
-dependencies = ["numpy", "astropy", "scipy", "tomso", "xarray"]
+dependencies = ["numpy", "astropy", "scipy", "tomso", "xarray", "h5netcdf"]
 requires-python = ">=3.7"
 
 [project.optional-dependencies]
