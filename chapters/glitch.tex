@@ -18,7 +18,7 @@ Explain that glitches can be a signature of helium abundance. If we can model th
 
 In this chapter, we explore the theoretical background of acoustic glitches
 
-\section[1D example]{A one-dimensional example of a glitch}
+\section[1D example]{A one-dimensional example of a glitch}\label{sec:1d-glitch}
 
 A rapid variation in the structure of a medium induces an oscillation in the eigenfrequencies, \(\delta\omega\). To demonstrate this, we will explore a simple one-dimensional example. Consider a medium bound from \(x=0\) to \(x=L\) in which pressure waves can propagate at constant speed \(c\). The longitudinal displacement of the wave \(\xi\) must obey the wave equation,
 %
@@ -187,15 +187,42 @@ It would not be hard to believe that a similar oscillation could be found in the
 
 \section{Acoustic glitches in stars}
 
+In the previous section, we considered a glitch in a homogeneous medium, where the speed of sound is constant everywhere else. In a star, the speed of sound (\(c\)) is not constant. It depends on the density (\(\rho\)) and pressure (\(p\)),
+%
+\begin{equation}
+    c^2 = \Gamma_1 \frac{p}{\rho},
+\end{equation}
+%
+where \(\Gamma_1\) is the first adiabatic exponent,
+%
+\begin{equation}
+    \Gamma_1 = \left( \frac{\partial \ln p}{\partial \ln \rho} \right)_s,
+\end{equation}
+%
+at constant entropy, \(s\). \todo{consider using \(\gamma \equiv \Gamma_1\) if not refering to other exponents.} Naturally, these quantities change with stellar radius.
+
+As discovered in Section \ref{sec:1d-glitch}, a convenient parameter to work with is the acoustic depth, \(\tau\). For a star, we define \(\tau_\star\) as the time taken for a pressure wave to travel from its surface (\(r=R\)) to some radius \(r_\star\),
+%
+\begin{equation}
+    \tau(r_\star) = \int_R^{r_\star} \frac{\dd r}{c(r)}.
+\end{equation}
+%
+The acoustic radius of the star, \(\Tau = \tau(R)\)
+
+Write about how and why the first adiabatic exponent depends on the ionisation state of the fluid. Inside a star, 
+
+\begin{figure}
+    \centering
+    \includegraphics{figures/adiabatic-ionisation-regions.pdf}
+    \caption{The depression in the first adiabatic exponent (\(\Gamma_1\)) caused by the ionisation of hydrogen (H), and first and second ionisations of helium (He I and He II). The x-axis is the fractional acoustic depth, \(t=\tau/\Tau\).}
+\end{figure}
+
+
 \subsection{Helium glitch}\label{sec:helium-glitch}
 
 Where does the helium glitch come from?
 
 In a star, gamma is effected by the ionisation of elements. This effects the speed of sound,
-
-\begin{equation}
-    c = \sqrt{\gamma \frac{p}{\rho}},
-\end{equation}
 
 where \(p\) is pressure, \(\rho\) is density, and \(\gamma\) is the first adiabatic exponent,
 
