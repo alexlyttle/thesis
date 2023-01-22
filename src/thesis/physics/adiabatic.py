@@ -29,7 +29,7 @@ def partial_free_energy_density_i(temperature, ionisation_energy, x, y, i=1):
     z = 1 - y
     return x * y * (1.5 + z * phi**2 / (1 + delta(i, 1) * z))
 
-def adiabatic_depression(temperature, density, helium):
+def adiabatic_depression(temperature, density, helium, frac_HeII=1.0):
     # Eq. 54
     x_He = helium / (4 - 3 * helium)
     x_H = 1 - x_He
@@ -50,7 +50,7 @@ def adiabatic_depression(temperature, density, helium):
     d2TTf = (
         1.5 + partial_free_energy_density_i(temperature, CHI_H, x_H, y_H)
         + partial_free_energy_density_i(temperature, CHI_HEI, x_He, y_HeI, i=2)
-        + partial_free_energy_density_i(temperature, CHI_HEII, x_He, y_HeII, i=2)
+        + frac_HeII*partial_free_energy_density_i(temperature, CHI_HEII, x_He, y_HeII, i=2)
     )
     return (
         1 / d2TTf 
@@ -59,13 +59,14 @@ def adiabatic_depression(temperature, density, helium):
         * (
             gamma_i(temperature, CHI_H, x_H, y_H)
             + gamma_i(temperature, CHI_HEI, x_He, y_HeI, i=2)
-            + gamma_i(temperature, CHI_HEII, x_He, y_HeII, i=2)
+            + frac_HeII*gamma_i(temperature, CHI_HEII, x_He, y_HeII, i=2)
         )
     )
 
-def first_adiabatic_exponent(temperature, density, helium):
+def first_adiabatic_exponent(temperature, density, helium, frac_HeI=1.0):
     # Eq. 53 fro Houdayer et al. (2021)
-    return 5/3 - 2/3 * adiabatic_depression(temperature, density, helium)
+    # frac_HeI for illustration purposes
+    return 5/3 - 2/3 * adiabatic_depression(temperature, density, helium, frac_HeII=frac_HeI)
 
 def sound_speed(gamma, pressure, density):
     return np.sqrt(gamma * pressure / density)

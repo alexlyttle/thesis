@@ -30,7 +30,7 @@ def structure_kernels(model):
     P = model.P             # pressure
     rho = model.rho         # density
     Gamma1 = model.Gamma_1  # first adiabatic index
-    c2 = Gamma1*P/rho          # square of the sound speed
+    c2 = Gamma1*P/rho       # square of the sound speed
     
     u = 1/r
     u[0] = 0.0  # need better solution to this!
