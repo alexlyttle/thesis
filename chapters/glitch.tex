@@ -187,19 +187,21 @@ It would not be hard to believe that a similar oscillation could be found in the
 
 \section{Acoustic glitches in stars}
 
-In the previous section, we considered a glitch in a homogeneous medium, where the speed of sound is constant everywhere else. In a star, the speed of sound (\(c\)) is not constant. It depends on the density (\(\rho\)) and pressure (\(p\)),
+In the previous section, we considered a glitch in a homogeneous medium, where the speed of sound is constant everywhere else. In a star, the adiabatic sound speed is not constant. It depends on the density (\(\rho\)) and pressure (\(p\)),
 %
 \begin{equation}
-    c^2 = \Gamma_1 \frac{p}{\rho},
+    c^2 = \gamma \frac{p}{\rho},
 \end{equation}
 %
-where \(\Gamma_1\) is the first adiabatic exponent,
+where \(\gamma \equiv \Gamma_1\) is the first adiabatic exponent,
 %
 \begin{equation}
-    \Gamma_1 = \left( \frac{\partial \ln p}{\partial \ln \rho} \right)_s,
+    \gamma = \left( \frac{\partial \ln p}{\partial \ln \rho} \right)_S,
 \end{equation}
 %
-at constant entropy, \(s\). \todo{consider using \(\gamma \equiv \Gamma_1\) if not refering to other exponents.} Naturally, these quantities change with stellar radius.
+at constant entropy, \(S\). Chandrasekhar \needcite{} introduced three adiabatic exponents (\(\Gamma_1,\Gamma_2,\Gamma_3\)) to describe the non-ideal gas inside a star. In this chapter, we do not use the other two and hence refer the first as \(\gamma\).
+
+For the most part, \(\gamma\), \(p\), and \(\rho\) change smoothly with radius inside a star. However, a small structural glitch in these quantities would lead to a sudden change in sound speed. We have seen how such a perturbation can lead to an oscillation in the eigenfrequencies of pressure waves in a homogeneous medium. Characterising this oscillation allows us to measure the properties of the glitch. If similar glitches were present in a star, then we might be able to do the same. In this section, we explore the origins of glitches inside a Sun-like star. Then, we see what effect these have on the eigenfrequencies, a quantity we can measure through asteroseismology.
 
 As discovered in Section \ref{sec:1d-glitch}, a convenient parameter to work with is the acoustic depth, \(\tau\). For a star, we define \(\tau_\star\) as the time taken for a pressure wave to travel from its surface (\(r=R\)) to some radius \(r_\star\),
 %
@@ -209,42 +211,68 @@ As discovered in Section \ref{sec:1d-glitch}, a convenient parameter to work wit
 %
 The acoustic radius of the star, \(\Tau = \tau(R)\)
 
-Write about how and why the first adiabatic exponent depends on the ionisation state of the fluid. Inside a star, 
-
-\begin{figure}
-    \centering
-    \includegraphics{figures/adiabatic-ionisation-regions.pdf}
-    \caption{The depression in the first adiabatic exponent (\(\Gamma_1\)) caused by the ionisation of hydrogen (H), and first and second ionisations of helium (He I and He II). The x-axis is the fractional acoustic depth, \(t=\tau/\Tau\).}
-\end{figure}
-
-
-\subsection{Helium glitch}\label{sec:helium-glitch}
-
-Where does the helium glitch come from?
-
-In a star, gamma is effected by the ionisation of elements. This effects the speed of sound,
-
-where \(p\) is pressure, \(\rho\) is density, and \(\gamma\) is the first adiabatic exponent,
-
-\begin{equation}
-    \gamma \equiv \Gamma_1 = \left( \frac{\partial \ln p}{\partial \ln \rho} \right)_s,
-\end{equation}
-
-where \(s\) is specific entropy.
-
-We can simplify the problem to consider a star of just hydrogen and helium. Using the approach of Houdeyer we can derive an apporximation for \(\gamma\) in terms of temperature and density in the star
-
-Reference Houdeyer's paper with plots to show the depression in the first adiabatic exponent with temperature and pressure. 
+In Figure \ref{fig:sound-speed-gradient}, we show the sound speed gradient of model S. We see how the speed of sound changes smoothly throughout the star, except for a wiggle around \SI{700}{\second}, a discontinuity at the base of the convective zone, and a rapid change near the core of the star. The first is caused by the ionisation of helium, which we explore further in Section \ref{sec:helium-glitch}. The second is due to a change in the density gradient as the structure moves from convectively unstable to radiative. \todo{Put a few references here of work which has studied these before}.
 
 \begin{figure}
     \centering
     \includegraphics{example-image-a}
-    \caption{Multi-panel figure showing \(\gamma\) as a function of \(\rho\) and \(T\) for different values of helium abundance.}
+    \caption{The sound speed gradient, \(\dd c/\dd \tau\), of model S with respect to the acoustic depth, \(\tau\). The fractional radius, \(r/R\) is given on the top axis. The base of the convective zone is marked with a dashed line (or the convective zone is shaded).}
+    \label{fig:sound-speed-gradient}
+\end{figure}
+
+\subsection{Helium ionisation glitch}\label{sec:helium-glitch}
+
+The pressure-density gradient at constant entropy for an ideal monatomic gas, \(\gamma = 5/3\). However, as a species ionises, its chemical potential changes, modifying the free energy of the gas and thus inducing a depression in \(\gamma\) \todo{Improve and verify this explaination}. Using an approximate form for the first adiabatic exponent from \citet{Houdayer.Reese.ea2021}, we show how \(\gamma\) is affected by the ionisation of helium and hydrogen in Figure \ref{fig:gamma-zones}. We see that hydrogen ionisation has the largest effect on \(\gamma\) close to the surface of the star. The first and second ionisations of helium occurs deeper in the star, at higher temperatures. We can see that the second ionisation of helium has a greater affect on \(\gamma\) than the first. This is because the ionisation energy of He II is higher than He I and the ground state degeneracy of He II is less than He I \todo{We know from equations but why physically}.
+
+\begin{figure}
+    \centering
+    \includegraphics{figures/adiabatic-ionisation-regions.pdf}
+    \caption{The depressions in the first adiabatic exponent (\(\gamma\)) caused by the ionisation of hydrogen (H), and the first and second ionisations of helium (He I and He II). The x-axis is the fractional acoustic depth from the surface of the star, \(\tau/\Tau\).}
+    \label{fig:gamma-zones}
+\end{figure}
+
+Lets consider a star of mass \(M\) with hydrogen and helium mass fractions of \(X\) and \(Y\) respectively. To demonstrate the effect of ionisation and stellar structure on \(\gamma\) we can use a recent  Using equations from \citet{Houdayer.Reese.ea2021}, we can approximate \(\gamma\) in a solar-like star as a function of temperature and density,
+%
+\begin{equation}
+    \gamma \approx \frac{5}{3} - \frac{2}{3} \, \eta(T, \rho), \label{eq:gamma1}
+\end{equation}
+%
+where \(\eta\) represents the depression in \(\gamma\). Considering a hydrogen-helium mixture where \(X + Y \approx 1\), \(\eta\) may be written in the following form,
+%
+\begin{align}
+    \begin{split}
+        \eta(T, \rho) = \frac{1}{\partial_{TT}^2 f} &\left[n_\hydrogen y_\hydrogen \, (1 - y_\hydrogen) \, \frac{(\chi_\hydrogen / k_B T)^2}{2 - y_\hydrogen}\right.\\
+        &\left. + \, n_\helium y_\helium^{(1)} \left(1 - y_\helium^{(1)}\right) \left(\frac{\chi_\helium^{(1)}}{k_B T}\right)^2 \right.\\
+        &\left. + \, n_\helium y_\helium^{(2)} \left(1 - y_\helium^{(2)}\right) \left(\frac{\chi_\helium^{(2)}}{k_B T}\right)^2\right],
+    \end{split}
+\end{align}
+%
+where \(k_B\) is the Boltzmann constant. The parameter \(\partial_{TT}^2\) is the second partial derivative of the free energy density with respect to \(T\),
+%
+\begin{align}
+    \begin{split}
+        \partial_{TT}^2 f = \frac{3}{2} &+ n_\hydrogen y_\hydrogen \left[ \frac{3}{2} + \frac{(1 - y_\hydrogen)}{2 - y_\hydrogen} \left(\frac{3}{2} + \frac{\chi_\hydrogen}{k_B T}\right)^2 \right]\\
+        & + n_\helium y_\helium^{(1)} \left[ \frac{3}{2} + \left(1 - y_\helium^{(1)}\right) \left(\frac{3}{2} + \frac{\chi_\helium^{(1)}}{k_B T}\right)^2 \right]\\
+        & + n_\helium y_\helium^{(2)} \left[ \frac{3}{2} + \left(1 - y_\helium^{(2)}\right) \left(\frac{3}{2} + \frac{\chi_\helium^{(2)}}{k_B T}\right)^2 \right],
+    \end{split}
+\end{align}
+%
+where \(n_\mathbb{X} = N_\mathbb{X} / N\) is the number density and \(\chi_\mathbb{X}^{i}\) is the \(i\)-th ionisation energy of species \(\mathbb{X}\). Parameter \(y_\mathbb{X}^i\) is related to a reduced form of Saha's equation \needcite,
+%
+\begin{equation}
+    \frac{(y_\mathbb{X}^i)^q}{1 - y_\mathbb{X}^i} = \frac{2 g_\mathbb{X}^i}{g_\mathbb{X}^{i-1}} \frac{\overline{m}}{\rho \lambda_e^3} \, e^{- \chi_\mathbb{X}^i / k_B T},
+\end{equation}
+%
+where \(q = 2\) for hydrogen, \(q = 1\) for helium, \(\overline{m} = M/N\) is the mean mass, and \(g_\mathbb{X}^i\) is the ground-state degeneracy of ionisation state \(i\). 
+
+\begin{figure}
+    \centering
+    \includegraphics{figures/adiabatic-ionisation-temp.pdf}
+    \caption{Temperature-density profile of a Sun-like star. \emph{Top:} The first adiabatic exponent \(\gamma\) as a function of temperature and density, calculated using Equation \ref{eq:gamma1} for a helium mass fraction, \(Y=0.25\). \emph{Bottom:} The change in \(\gamma\) induced by a change in helium abundance, \(\Delta Y = 0.1\). In both panels, the dashed line shows the temperature-density profile of model S.}
     \label{fig:gamma-temp-density}
 \end{figure}
 
 Now we look at the radial order kernels and how they are sensitive to different region
-
 
 One approach is in Houdek and Gough, to take a perturbation in gamma and propagate this to a perturbation in frequency.
 
