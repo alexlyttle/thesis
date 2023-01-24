@@ -187,36 +187,36 @@ It would not be hard to believe that a similar oscillation could be found in the
 
 \section{Acoustic glitches in stars}
 
-In the previous section, we considered a glitch in a homogeneous medium, where the speed of sound is constant everywhere else. In a star, the adiabatic sound speed is not constant. It depends on the density (\(\rho\)) and pressure (\(p\)),
+In the previous section, we considered a glitch in a homogeneous medium, where the speed of sound is constant everywhere else. In a star, the adiabatic sound speed is not constant. It depends on the density (\(\rho\)) and pressure (\(P\)),
 %
 \begin{equation}
-    c^2 = \gamma \frac{p}{\rho},
+    c^2 = \gamma \frac{P}{\rho},
 \end{equation}
 %
 where \(\gamma \equiv \Gamma_1\) is the first adiabatic exponent,
 %
 \begin{equation}
-    \gamma = \left( \frac{\partial \ln p}{\partial \ln \rho} \right)_S,
+    \gamma = \left( \frac{\partial \ln P}{\partial \ln \rho} \right)_S,
 \end{equation}
 %
 at constant entropy, \(S\). Chandrasekhar \needcite{} introduced three adiabatic exponents (\(\Gamma_1,\Gamma_2,\Gamma_3\)) to describe the non-ideal gas inside a star. In this chapter, we do not use the other two and hence refer the first as \(\gamma\).
 
-For the most part, \(\gamma\), \(p\), and \(\rho\) change smoothly with radius inside a star. However, a small structural glitch in these quantities would lead to a sudden change in sound speed. We have seen how such a perturbation can lead to an oscillation in the eigenfrequencies of pressure waves in a homogeneous medium. Characterising this oscillation allows us to measure the properties of the glitch. If similar glitches were present in a star, then we might be able to do the same. In this section, we explore the origins of glitches inside a Sun-like star. Then, we see what effect these have on the eigenfrequencies, a quantity we can measure through asteroseismology.
+For the most part, \(\gamma\), \(P\), and \(\rho\) change smoothly with radius inside a star. However, a small structural glitch in these quantities would lead to a sudden change in sound speed. We have seen how such a perturbation can lead to an oscillation in the eigenfrequencies of pressure waves in a homogeneous medium. Characterising this oscillation allows us to measure the properties of the glitch. If similar glitches were present in a star, then we might be able to do the same. In this section, we explore the origins of glitches inside a Sun-like star. Then, we see what effect these have on the eigenfrequencies, a quantity we can measure through asteroseismology.
 
-As discovered in Section \ref{sec:1d-glitch}, a convenient parameter to work with is the acoustic depth, \(\tau\). For a star, we define \(\tau_\star\) as the time taken for a pressure wave to travel from its surface (\(r=R\)) to some radius \(r_\star\),
+Firstly, let us look at the sound speed profile of a Sun-like star. Particularly, we want to see how the sound speed changes on the timescale of a pressure wave moving through the star. As discovered in Section \ref{sec:1d-glitch}, a convenient timescale to work with is the acoustic depth, \(\tau\). For a star, we define \(\tau_\star\) as the time taken for a pressure wave to travel from its surface (\(r=R\)) to some radius \(r_\star\),
 %
 \begin{equation}
     \tau(r_\star) = \int_R^{r_\star} \frac{\dd r}{c(r)}.
 \end{equation}
 %
-The acoustic radius of the star, \(\Tau = \tau(R)\)
+The acoustic radius of the star, \(\Tau = \tau(R)\) relates approximately to the average large frequency spacing \(\langle\Delta\nu\rangle^{-1} \approx 2T_0\).
 
-In Figure \ref{fig:sound-speed-gradient}, we show the sound speed gradient of model S. We see how the speed of sound changes smoothly throughout the star, except for a wiggle around \SI{700}{\second}, a discontinuity at the base of the convective zone, and a rapid change near the core of the star. The first is caused by the ionisation of helium, which we explore further in Section \ref{sec:helium-glitch}. The second is due to a change in the density gradient as the structure moves from convectively unstable to radiative. \todo{Put a few references here of work which has studied these before}.
+In Figure \ref{fig:sound-speed-gradient}, we show the sound speed gradient with respect to \(\tau\) for model S. We see how the speed of sound changes smoothly throughout the star. In the convective envelope, there is a noticeable wiggle around \SI{700}{\second} and a sharp discontinuity at its base. The first is caused by the ionisation of helium, which affects \(\gamma\) by increasing the number of free electrons and thus modifying the free energy of the gas. We explore this further in Section \ref{sec:helium-glitch}. The second is due to a change in the density gradient as the structure moves from convectively unstable to radiative, which will be discussed in Section \ref{sec:bcz-glitch} \todo{Put a few references here of work which has studied these before}.
 
 \begin{figure}
     \centering
-    \includegraphics{example-image-a}
-    \caption{The sound speed gradient, \(\dd c/\dd \tau\), of model S with respect to the acoustic depth, \(\tau\). The fractional radius, \(r/R\) is given on the top axis. The base of the convective zone is marked with a dashed line (or the convective zone is shaded).}
+    \includegraphics{figures/sound-speed-gradient.pdf}
+    \caption{The sound speed gradient (\(\dd c/\dd \tau\)) of model S with respect to the acoustic depth (\(\tau\)). The fractional radius to the photosphere base (\(r/R\)) is given on the top axis. The convective envelope is shaded and the bases of the photosphere and convective zone are marked with dashed lines.}
     \label{fig:sound-speed-gradient}
 \end{figure}
 
@@ -272,16 +272,57 @@ where \(q = 2\) for hydrogen, \(q = 1\) for helium, \(\overline{m} = M/N\) is th
     \label{fig:gamma-temp-density}
 \end{figure}
 
-Now we look at the radial order kernels and how they are sensitive to different region
+\begin{figure}
+    \centering
+    \includegraphics{figures/helium-ionisation-sound-speed.pdf}
+    \caption{The effect on the sound speed profile for three solar-like stars with initial helium mass fractions of 0.26 (\emph{solid}), 0.28 (\emph{dashed}), and 0.3 (\emph{dot-dashed}). The models were each evolved to a central helium mass fraction of 0.6. \emph{Top:} The first adiabatic exponent \(gamma\). \emph{Bottom:} The sound speed gradient \(\dd c/\dd t\) where \(t = \tau/T_0\) is the fractional acoustic depth (plot on the x-axis).}
+\end{figure}
 
-One approach is in Houdek and Gough, to take a perturbation in gamma and propagate this to a perturbation in frequency.
+\todo{Now we look at the radial order kernels and how they are sensitive to different region}
+
+Using the variational principle \needcite[Chandrasekhar], we can write,
+%
+\begin{equation}
+    \omega^2 = \frac{\mathcal{K}}{\mathcal{I}}
+\end{equation}
+%
+\needcite[Houdek \& Gough 2007], where 
+%
+\begin{equation}
+    \mathcal{I} = \int \vec{\xi} \cdot \vec{\xi} \rho r^2 \dd r
+\end{equation}
+%
+and,
+%
+\begin{equation}
+    \mathcal{K} = \int \left[\gamma P (\nabla\cdot\vec{\xi})^2 + 2(\vec{\xi}\cdot\nabla P) \nabla\cdot\vec{\xi} + (\vec{\xi}\cdot\nabla P) (\vec{\xi}\cdot\nabla\ln\rho)\right] r^2 \dd r
+\end{equation}
+%
+\todo{Explain the meaning of each term}.
+
+we can write a small perturbation to frequency as a function of the so-called structural kernels \(\mathcal{K}\) \needcite[Gough \& Thompson 1991],
+%
+\begin{equation}
+    \frac{\delta\omega}{\omega} = \int_0^R \left(\mathcal{K}_{c^2,\rho} \frac{\delta c^2}{c^2} + \mathcal{K}_{\rho,c^2} \frac{\delta \rho}{\rho} \right) \dd r.
+\end{equation}
+%
+A given kernel \(\mathcal{K}_{a, b}\) gives the relative effect on \(\omega\) due to a perturbation in quantity \(a\) at fixed \(b\).
+
 
 \subsection{Base of the convective zone glitch}\label{sec:bcz-glitch}
 
 Other glitches are present. Sharp structure variation
 
+\begin{figure}
+    \centering
+    \includegraphics{figures/bcz-density-gradient.pdf}
+    \caption{Discontinuity in the density gradient at the base of the convective zone for three solar-like stars with initial helium mass fractions of 0.26 (\emph{solid}), 0.28 (\emph{dashed}), and 0.3 (\emph{dot-dashed}).}
+    \label{fig:bcz-density}
+\end{figure}
+
 \section[Modelling the glitch]{Modelling glitches in stellar oscillations}
 
+One approach is in Houdek and Gough, to take a perturbation in gamma and propagate this to a perturbation in frequency.
 
 \subsection{Gaussian processes }\label{sec:glitch-gp}
 

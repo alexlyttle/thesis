@@ -121,7 +121,7 @@
 \newcommand{\heII}{\ensuremath{{\mathrm{II}}}}
 
 \newcommand*{\todo}[1]{{\color{red}(TODO: #1)}}
-\newcommand{\needcite}{{\color{red}(citation needed)}}
+\newcommand{\needcite}[1][\empty]{{\color{red}(\def\temp{#1}\ifx\temp\empty\else\temp,~\fi citation needed)}}
 %% INFO
 % Layout and Margins
 % A4 paper:                       21 x 29.7 cm (8.27 x 11.69 in)
