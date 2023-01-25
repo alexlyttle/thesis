@@ -211,7 +211,7 @@ Firstly, let us look at the sound speed profile of a Sun-like star. Particularly
 %
 The acoustic radius of the star, \(\Tau = \tau(R)\) relates approximately to the average large frequency spacing \(\langle\Delta\nu\rangle^{-1} \approx 2T_0\).
 
-In Figure \ref{fig:sound-speed-gradient}, we show the sound speed gradient with respect to \(\tau\) for model S. We see how the speed of sound changes smoothly throughout the star. In the convective envelope, there is a noticeable wiggle around \SI{700}{\second} and a sharp discontinuity at its base. The first is caused by the ionisation of helium, which affects \(\gamma\) by increasing the number of free electrons and thus modifying the free energy of the gas. We explore this further in Section \ref{sec:helium-glitch}. The second is due to a change in the density gradient as the structure moves from convectively unstable to radiative, which will be discussed in Section \ref{sec:bcz-glitch} \todo{Put a few references here of work which has studied these before}.
+In Figure \ref{fig:sound-speed-gradient}, we show the sound speed gradient with respect to \(\tau\) for model S. We see how the speed of sound changes smoothly throughout the star. In the convective envelope, there is a noticeable wiggle around \SI{700}{\second} and a sharp discontinuity at its base. The first is caused by the ionisation of helium, which affects \(\gamma\) by increasing the number of free electrons and thus modifying the free energy of the gas. We explore this further in Section \ref{sec:helium-glitch}. The second is due to a change in the temperature gradient as the structure moves from convectively unstable to radiative, which will be discussed in Section \ref{sec:bcz-glitch} \todo{Put a few references here of work which has studied these before}.
 
 \begin{figure}
     \centering
@@ -237,7 +237,7 @@ Lets consider a star of mass \(M\) with hydrogen and helium mass fractions of \(
     \gamma \approx \frac{5}{3} - \frac{2}{3} \, \eta(T, \rho), \label{eq:gamma1}
 \end{equation}
 %
-where \(\eta\) represents the depression in \(\gamma\). Considering a hydrogen-helium mixture where \(X + Y \approx 1\), \(\eta\) may be written in the following form,
+where \(\eta\) represents the depression in \(\gamma\). Considering a hydrogen-helium mixture where \(X + Y \approx 1\), \(\eta\) is given by,
 %
 \begin{equation}
     \begin{split}
@@ -282,33 +282,38 @@ where \(q = 2\) for hydrogen, \(q = 1\) for helium, \(\overline{m} = M/N\) is th
 
 \todo{Now we look at the radial order kernels and how they are sensitive to different region}
 
-Using the variational principle \needcite[Chandrasekhar], we can write,
+From the variational principle \citep{Chandrasekhar1939,Chandrasekhar1964}, we can write the characteristic frequencies,
 %
 \begin{equation}
-    \omega^2 = \frac{\mathcal{K}}{\mathcal{I}}
+    \omega^2 = \frac{\mathcal{E}}{\mathcal{I}}\label{eq:var-prin}
 \end{equation}
 %
-\needcite[Houdek \& Gough 2007], where 
+in terms of the mode interia,
 %
 \begin{equation}
-    \mathcal{I} = \int \vec{\xi} \cdot \vec{\xi} \rho r^2 \dd r
+    \mathcal{I} = \int_0^R \vec{\xi} \cdot \vec{\xi} \rho r^2 \dd r
 \end{equation}
 %
-and,
+and its energy,
 %
 \begin{equation}
-    \mathcal{K} = \int \left[\gamma P (\vec{\nabla}\cdot\vec{\xi})^2 + 2(\vec{\xi}\cdot\vec{\nabla} P) \vec{\nabla}\cdot\vec{\xi} + (\vec{\xi}\cdot\vec{\nabla} P) (\vec{\xi}\cdot\vec{\nabla}\ln\rho)\right] r^2 \dd r
+    \mathcal{E} = \int_0^R \left[\gamma P (\vec{\nabla}\cdot\vec{\xi})^2 + 2(\vec{\xi}\cdot\vec{\nabla} P) \vec{\nabla}\cdot\vec{\xi} + (\vec{\xi}\cdot\vec{\nabla} P) (\vec{\xi}\cdot\vec{\nabla}\ln\rho)\right] r^2 \dd r
 \end{equation}
 %
-\todo{Explain the meaning of each term}.
-
-we can write a small perturbation to frequency as a function of the so-called structural kernels \(\mathcal{K}\) \needcite[Gough \& Thompson 1991],
+\todo{Explain the meaning of each term}. Differentiating both sides of Equation \ref{eq:var-prin} with respect to \(\omega\), we get,
+%
+\begin{align}
+    2\omega &= \frac{1}{\mathcal{I}} \left( \frac{\delta\mathcal{E}}{\delta\omega} - \omega^2 \frac{\delta\mathcal{I}}{\delta\omega}\right), \qquad \left[\times \frac{\delta\omega}{2\omega^2}\right] \notag \\
+    \frac{\delta\omega}{\omega} &= \frac{1}{2\,\mathcal{I}} \left(\frac{\delta\mathcal{E}}{\omega^2} - \delta\mathcal{I}\right).
+\end{align}
+%
+We may rewrite this as a function of the so-called structural kernels \(\mathcal{K}_{a,b}\),
 %
 \begin{equation}
     \frac{\delta\omega}{\omega} = \int_0^R \left(\mathcal{K}_{c^2,\rho} \frac{\delta c^2}{c^2} + \mathcal{K}_{\rho,c^2} \frac{\delta \rho}{\rho} \right) \dd r.
 \end{equation}
 %
-A given kernel \(\mathcal{K}_{a, b}\) gives the relative effect on \(\omega\) due to a perturbation in quantity \(a\) at fixed \(b\).
+where \(\mathcal{K}_{a, b}\) gives the relative effect on \(\omega\) due to a perturbation in quantity \(a\) at fixed \(b\) at a given stellar radius. These kernels are defined in \citet{Gough.Thompson1991}. 
 
 
 \subsection{Base of the convective zone glitch}\label{sec:bcz-glitch}
