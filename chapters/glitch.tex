@@ -282,6 +282,13 @@ where \(q = 2\) for hydrogen, \(q = 1\) for helium, \(\overline{m} = M/N\) is th
 
 \todo{Now we look at the radial order kernels and how they are sensitive to different region}
 
+\begin{itemize}
+    \color{red}
+    \item Use variational principle to link modes to change in structure
+    \item Introduce kernels to plot and show mode sensitivity
+    \item Go from kernels to the form of \(\delta\nu\) from Houdek and Gough
+\end{itemize}
+
 From the variational principle \citep{Chandrasekhar1939,Chandrasekhar1964}, we can write the characteristic frequencies,
 %
 \begin{equation}
@@ -300,20 +307,20 @@ and its energy,
     \mathcal{E} = \int_0^R \left[\gamma P (\vec{\nabla}\cdot\vec{\xi})^2 + 2(\vec{\xi}\cdot\vec{\nabla} P) \vec{\nabla}\cdot\vec{\xi} + (\vec{\xi}\cdot\vec{\nabla} P) (\vec{\xi}\cdot\vec{\nabla}\ln\rho)\right] r^2 \dd r
 \end{equation}
 %
-\todo{Explain the meaning of each term}. Differentiating both sides of Equation \ref{eq:var-prin} with respect to \(\omega\), we get,
+where \(\vec{\xi}\) is the Lagrangian perturbation of the pulsation mode. \todo{Explain the meaning of each term}. A structural glitch in the star would cause a small change in frequency (\(\delta\omega\)). Differentiating both sides of Equation \ref{eq:var-prin} with respect to \(\omega\), we get,
 %
 \begin{align}
     2\omega &= \frac{1}{\mathcal{I}} \left( \frac{\delta\mathcal{E}}{\delta\omega} - \omega^2 \frac{\delta\mathcal{I}}{\delta\omega}\right), \qquad \left[\times \frac{\delta\omega}{2\omega^2}\right] \notag \\
     \frac{\delta\omega}{\omega} &= \frac{1}{2\,\mathcal{I}} \left(\frac{\delta\mathcal{E}}{\omega^2} - \delta\mathcal{I}\right).
 \end{align}
 %
-We may rewrite this as a function of the so-called structural kernels \(\mathcal{K}_{a,b}\),
+To see the effect of a change in structure on the modes, it is possible to rewrite this as a function of the so-called structural kernels \(\mathcal{K}_{a,b}\),
 %
 \begin{equation}
-    \frac{\delta\omega}{\omega} = \int_0^R \left(\mathcal{K}_{c^2,\rho} \frac{\delta c^2}{c^2} + \mathcal{K}_{\rho,c^2} \frac{\delta \rho}{\rho} \right) \dd r.
+    \frac{\delta\omega}{\omega} = \int_0^R \left(\mathcal{K}_{c^2,\rho} \frac{\delta c^2}{c^2} + \mathcal{K}_{\rho,c^2} \frac{\delta \rho}{\rho} \right) \dd r.\label{eq:kernels}
 \end{equation}
 %
-where \(\mathcal{K}_{a, b}\) gives the relative effect on \(\omega\) due to a perturbation in quantity \(a\) at fixed \(b\) at a given stellar radius. These kernels are defined in \citet{Gough.Thompson1991}. 
+where \(\mathcal{K}_{a, b}\) gives the relative effect on \(\omega\) due to a perturbation in quantity \(a\) at fixed \(b\) at a given \(r\). These kernels are defined in \citet{Gough.Thompson1991}. We plot the kernels in Figure \ref{fig:kernels} for a few modes. Both decay through the star, meaning that the modes are less sensitive to structural changes deeper in the star. \todo{Explain why this is}. The second term of Equation \ref{eq:kernels} integrates to approximately zero, particularly for high-order modes. 
 
 
 \subsection{Base of the convective zone glitch}\label{sec:bcz-glitch}
