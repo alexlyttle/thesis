@@ -3,9 +3,8 @@ name: Publish
 
 # Controls when the workflow will run - when a tag is created
 on:
-  push:
-    tags:
-      - '*'
+  release:
+    types: [published]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -29,6 +28,4 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: thesis.pdf
           tag: ${{ github.ref }}
-          asset_name: thesis-$tag
-          body: ""
-          prerelease: True  # Set to true unless the push is to main
+          asset_name: thesis-$tag.pdf
