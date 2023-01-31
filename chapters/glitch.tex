@@ -20,7 +20,7 @@ In this chapter, we explore the theoretical background of acoustic glitches
 
 \section[1D example]{A one-dimensional example of a glitch}\label{sec:1d-glitch}
 
-A rapid variation in the structure of a medium induces an oscillation in the eigenfrequencies, \(\delta\omega\). To demonstrate this, we will explore a simple one-dimensional example. Consider a medium bound from \(x=0\) to \(x=L\) in which pressure waves can propagate at constant speed \(c\). The longitudinal displacement of the wave \(\xi\) must obey the wave equation,
+A rapid variation in the structure of a medium induces an oscillation (\(\delta\omega\)) in the eigenfrequencies. To demonstrate this, we will explore a simple one-dimensional example \citep[e.g][]{Verner2005}. Consider a medium bound from \(x=0\) to \(x=L\) in which pressure waves can propagate at constant speed \(c\). The longitudinal displacement of the wave \(\xi\) must obey the wave equation,
 %
 \begin{equation}
     \frac{\partial^2\xi(x, t)}{\partial t^2} = c^2 \frac{\partial^2\xi(x, t)}{\partial x^2},
@@ -32,13 +32,13 @@ at a given position \(x\) and time \(t\). A general solution to the wave may be 
     \xi(x, t) = A e^{i (\omega t - k x)} + B e^{i (\omega t + k x)},
 \end{equation}
 %
-where \(\omega\) and \(k\) satisfy \(\omega = c k\). Solving for the boundary condition \(\xi(0, t) = 0\) we find \(B = - A\). Substituting \(A = (r/2) e^{i\phi}\) we can write the real solution for \(\xi\) as,
+where \(\omega\) and \(k\) satisfy \(\omega = c k\). Solving for the boundary condition \(\xi(0, t) = 0\) we find \(B = - A\). Substituting Euler's formula, \(A = (r/2) e^{i\phi}\), we can write the real solution for \(\xi\) as,
 %
 \begin{equation}
     \real\left[\xi(x, t)\right] = r \sin k x \sin(\omega t + \phi),
 \end{equation}
 %
-where \(r\) and \(\phi\) are the amplitude and temporal phase respectively. Solutions for \(\omega\) which satisfy \(\xi(L, t)=0\) may then be found,
+representing the physical component of the wave, where \(r\) and \(\phi\) are the amplitude and temporal phase respectively. Solutions for \(\omega\) which satisfy \(\xi(L, t)=0\) may then be found,
 %
 \begin{equation}
     \omega_n = c \frac{n \pi}{L}, \label{eq:omega-n}
@@ -65,7 +65,7 @@ where complex coefficients \(A\) and \(C\) represent reflections, and \(B\) and 
     \label{fig:1d-diagram}
 \end{figure}
 
-The boundary conditions for this system are,
+The boundary conditions for this system are found by enforcing spacial continuity at \(x - \delta x\) and \(x + \delta x\),
 %
 \begin{align*}
     \xi_1(x_0 - \delta x, t) &= \xi_2(x_0 - \delta x, t), \\
@@ -74,7 +74,7 @@ The boundary conditions for this system are,
     \frac{\partial \xi_2}{\partial x}(x_0 + \delta x, t) &= \frac{\partial \xi_3}{\partial x}(x_0 + \delta x, t).
 \end{align*}
 %
-Solving these simultaneously gives the following equations for the complex coefficients,
+Solving these simultaneously with the Python package \textsc{sympy} gives the following equations for the complex coefficients\footnote{The code for these derivations are available at \url{\gitremote/tree/\gitbranch/notebooks}},
 %
 \begin{align}
     A &= \delta k (2k + \delta k) (1 - e^{4i \delta x (k + \delta k)}) e^{- 2i k (x_0 - \delta x)} \alpha^{-1}, \\
@@ -100,7 +100,7 @@ where its real component is,
     \real\left[\xi_1(x, t)\right] = \sin \omega t \left[2 \sin kx - r_A \sin(kx + \phi_A)\right].
 \end{equation}
 %
-However, this does not satisfy the boundary condition that \(\xi_1(0, t) = 0\). To do so, we must introduce a small displacement phase \(\epsilon\) and let \(x \rightarrow x + \epsilon\). We will determine \(\epsilon\) shortly. In the meantime, superposing the right-travelling wave and substituting Euler's formula into Equations \ref{eq:xi2-r} and \ref{eq:xi3-r}, we get the real components of the wave functions,
+However, this does not satisfy the boundary condition that the displacement is always zero at \(x=0\); \(\xi_1(0, t) = - r_A \sin \omega t \sin(\phi_A) \neq 0\). To do so, we introduce a small displacement phase \(\epsilon\) caused by the glitch, and let \(x \rightarrow x + \epsilon\). We will determine \(\epsilon\) shortly. In the meantime, superposing the right-travelling wave and substituting Euler's formula into Equations \ref{eq:xi2-r} and \ref{eq:xi3-r}, we can write the real components of the wave functions,
 %
 % \begin{align}
 %     \xi_3(x, t) = \frac{r_A}{2} e^{i \omega t} \left[ e^{i(k(x + \epsilon) + \phi_A)} - e^{-i(k(x + \epsilon) + \phi_A)} \right],
@@ -130,18 +130,20 @@ Finally, we can impose the boundary condition \(\xi_3(L, t) = 0\) to solve for \
     \real[D] \sin[k(L + \epsilon)] - \imag[D] \cos[k(L + \epsilon)] &=0. \label{eq:1d-glitch-sol}
 \end{align}
 %
-Unfortunately, solving Equation \ref{eq:1d-glitch-sol} for \(\omega\) is not possible analytically. However, we can find individual modes (\(\omega_n\)) numerically.
+The glitch affects the amplitude and phase of the wave, because if we set \(\epsilon = 0\) and \(D = 1\) we recover the homogeneous frequency solutions (Equation \ref{eq:omega-n}). Unfortunately, solving Equation \ref{eq:1d-glitch-sol} for \(\omega\) is not possible analytically. However, we can find individual roots (or modes, \(\omega_n\)) numerically.
 
-We find \(\omega_n\) by solving Equation \ref{eq:1d-glitch-sol} using Newton's method for \(n = 1,\dots,50\), with \(c=1\), \(L=1\), and several values of \(x_0\), \(\delta x\), and \(\delta c\). Initial guesses are obtained from the homogeneous medium solutions in Equation \ref{eq:omega-n}. The difference between the solutions for \(\omega_n\) and those from the homogeneous medium are shown in Figure \ref{fig:1d-results}. We can see that the change in frequency (\(\delta \omega\)) induced by the glitch oscillates. There appears to be a linear component and a short period oscillation modulated by a longer period. As the location of the glitch (\(x_0\)) increases towards the edge of the system, the short-period oscillation of \(\delta\omega\) increases. Similarly, as the the half-width of the glitch (\(\delta x\)) increases, the longer modulation period increases. Furthermore, an increasing change in sound speed (\(\delta c\)) increases the amplitude of \(\delta\omega\). Finally, increasing both \(\delta x\) and \(\delta c\) increases the slope of \(\delta\omega\).
+We find \(\omega_n\) by solving Equation \ref{eq:1d-glitch-sol} using Newton's method for \(n = 1,\dots,50\), with \(c=1\), \(L=1\), and several values of \(x_0\), \(\delta x\), and \(\delta c\). Initial guesses are obtained from the homogeneous medium solutions (\(\omega_n^0\)) in Equation \ref{eq:omega-n}. The difference between the solutions for \(\omega_n\) and those from the homogeneous medium, \(\delta \omega_n = \omega_n - \omega_n^0\), are shown in Figure \ref{fig:1d-results}. We can see an oscillation in \(\delta\omega\) induced by the glitch. Physically, this arises from the change in phase \(\epsilon\) caused as the wave travels through the glitch region. As the nodes pass in and out of the region with changing \(n\), the sensitivity of the wave to the glitch oscillates. The form of \(\delta\omega\) appears to have a linear component and a short period oscillation modulated by a longer period. As the location of the glitch (\(x_0\)) increases towards the edge of the system, the short-period oscillation of \(\delta\omega\) increases. Similarly, as the the half-width of the glitch (\(\delta x\)) increases, the longer modulation period increases. Furthermore, an increasing change in sound speed (\(\delta c\)) increases the amplitude of \(\delta\omega\). Finally, increasing both \(\delta x\) and \(\delta c\) increases the slope of \(\delta\omega\).
 
 \begin{figure}
     \centering
     \includegraphics{figures/glitch-1d-example-results.pdf}
-    \caption{The change in mode frequency induced by a change in sound speed of \(\delta c\) from \(x=x_0\) to \(x=x_0 + \delta x\) in a one-dimensional medium, bound such that \(x \in [0, 1]\) (see Figure \ref{fig:1d-diagram}). Outside of the perturbation the speed of sound, \(c=1\).
+    \caption{The change in mode frequency induced by a change in sound speed of \(\delta c\) from \(x_0 - \delta x\) to \(x_0 + \delta x\) in a one-dimensional medium, bound such that \(x \in [0, 1]\) (see Figure \ref{fig:1d-diagram}). Outside of the perturbation the speed of sound, \(c=1\).
     The frequencies in the top panel are offset by \(\omega_0\).
+    Points are joined by straight lines to guide the eye.
     }
     \label{fig:1d-results}
 \end{figure}
+
 
 %This may be interpreted as the nodes of each standing wave passing in and out of region 2 with increasing \(n\). Where there is a node, the wave is least sensitive to a change in structure, and 
 
