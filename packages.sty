@@ -99,6 +99,7 @@
 \usepackage{emptypage}  % Make skipped pages blank
 \usepackage{tocbibind}  % Add TOC and bibliography to TOC
 \usepackage{lipsum}     % For placeholder text
+\usepackage{nicefrac}
 
 \usepackage[acronym,toc]{glossaries}
 \makeglossaries
@@ -125,9 +126,14 @@
 \newcommand*{\todo}[1]{{\color{red}(TODO: #1)}}
 \newcommand*{\needcite}[1][]{{\color{red}(\def\temp{#1}\ifx\temp\empty\else\temp,~\fi citation needed)}}
 
-\newcommand*{\vect}[1]{\bm{#1}}
-% \newcommand*{\dive}[1]{\nabla \cdot #1}
-\newcommand*{\dive}[1]{\mathrm{div} #1}
+% Vector calculus
+% Vector:
+\newcommand*{\vect}[1]{\bm{#1}}  % Bold
+% \newcommand*{\vect}[1]{\vec{#1}}  % Over-arrow
+
+% Divergence:
+% \newcommand*{\dive}[1]{\nabla \cdot #1}  % Del-dot
+\newcommand*{\dive}[1]{\mathrm{div} #1}  % Roman text
 
 %% LINKS
 \newcommand{\gitremote}{https://github.com/alexlyttle/thesis}

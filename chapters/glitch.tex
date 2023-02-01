@@ -307,7 +307,7 @@ where \(\mathcal{I}\) is the mode inertia,
 and \(\mathcal{E}\) is proportional to its energy,
 %
 \begin{equation}
-    \mathcal{E} = \int_0^R \left[\gamma P (\dive{\vect{\xi}})^2 + 2(\vect{\xi}\cdot\vect{\nabla} P) \dive{\vect{\xi}} + (\vect{\xi}\cdot \nabla P) (\vect{\xi}\cdot\nabla\ln\rho)\right] r^2 \dd r
+    \mathcal{E} = \int_0^R \left[\gamma P (\dive{\vect{\xi}})^2 + 2(\vect{\xi}\cdot \nabla P) \dive{\vect{\xi}} + (\vect{\xi}\cdot \nabla P) (\vect{\xi}\cdot\nabla\ln\rho)\right] r^2 \dd r
 \end{equation}
 %
 where \(\vect{\xi}\) is the Lagrangian perturbation vector of the pulsation mode. \todo{Explain the meaning of each term}. A structural glitch in the star would cause a small change in frequency (\(\delta\omega\)). Differentiating both sides of Equation \ref{eq:var-prin} with respect to \(\omega\), we get,
@@ -336,64 +336,61 @@ where \(\mathcal{K}_{\gamma,\rho} \equiv \mathcal{K}_{c^2,\rho}\) is shown in \c
     \omega^2 \mathcal{I}\mathcal{K}_{\gamma,\rho} = \frac12 \gamma P (\dive{\vect{\xi}})^2 r^2.\label{eq:gamma-kernel}
 \end{equation}
 %
-show how this gets to, using equations for \(\xi_r\) and pressure perturbation \(P'\) from eq. 24-25 of \citet{Shibahashi1979}, \(\vect{\xi} = \xi_r \hat{r} + \vect{\xi}_h\) for high-order acoustic modes (where we can ignore the horizontal component of \(\vect{\xi}\)).
+show how this gets to, using equations for \(\xi_r\) and pressure perturbation \(P'\) from eq. 24-25 of e.g. \citet{Shibahashi1979}, \(\vect{\xi} = \xi_r \hat{r} + \vect{\xi}_h\) for high-order acoustic modes (where we can ignore the horizontal component of \(\vect{\xi}\)).
 %
 \begin{equation}
-    \xi_r \approx \frac{A}{r}\sqrt{\frac{K}{\rho}} \cos\psi,\qquad
-    (\dive{\vect{\xi}})^2 \approx \frac{A^2 \omega^3}{\gamma P c r^2} \sin^2\psi \label{eq:xi-approx}
+    \xi_r \approx \frac{\psi_0}{r}\sqrt{\frac{K}{\rho}} \cos\psi,\qquad
+    (\dive{\vect{\xi}})^2 \approx \frac{\psi_0^2 \omega^3}{\gamma P c r^2} \sin^2\psi, \label{eq:xi-approx}
 \end{equation}
 %
-where \(A\) is a proportionality constant and \(K \approx \omega / c\) is the radial wave number for high-order acoustic modes. The phase term \(\psi \approx \omega \tau + \epsilon\) when \(\tau\) is not close to the upper turning point where the wave is reflected near the stellar surface.
+where \(\psi_0\) is a proportionality constant and the radial wave number \(K \approx \omega / c\) for high-order acoustic modes. The phase term \(\psi \approx \omega \tau + \epsilon\) when \(\tau\) is not close to the upper turning point (where the wave is reflected near the stellar surface), and the small offset \(\epsilon\) is a slowly varying function of \(\tau\).
 
 \begin{align}
-    \mathcal{I} &\approx \int_0^R \xi_r^2 \rho r^2 \, \dd r\\
-    &\approx A^2 \int_0^R K \cos^2\psi \, \dd r\\
-    &= \frac12 \omega A^2 \int_0^R (1 + \cos 2 \psi) \frac{\dd r}{c}
+    \mathcal{I} &\approx \int_0^R \xi_r^2 \rho r^2 \, \dd r \notag\\
+    &\approx \psi_0^2 \int_0^R K \cos^2\psi \, \dd r \notag \\
+    &= \frac12 \omega \psi_0^2 \int_0^R (1 + \cos 2 \psi) \frac{\dd r}{c}
 \end{align}
 %
-Changing to an integral over acoustic depth,
+Changing to an integral over acoustic depth we can evaluate it for high-order modes where \(\omega_n \ll T_0^{\,-1}\),
 %
 \begin{align}
-    \mathcal{I} &\approx \frac12 \omega A^2 \int_0^{T_0} [1 + \cos 2 (\omega\tau + \epsilon)] \, \dd \tau \approx \frac12 \omega A^2 T_0
+    \mathcal{I} &\approx \frac12 \omega \psi_0^2 \int_0^{T_0} [1 + \cos 2 (\omega\tau + \epsilon)] \, \dd \tau \approx \frac12 \omega \psi_0^2 T_0.
 \end{align}
 %
-for high-order modes where \(T_0 \gg \omega_n^{-1}\). Finally, substituting Equations \ref{eq:gamma-kernel} and \ref{eq:xi-approx} into Equation \ref{eq:delta-omega}, we get,
+Finally, substituting Equations \ref{eq:gamma-kernel} and \ref{eq:xi-approx} into Equation \ref{eq:delta-omega}, we get,
 %
 \begin{align}
-    \frac{\delta\omega}{\omega} &\approx \frac{1}{2\omega^2\mathcal{I}} \int \delta\gamma P (\dive{\vect{\xi}})^2 r^2 \, \dd r,\\
-    &\approx \frac{\omega A^2}{2 \mathcal{I}} \int \frac{\delta\gamma}{\gamma}\sin^2\psi\frac{\dd r}{c},\\
-    &= \frac{\omega A^2}{4 \mathcal{I}} \int \frac{\delta\gamma}{\gamma}(1 - \cos 2\psi)\frac{\dd r}{c}.
+    \frac{\delta\omega}{\omega} &\approx \frac{1}{2\omega^2\mathcal{I}} \int \delta\gamma P (\dive{\vect{\xi}})^2 r^2 \, \dd r, \notag \\
+    &\approx \frac{\omega \psi_0^2}{2 \mathcal{I}} \int \frac{\delta\gamma}{\gamma}\sin^2\psi\frac{\dd r}{c}, \notag \\
+    &= \frac{\omega \psi_0^2}{4 \mathcal{I}} \int \frac{\delta\gamma}{\gamma}(1 - \cos 2\psi)\frac{\dd r}{c}.
 \end{align}
 %
 where the integral need only be evaluated in the region where \(\delta\gamma / \gamma\) is non-zero. We can see that \(\delta\omega\) is split into a smooth and an oscillating component. The smooth component may be treated later, but for now we focus on the oscillating part of \(\delta\omega\). Substituting for \(\mathcal{I}\) and \(\psi\), changing to an integral over acoustic depth, and switching to cyclic frequency we get,
 %
 \begin{equation}
-    \left.\frac{\delta\nu}{\nu}\right|_\mathrm{osc} \approx - \nu_0 \int \frac{\delta\gamma}{\gamma} \cos (4 \pi\nu\tau + \phi) \, \dd \tau,
+    \left.\frac{\delta\nu}{\nu}\right|_\mathrm{osc} \approx - \nu_0 \int \frac{\delta\gamma}{\gamma} \cos 2 (2 \pi\nu\tau + \epsilon) \, \dd \tau,
 \end{equation}
 %
-where \(\omega = 2\pi\nu\), \(\phi = 2\epsilon\), and \(\nu_0 = (2 T_0)^{-1}\) is approximately the average large frequency separation \(\langle \Delta \nu \rangle\).
+where \(\omega = 2\pi\nu\), and \(\nu_0 = (2 T_0)^{-1}\) is the inverse acoustic diameter of the star (approximately the average large frequency separation \(\langle \Delta \nu \rangle\)).
 
-We have shown that a perturbation in \(\gamma\) can induce an oscillation in \(\nu\). The functional from of this oscillation depends on \(\delta\gamma/\gamma\). There have been different attempt to approximate \(\delta\gamma\) due to helium ionisation in the literature, for example using a Dirac delta function or a triangular function \citep{Monteiro.Christensen-Dalsgaard.ea1994, Monteiro.Thompson2005}. In recent years, work modelling the glitch has used the formulation from \citet{Houdek.Gough2007} where the perturbation is modelled by a Gaussian,
+We have shown that a perturbation in \(\gamma\) can induce an oscillation in \(\nu\). The functional from of this oscillation depends on \(\delta\gamma/\gamma\). As shown in Figures \ref{fig:gamma-zones} and \ref{fig:gamma-temp-density}, the dominant perturbation due to a change in helium abundance is from the second ionisation of helium. There have been different attempts to approximate \(\delta\gamma/\gamma\,|_\heII\) in the literature, for example using a Dirac delta function or a triangular function \citep{Monteiro.Christensen-Dalsgaard.ea1994, Monteiro.Thompson2005}. In recent years, work modelling the glitch has used the formulation from \citet{Houdek.Gough2007} where the perturbation is modelled with a Gaussian shape,
 %
 \begin{equation}
-    \frac{\delta\gamma}{\gamma} \approx - \frac{\Gamma_\heII}{\Delta_\heII \sqrt{2\pi}} \exp\left[ - \frac{(\tau - \tau_\heII)^2}{2\Delta_\heII^2} \right],
+    \left.\frac{\delta\gamma}{\gamma}\right|_\heII \approx - \frac{\Gamma_\heII}{\Delta_\heII \sqrt{2\pi}} \, e^{- \frac12{(\tau - \tau_\heII)^2}/{\Delta_\heII^2} },
 \end{equation}
 %
 where \(\Gamma_\heII\) is the area, \(\Delta_\heII\) is the characteristic width, and \(\tau_\heII\) is the center of the ionisation region.
 
-Combine the above two equations, asymptotically integrate about \(\tau = \tau_\heII\) using \textsc{WolframAlpha},
+Combine the above two equations, asymptotically integrate about \(\tau = \tau_\heII\) using \textsc{WolframAlpha}, dropping second-order terms in \(\tau - \tau_\heII\) we get the following from for the glitch oscillation \citep[cf.][]{Houdek.Gough2007},
 %
 \begin{align}
-    \left.\frac{\delta\nu}{\nu}\right|_{\heII, \mathrm{osc}} &\approx \frac{\nu_0 \Gamma_\heII}{\Delta_\heII \sqrt{2\pi}} \int \exp\left[ - \frac{(\tau - \tau_\heII)^2}{2\Delta_\heII^2} \right] \cos(4 \pi \nu \tau + \phi) \, \dd \tau \\
-    &\approx \frac{\nu_0 \Gamma_\heII}{2} \exp\left(- 8 \pi^2 \Delta_\heII^2 \nu^2\right) \, \mathrm{erfi}\left(2\pi\sqrt{2}\Delta_\heII\nu\right) \sin(4 \pi \nu \tau_\heII + \phi_\heII)\\
-    &\approx A_\heII \nu \exp\left(- 8 \pi^2 \Delta_\heII^2 \nu^2\right) \sin(4 \pi \nu \tau_\heII + \phi_\heII)
+    % \left.\frac{\delta\nu}{\nu}\right|_{\heII, \mathrm{osc}} &\approx \frac{\nu_0 \Gamma_\heII}{\Delta_\heII \sqrt{2\pi}} \int \exp\left[ - \frac{(\tau - \tau_\heII)^2}{2\Delta_\heII^2} \right] \cos(4 \pi \nu \tau + \phi) \, \dd \tau \notag \\
+    \left.\frac{\delta\nu}{\nu}\right|_{\heII, \mathrm{osc}} &\approx \frac{\Gamma_\heII \nu_0}{\Delta_\heII \sqrt{2\pi}} \int e^{- \frac12{(\tau - \tau_\heII)^2}/{\Delta_\heII^2} } \cos 2 (2 \pi \nu \tau + \epsilon) \, \dd \tau \notag \\
+    &\approx \frac12 \, {\Gamma_\heII \nu_0} \, e^{- 8 \pi^2 \Delta_\heII^2 \nu^2} \, \mathrm{erfi}\left(2\sqrt{2}\,\pi\Delta_\heII\nu\right) \sin(4 \pi \nu \tau_\heII + \phi_\heII) \notag\\
+    &\approx A_\heII \nu \, e^{- 8 \pi^2 \Delta_\heII^2 \nu^2} \sin(4 \pi \nu \tau_\heII + \phi_\heII)
 \end{align}
 %
-where \(\mathrm{erfi}(z)\) is the imaginary error function for \(z\) which we expand around \(z=0\). The amplitude,
-%
-\begin{equation}
-    A_\heII = 2 \sqrt{2\pi} \, \Gamma_\heII \Delta_\heII \nu_0.
-\end{equation}
+where we expanded the imaginary error function \(\mathrm{erfi}(z)\) around \(z=0\) and drop terms of order \(\mathcal{O}(z^3)\). Parameters \(A_\heII = 2 \sqrt{2\pi} \, \Gamma_\heII \Delta_\heII \nu_0\), and \(\phi_\heII = 2\epsilon_\heII\), where we assume \(\epsilon \approx \epsilon_\heII\) is constant over the glitch region.
 
 Notice how this differs slightly from \citet{Houdek.Gough2007}, who appear to set the error function term to one.
 
