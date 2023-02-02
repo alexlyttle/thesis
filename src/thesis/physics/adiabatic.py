@@ -33,6 +33,8 @@ def adiabatic_depression(temperature, density, helium, frac_HeII=1.0):
     # Eq. 54
     x_He = helium / (4 - 3 * helium)
     x_H = 1 - x_He
+    
+    # x_H = 1 - x_He
     mean_mass = M_H * (x_H + 4 * x_He) # assume m_He = 4 m_H
 
     K_H = approx_saha(temperature, density, mean_mass, CHI_H, 1, 2)
@@ -63,10 +65,10 @@ def adiabatic_depression(temperature, density, helium, frac_HeII=1.0):
         )
     )
 
-def first_adiabatic_exponent(temperature, density, helium, frac_HeI=1.0):
+def first_adiabatic_exponent(temperature, density, helium, frac_HeII=1.0):
     # Eq. 53 fro Houdayer et al. (2021)
     # frac_HeI for illustration purposes
-    return 5/3 - 2/3 * adiabatic_depression(temperature, density, helium, frac_HeII=frac_HeI)
+    return 5/3 - 2/3 * adiabatic_depression(temperature, density, helium, frac_HeII=frac_HeII)
 
 def sound_speed(gamma, pressure, density):
     return np.sqrt(gamma * pressure / density)
