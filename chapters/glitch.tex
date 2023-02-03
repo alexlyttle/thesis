@@ -381,20 +381,17 @@ We have shown that a perturbation in \(\gamma\) can induce an oscillation in \(\
 %
 where \(\Gamma_\heII\) is the area, \(\Delta_\heII\) is the characteristic width, and \(\tau_\heII\) is the center of the ionisation region.
 
-Combine the above two equations, asymptotically integrate about \(\tau = \tau_\heII\) using \textsc{WolframAlpha}, dropping second-order terms in \(\tau - \tau_\heII\) we get the following from for the glitch oscillation \citep[cf.][]{Houdek.Gough2007},
+Combine the above two equations, asymptotically integrate about \(\tau = \tau_\heII\) (e.g. using Laplace's method) we get the following from for the glitch oscillation \citep[cf.][]{Houdek.Gough2007},
 %
 \begin{align}
     % \left.\frac{\delta\nu}{\nu}\right|_{\heII, \mathrm{osc}} &\approx \frac{\nu_0 \Gamma_\heII}{\Delta_\heII \sqrt{2\pi}} \int \exp\left[ - \frac{(\tau - \tau_\heII)^2}{2\Delta_\heII^2} \right] \cos(4 \pi \nu \tau + \phi) \, \dd \tau \notag \\
-    \left.\frac{\delta\nu}{\nu}\right|_{\heII, \mathrm{osc}} &\approx \frac{\Gamma_\heII \nu_0}{\Delta_\heII \sqrt{2\pi}} \int e^{- \frac12{(\tau - \tau_\heII)^2}/{\Delta_\heII^2} } \cos 2 (2 \pi \nu \tau + \epsilon) \, \dd \tau \notag \\
-    &\approx \frac12 \, {\Gamma_\heII \nu_0} \, e^{- 8 \pi^2 \Delta_\heII^2 \nu^2} \, \mathrm{erfi}\left(2\sqrt{2}\,\pi\Delta_\heII\nu\right) \sin(4 \pi \nu \tau_\heII + \phi_\heII) \notag\\
-    &\approx A_\heII \nu \, e^{- 8 \pi^2 \Delta_\heII^2 \nu^2} \sin(4 \pi \nu \tau_\heII + \phi_\heII)
+    \left.\frac{\delta\nu}{\nu}\right|_{\heII, \mathrm{osc}} &\approx \frac{\nu_0 \Gamma_\heII}{\Delta_\heII \sqrt{2\pi}} \int e^{- \frac12{(\tau - \tau_\heII)^2}/{\Delta_\heII^2} } \cos 2 (2 \pi \nu \tau + \epsilon) \, \dd \tau \notag \\
+    &\approx \nu_0 \Gamma_\heII \, e^{- 8 \pi^2 \Delta_\heII^2 \nu^2} \, \cos 2 (2 \pi \nu \tau_\heII + \epsilon_\heII) \notag
 \end{align}
 %
-where we expanded the imaginary error function \(\mathrm{erfi}(z)\) around \(z=0\) and drop terms of order \(\mathcal{O}(z^3)\). Parameters \(A_\heII = 2 \sqrt{2\pi} \, \Gamma_\heII \Delta_\heII \nu_0\), and \(\phi_\heII \approx 2\epsilon\), where we assume \(\epsilon\) is constant over the glitch region.
+where we assume \(\epsilon \approx \epsilon_\heII\) is constant over the glitch region.
 
-\todo{I have made a mistake here in the asymptotic integral. Try changing integral to be over a quantity that stays close to zero (like (tau - tauII) nu) and you may find the expansion of the error function makes more sense.}
-
-Notice how this differs slightly from \citet{Houdek.Gough2007}, who appear to set the error function term to one. \(\mathbb{D}\)
+\todo{Check this by doing the integral. May need a mix of by parts and Laplace's Method.}
 
 \subsection{Base of the convective zone glitch}\label{sec:bcz-glitch}
 
