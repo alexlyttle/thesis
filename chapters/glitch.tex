@@ -365,13 +365,12 @@ Finally, substituting Equations \ref{eq:gamma-kernel} and \ref{eq:xi-approx} int
     &= \frac{\omega \psi_0^2}{4 \mathcal{I}} \int \frac{\delta\gamma}{\gamma}(1 - \cos 2\psi)\frac{\dd r}{c}.
 \end{align}
 %
-where the integral need only be evaluated in the region where \(\delta\gamma / \gamma\) is non-zero. We can see that \(\delta\omega\) is split into a smooth and an oscillating component. The smooth component may be treated later, but for now we focus on the oscillating part of \(\delta\omega\). Substituting for \(\mathcal{I}\) and \(\psi\), changing to an integral over acoustic depth, and switching to cyclic frequency we get,
+where the integral need only be evaluated in the region where \(\delta\gamma / \gamma\) is non-zero. We can see that \(\delta\omega\) is split into a smooth and an oscillating component. The smooth component may be treated later, but for now we focus on the oscillating part of \(\delta\omega\). Substituting for \(\mathcal{I}\) and \(\psi\), changing to an integral over acoustic depth we get,
 %
 \begin{equation}
-    \left.\frac{\delta\nu}{\nu}\right|_\mathrm{osc} \approx - \nu_0 \int \frac{\delta\gamma}{\gamma} \cos 2 (2 \pi\nu\tau + \epsilon) \, \dd \tau,
+    \left.\frac{\delta\omega}{\omega}\right|_\mathrm{osc} \approx - \frac{1}{2T_0} \int \frac{\delta\gamma}{\gamma} \cos 2 (\omega\tau + \epsilon) \, \dd \tau,
 \end{equation}
 %
-where \(\omega = 2\pi\nu\), and \(\nu_0 = (2 T_0)^{-1}\) is the inverse acoustic diameter of the star (approximately the average large frequency separation \(\langle \Delta \nu \rangle\)).
 
 We have shown that a perturbation in \(\gamma\) can induce an oscillation in \(\nu\). The functional from of this oscillation depends on \(\delta\gamma/\gamma\). As shown in Figures \ref{fig:gamma-zones} and \ref{fig:gamma-temp-density}, the dominant perturbation due to a change in helium abundance is from the second ionisation of helium. There have been different attempts to approximate \(\delta\gamma/\gamma\,|_\heII\) in the literature, for example using a Dirac delta function or a triangular function \citep{Monteiro.Christensen-Dalsgaard.ea1994, Monteiro.Thompson2005}. In recent years, work modelling the glitch has used the formulation from \citet{Houdek.Gough2007} where the perturbation is modelled with a Gaussian shape,
 %
@@ -381,15 +380,46 @@ We have shown that a perturbation in \(\gamma\) can induce an oscillation in \(\
 %
 where \(\Gamma_\heII\) is the area, \(\Delta_\heII\) is the characteristic width, and \(\tau_\heII\) is the center of the ionisation region.
 
-Combine the above two equations, asymptotically integrate about \(\tau = \tau_\heII\) (e.g. using Laplace's method) we get the following from for the glitch oscillation \citep[cf.][]{Houdek.Gough2007},
+Combine the above two equations and changing variables to \(t = \tau - \tau_\heII\), we get,
+%
+\begin{equation}
+    \left.\frac{\delta\omega}{\omega}\right|_{\heII, \mathrm{osc}} \approx \frac{\Gamma_\heII}{2\sqrt{2\pi}\,\Delta_\heII T_0} \, \int_{-\infty}^\infty e^{- {t^2}/{2 \Delta_\heII^2} } \cos 2 (\omega t + \tilde{\epsilon}) \, \dd t
+\end{equation}
+%
+where \(\tilde{\epsilon} = \omega\tau_\heII + \epsilon_\heII\) and \(\epsilon=\epsilon_\heII\) is assumed constant accross the glitch region. We can solve the above integral analytically using differentiation under the integral sign by introducing an arbitrary variable \(a\),
+%
+\begin{equation}
+    I(a) = \int_{-\infty}^\infty e^{- {t^2}/{2 \Delta_\heII^2} } \cos 2 (a \omega t + \tilde{\epsilon}) \, \dd t
+\end{equation}
+%
+Differentiating this with respect to \(a\), and then integrating by parts gets,
 %
 \begin{align}
-    % \left.\frac{\delta\nu}{\nu}\right|_{\heII, \mathrm{osc}} &\approx \frac{\nu_0 \Gamma_\heII}{\Delta_\heII \sqrt{2\pi}} \int \exp\left[ - \frac{(\tau - \tau_\heII)^2}{2\Delta_\heII^2} \right] \cos(4 \pi \nu \tau + \phi) \, \dd \tau \notag \\
-    \left.\frac{\delta\nu}{\nu}\right|_{\heII, \mathrm{osc}} &\approx \frac{\nu_0 \Gamma_\heII}{\Delta_\heII \sqrt{2\pi}} \int e^{- \frac12{(\tau - \tau_\heII)^2}/{\Delta_\heII^2} } \cos 2 (2 \pi \nu \tau + \epsilon) \, \dd \tau \notag \\
-    &\approx \nu_0 \Gamma_\heII \, e^{- 8 \pi^2 \Delta_\heII^2 \nu^2} \, \cos 2 (2 \pi \nu \tau_\heII + \epsilon_\heII) \notag
+    I'(a) &= - 2 \omega \int_{-\infty}^\infty t \, e^{- {t^2}/{2\Delta_\heII^2} } \sin 2 (a \omega t + \tilde{\epsilon}) \, \dd t \notag\\
+    &= 2\omega\Delta_\heII^2 \left[ \left. e^{- {t^2}/{2\Delta_\heII^2} } \sin 2 (a \omega t + \tilde{\epsilon}) \right|_{-\infty}^\infty - 2a\omega \int_{-\infty}^\infty e^{- {t^2}/{2 \Delta_\heII^2} } \cos 2 (\omega t + \tilde{\epsilon}) \, \dd t \right] \notag\\
+    &= - 4 a \omega^2 \Delta_\heII^2 I(\omega)
 \end{align}
 %
-where we assume \(\epsilon \approx \epsilon_\heII\) is constant over the glitch region.
+which has the following solution,
+%
+\begin{align}
+    I(a) = I(0) e^{- 2 \Delta_\heII^2 \omega^2 a^2}, \qquad I(0) &= \int_{-\infty}^\infty e^{- {t^2}/{2 \Delta_\heII^2} } \cos 2 \tilde{\epsilon} \, \dd t\notag\\
+    &= \sqrt{2\pi} \, \Delta_\heII \cos 2 \tilde{\epsilon}
+\end{align}
+%
+Therefore, if we set \(a = 1\) to match Equation \ref{} we get the following equation for the oscillatory glitch signature \citep[cf.][]{Houdek.Gough2007},
+%
+\begin{equation}
+    \left.\frac{\delta\omega}{\omega}\right|_{\heII, \mathrm{osc}} \approx \frac{\Gamma_\heII}{2 T_0} e^{- 2 \Delta_\heII^2 \omega^2} \cos 2 (\omega \tau_\heII + \epsilon_\heII)
+\end{equation}
+%
+To get this into a more familier form, we may substitute \(\omega = 2\pi\nu\),
+%
+\begin{equation}
+    \left.\frac{\delta\nu}{\nu}\right|_{\heII, \mathrm{osc}} \approx \nu_0 \Gamma_\heII \, e^{- 8 \pi^2 \Delta_\heII^2 \nu^2} \, \sin ( 4 \pi \nu \tau_\heII + \phi_\heII),
+\end{equation}
+%
+where \(\phi_\heII = 2\epsilon_\heII + \pi/2\), and \(\nu_0 = (2 T_0)^{-1}\) is the inverse acoustic diameter of the star (approximately the average large frequency separation \(\langle \Delta \nu \rangle\)).
 
 \todo{Check this by doing the integral. May need a mix of by parts and Laplace's Method.}
 
