@@ -386,7 +386,7 @@ Combine the above two equations and changing variables to \(t = \tau - \tau_\heI
     \left.\frac{\delta\omega}{\omega}\right|_{\heII, \mathrm{osc}} \approx \frac{\Gamma_\heII}{2\sqrt{2\pi}\,\Delta_\heII T_0} \, \int_{-\infty}^\infty e^{- {t^2}/{2 \Delta_\heII^2} } \cos 2 (\omega t + \tilde{\epsilon}) \, \dd t
 \end{equation}
 %
-where \(\tilde{\epsilon} = \omega\tau_\heII + \epsilon_\heII\) and \(\epsilon=\epsilon_\heII\) is assumed constant accross the glitch region. We can solve the above integral analytically using differentiation under the integral sign by introducing an arbitrary variable \(a\),
+where \(\tilde{\epsilon} = \omega\tau_\heII + \epsilon_\heII\) and the phase \(\epsilon=\epsilon_\heII\) is assumed constant accross the glitch region. We can solve the above integral analytically using differentiation under the integral sign by introducing an arbitrary variable \(a\),
 %
 \begin{equation}
     I(a) = \int_{-\infty}^\infty e^{- {t^2}/{2 \Delta_\heII^2} } \cos 2 (a \omega t + \tilde{\epsilon}) \, \dd t
@@ -395,31 +395,34 @@ where \(\tilde{\epsilon} = \omega\tau_\heII + \epsilon_\heII\) and \(\epsilon=\e
 Differentiating this with respect to \(a\), and then integrating by parts gets,
 %
 \begin{align}
-    I'(a) &= - 2 \omega \int_{-\infty}^\infty t \, e^{- {t^2}/{2\Delta_\heII^2} } \sin 2 (a \omega t + \tilde{\epsilon}) \, \dd t \notag\\
-    &= 2\omega\Delta_\heII^2 \left[ \left. e^{- {t^2}/{2\Delta_\heII^2} } \sin 2 (a \omega t + \tilde{\epsilon}) \right|_{-\infty}^\infty - 2a\omega \int_{-\infty}^\infty e^{- {t^2}/{2 \Delta_\heII^2} } \cos 2 (\omega t + \tilde{\epsilon}) \, \dd t \right] \notag\\
-    &= - 4 a \omega^2 \Delta_\heII^2 I(\omega)
+    I'(a) &= - 2 \omega \int_{-\infty}^\infty t \, e^{- {t^2}/{2\Delta_\heII^2} } \sin 2 (a \omega t + \tilde{\epsilon}) \, \dd t, \notag\\
+    &= - 2 \omega \Delta_\heII^2 \int_{-\infty}^\infty \sin 2 (a \omega t + \tilde{\epsilon}) \, \dd s, \qquad \mathrm{where} \ s = - \frac12 {\Delta_\heII^{-2}}\,t \, e^{- {t^2}/{2\Delta_\heII^2} }, \notag\\
+    &= 2\omega\Delta_\heII^2 \left\{ \left[ e^{- {t^2}/{2\Delta_\heII^2} } \sin 2 (a \omega t + \tilde{\epsilon}) \right]_{-\infty}^\infty - 2a\omega \int_{-\infty}^\infty e^{- {t^2}/{2 \Delta_\heII^2} } \cos 2 (a \omega t + \tilde{\epsilon}) \, \dd t \right\}, \notag\\
+    &= - 4 a \omega^2 \Delta_\heII^2 \, I(a),
 \end{align}
 %
-which has the following solution,
-%
-\begin{align}
-    I(a) = I(0) e^{- 2 \Delta_\heII^2 \omega^2 a^2}, \qquad I(0) &= \int_{-\infty}^\infty e^{- {t^2}/{2 \Delta_\heII^2} } \cos 2 \tilde{\epsilon} \, \dd t\notag\\
-    &= \sqrt{2\pi} \, \Delta_\heII \cos 2 \tilde{\epsilon}
-\end{align}
-%
-Therefore, if we set \(a = 1\) to match Equation \ref{} we get the following equation for the oscillatory glitch signature \citep[cf.][]{Houdek.Gough2007},
+which is a differential equation with the solution,
 %
 \begin{equation}
-    \left.\frac{\delta\omega}{\omega}\right|_{\heII, \mathrm{osc}} \approx \frac{\Gamma_\heII}{2 T_0} e^{- 2 \Delta_\heII^2 \omega^2} \cos 2 (\omega \tau_\heII + \epsilon_\heII)
+    \begin{split}
+        I(a) = I(0) e^{- 2 \Delta_\heII^2 \omega^2 a^2}, \qquad I(0) &= \int_{-\infty}^\infty e^{- {t^2}/{2 \Delta_\heII^2} } \cos 2 \tilde{\epsilon} \, \dd t, \\
+        &= \sqrt{2\pi} \, \Delta_\heII \cos 2 \tilde{\epsilon},
+    \end{split}
 \end{equation}
 %
-To get this into a more familier form, we may substitute \(\omega = 2\pi\nu\),
+Therefore, if we set \(a = 1\) to match Equation \ref{} we get the following for the oscillatory glitch signature \citep[cf.][]{Houdek.Gough2007},
+%
+\begin{equation}
+    \left.\frac{\delta\omega}{\omega}\right|_{\heII, \mathrm{osc}} \approx \frac{\Gamma_\heII}{2 T_0} e^{- 2 \Delta_\heII^2 \omega^2} \cos 2 (\omega \tau_\heII + \epsilon_\heII),
+\end{equation}
+%
+To get this in a more familiar form in terms of cyclic frequency \citep[e.g.][]{Verma.Faria.ea2014,Verma.Raodeo.ea2017}, we substitute \(\omega = 2\pi\nu\),
 %
 \begin{equation}
     \left.\frac{\delta\nu}{\nu}\right|_{\heII, \mathrm{osc}} \approx \nu_0 \Gamma_\heII \, e^{- 8 \pi^2 \Delta_\heII^2 \nu^2} \, \sin ( 4 \pi \nu \tau_\heII + \phi_\heII),
 \end{equation}
 %
-where \(\phi_\heII = 2\epsilon_\heII + \pi/2\), and \(\nu_0 = (2 T_0)^{-1}\) is the inverse acoustic diameter of the star (approximately the average large frequency separation \(\langle \Delta \nu \rangle\)).
+where \(\phi_\heII = 2(\epsilon_\heII + \pi/4)\), and \(\nu_0 = (2 T_0)^{-1}\) is the inverse acoustic diameter of the star (approximately the average large frequency separation \(\langle \Delta \nu \rangle\)).
 
 \todo{Check this by doing the integral. May need a mix of by parts and Laplace's Method.}
 
