@@ -29,10 +29,10 @@ A rapid variation in the structure of a medium induces an oscillation (\(\delta\
 at a given position \(x\) and time \(t\). A general solution to the wave may be written as a sum of right- and left-travelling waves. In terms of the angular frequency \(\omega\), wave number \(k\), and complex coefficients \((A, B)\),
 %
 \begin{equation}
-    \xi(x, t) = A e^{i (\omega t - k x)} + B e^{i (\omega t + k x)},
+    \xi(x, t) = A \ee^{i (\omega t - k x)} + B \ee^{i (\omega t + k x)},
 \end{equation}
 %
-where \(\omega\) and \(k\) satisfy \(\omega = c k\). Solving for the boundary condition \(\xi(0, t) = 0\) we find \(B = - A\). Substituting Euler's formula, \(A = (r/2) e^{i\phi}\), we can write the real solution for \(\xi\) as,
+where \(\omega\) and \(k\) satisfy \(\omega = c k\). Solving for the boundary condition \(\xi(0, t) = 0\) we find \(B = - A\). Substituting Euler's formula, \(A = (r/2) \ee^{i\phi}\), we can write the real solution for \(\xi\) as,
 %
 \begin{equation}
     \real\left[\xi(x, t)\right] = r \sin k x \sin(\omega t + \phi),
@@ -51,9 +51,9 @@ Now, let us suppose there is a small structural perturbation (or glitch) in the 
 Firstly, we propose solutions to the wave for each region by considering reflection and transmission at each boundary. Initially ignoring the wave superposed by a reflection at \(x=L\),
 %
 \begin{align}
-    \xi_1(x, t) &= e^{i(\omega t - k x)} + A e^{i(\omega t + k x)}, \label{eq:xi1-r} \\
-    \xi_2(x, t) &= Be^{i(\omega t - (k + \delta k) x)} + C e^{i(\omega t + (k + \delta k) x)}, \label{eq:xi2-r} \\
-    \xi_3(x, t) &= D e^{i(\omega t - k x)}, \label{eq:xi3-r}
+    \xi_1(x, t) &= \ee^{i(\omega t - k x)} + A \ee^{i(\omega t + k x)}, \label{eq:xi1-r} \\
+    \xi_2(x, t) &= B\ee^{i(\omega t - (k + \delta k) x)} + C \ee^{i(\omega t + (k + \delta k) x)}, \label{eq:xi2-r} \\
+    \xi_3(x, t) &= D \ee^{i(\omega t - k x)}, \label{eq:xi3-r}
 \end{align}
 %
 where complex coefficients \(A\) and \(C\) represent reflections, and \(B\) and \(D\) represent transmissions, at \(x_0 \pm \delta x\) respectively. Later, we will substitute the left-travelling wave (\(- \xi\{-k, -\delta k\}\)) after determining the values of the coefficients.
@@ -77,22 +77,22 @@ The boundary conditions for this system are found by enforcing spacial continuit
 Solving these simultaneously with the Python package \textsc{sympy} gives the following equations for the complex coefficients\footnote{The code for these derivations are available at \url{\gitremote/tree/\gitbranch/notebooks}},
 %
 \begin{align}
-    A &= \delta k (2k + \delta k) (1 - e^{4i \delta x (k + \delta k)}) e^{- 2i k (x_0 - \delta x)} \alpha^{-1}, \\
-    B &= 2 k (2k + \delta k) e^{4i \delta x (k + \delta k)} e^{i \delta k (x_0 - \delta x)} \alpha^{-1}, \\
-    C &= 2 k \delta k e^{- i (x_0 - \delta x) (2k + \delta k)} \alpha^{-1}, \\
-    D &= 4 k (k + \delta k) e^{2 i \delta x (2k + \delta k)} \alpha^{-1},
+    A &= \delta k (2k + \delta k) (1 - \ee^{4i \delta x (k + \delta k)}) \ee^{- 2i k (x_0 - \delta x)} \alpha^{-1}, \\
+    B &= 2 k (2k + \delta k) \ee^{4i \delta x (k + \delta k)} \ee^{i \delta k (x_0 - \delta x)} \alpha^{-1}, \\
+    C &= 2 k \delta k \ee^{- i (x_0 - \delta x) (2k + \delta k)} \alpha^{-1}, \\
+    D &= 4 k (k + \delta k) \ee^{2 i \delta x (2k + \delta k)} \alpha^{-1},
 \end{align}
 %
 where,
 \begin{equation}
-    \alpha = (2k + \delta k)^2 e^{4 i \delta x (k + \delta k)} - \delta k^2.
+    \alpha = (2k + \delta k)^2 \ee^{4 i \delta x (k + \delta k)} - \delta k^2.
 \end{equation}
 %
 
-Now we have solutions for the coefficients, we can superpose the right-travelling wave, \(\xi\{k, \delta k\} \rightarrow - \xi\{-k, -\delta k\}\) to get the full solution for the wave function. Substituting \(k \rightarrow -k\) and \(\delta k \rightarrow -\delta k\) into the coefficients yields their complex conjugates, \((\overline{A},\overline{B},\overline{C},\overline{D})\). This allows us to rewrite the wave functions into a more flexible form. For example, substituting Euler's formula, \(A = (r_A/2) e^{i\phi_A}\) and \(\overline{A} = (r_A/2) e^{-i\phi_A}\), Equation \ref{eq:xi1-r} now becomes,
+Now we have solutions for the coefficients, we can superpose the right-travelling wave, \(\xi\{k, \delta k\} \rightarrow - \xi\{-k, -\delta k\}\) to get the full solution for the wave function. Substituting \(k \rightarrow -k\) and \(\delta k \rightarrow -\delta k\) into the coefficients yields their complex conjugates, \((\overline{A},\overline{B},\overline{C},\overline{D})\). This allows us to rewrite the wave functions into a more flexible form. For example, substituting Euler's formula, \(A = (r_A/2) \ee^{i\phi_A}\) and \(\overline{A} = (r_A/2) \ee^{-i\phi_A}\), Equation \ref{eq:xi1-r} now becomes,
 %
 \begin{equation}
-    \xi_1(x, t) = e^{i \omega t} \left[ \frac{r_A}{2} \left( e^{i(kx + \phi_A)} - e^{-i(kx + \phi_A)} \right) - \left( e^{ikx} - e^{-ikx} \right) \right] \label{eq:xi1}
+    \xi_1(x, t) = \ee^{i \omega t} \left[ \frac{r_A}{2} \left( \ee^{i(kx + \phi_A)} - \ee^{-i(kx + \phi_A)} \right) - \left( \ee^{ikx} - \ee^{-ikx} \right) \right] \label{eq:xi1}
 \end{equation}
 %
 where its real component is,
@@ -103,7 +103,7 @@ where its real component is,
 However, this does not satisfy the boundary condition that the displacement is always zero at \(x=0\); \(\xi_1(0, t) = - r_A \sin \omega t \sin(\phi_A) \neq 0\). To do so, we introduce a small displacement phase \(\epsilon\) caused by the glitch, and let \(x \rightarrow x + \epsilon\). We will determine \(\epsilon\) shortly. In the meantime, superposing the right-travelling wave and substituting Euler's formula into Equations \ref{eq:xi2-r} and \ref{eq:xi3-r}, we can write the real components of the wave functions,
 %
 % \begin{align}
-%     \xi_3(x, t) = \frac{r_A}{2} e^{i \omega t} \left[ e^{i(k(x + \epsilon) + \phi_A)} - e^{-i(k(x + \epsilon) + \phi_A)} \right],
+%     \xi_3(x, t) = \frac{r_A}{2} \ee^{i \omega t} \left[ \ee^{i(k(x + \epsilon) + \phi_A)} - \ee^{-i(k(x + \epsilon) + \phi_A)} \right],
 % \end{align}
 %
 % with a real solution in trigonometric form,
@@ -164,13 +164,13 @@ Finding an approximate solution for \(\delta\omega\) is beyond the scope of this
 %
 where \(a_1\) and \(a_2\) are coefficients which are both functions of \(\delta x\) and \(\delta c\). Parameters \(\tau_1\) and \(\tau_2\) are the `frequencies' (units of time\footnote{A frequency in \(\omega\) would have units of time, but shouldn't be confused with a periodicity in \(\omega\).}) of oscillations in \(\delta\omega\), which are functions of \(\delta x\) and \(x_0\) respectively.
 
-We fit Equation \ref{eq:1d-domega-func} to \(\delta\omega_n\) obtained from a glitch located at \(x_0 = 0.9\), with half-width \(\delta x = 0.02\), and change in sound speed \(\delta c = 0.03\). The best fitting line is shown in Figure \ref{fig:1d-fit}. Repeating this for different glitch parameters, it can be shown empirically how the `frequencies' \(\tau_1\) and \(\tau_2\) relate to the half-width and location of the glitch respectively. It emerges that \(\tau_1 \approx 2\delta\tau\), where \(\delta\tau\) is half the acoustic width of the glitch (i.e. the time at which sound takes to transverse the region). The second `frequency' \(\tau_2 \approx 2\tau_0\), where \(\tau_0\) is the acoustic depth from the nearest edge to the centre of the glitch, \(x_0\),
+We fit Equation \ref{eq:1d-domega-func} to \(\delta\omega_n\) obtained from a glitch located at \(x_0 = 0.9\), with half-width \(\delta x = 0.02\), and change in sound speed \(\delta c = 0.03\). The best fitting line is shown in Figure \ref{fig:1d-fit}. Repeating this for different glitch parameters, it can be shown empirically how the `frequencies' \(\tau_1\) and \(\tau_2\) relate to the half-width and location of the glitch respectively. It emerges that \(\tau_1 \simeq 2\delta\tau\), where \(\delta\tau\) is half the acoustic width of the glitch (i.e. the time at which sound takes to transverse the region). The second `frequency' \(\tau_2 \simeq 2\tau_0\), where \(\tau_0\) is the acoustic depth from the nearest edge to the centre of the glitch, \(x_0\),
 %
 \begin{equation}
     \tau_0 = \int_0^{x_0'} \frac{\dd x}{c(x)},
 \end{equation}
 %
-where \(x_0' = L/2 - | L/2 - x_0 |\) is the relative location of the glitch from the nearest edge of the system. Since the speed of sound \(c(x) \approx 1\) throughout the medium, \(x_0 \approx L - \tau_0\). Our example fit yields \(\tau_1 \approx \SI{0.0389}{\second\per\radian}\) and \(\tau_2 \approx \SI{0.199}{\second\per\radian}\), approximately recovering the input glitch half-width of \num{0.02} and location of \num{0.9}.
+where \(x_0' = L/2 - | L/2 - x_0 |\) is the relative location of the glitch from the nearest edge of the system. Since the speed of sound \(c(x) \approx 1\) throughout the medium, \(x_0 \simeq L - \tau_0\). Our example fit yields \(\tau_1 \approx \SI{0.0389}{\second\per\radian}\) and \(\tau_2 \approx \SI{0.199}{\second\per\radian}\), approximately recovering the input glitch half-width of \num{0.02} and location of \num{0.9}.
 
 % NOTE: Could take this further to show a1 = 2 dc dtau / L and a2 = dc / L
 
@@ -203,17 +203,17 @@ where \(\gamma \equiv \Gamma_1\) is the first adiabatic exponent,
 %
 at constant entropy, \(S\). Chandrasekhar \needcite{} introduced three adiabatic exponents (\(\Gamma_1,\Gamma_2,\Gamma_3\)) to describe the non-ideal gas inside a star. In this chapter, we do not use the other two and hence refer the first as \(\gamma\).
 
-For the most part, \(\gamma\), \(P\), and \(\rho\) change smoothly with radius inside a star. However, a small structural glitch in these quantities would lead to a sudden change in sound speed. We have seen how such a perturbation can lead to an oscillation in the eigenfrequencies of pressure waves in a homogeneous medium. Characterising this oscillation allows us to measure the properties of the glitch. If similar glitches were present in a star, then we might be able to do the same. In this section, we explore the origins of glitches inside a Sun-like star. Then, we see what effect these have on the eigenfrequencies, a quantity we can measure through asteroseismology.
+For the most part, \(\gamma\), \(P\), and \(\rho\) change smoothly with radius inside a star. However, a small structural glitch in these quantities would lead to a sudden change in sound speed. In the previous section, we showed how such a perturbation can lead to an oscillation in the eigenfrequencies of pressure waves in a homogeneous medium. Characterising this oscillation allowed us to measure the properties of the glitch. If similar glitches were present in a star, then we might be able to do the same. In this section, we explore the origins of glitches inside a Sun-like star. Then, we see what effect these have on the eigenfrequencies, a quantity we can measure through asteroseismology.
 
 Firstly, let us look at the sound speed profile of a Sun-like star. Particularly, we want to see how the sound speed changes on the timescale of a pressure wave moving through the star. As discovered in Section \ref{sec:1d-glitch}, a convenient timescale to work with is the acoustic depth, \(\tau\). For a star, we define \(\tau_\star\) as the time taken for a pressure wave to travel from its surface (\(r=R\)) to some radius \(r_\star\),
 %
 \begin{equation}
-    \tau(r_\star) = \int_R^{r_\star} \frac{\dd r}{c(r)}.
+    \tau(r_\star) = \int_R^{r_\star} \frac{\dd r}{c(r)} \equiv T_0 - \int_0^{r_\star} \frac{\dd r}{c(r)},
 \end{equation}
 %
-The acoustic radius of the star, \(\Tau = \tau(R)\) relates approximately to the average large frequency spacing \(\langle\Delta\nu\rangle^{-1} \approx 2T_0\).
+where the acoustic radius of the star, \(\Tau = \tau(R)\) relates approximately to the average large frequency spacing \(\langle\Delta\nu\rangle^{-1} \simeq 2T_0\).
 
-In Figure \ref{fig:sound-speed-gradient}, we show the sound speed gradient with respect to \(\tau\) for model S. We see how the speed of sound changes smoothly throughout the star. In the convective envelope, there is a noticeable wiggle around \SI{700}{\second} and a sharp discontinuity at its base. The first is caused by the ionisation of helium, which affects \(\gamma\) by increasing the number of free electrons and thus modifying the free energy of the gas. We explore this further in Section \ref{sec:helium-glitch}. The second is due to a change in the temperature gradient as the structure moves from convectively unstable to radiative, which will be discussed in Section \ref{sec:bcz-glitch} \todo{Put a few references here of work which has studied these before}.
+In Figure \ref{fig:sound-speed-gradient}, we show the sound speed gradient with respect to \(\tau\) for model S. We see how the speed of sound changes smoothly throughout the star. In the convective envelope, where p-modes propagate, there is a noticeable wiggle around \SI{700}{\second} and a sharp discontinuity at its base. The first is caused by the ionisation of helium, which affects \(\gamma\) by increasing the number of free electrons and thus modifying the free energy of the gas. We explore this further in Section \ref{sec:helium-glitch}. The second is due to a change in the temperature gradient as the structure moves from convectively unstable to radiative, which will be discussed in Section \ref{sec:bcz-glitch} \todo{Put a few references here of work which has studied these before}.
 
 \begin{figure}
     \centering
@@ -224,7 +224,9 @@ In Figure \ref{fig:sound-speed-gradient}, we show the sound speed gradient with 
 
 \subsection{Helium ionisation glitch}\label{sec:helium-glitch}
 
-The pressure-density gradient at constant entropy for an ideal monatomic gas, \(\gamma = 5/3\). However, as a species ionises, its chemical potential changes, modifying the free energy of the gas and thus inducing a depression in \(\gamma\) \todo{Improve and verify this explaination}. Using an approximate form for the first adiabatic exponent from \citet{Houdayer.Reese.ea2021}, we show how \(\gamma\) is affected by the ionisation of helium and hydrogen in Figure \ref{fig:gamma-zones}. We see that hydrogen ionisation has the largest effect on \(\gamma\) close to the surface of the star. The first and second ionisations of helium occurs deeper in the star, at higher temperatures. We can see that the second ionisation of helium has a greater affect on \(\gamma\) than the first. This is because the ionisation energy of He II is higher than He I and the ground state degeneracy of He II is less than He I \todo{We know from equations but why physically}.
+In this section, we will first show how the sound speed inside a star is affected by the abundance of helium. Then, starting with the variational principle, we will derive a commonly used form of the glitch signature found in the mode frequencies of solar-like oscillators.
+
+The pressure-density gradient at constant entropy for an ideal monatomic gas, \(\gamma = 5/3\). However, as a species ionises, its chemical potential changes, modifying the free energy of the gas and thus inducing a depression in \(\gamma\) \todo{Improve and verify this explaination}. Using an approximate form for the first adiabatic exponent from \citet{Houdayer.Reese.ea2021}, we show how \(\gamma\) is affected by the ionisation of helium and hydrogen in Figure \ref{fig:gamma-zones}. We see that hydrogen ionisation has the largest effect on \(\gamma\) close to the surface of the star. The first and second ionisations of helium occurs deeper in the star, at higher temperatures. We can see that the second ionisation of helium has a greater affect on \(\gamma\) than the first. This is because the ionisation energy of He II is higher than He I and the ground state degeneracy of He II is less than He I.
 
 \begin{figure}
     \centering
@@ -236,7 +238,7 @@ The pressure-density gradient at constant entropy for an ideal monatomic gas, \(
 Lets consider a star of mass \(M\) with hydrogen and helium mass fractions of \(X\) and \(Y\) respectively. To demonstrate the effect of ionisation and stellar structure on \(\gamma\) we can use a recent... \citet{Houdayer.Reese.ea2021} approximated \(\gamma\) in a solar-like star as a function of temperature and density,
 %
 \begin{equation}
-    \gamma \approx \frac{5}{3} - \frac{2}{3} \, \eta(T, \rho), \label{eq:gamma1}
+    \gamma \simeq \frac{5}{3} - \frac{2}{3} \, \eta(T, \rho), \label{eq:gamma1}
 \end{equation}
 %
 where \(\eta\) represents the depression in \(\gamma\). Considering a hydrogen-helium mixture where \(X + Y \approx 1\), \(\eta\) is given by,
@@ -255,7 +257,7 @@ where \(k_B\) is the Boltzmann constant. The parameter \(\partial_{TT}^2\) is th
 %
 \begin{equation}
     \begin{split}
-        \partial_{TT}^2 f &\approx \frac{3}{2} + n_\hydrogen y_\hydrogen \left[ \frac{3}{2} + \frac{(1 - y_\hydrogen)}{2 - y_\hydrogen} \left(\frac{3}{2} + \frac{\chi_\hydrogen}{k_B T}\right)^2 \right] %\\
+        \partial_{TT}^2 f &\simeq \frac{3}{2} + n_\hydrogen y_\hydrogen \left[ \frac{3}{2} + \frac{(1 - y_\hydrogen)}{2 - y_\hydrogen} \left(\frac{3}{2} + \frac{\chi_\hydrogen}{k_B T}\right)^2 \right] %\\
         + n_\helium y_\helium^{(1)} \left[ \frac{3}{2} + \left(1 - y_\helium^{(1)}\right) \left(\frac{3}{2} + \frac{\chi_\helium^{(1)}}{k_B T}\right)^2 \right] \\
         &+ n_\helium y_\helium^{(2)} \left[ \frac{3}{2} + \left(1 - y_\helium^{(2)}\right) \left(\frac{3}{2} + \frac{\chi_\helium^{(2)}}{k_B T}\right)^2 \right],
     \end{split}
@@ -264,10 +266,12 @@ where \(k_B\) is the Boltzmann constant. The parameter \(\partial_{TT}^2\) is th
 where \(n_\mathbb{X} = N_\mathbb{X} / N\) is the number density and \(\chi_\mathbb{X}^{i}\) is the \(i\)-th ionisation energy of species \(\mathbb{X}\). Parameter \(y_\mathbb{X}^i\) is related to a reduced form of Saha's equation \needcite,
 %
 \begin{equation}
-    \frac{(y_\mathbb{X}^i)^q}{1 - y_\mathbb{X}^i} = \frac{2 g_\mathbb{X}^i}{g_\mathbb{X}^{i-1}} \frac{\overline{m}}{\rho \lambda_e^3} \, e^{- \chi_\mathbb{X}^i / k_B T},
+    \frac{(y_\mathbb{X}^i)^q}{1 - y_\mathbb{X}^i} = \frac{2 g_\mathbb{X}^i}{g_\mathbb{X}^{i-1}} \frac{\overline{m}}{\rho \lambda_\ee^3} \, \ee^{- \chi_\mathbb{X}^i / k_B T},
 \end{equation}
 %
-where \(q = 2\) for hydrogen, \(q = 1\) for helium, \(\overline{m} = M/N\) is the mean mass, and \(g_\mathbb{X}^i\) is the ground-state degeneracy of ionisation state \(i\). 
+where \(q = 2\) for hydrogen, \(q = 1\) for helium, \(\overline{m} = M/N\) is the mean mass, and \(g_\mathbb{X}^i\) is the ground-state degeneracy of ionisation state \(i\).
+
+In Figure \ref{fig:gamma-temp-density}, we plot \(\gamma\) as a function of pressure and temperature for model S \citep[cf.][]{Houdayer.Reese.ea2021}. The first panel illustrates the three ionisation regions of hydrogen and helium. The first adiabatic exponent depends primarily on the temperature-density profile of the star. However, in the second panel we see that an increase in helium abundance decreases \(\gamma\) in the helium ionisation regions \todo{More discussion here}.
 
 \begin{figure}
     \centering
@@ -276,6 +280,8 @@ where \(q = 2\) for hydrogen, \(q = 1\) for helium, \(\overline{m} = M/N\) is th
     \label{fig:gamma-temp-density}
 \end{figure}
 
+To show the effect of small changes in \(\gamma\) on the sound speed, we plot the sound speed gradient in Figure \ref{fig:gamma-sound-speed}. The three models shown were evolved to the same central temperature with different initial helium abundances. We see how larger helium abundance increases the width and depression in \(\gamma\), which is reflected in the sound speed gradient. However, larger \(Y\) also leads to a relative reduction in hydrogen abundance. This slightly shrinks the width of the hydrogen ionisation region \todo{More discussion here}.
+
 \begin{figure}
     \centering
     \includegraphics{figures/helium-ionisation-sound-speed.pdf}
@@ -283,51 +289,44 @@ where \(q = 2\) for hydrogen, \(q = 1\) for helium, \(\overline{m} = M/N\) is th
     \label{fig:gamma-sound-speed}
 \end{figure}
 
-\todo{Now we look at the radial order kernels and how they are sensitive to different region}
-
-\begin{itemize}
-    \color{red}
-    \item Use variational principle to link modes to change in structure
-    \item Introduce kernels to plot and show mode sensitivity
-    \item Go from kernels to the form of \(\delta\nu\) from Houdek and Gough
-\end{itemize}
-
-From the variational principle \citep{Chandrasekhar1939,Chandrasekhar1964}, we can write the characteristic frequencies for a spherically symmetric, slowly rotating star,
+To see how a change in \(\gamma\) affects the mode frequencies, we will consider the sensitivity of a given mode to structural changes in the star. We can get there by starting with the variational principle \citep{Chandrasekhar1964},
 %
 \begin{equation}
     \omega^2 = \frac{\mathcal{E}}{\mathcal{I}}\label{eq:var-prin}
 \end{equation}
 %
-where \(\mathcal{I}\) is the mode inertia,
+which approximates the characteristic frequencies of a spherically symmetric, slowly rotating star as a function of the mode inertia,
 %
 \begin{equation}
-    \mathcal{I} = \int_0^R \vect{\xi} \cdot \vect{\xi} \rho r^2 \dd r
+    \mathcal{I} = \int_0^R \vect{\xi} \cdot \vect{\xi} \, \rho r^2 \, \dd r
 \end{equation}
 %
-and \(\mathcal{E}\) is proportional to its energy,
+and \(\mathcal{E}\) which is proportional to the mode energy,
 %
 \begin{equation}
-    \mathcal{E} = \int_0^R \left[\gamma P (\dive{\vect{\xi}})^2 + 2(\vect{\xi}\cdot \nabla P) \dive{\vect{\xi}} + (\vect{\xi}\cdot \nabla P) (\vect{\xi}\cdot\nabla\ln\rho)\right] r^2 \dd r
+    \mathcal{E} = \int_0^R \left[\gamma P (\dive{\vect{\xi}})^2 + 2(\vect{\xi}\cdot \nabla P) \dive{\vect{\xi}} + (\vect{\xi}\cdot \nabla P) (\vect{\xi}\cdot\nabla\ln\rho)\right] r^2 \, \dd r.
 \end{equation}
 %
-where \(\vect{\xi}\) is the Lagrangian perturbation vector of the pulsation mode. \todo{Explain the meaning of each term}. A structural glitch in the star would cause a small change in frequency (\(\delta\omega\)). Differentiating both sides of Equation \ref{eq:var-prin} with respect to \(\omega\), we get,
+These equations depend on \(\vect{\xi}\), the Lagrangian perturbation vector of the pulsation mode (the amplitude and direction of the wave). \todo{Explain the meaning of each term}. A structural glitch in the star would cause a small change in frequency (\(\delta\omega\)). Differentiating both sides of Equation \ref{eq:var-prin} with respect to \(\omega\), we get,
 %
 \begin{align}
     2\omega &= \frac{1}{\mathcal{I}} \left( \frac{\delta\mathcal{E}}{\delta\omega} - \omega^2 \frac{\delta\mathcal{I}}{\delta\omega}\right), \qquad \left[\times \frac{\delta\omega}{2\omega^2}\right] \notag \\
     \frac{\delta\omega}{\omega} &= \frac{1}{2\,\mathcal{I}} \left(\frac{\delta\mathcal{E}}{\omega^2} - \delta\mathcal{I}\right).
 \end{align}
 %
-To see the effect of a change in structure on the modes, it is possible to rewrite this as a function of the so-called structural kernels \(\mathcal{K}_{a,b}\), for example,
+The perturbations \(\delta\mathcal{E}\) and \(\delta\mathcal{I}\) depend on changes in the state variables. To see the effect of a change i on the modes, it is possible to rewrite this as a function of the so-called structural kernels \(\mathcal{K}_{a,b}\), for example,
 %
 \begin{equation}
     \frac{\delta\omega}{\omega} = \int_0^R \left(\mathcal{K}_{c^2,\rho} \frac{\delta c^2}{c^2} + \mathcal{K}_{\rho,c^2} \frac{\delta \rho}{\rho} \right) \dd r.\label{eq:kernels}
 \end{equation}
 %
-where \(\mathcal{K}_{a, b}\) gives the relative effect on \(\omega\) due to a perturbation in quantity \(a\) at fixed \(b\) at a given \(r\). These kernels are defined in \citet{Gough.Thompson1991}. We plot the kernels in Figure \ref{fig:kernels} for a few modes. Both decay through the star, meaning that the modes are less sensitive to structural changes deeper in the star. \todo{Explain why this is, from asymptotic theory frequencies determined by sound speed}. The second term of Equation \ref{eq:kernels} approximately integrates to zero, particularly for high-order modes. 
+where \(\mathcal{K}_{a, b}\) gives the relative effect on \(\omega\) due to a perturbation in a state variable \(a\) at fixed \(b\), at a given \(r\). These kernels are defined fully in \citet{Gough.Thompson1991}.
+
+We plot the kernels in Figure \ref{fig:kernels} for a few modes. Both decay through the star, meaning that the modes are less sensitive to structural changes deeper in the star. \todo{Explain why this is, from asymptotic theory frequencies determined by sound speed}. We see that for high-order modes, the second term of Equation \ref{eq:kernels} approximately integrates to zero. Therefore, we may rewrite the 
 
 %
 \begin{equation}
-    \frac{\delta\omega}{\omega} \approx \int_0^R \mathcal{K}_{\gamma,\rho} \frac{\delta\gamma}{\gamma} \dd r,\label{eq:delta-omega}
+    \frac{\delta\omega}{\omega} \simeq \int_0^R \mathcal{K}_{\gamma,\rho} \frac{\delta\gamma}{\gamma} \dd r,\label{eq:delta-omega}
 \end{equation}
 %
 where \(\mathcal{K}_{\gamma,\rho} \equiv \mathcal{K}_{c^2,\rho}\) is shown in \citet{Gough1993} to satisfy,
@@ -339,92 +338,90 @@ where \(\mathcal{K}_{\gamma,\rho} \equiv \mathcal{K}_{c^2,\rho}\) is shown in \c
 show how this gets to, using equations for \(\xi_r\) and pressure perturbation \(P'\) from eq. 24-25 of e.g. \citet{Shibahashi1979}, \(\vect{\xi} = \xi_r \hat{r} + \vect{\xi}_h\) for high-order acoustic modes (where we can ignore the horizontal component of \(\vect{\xi}\)).
 %
 \begin{equation}
-    \xi_r \approx \frac{\psi_0}{r}\sqrt{\frac{K}{\rho}} \cos\psi,\qquad
-    (\dive{\vect{\xi}})^2 \approx \frac{\psi_0^2 \omega^3}{\gamma P c r^2} \sin^2\psi, \label{eq:xi-approx}
+    \xi_r \simeq \frac{\psi_0}{r}\sqrt{\frac{K}{\rho}} \cos\psi,\qquad
+    (\dive{\vect{\xi}})^2 \simeq \frac{\psi_0^2 \omega^3}{\gamma P c r^2} \sin^2\psi, \label{eq:xi-approx}
 \end{equation}
 %
-where \(\psi_0\) is a proportionality constant and the radial wave number \(K \approx \omega / c\) for high-order acoustic modes. The phase term \(\psi \approx \omega \tau + \epsilon\) when \(\tau\) is not close to the upper turning point (where the wave is reflected near the stellar surface), and the small offset \(\epsilon\) is a slowly varying function of \(\tau\).
+where \(\psi_0\) is a proportionality constant and the radial wave number \(K \simeq \omega / c\) for high-order acoustic modes. The phase term \(\psi \simeq \omega \tau + \epsilon\) when \(\tau\) is not close to the upper turning point (where the wave is reflected near the stellar surface), and the small offset \(\epsilon\) is a slowly varying function of \(\tau\).
 
 \begin{align}
-    \mathcal{I} &\approx \int_0^R \xi_r^2 \rho r^2 \, \dd r \notag\\
-    &\approx \psi_0^2 \int_0^R K \cos^2\psi \, \dd r \notag \\
+    \mathcal{I} &\simeq \int_0^R \xi_r^2 \rho r^2 \, \dd r \notag\\
+    &\simeq \psi_0^2 \int_0^R K \cos^2\psi \, \dd r \notag \\
     &= \frac12 \omega \psi_0^2 \int_0^R (1 + \cos 2 \psi) \frac{\dd r}{c}
 \end{align}
 %
 Changing to an integral over acoustic depth we can evaluate it for high-order modes where \(\omega_n \ll T_0^{\,-1}\),
 %
 \begin{align}
-    \mathcal{I} &\approx \frac12 \omega \psi_0^2 \int_0^{T_0} [1 + \cos 2 (\omega\tau + \epsilon)] \, \dd \tau \approx \frac12 \omega \psi_0^2 T_0.
+    \mathcal{I} &\simeq \frac12 \omega \psi_0^2 \int_0^{T_0} [1 + \cos 2 (\omega\tau + \epsilon)] \, \dd \tau \simeq \frac12 \omega \psi_0^2 T_0.
 \end{align}
 %
 Finally, substituting Equations \ref{eq:gamma-kernel} and \ref{eq:xi-approx} into Equation \ref{eq:delta-omega}, we get,
 %
 \begin{align}
-    \frac{\delta\omega}{\omega} &\approx \frac{1}{2\omega^2\mathcal{I}} \int \delta\gamma P (\dive{\vect{\xi}})^2 r^2 \, \dd r, \notag \\
-    &\approx \frac{\omega \psi_0^2}{2 \mathcal{I}} \int \frac{\delta\gamma}{\gamma}\sin^2\psi\frac{\dd r}{c}, \notag \\
+    \frac{\delta\omega}{\omega} &\simeq \frac{1}{2\omega^2\mathcal{I}} \int \delta\gamma P (\dive{\vect{\xi}})^2 r^2 \, \dd r, \notag \\
+    &\simeq \frac{\omega \psi_0^2}{2 \mathcal{I}} \int \frac{\delta\gamma}{\gamma}\sin^2\psi\frac{\dd r}{c}, \notag \\
     &= \frac{\omega \psi_0^2}{4 \mathcal{I}} \int \frac{\delta\gamma}{\gamma}(1 - \cos 2\psi)\frac{\dd r}{c}.
 \end{align}
 %
 where the integral need only be evaluated in the region where \(\delta\gamma / \gamma\) is non-zero. We can see that \(\delta\omega\) is split into a smooth and an oscillating component. The smooth component may be treated later, but for now we focus on the oscillating part of \(\delta\omega\). Substituting for \(\mathcal{I}\) and \(\psi\), changing to an integral over acoustic depth we get,
 %
 \begin{equation}
-    \left.\frac{\delta\omega}{\omega}\right|_\mathrm{osc} \approx - \frac{1}{2T_0} \int \frac{\delta\gamma}{\gamma} \cos 2 (\omega\tau + \epsilon) \, \dd \tau,
+    \left.\frac{\delta\omega}{\omega}\right|_\mathrm{osc} \simeq - \frac{1}{2T_0} \int \frac{\delta\gamma}{\gamma} \cos 2 (\omega\tau + \epsilon) \, \dd \tau,
 \end{equation}
 %
 
-We have shown that a perturbation in \(\gamma\) can induce an oscillation in \(\nu\). The functional from of this oscillation depends on \(\delta\gamma/\gamma\). As shown in Figures \ref{fig:gamma-zones} and \ref{fig:gamma-temp-density}, the dominant perturbation due to a change in helium abundance is from the second ionisation of helium. There have been different attempts to approximate \(\delta\gamma/\gamma\,|_\heII\) in the literature, for example using a Dirac delta function or a triangular function \citep{Monteiro.Christensen-Dalsgaard.ea1994, Monteiro.Thompson2005}. In recent years, work modelling the glitch has used the formulation from \citet{Houdek.Gough2007} where the perturbation is modelled with a Gaussian shape,
+We have shown that a perturbation in \(\gamma\) can induce an oscillation in \(\omega\). The functional from of this oscillation depends on \(\delta\gamma/\gamma\). As shown in Figures \ref{fig:gamma-zones} and \ref{fig:gamma-temp-density}, the dominant perturbation due to a change in helium abundance is from the second ionisation of helium. There have been different attempts to approximate \(\delta\gamma/\gamma\,|_\heII\) in the literature, for example using a Dirac delta function or a triangular function \citep{Monteiro.Christensen-Dalsgaard.ea1994, Monteiro.Thompson2005}. In recent years, work modelling the glitch has used the formulation from \citet{Houdek.Gough2007} where the perturbation is modelled with a Gaussian shape,
 %
 \begin{equation}
-    \left.\frac{\delta\gamma}{\gamma}\right|_\heII \approx - \frac{\Gamma_\heII}{\Delta_\heII \sqrt{2\pi}} \, e^{- \frac12{(\tau - \tau_\heII)^2}/{\Delta_\heII^2} },
+    \left.\frac{\delta\gamma}{\gamma}\right|_\heII \simeq - \frac{\Gamma_\heII}{\Delta_\heII \sqrt{2\pi}} \, \ee^{- \frac12{(\tau - \tau_\heII)^2}/{\Delta_\heII^2} },
 \end{equation}
 %
 where \(\Gamma_\heII\) is the area, \(\Delta_\heII\) is the characteristic width, and \(\tau_\heII\) is the center of the ionisation region.
 
-Combine the above two equations and changing variables to \(t = \tau - \tau_\heII\), we get,
+Combine the above two equations with a change of variables to \(x = (\tau - \tau_\heII)/\Delta_\heII\), we get,
 %
 \begin{equation}
-    \left.\frac{\delta\omega}{\omega}\right|_{\heII, \mathrm{osc}} \approx \frac{\Gamma_\heII}{2\sqrt{2\pi}\,\Delta_\heII T_0} \, \int_{-\infty}^\infty e^{- {t^2}/{2 \Delta_\heII^2} } \cos 2 (\omega t + \tilde{\epsilon}) \, \dd t
+    \left.\frac{\delta\omega}{\omega}\right|_{\heII, \mathrm{osc}} \simeq \frac{\Gamma_\heII}{2\sqrt{2\pi} \, T_0} \, \int_{-\infty}^\infty \ee^{- x^2/2} \cos 2 (\Delta_\heII \omega x + \widetilde{\epsilon_\heII}) \, \dd x
 \end{equation}
 %
-where \(\tilde{\epsilon} = \omega\tau_\heII + \epsilon_\heII\) and the phase \(\epsilon=\epsilon_\heII\) is assumed constant accross the glitch region. We can solve the above integral analytically using differentiation under the integral sign by introducing an arbitrary variable \(a\),
+where \(\widetilde{\epsilon_\heII} = \omega\tau_\heII + \epsilon_\heII\) and the phase \(\epsilon=\epsilon_\heII\) is assumed constant accross the glitch region. We can solve the above integral analytically using differentiation under the integral sign by introducing an arbitrary variable \(a\),
 %
 \begin{equation}
-    I(a) = \int_{-\infty}^\infty e^{- {t^2}/{2 \Delta_\heII^2} } \cos 2 (a \omega t + \tilde{\epsilon}) \, \dd t
+    f(a) = \int_{-\infty}^\infty \ee^{- x^2/2 } \cos 2 (\Delta_\heII \omega x a + \widetilde{\epsilon_\heII}) \, \dd x
 \end{equation}
 %
 Differentiating this with respect to \(a\), and then integrating by parts gets,
 %
 \begin{align}
-    I'(a) &= - 2 \omega \int_{-\infty}^\infty t \, e^{- {t^2}/{2\Delta_\heII^2} } \sin 2 (a \omega t + \tilde{\epsilon}) \, \dd t, \notag\\
-    &= - 2 \omega \Delta_\heII^2 \int_{-\infty}^\infty \sin 2 (a \omega t + \tilde{\epsilon}) \, \dd s, \qquad \mathrm{where} \ s = - \frac12 {\Delta_\heII^{-2}}\,t \, e^{- {t^2}/{2\Delta_\heII^2} }, \notag\\
-    &= 2\omega\Delta_\heII^2 \left\{ \left[ e^{- {t^2}/{2\Delta_\heII^2} } \sin 2 (a \omega t + \tilde{\epsilon}) \right]_{-\infty}^\infty - 2a\omega \int_{-\infty}^\infty e^{- {t^2}/{2 \Delta_\heII^2} } \cos 2 (a \omega t + \tilde{\epsilon}) \, \dd t \right\}, \notag\\
-    &= - 4 a \omega^2 \Delta_\heII^2 \, I(a),
+    f'(a) &= - 2 \Delta_\heII \omega \int_{-\infty}^\infty x \, \ee^{- x^2/2 } \sin 2 (\Delta_\heII \omega x a + \widetilde{\epsilon_\heII}) \, \dd x, \notag\\
+    &= - 2 \Delta_\heII \omega \int_{-\infty}^\infty \sin 2 (\Delta_\heII \omega x a + \widetilde{\epsilon_\heII}) \, \dd \ee^{- x^2/2 }, \notag\\
+    &= 2 \Delta_\heII \omega \left\{ \left[ \ee^{- x^2/2 } \sin 2 (\Delta_\heII \omega x a + \widetilde{\epsilon_\heII}) \right]_{-\infty}^\infty - 2 \Delta_\heII \omega a \int_{-\infty}^\infty \ee^{- x^2/2 } \cos 2 (\Delta_\heII \omega x a + \widetilde{\epsilon_\heII}) \, \dd x \right\}, \notag\\
+    &= - 4 \Delta_\heII^2 \omega^2 a \, f(a),
 \end{align}
 %
 which is a differential equation with the solution,
 %
 \begin{equation}
     \begin{split}
-        I(a) = I(0) e^{- 2 \Delta_\heII^2 \omega^2 a^2}, \qquad I(0) &= \int_{-\infty}^\infty e^{- {t^2}/{2 \Delta_\heII^2} } \cos 2 \tilde{\epsilon} \, \dd t, \\
-        &= \sqrt{2\pi} \, \Delta_\heII \cos 2 \tilde{\epsilon},
+        f(a) = f(0) \ee^{- 2 \Delta_\heII^2 \omega^2 a^2}, \qquad f(0) &= \int_{-\infty}^\infty \ee^{- x^2/2 } \cos 2 \widetilde{\epsilon_\heII} \, \dd x, \\
+        &= \sqrt{2\pi} \, \cos 2 \widetilde{\epsilon_\heII},
     \end{split}
 \end{equation}
 %
-Therefore, if we set \(a = 1\) to match Equation \ref{} we get the following for the oscillatory glitch signature \citep[cf.][]{Houdek.Gough2007},
+Therefore, if we set \(a = 1\) for the case of the integral in Equation \ref{} we get the following for the oscillatory glitch signature \citep[cf.][]{Houdek.Gough2007},
 %
 \begin{equation}
-    \left.\frac{\delta\omega}{\omega}\right|_{\heII, \mathrm{osc}} \approx \frac{\Gamma_\heII}{2 T_0} e^{- 2 \Delta_\heII^2 \omega^2} \cos 2 (\omega \tau_\heII + \epsilon_\heII),
+    \left.\frac{\delta\omega}{\omega}\right|_{\heII, \mathrm{osc}} \simeq \frac{\Gamma_\heII}{2 T_0} \ee^{- 2 \Delta_\heII^2 \omega^2} \cos 2 (\omega \tau_\heII + \epsilon_\heII),
 \end{equation}
 %
 To get this in a more familiar form in terms of cyclic frequency \citep[e.g.][]{Verma.Faria.ea2014,Verma.Raodeo.ea2017}, we substitute \(\omega = 2\pi\nu\),
 %
 \begin{equation}
-    \left.\frac{\delta\nu}{\nu}\right|_{\heII, \mathrm{osc}} \approx \nu_0 \Gamma_\heII \, e^{- 8 \pi^2 \Delta_\heII^2 \nu^2} \, \sin ( 4 \pi \nu \tau_\heII + \phi_\heII),
+    \left.\frac{\delta\nu}{\nu}\right|_{\heII, \mathrm{osc}} \simeq \nu_0 \Gamma_\heII \, \ee^{- 8 \pi^2 \Delta_\heII^2 \nu^2} \, \sin ( 4 \pi \nu \tau_\heII + \phi_\heII),
 \end{equation}
 %
 where \(\phi_\heII = 2(\epsilon_\heII + \pi/4)\), and \(\nu_0 = (2 T_0)^{-1}\) is the inverse acoustic diameter of the star (approximately the average large frequency separation \(\langle \Delta \nu \rangle\)).
-
-\todo{Check this by doing the integral. May need a mix of by parts and Laplace's Method.}
 
 \subsection{Base of the convective zone glitch}\label{sec:bcz-glitch}
 
@@ -447,5 +444,14 @@ One approach is in Houdek and Gough, to take a perturbation in gamma and propaga
     \item Use Gaussian process to model smooth component
 \end{itemize}
 
+\begin{equation}
+    \nu_n \sim \mathcal{GP}\left[ \widetilde{\nu}_n, k_\theta(n, n') \right]
+\end{equation}
+%
+where \(\widetilde{\nu}_n\) are solutions to,
+%
+\begin{equation}
+    \nu_n = \Delta\nu(n + \epsilon) + g(\nu_n)
+\end{equation}
 \subsection{Gaussian processes }\label{sec:glitch-gp}
 
