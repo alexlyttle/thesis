@@ -211,7 +211,7 @@ Firstly, let us look at the sound speed profile of a Sun-like star. Particularly
     \tau(r_\star) = \int_R^{r_\star} \frac{\dd r}{c(r)} \equiv T_0 - \int_0^{r_\star} \frac{\dd r}{c(r)},
 \end{equation}
 %
-where the acoustic radius of the star, \(\Tau = \tau(R)\) relates approximately to the average large frequency spacing \(\langle\Delta\nu\rangle^{-1} \simeq 2T_0\).
+where the acoustic radius of the star, \(\Tau = \tau(R)\) relates approximately to the average large frequency spacing \(\langle\Delta\nu_{nl}\rangle^{-1} \simeq 2T_0\).
 
 In Figure \ref{fig:sound-speed-gradient}, we show the sound speed gradient with respect to \(\tau\) for model S. We see how the speed of sound changes smoothly throughout the star. In the convective envelope, where p-modes propagate, there is a noticeable wiggle around \SI{700}{\second} and a sharp discontinuity at its base. The first is caused by the ionisation of helium, which affects \(\gamma\) by increasing the number of free electrons and thus modifying the free energy of the gas. We explore this further in Section \ref{sec:helium-glitch}. The second is due to a change in the temperature gradient as the structure moves from convectively unstable to radiative, which will be discussed in Section \ref{sec:bcz-glitch} \todo{Put a few references here of work which has studied these before}.
 
@@ -271,7 +271,7 @@ where \(n_\mathbb{X} = N_\mathbb{X} / N\) is the number density and \(\chi_\math
 %
 where \(q = 2\) for hydrogen, \(q = 1\) for helium, \(\overline{m} = M/N\) is the mean mass, and \(g_\mathbb{X}^i\) is the ground-state degeneracy of ionisation state \(i\).
 
-In Figure \ref{fig:gamma-temp-density}, we plot \(\gamma\) as a function of pressure and temperature for model S \citep[cf.][]{Houdayer.Reese.ea2021}. The first panel illustrates the three ionisation regions of hydrogen and helium. The first adiabatic exponent depends primarily on the temperature-density profile of the star. However, in the second panel we see that an increase in helium abundance decreases \(\gamma\) in the helium ionisation regions \todo{More discussion here}.
+In Figure \ref{fig:gamma-temp-density} \todo{Add lines for different stellar mass and age to show degeneracy} we plot \(\gamma\) as a function of pressure and temperature for model S \citep[cf.][]{Houdayer.Reese.ea2021}. The first panel illustrates the three ionisation regions of hydrogen and helium. The first adiabatic exponent depends primarily on the temperature-density profile of the star. However, in the second panel we see that an increase in helium abundance decreases \(\gamma\) in the helium ionisation regions \todo{Show that increasing Y increases the depth and width of the glitch, but so do other parameters}.
 
 \begin{figure}
     \centering
@@ -421,7 +421,7 @@ To get this in a more familiar form in terms of cyclic frequency \citep[e.g.][]{
     \left.\frac{\delta\nu}{\nu}\right|_{\heII, \mathrm{osc}} \simeq \nu_0 \Gamma_\heII \, \ee^{- 8 \pi^2 \Delta_\heII^2 \nu^2} \, \sin ( 4 \pi \nu \tau_\heII + \phi_\heII),
 \end{equation}
 %
-where \(\phi_\heII = 2(\epsilon_\heII + \pi/4)\), and \(\nu_0 = (2 T_0)^{-1}\) is the inverse acoustic diameter of the star (approximately the average large frequency separation \(\langle \Delta \nu \rangle\)).
+where \(\phi_\heII = 2(\epsilon_\heII + \pi/4)\), and \(\nu_0 = (2 T_0)^{-1}\) is the inverse acoustic diameter of the star.
 
 \subsection{Base of the convective zone glitch}\label{sec:bcz-glitch}
 
@@ -436,22 +436,57 @@ Other glitches are present. Sharp structure variation
 
 \section[Modelling the glitch]{Modelling glitches in stellar oscillations}
 
-One approach is in Houdek and Gough, to take a perturbation in gamma and propagate this to a perturbation in frequency.
-
-\begin{itemize}
-    \item Approx model for \(\delta\nu\)
-    \item Need a smooth component
-    \item Use Gaussian process to model smooth component
-\end{itemize}
-
-\begin{equation}
-    \nu_n \sim \mathcal{GP}\left[ \widetilde{\nu}_n, k_\theta(n, n') \right]
-\end{equation}
-%
-where \(\widetilde{\nu}_n\) are solutions to,
+The p-mode frequencies (\(\nu_{nl}\)) for a slowly rotating star are given by some function of their radial order (\(n\)) and angular degree (\(l\)). This function is not exactly known, making the prediction of mode frequencies given stellar parameters difficult. Typically, oscillation modes are identified in an acoustic power spectra through the process of `peakbagging' \citep[e.g.][]{Nielsen.Davies.ea2021}. We identify these modes using approximate relations for \(\nu_{nl}\) as a guide. For example, from asymptotic theory \citep{Tassoul1980},
 %
 \begin{equation}
-    \nu_n = \Delta\nu(n + \epsilon) + g(\nu_n)
+    \nu_{nl} \simeq \left(n + \frac{l}{2} + \varepsilon\right) \nu_0\label{eq:asy}
 \end{equation}
+%
+where \(\varepsilon\) is some small offset depending on the boundary conditions, and \(\nu_0\) is inverse of the sound travel time across the stellar diameter. As mentioned previously, \(\nu_0 \simeq \langle \Delta\nu_{nl} \rangle \equiv \Delta\nu\) where \(\Delta\nu_{nl}\) is the difference between modes of consecutive \(n\). Fitting this equation, or measuring \(\langle \Delta\nu_{nl} \rangle\) can at most hold information about the mean density of the star \needcite. The modes can be further approximated by a polynomial with increasing order in \(n\) \citep{Ulrich1986,Kjeldsen.Bedding.ea2005}, but the physical meaning of its coefficients become difficult to interpret.
+
+We want to extend this model to include parameters which carry more information about the star. Particularly, we want to model the acoustic glitch signatures in \(\nu_{nl}\) which arise from helium ionisation and the base of the convective zone (BCZ). In the previous section, we found the functional forms of \(\delta\nu\) arising from such glitches. Adding these to Equation \ref{eq:asy} should give us a model, \(g(n, l)\), which we can fit to \(\nu_{nl}\) obtained from peakbagging. Such a model could look something like this,
+%
+\begin{equation}
+    g(n, l) = \sum_{k=0}^{N} a_{lk} n^k + \delta\nu_\helium + \delta\nu_\bcz
+\end{equation}
+%
+where the \(N\)-th order polynomial represents the smooth component of the frequencies with coefficients \(a_{lk}\). Directly fitting the glitch this way has been done before \citep[e.g.][]{Verma.Raodeo.ea2019}. However, there are drawbacks to using a polynomial in the fit. Whilst a polynomial with \(N = \infty\) can represent any function, this is completely impractical here. If \(N\) is too low, then it will not be flexible enough, biasing \(\delta\nu_\helium\) and \(\delta\nu_\bcz\). Yet, if \(N\) is too high, then it will over-fit and the glitch will be missed. Regularising the polynomial is one solution to over-fitting, but this adds extra parameters to tune. Finally, a finite polynomial represents only a small fraction of function space, leading to our model to be systematically biased to a particular functional form.
+
+In this thesis, we suggest and evaluate an alternative model for \(g(n, l)\) which can both be infinitely flexible and easily controlled with fewer parameters. This is a GP. The GP represents a probability distribution over function space, meaning that we can quantify the systematic uncertainty associated with the function conditioned on the data.
+
+We will start by only modelling radial oscillation modes (\(l = 0\)), but this method may be extended to higher angular degree in the future. One way of doing this could be to introduce a new variable \(x = n + l/2\), or to expand the input dimensions.
+
+\begin{equation}
+    g(\vect{n}) \sim \mathcal{GP}\left[ m_\theta(\vect{n}), k_\theta(\vect{n}, \vect{n}') \right]
+\end{equation}
+%
+where \(m\) and \(k\) are the mean and kernel functions. The mean function describes where we expect \(\nu_n\) to be. This should come from known physical processes. However, we do not know the full functional form of \(\nu_n\), so we introduce the kernel function to describe additional correlation between modes. The GP is effectively a prior over the function \(\nu_n = f(n)\). \todo{This is clunky, rethink}.
+
+We know from the asymptotic theory of stellar oscillations, that the radial p-mode frequencies may be approximated by \citep[e.g.][]{Tassoul1980},
+%
+\begin{equation}
+    \nu_n \simeq (n + \varepsilon) \nu_0
+\end{equation}
+%
+where \(\nu_0\) is often approximated by the average large frequency separation \(\langle\Delta\nu\rangle\), and \(\varepsilon\) is a small phase offset which depends on the boundary conditions of the convective zone. This would not be a bad choice for mean function, although we know that there is more physics which contribute to the mode frequencies.
+
+\begin{align}
+    \nu_n &\simeq (n + \varepsilon)\nu_0 + g_\helium(\nu_n) + g_\bcz(\nu_n) \label{eq:asy-glitch}\\
+    g_\helium(\nu) &= \alpha_\helium \nu_0 \nu \, \ee^{-\beta_\helium^2\nu^2} \sin(4\pi\tau_\helium\nu + \phi_\helium),\\
+    g_\bcz(\nu) &= \alpha_\bcz^2 \nu_0 \nu^{-2} \, \sin(4\pi\tau_\bcz\nu + \phi_\bcz)
+\end{align}
+%
+where \(g_\helium\) and \(g_\bcz\) are functions representing the acoustic glitch signature of helium ionisation and the base of the convective zone respectively. The parameters \(\alpha_\helium \simeq \Gamma_\heII\) and \(\beta_\helium \propto \Delta_\heII\) relate to the area and width of the depression in \(\gamma\) caused by the second ionisation of helium, and both have units of time. We neglect contribution by the first ionisation of helium to \(g_\helium(\nu)\) \todo{why?}. The amplitude parameter for the BCZ glitch, \(\alpha_\bcz \propto \sqrt{\Delta_{\bcz}}\) is relates to the difference in the second density derivative at the base of the convective zone and has units of frequency. The approximate acoustic depths of second helium ionisation and the BCZ are given by \(\tau_\helium\) and \(\tau_\bcz\) respectively, and \(\phi\) represents a phase constant.
+
+Equation \ref{eq:asy-glitch} would make a better mean function than the linear asymptotic expression, but it is no longer a forward model because it has \(\nu_n\) on both sides. Solutions for \(\nu_n\) cannot be found analytically. This leaves us with two options: solve Equation \ref{eq:asy-glitch} numerically within the mean function, or approximate the arguments of \(\delta_\helium\) and \(\delta_\bcz\) with the linear asymptotic form. We can estimate the error in the latter method using the former.
+
+Rearranged into dimensionless quantities, \(f = \nu/\nu_0\) and \(t = \tau/T_0\),
+%
+\begin{align}
+    f_n &\simeq n + \varepsilon + h_\helium(f_n) + h_\bcz(f_n)\\
+    h_\helium(f) &= a_\helium f \, \ee^{-b_\helium^2 f^2} \sin(2 \pi \, t_\helium f + \phi_\helium),\\
+    h_\bcz(f) &= (a_\bcz / f)^{2} \, \sin(2\pi\,t_\bcz f + \phi_\bcz)
+\end{align}
+
 \subsection{Gaussian processes }\label{sec:glitch-gp}
 
