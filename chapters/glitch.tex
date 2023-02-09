@@ -201,47 +201,47 @@ where \(\gamma \equiv \Gamma_1\) is the first adiabatic exponent,
     \gamma = \left( \frac{\partial \ln P}{\partial \ln \rho} \right)_S,
 \end{equation}
 %
-at constant entropy, \(S\). Chandrasekhar \needcite{} introduced three adiabatic exponents (\(\Gamma_1,\Gamma_2,\Gamma_3\)) to describe the non-ideal gas inside a star. In this chapter, we do not use the other two and hence refer the first as \(\gamma\).
+at constant entropy, \(S\). Chandrasekhar introduced three adiabatic exponents (\(\Gamma_1,\Gamma_2,\Gamma_3\)) to describe the non-ideal gas inside a star \needcite{}. In this chapter, we do not use the other two and hence refer the first as \(\gamma\).
 
 For the most part, \(\gamma\), \(P\), and \(\rho\) change smoothly with radius inside a star. However, a small structural glitch in these quantities would lead to a sudden change in sound speed. In the previous section, we showed how such a perturbation can lead to an oscillation in the eigenfrequencies of pressure waves in a homogeneous medium. Characterising this oscillation allowed us to measure the properties of the glitch. If similar glitches were present in a star, then we might be able to do the same. In this section, we explore the origins of glitches inside a Sun-like star. Then, we see what effect these have on the eigenfrequencies, a quantity we can measure through asteroseismology.
 
-Firstly, let us look at the sound speed profile of a Sun-like star. Particularly, we want to see how the sound speed changes on the timescale of a pressure wave moving through the star. As discovered in Section \ref{sec:1d-glitch}, a convenient timescale to work with is the acoustic depth, \(\tau\). For a star, we define \(\tau_\star\) as the time taken for a pressure wave to travel from its surface (\(r=R\)) to some radius \(r_\star\),
+Firstly, let us consider the sound speed profile of a Sun-like star. Particularly, we want to see how the sound speed changes on the timescale of a pressure wave moving through the star. As discovered in Section \ref{sec:1d-glitch}, a convenient timescale to work with is the acoustic depth, \(\tau\). Here, we define \(\tau_\star\) as the time taken for a pressure wave to travel from its surface (\(r=R\)) to some radius \(r_\star\) under the assumption of spherical symmetry,
 %
 \begin{equation}
     \tau(r_\star) = \int_R^{r_\star} \frac{\dd r}{c(r)} \equiv \tau_0 - \int_0^{r_\star} \frac{\dd r}{c(r)},
 \end{equation}
 %
-where the acoustic radius of the star, \(\tau_0 = \tau(0)\)\footnote{Not to be confused with \(\tau_0 in the previous section.\)}, relates approximately to the average large frequency spacing \(\langle\Delta\nu_{nl}\rangle^{-1} \simeq 2\tau_0\).
+where the acoustic radius of the star\footnote{Not to be confused with \(\tau_0 in the previous section.\)}, \(\tau_0 = \tau(0)\), relates approximately to the average large frequency separation \(\langle\Delta\nu_{nl}\rangle^{-1} \simeq 2\tau_0\).
 
-In Figure \ref{fig:sound-speed-gradient}, we show the sound speed gradient with respect to \(\tau\) for model S. We see how the speed of sound changes smoothly throughout the star. In the convective envelope, where p-modes propagate, there is a noticeable wiggle around \SI{700}{\second} and a sharp discontinuity at its base. The first is caused by the ionisation of helium, which affects \(\gamma\) by increasing the number of free electrons and thus modifying the free energy of the gas. We explore this further in Section \ref{sec:helium-glitch}. The second is due to a change in the temperature gradient as the structure moves from convectively unstable to radiative, which will be discussed in Section \ref{sec:bcz-glitch} \todo{Put a few references here of work which has studied these before}.
+In Figure \ref{fig:sound-speed-gradient}, we show the sound speed gradient with respect to \(\tau\) for model S. We see how the speed of sound changes smoothly throughout the star. In the convective envelope, where p-modes propagate, there is a noticeable wiggle around \SI{700}{\second} and a sharp change in direction at its base. The first is caused by the ionisation of helium, which affects \(\gamma\) by increasing the number of free electrons and thus modifying the free energy of the gas. We explore this further in Section \ref{sec:helium-glitch}. The second is due to a discontinuity in the second temperature gradient as the structure moves from convectively unstable to radiative, which will be discussed in Section \ref{sec:bcz-glitch} \todo{Put a few references here of work which has studied these before}.
 
 \begin{figure}
     \centering
     \includegraphics{figures/sound-speed-gradient.pdf}
-    \caption{The sound speed gradient (\(\dd c/\dd \tau\)) of model S with respect to the acoustic depth (\(\tau\)). The fractional radius to the photosphere base is given on the top axis. The convective envelope is shaded and the bases of the photosphere and convective zone are marked with dashed lines.}
+    \caption{The sound speed gradient (\(\dd c/\dd \tau\)) of model S plot against the acoustic depth (\(\tau\)). The fractional radius to the photosphere base is given on the top axis. The convective envelope is shaded and the bases of the photosphere and convective zone are marked with dashed lines.}
     \label{fig:sound-speed-gradient}
 \end{figure}
 
 \subsection{Helium ionisation glitch}\label{sec:helium-glitch}
 
-In this section, we will first show how the sound speed inside a star is affected by the abundance of helium. Then, starting with the variational principle, we will derive a commonly used form of the glitch signature found in the mode frequencies of solar-like oscillators.
+In this section, we will first show how the sound speed inside a solar-like star is affected by the ionisation of hydrogen and helium. Then, we will see that an increase in helium abundance increases the effect of helium ionisation on the speed of sound. Starting with the variational principle, we derive a commonly used form of the glitch signature found in the mode frequencies. In the process, we show that the oscillation modes are sensitive to changes in sound speed near the surface.
 
-The pressure-density gradient at constant entropy for an ideal monatomic gas, \(\gamma = 5/3\). However, as a species ionises, its chemical potential changes, modifying the free energy of the gas and thus inducing a depression in \(\gamma\) \todo{Improve and verify this explaination}. Using an approximate form for the first adiabatic exponent from \citet{Houdayer.Reese.ea2021}, we show how \(\gamma\) is affected by the ionisation of helium and hydrogen in Figure \ref{fig:gamma-zones}. We see that hydrogen ionisation has the largest effect on \(\gamma\) close to the surface of the star. The first and second ionisations of helium occurs deeper in the star, at higher temperatures. We can see that the second ionisation of helium has a greater affect on \(\gamma\) than the first. This is because the ionisation energy of He II is higher than He I and the ground state degeneracy of He II is less than He I.
+The speed of sound in the star is proportional to \(\gamma\). As a chemical species in the star ionises, the number of particles and thus chemical potential of the species changes. This induces a gradient in the thermal free energy of the gas which relates to the pressure and entropy of the gas. Therefore, we expect a change in the pressure-density gradient at constant entropy, \(\gamma\). Using an approximate form for the first adiabatic exponent from \citet{Houdayer.Reese.ea2021}, we show how \(\gamma\) is affected by the ionisation of helium and hydrogen in Figure \ref{fig:gamma-zones}. We see that hydrogen ionisation has the largest effect on \(\gamma\) close to the surface of the star. The first and second ionisations of helium occurs deeper in the star, at higher temperatures. We can see that the second ionisation of helium has a greater affect on \(\gamma\) than the first. This is because the ionisation energy of He\,\textsc{ii} is higher than He\,\textsc{i} and the ground state degeneracy of He\,\textsc{ii} is less than He\,\textsc{i}.
 
 \begin{figure}
     \centering
     \includegraphics{figures/adiabatic-ionisation-regions.pdf}
-    \caption{The depressions in the first adiabatic exponent (\(\gamma\)) caused by the ionisation of hydrogen (H), and the first and second ionisations of helium (He I and He II). The x-axis is the fractional acoustic depth from the surface of the star, \(\tau/\tau_0\).}
+    \caption{The depressions in the first adiabatic exponent (\(\gamma\)) caused by the ionisation of hydrogen (H), and the first and second ionisations of helium (He\,\textsc{i} and He\,\textsc{ii}). The x-axis is the fractional acoustic depth from the surface of the star, \(\tau/\tau_0\).}
     \label{fig:gamma-zones}
 \end{figure}
 
-Lets consider a star of mass \(M\) with hydrogen and helium mass fractions of \(X\) and \(Y\) respectively. To demonstrate the effect of ionisation and stellar structure on \(\gamma\) we can use a recent... \citet{Houdayer.Reese.ea2021} approximated \(\gamma\) in a solar-like star as a function of temperature and density,
+Let us consider a star of mass \(M\) with hydrogen and helium mass fractions of \(X\) and \(Y\) respectively. To demonstrate the effect of ionisation and stellar structure on \(\gamma\), we will use derivations from \citet{Houdayer.Reese.ea2021} to approximate \(\gamma\) in a solar-like star as a function of temperature and density,
 %
 \begin{equation}
     \gamma \simeq \frac{5}{3} - \frac{2}{3} \, \eta(T, \rho), \label{eq:gamma1}
 \end{equation}
 %
-where \(\eta\) represents the depression in \(\gamma\). Considering a hydrogen-helium mixture where \(X + Y \approx 1\), \(\eta\) is given by,
+where \(\eta\) represents the depression in \(\gamma\). Considering a hydrogen-helium mixture where \(X + Y \approx 1\), \(\eta\) is given by \citep[cf.][]{Houdayer.Reese.ea2021},
 %
 \begin{equation}
     \begin{split}
@@ -269,9 +269,9 @@ where \(n_\mathbb{X} = N_\mathbb{X} / N\) is the number density and \(\chi_\math
     \frac{(y_\mathbb{X}^i)^q}{1 - y_\mathbb{X}^i} = \frac{2 g_\mathbb{X}^i}{g_\mathbb{X}^{i-1}} \frac{\overline{m}}{\rho \lambda_\ee^3} \, \ee^{- \chi_\mathbb{X}^i / k_B T},
 \end{equation}
 %
-where \(q = 2\) for hydrogen, \(q = 1\) for helium, \(\overline{m} = M/N\) is the mean mass, and \(g_\mathbb{X}^i\) is the ground-state degeneracy of ionisation state \(i\).
+where \(q = 2\) for hydrogen, \(q = 1\) for helium, \(\overline{m} = M/N\) is the mean mass, and \(g_\mathbb{X}^i\) is the ground-state degeneracy of ionisation state \(i\). We used these equations to produce Figures \ref{fig:gamma-zones} and \ref{fig:gamma-temp-density}.
 
-In Figure \ref{fig:gamma-temp-density} \todo{Add lines for different stellar mass and age to show degeneracy} we plot \(\gamma\) as a function of pressure and temperature for model S \citep[cf.][]{Houdayer.Reese.ea2021}. The first panel illustrates the three ionisation regions of hydrogen and helium. The first adiabatic exponent depends primarily on the temperature-density profile of the star. However, in the second panel we see that an increase in helium abundance decreases \(\gamma\) in the helium ionisation regions \todo{Show that increasing Y increases the depth and width of the glitch, but so do other parameters}.
+In Figure \ref{fig:gamma-temp-density} we plot \(\gamma\) as a function of pressure and temperature. The first panel illustrates the three ionisation regions of hydrogen and helium. The value of \(\gamma\) decreases when the ionisation reaction is occurring. The magnitude of the effect depends primarily on the temperature-density profile of the star. Additionally, in the second panel we see that an increase in helium abundance decreases \(\gamma\) in the helium ionisation regions. A temperature-density profile from model S is shown to see how the star probes the ionisation regions. We can imagine a hotter star shifting this line such that ionisation occurs closer to the surface. Similarly, the effect on \(\gamma\) would be smaller in denser star. \todo{Finish by saying how helium dominates the effect on gamma but we expect it to also be effected by mass and evolution}.
 
 \begin{figure}
     \centering
