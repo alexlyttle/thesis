@@ -321,7 +321,7 @@ The perturbations \(\delta\mathcal{E}\) and \(\delta\mathcal{I}\) depend on chan
 %
 where \(\mathcal{K}_{a, b}\) gives the relative effect on \(\omega\) due to a perturbation in a state variable \(a\) at fixed \(b\), at a given \(r\). These kernels are defined fully in \citet{Gough.Thompson1991}.
 
-We plot the kernels in Figure \ref{fig:kernels} for a few modes. Both decay through the star, meaning that the modes are less sensitive to structural changes deeper in the star. \todo{Explain why this is, from asymptotic theory frequencies determined by sound speed}. We see that for high-order modes, the second term of Equation \ref{eq:kernels} approximately integrates to zero. Therefore, we may rewrite the 
+We plot the kernels in Figure \ref{fig:kernels} for a few modes. Both decay through the star, meaning that the modes are less sensitive to structural changes deeper in the star. \todo{Explain why this is, from asymptotic theory frequencies determined by sound speed}. We see that for high-order modes, the second term of Equation \ref{eq:kernels} approximately integrates to zero, unless there is a sharp change in \(\delta\rho/\rho\) (such as at the base of the convective zone). Therefore, we may rewrite the 
 
 %
 \begin{equation}
@@ -411,20 +411,20 @@ which is a differential equation with the solution,
 Therefore, if we set \(a = 1\) for the case of the integral in Equation \ref{} we get the following for the oscillatory glitch signature \citep[cf.][]{Houdek.Gough2007},
 %
 \begin{equation}
-    \left.\frac{\delta\omega}{\omega}\right|_{\heII, \mathrm{osc}} \simeq \frac{\Gamma_\heII}{2 \tau_0} \ee^{- 2 \Delta_\heII^2 \omega^2} \cos 2 (\omega \tau_\heII + \epsilon_\heII),
+    \left.\frac{\delta\omega}{\omega}\right|_{\heII, \mathrm{osc}} \simeq \frac{\Gamma_\heII}{2 \tau_0} \ee^{- 2 \Delta_\heII^2 \omega^2} \cos 2 (\tau_\heII\omega + \epsilon_\heII),
 \end{equation}
 %
 To get this in a more familiar form in terms of cyclic frequency \citep[e.g.][]{Verma.Faria.ea2014,Verma.Raodeo.ea2017}, we substitute \(\omega = 2\pi\nu\),
 %
 \begin{equation}
-    \left.\frac{\delta\nu}{\nu}\right|_{\heII, \mathrm{osc}} \simeq \nu_0 \Gamma_\heII \, \ee^{- 8 \pi^2 \Delta_\heII^2 \nu^2} \, \sin ( 4 \pi \nu \tau_\heII + \phi_\heII),
+    \left.\frac{\delta\nu}{\nu}\right|_{\heII, \mathrm{osc}} \simeq \nu_0 \Gamma_\heII \, \ee^{- 8 \pi^2 \Delta_\heII^2 \nu^2} \, \sin ( 4 \pi \tau_\heII \nu + \phi_\heII),
 \end{equation}
 %
 where \(\phi_\heII = 2(\epsilon_\heII + \pi/4)\), and \(\nu_0 = (2 \tau_0)^{-1}\) is the inverse acoustic diameter of the star.
 
 \subsection{Base of the convective zone glitch}\label{sec:bcz-glitch}
 
-Other glitches are present. Sharp structure variation
+The sensitivity of p-modes to glitches gets smaller further into the star. However, we should not neglect the effect of a discontinuity at the base of the convective zone. This arises 
 
 \begin{figure}
     \centering
@@ -432,6 +432,29 @@ Other glitches are present. Sharp structure variation
     \caption{Discontinuity in the density gradient at the base of the convective zone for three solar-like stars with initial helium mass fractions of 0.26 (\emph{solid}), 0.28 (\emph{dashed}), and 0.3 (\emph{dot-dashed}).}
     \label{fig:bcz-density}
 \end{figure}
+
+
+We can take a similar approach to the previous section but now considering the second kernel \(\mathcal{K}_{\rho,c^2}\) in Equation \ref{eq:kernels}. However, \citet{Houdek.Gough2007} take another approach by considering the discontinuity as it appears in the acoustic cut-off frequency, \(\omega_{ac}\). The details of this derivation are beyond the scope of this work. We quote their result for the change in frequency induced by a density discontinuity at the base of the convective zone located at an acoustic depth of \(\tau_\bcz\),
+%
+\begin{equation}
+    \left.\frac{\delta\omega}{\omega}\right|_{\bcz,\mathrm{osc}} \simeq \frac{c_\bcz^2\Delta_\bcz}{8\tau_0 \omega^3} \left(1 + {1}/{4\tau_0^2\omega^2}\right)^{-1/2} \cos\left[2(\tau_\bcz \omega + \epsilon_\bcz) + \tan^{-1}(2\tau_0\omega)\right]
+\end{equation}
+%
+where \(\epsilon_\bcz\) is some phase which depends slowly on \(\omega\), \(c_\bcz\) is the speed of sound and,
+%
+\begin{equation}
+    \Delta_\bcz = \left.\frac{\dd^2 \ln\rho}{\dd r^2}\right|_{+r_\bcz} - \left.\frac{\dd^2 \ln\rho}{\dd r^2}\right|_{-r_\bcz}
+\end{equation}
+%
+is the change in second derivative of density at the base of the convective zone (\(r = r_\bcz\)).
+
+For high-order modes, \(\tau_0 \omega \gg 1\) and thus \(\tan^{-1}(2\tau_0\omega) \simeq \pi/2\), and \((1 + {1}/{4\tau_0^2\omega^2})^{-1/2} \simeq 1\). Therefore, we can simplify this and write it in a more familiar form in terms of cyclic frequency,
+%
+\begin{equation}
+    \left.\frac{\delta\nu}{\nu}\right|_{\bcz,\mathrm{osc}} \simeq \frac{c_\bcz^2\Delta_\bcz\nu_0}{32\pi^3 \nu^3} \sin(4\pi\tau_\bcz\nu + \phi_\bcz)
+\end{equation}
+%
+where \(\phi_\bcz\) is some approximately constant phase term.
 
 \section[Modelling the glitch]{Modelling glitches in stellar oscillations}
 
@@ -446,10 +469,18 @@ where \(\varepsilon\) is some small offset depending on the boundary conditions,
 We want to extend this model to include parameters which carry more information about the star. Particularly, we want to model the acoustic glitch signatures in \(\nu_{nl}\) which arise from helium ionisation and the base of the convective zone (BCZ). In the previous section, we found the functional forms of \(\delta\nu\) arising from such glitches. Adding these to Equation \ref{eq:asy} should give us a model, \(g(n, l)\), which we can fit to \(\nu_{nl}\) obtained from peakbagging. Such a model could look something like this,
 %
 \begin{equation}
-    g(n, l) = \nu_0 \sum_{k=0}^{N} a_k^{(l)} n^k + \delta\nu_\helium + \delta\nu_\bcz
+    g(n, l) = \nu_\mathrm{sm} + \delta\nu_\helium + \delta\nu_\bcz
 \end{equation}
 %
-where the \(N\)-th order polynomial represents the smooth component of the frequencies with coefficients \(a_k^{(l)}\). Directly fitting the glitch this way has been done before \citep[e.g.][]{Verma.Raodeo.ea2019}. However, there are drawbacks to using a polynomial in the fit. Whilst a polynomial with \(N = \infty\) can represent any function, this is completely impractical here. If \(N\) is too low, then it will not be flexible enough, biasing \(\delta\nu_\helium\) and \(\delta\nu_\bcz\). Yet, if \(N\) is too high, then it will over-fit and the glitch will be missed. Regularising the polynomial is one solution to over-fitting, but this adds extra parameters to tune. Finally, a finite polynomial represents only a small fraction of function space, leading to our model to be systematically biased to a particular functional form.
+where,
+%
+\begin{equation}
+    \nu_\mathrm{sm} = \nu_0 \sum_{k=0}^{N} a_k^{(l)} n^k,
+\end{equation}
+%
+is an \(N\)-th order polynomial represents the smooth component of the frequencies with coefficients \(a_k^{(l)}\). Directly fitting the glitch this way has been done before \citep[e.g.][]{Verma.Raodeo.ea2019}. However, there are drawbacks to using a polynomial in the fit. Whilst a polynomial with \(N = \infty\) can represent any function, this is completely impractical here. If \(N\) is too low, then it will not be flexible enough, biasing \(\delta\nu_\helium\) and \(\delta\nu_\bcz\). Yet, if \(N\) is too high, then it will over-fit and the glitch will be missed. Regularising the polynomial is one solution to over-fitting, but this adds extra parameters to tune. Finally, a finite polynomial represents only a small fraction of function space, leading to our model to be systematically biased to a particular functional form.
+
+\todo{Show the drawbacks of this fit by plotting the residuals}
 
 In this thesis, we suggest and evaluate an alternative model for \(g(n, l)\) which can both be infinitely flexible and easily controlled with fewer parameters. This is a GP. The GP represents a probability distribution over function space, meaning that we can quantify the systematic uncertainty associated with the function conditioned on the data.
 
@@ -474,19 +505,19 @@ where the first term approximates the smooth component of the model as a quadrat
 where \(\kappa\) is a coefficient describing the curvature. The glitch terms are given by,
 %
 \begin{align}
-    \delta\nu_\helium &= \alpha_\helium \nu_0 \nu \, \ee^{-\beta_\helium^2\nu^2} \sin(4\pi\tau_\helium\nu + \phi_\helium),\\
+    \delta\nu_\helium &= \alpha_\helium \nu_0 \nu \, \ee^{-\beta_\helium \nu^2} \sin(4\pi\tau_\helium\nu + \phi_\helium),\\
     \delta\nu_\bcz &= \alpha_\bcz \nu_0 \nu^{-2} \, \sin(4\pi\tau_\bcz\nu + \phi_\bcz)
 \end{align}
 %
-representing the acoustic glitch signature of helium ionisation and the base of the convective zone respectively. The parameters \(\alpha_\helium \simeq \Gamma_\heII\) and \(\beta_\helium \propto \Delta_\heII\) relate to the area and width of the depression in \(\gamma\) caused by the second ionisation of helium, both with units of time. We neglect contribution by the first ionisation of helium \todo{why?}. The amplitude parameter for the BCZ glitch, \(\alpha_\bcz \propto \Delta_{\bcz}\) is relates to the difference in the second density derivative at the base of the convective zone and has units of frequency squared. The approximate acoustic depths of second helium ionisation and the BCZ are given by \(\tau_\helium\) and \(\tau_\bcz\) respectively, and \(\phi\) represents a phase constant.
+representing the acoustic glitch signature of helium ionisation and the base of the convective zone respectively. The parameters \(\alpha_\helium \simeq \Gamma_\heII\) and \(\beta_\helium \propto \Delta_\heII^2\) relate to the area and variance of the Gaussian-like depression in \(\gamma\) caused by the second ionisation of helium. We neglect contribution by the first ionisation of helium \todo{why?}. The amplitude parameter for the BCZ glitch, \(\alpha_\bcz \propto \Delta_{\bcz}\) is relates to the difference in the second density derivative at the base of the convective zone and has units of frequency squared. The approximate acoustic depths of second helium ionisation and the BCZ are given by \(\tau_\helium\) and \(\tau_\bcz\) respectively, and \(\phi\) represents a phase constant.
 
 Equation \ref{eq:asy-glitch} would make a better mean function than the linear asymptotic expression, but it is no longer a forward model because it has \(\nu_n\) on both sides. Solutions for \(\nu_n\) cannot be found analytically. This leaves us with two options: solve Equation \ref{eq:asy-glitch} numerically within the mean function, or approximate the arguments of \(\delta_\helium\) and \(\delta_\bcz\) with the linear asymptotic form. We can estimate the error in the latter method using the former.
 
-Rearranged into dimensionless quantities, \(f = \nu/\nu_0\), \(t = \tau/\tau_0\), \(a_\helium = \nu_0\alpha_\helium\), \(b_\helium = \nu_0 \beta_\helium\), and \(a_\bcz = \alpha_\bcz/\nu_0^2\)
+Rearranged into dimensionless quantities, \(f = \nu/\nu_0\), \(t = \tau/\tau_0\), \(a_\helium = \nu_0\alpha_\helium\), \(b_\helium = \nu_0 \beta_\helium\), and \(a_\bcz = \alpha_\bcz/\nu_0^2\),
 %
 \begin{align}
     f_n &\simeq f_\asy + \delta f_\helium + \delta f_\bcz\\
-    \delta f_\helium &= a_\helium f \, \ee^{-b_\helium^2 f^2} \sin(2 \pi \, t_\helium f + \phi_\helium),\\
+    \delta f_\helium &= a_\helium f \, \ee^{-b_\helium f^2} \sin(2 \pi \, t_\helium f + \phi_\helium),\\
     \delta f_\bcz &= a_\bcz f^{-2} \, \sin(2\pi\,t_\bcz f + \phi_\bcz)
 \end{align}
 
