@@ -475,7 +475,7 @@ We want to extend this model to include parameters which carry more information 
 where,
 %
 \begin{equation}
-    \nu_\mathrm{sm} = \nu_0 \sum_{k=0}^{N} a_k^{(l)} n^k,
+    \nu_\mathrm{sm} = \nu_0 \sum_{k=0}^{N-1} a_k^{(l)} n^k,
 \end{equation}
 %
 is an \(N\)-th order polynomial represents the smooth component of the frequencies with coefficients \(a_k^{(l)}\). Directly fitting the glitch this way has been done before \citep[e.g.][]{Verma.Raodeo.ea2019}. However, there are drawbacks to using a polynomial in the fit. Whilst a polynomial with \(N = \infty\) can represent any function, this is completely impractical here. If \(N\) is too low, then it will not be flexible enough, biasing \(\delta\nu_\helium\) and \(\delta\nu_\bcz\). Yet, if \(N\) is too high, then it will over-fit and the glitch will be missed. Regularising the polynomial is one solution to over-fitting, but this adds extra parameters to tune. Finally, a finite polynomial represents only a small fraction of function space, leading to our model to be systematically biased to a particular functional form.
