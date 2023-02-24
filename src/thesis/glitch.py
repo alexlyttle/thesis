@@ -1,21 +1,27 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+import jax
 import jax.numpy as jnp
 
 from tinygp import kernels, GaussianProcess
 
-from .distributions import JointDistribution, Normal, Uniform, CircularUniform
+from .distributions import Distribution, JointDistribution, Normal, Uniform, CircularUniform
+from .model import Model
 
 PARAM_NAMES = [
     'delta_nu',
     'epsilon',
     'log_tau_he',
     'log_beta_he',
-    'log_gamma_he',
+    'log_alpha_he',
     'log_alpha_cz',
     'log_tau_cz',
     'phi_he',
     'phi_cz',
     'log_sigma'
 ]
+
 
 def estimate_asy(n, nu, nu_err=None):
     w = None if nu_err is None else jnp.broadcast_to(1/nu_err, nu.shape)
@@ -52,12 +58,12 @@ class GlitchPrior(JointDistribution):
         ))
         # beta = 8 * pi**2 * delta**2
         
-        distributions.setdefault("log_gamma_he", Normal(
+        distributions.setdefault("log_alpha_he", Normal(
             0.5*(log_beta_he.mean -  jnp.log(jnp.pi)) + jnp.log(0.5*0.1), # gamma ~ 1/2 * 0.1 * sqrt(beta/pi)
             jnp.sqrt(0.64 + 0.25*log_beta_he.variance)  # 0.8
         ))
-        # alpha_he = (dgamma / gamma)_min = gamma_he / sqrt(2pi) / delta_he
-        # a_he = delta_nu * gamma_he
+        # alpha_he = (dgamma / gamma)_min = alpha_he / sqrt(2pi) / delta_he
+        # a_he = delta_nu * alpha_he
         
         distributions.setdefault("log_alpha_cz", Normal(
             jnp.log(delta_nu.mean*30.0), 
@@ -77,9 +83,23 @@ class GlitchPrior(JointDistribution):
         super().__init__(distributions)
 
 
-class GlitchModel:
-    def __init__(self, prior, *, n, nu, nu_err=None):
-        self.prior = prior
+class GlitchModel(Model):
+
+    symbols = {
+        'delta_nu': r"$\Delta\nu$",
+        'epsilon': r"$\varepsilon$",
+        'log_tau_he': r"$\ln(\tau_\mathrm{He})$",
+        'log_beta_he': r"$\ln(\beta_\mathrm{He})$",
+        'log_alpha_he': r"$\ln(\alpha_\mathrm{He})$",
+        'log_alpha_cz': r"$\ln(\alpha_\mathrm{cz})$",
+        'log_tau_cz': r"$\ln(\tau_\mathrm{cz})$",
+        'phi_he': r"$\phi_\mathrm{He}$",
+        'phi_cz': r"$\phi_\mathrm{cz}$",
+        'log_sigma': r"$\ln(\sigma)$",
+    }
+    
+    def __init__(self, prior: JointDistribution, *, n, nu, nu_err=None):
+        super().__init__(prior)
         self.n = n
         self.nu = nu
         self.nu_err = nu_err
@@ -92,7 +112,7 @@ class GlitchModel:
         return params["delta_nu"] * (n + params["epsilon"])
     
     def helium_amp(self, params, nu):
-        return params["delta_nu"] * jnp.exp(params["log_gamma_he"]) * nu \
+        return params["delta_nu"] * jnp.exp(params["log_alpha_he"]) * nu \
             * jnp.exp(- jnp.exp(params["log_beta_he"]) * nu**2)
 
     def helium_osc(self, params, nu):
@@ -150,3 +170,44 @@ class GlitchModel:
     def log_probability(self, params):
         logp = self.prior.log_probability(params)
         return logp + self.log_likelihood(params)
+
+    def plot_glitch(self, samples, kind="both", intervals=None, draws=None, 
+                    color=None, alpha=0.33, ax=None):
+        if kind == "both":
+            func = self.glitch
+        elif kind == "he":
+            func = self.helium_glitch
+        elif kind == "cz":
+            func = self.bcz_glitch
+        else:
+            raise ValueError(f"Kind '{kind}' is not one of ['both', 'he', 'cz'].")
+        
+        if ax is None:
+            ax = plt.gca()
+        
+        properties = {"color": color}
+        if color is None:
+            properties.update(next(ax._get_lines.prop_cycler))
+            
+        nu_pred = jnp.linspace(self.nu.min(), self.nu.max(), 201)
+        dnu_pred = jax.vmap(func, in_axes=(0, None))(samples, nu_pred)
+        
+        if draws is None:
+            dnu_med = np.median(dnu_pred, axis=0)
+
+            ax.plot(nu_pred, dnu_med, label=kind, **properties)
+            
+            if intervals is not None:
+                # intervals is an iterable of two-tuples
+                for interval in intervals:
+                    assert isinstance(interval, tuple)  # raise errors here
+                    assert len(interval) == 2
+                    dnu_lower, dnu_upper = np.quantile(dnu_pred, interval, axis=0)
+                    ax.fill_between(nu_pred, dnu_lower, dnu_upper, alpha=alpha, **properties)
+        else:
+            thin = samples["delta_nu"].shape[0] // draws + 1
+            y = dnu_pred[::thin]
+            x = jnp.broadcast_to(nu_pred, y.shape)
+            ax.plot(x.T, y.T, alpha=alpha, **properties)
+            
+        return ax
