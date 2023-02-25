@@ -499,10 +499,10 @@ where \(m\) and \(k\) are the mean and kernel functions which depend on paramete
 where the first term approximates the smooth component of the model as a quadratic function of \(n\) centred on \(n_0\) \citep[e.g.][]{Kjeldsen.Bedding.ea2005},
 %
 \begin{equation}
-    \nu_\asy = \left(\kappa \, (n - n_0)^2 + n + \varepsilon\right) \nu_0
+    \nu_\asy = \left(n + \varepsilon\right) \nu_0.
 \end{equation}
 %
-where \(\kappa\) is a coefficient describing the curvature. The glitch terms are given by,
+The glitch terms are given by,
 %
 \begin{align}
     \delta\nu_\helium &= \alpha_\helium \nu_0 \nu \, \ee^{-\beta_\helium \nu^2} \sin(4\pi\tau_\helium\nu + \phi_\helium),\\
@@ -513,11 +513,11 @@ representing the acoustic glitch signature of helium ionisation and the base of 
 
 Equation \ref{eq:asy-glitch} would make a better mean function than the linear asymptotic expression, but it is no longer a forward model because it has \(\nu_n\) on both sides. Solutions for \(\nu_n\) cannot be found analytically. This leaves us with two options: solve Equation \ref{eq:asy-glitch} numerically within the mean function, or approximate the arguments of \(\delta_\helium\) and \(\delta_\bcz\) with the linear asymptotic form. We can estimate the error in the latter method using the former.
 
-Rearranged into dimensionless quantities, \(f = \nu/\nu_0\), \(t = \tau/\tau_0\), \(a_\helium = \nu_0\alpha_\helium\), \(b_\helium = \nu_0 \beta_\helium\), and \(a_\bcz = \alpha_\bcz/\nu_0^2\),
-%
-\begin{align}
-    f_n &\simeq f_\asy + \delta f_\helium + \delta f_\bcz\\
-    \delta f_\helium &= a_\helium f \, \ee^{-b_\helium f^2} \sin(2 \pi \, t_\helium f + \phi_\helium),\\
-    \delta f_\bcz &= a_\bcz f^{-2} \, \sin(2\pi\,t_\bcz f + \phi_\bcz)
-\end{align}
-%
+% Rearranged into dimensionless quantities, \(f = \nu/\nu_0\), \(t = \tau/\tau_0\), \(a_\helium = \nu_0\alpha_\helium\), \(b_\helium = \nu_0 \beta_\helium\), and \(a_\bcz = \alpha_\bcz/\nu_0^2\),
+% %
+% \begin{align}
+%     f_n &\simeq f_\asy + \delta f_\helium + \delta f_\bcz\\
+%     \delta f_\helium &= a_\helium f \, \ee^{-b_\helium f^2} \sin(2 \pi \, t_\helium f + \phi_\helium),\\
+%     \delta f_\bcz &= a_\bcz f^{-2} \, \sin(2\pi\,t_\bcz f + \phi_\bcz)
+% \end{align}
+% %
