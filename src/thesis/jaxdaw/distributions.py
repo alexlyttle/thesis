@@ -3,7 +3,7 @@ from jax import random, tree_util, tree_map
 from jax.scipy.stats import norm, uniform
 from jax.typing import ArrayLike
 
-from .random import split_like_tree
+from ..random import split_like_tree
 
 
 class Distribution:

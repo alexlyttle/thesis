@@ -1,4 +1,3 @@
-import h5py
 import xarray as xr
 import numpy as np
 
@@ -27,7 +26,7 @@ def tomso_to_dataset(tomso_log, dim=None):
     return xr.Dataset(data_vars, attrs=attrs)
 
 def load_dataset(filename):
-    xr.load_dataset(filename, engine="h5netcdf")
+    return xr.load_dataset(filename, engine="h5netcdf")
 
 def save_dataset(dataset: xr.Dataset, filename, **kwargs):
     dataset.to_netcdf(filename, engine="h5netcdf", **kwargs)

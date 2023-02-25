@@ -6,8 +6,8 @@ import jax.numpy as jnp
 
 from tinygp import kernels, GaussianProcess
 
-from .distributions import Distribution, JointDistribution, Normal, Uniform, CircularUniform
-from .model import Model
+from .jaxdaw.distributions import Distribution, JointDistribution, Normal, Uniform, CircularUniform
+from .jaxdaw.model import Model
 
 PARAM_NAMES = [
     'delta_nu',
@@ -205,9 +205,64 @@ class GlitchModel(Model):
                     dnu_lower, dnu_upper = np.quantile(dnu_pred, interval, axis=0)
                     ax.fill_between(nu_pred, dnu_lower, dnu_upper, alpha=alpha, **properties)
         else:
-            thin = samples["delta_nu"].shape[0] // draws + 1
+            thin = samples["delta_nu"].shape[0] // draws
             y = dnu_pred[::thin]
             x = jnp.broadcast_to(nu_pred, y.shape)
             ax.plot(x.T, y.T, alpha=alpha, **properties)
             
+        return ax
+
+    def plot_echelle(self, key, samples, kind="full", intervals=None, draws=None,
+                     max_samples=None, color=None, alpha=0.33, ax=None):
+        
+        if kind == "full":
+            func = lambda params, n: self.sample(key, params, n)
+        elif kind == "asy":
+            func = self.smooth_component
+        elif kind == "gp":
+            func = lambda params, n: self.smooth_component(params, n) \
+                + self.sample(key, params, n, include_mean=False) 
+        else:
+            raise ValueError(f"Kind '{kind}' is not one of ['full', 'asy', 'gp'].")
+
+        delta_nu = samples["delta_nu"].mean()
+        
+        if self.nu_err is None:
+            plt.plot(self.nu%delta_nu, self.nu, "o")
+        else:
+            plt.errorbar(self.nu%delta_nu, self.nu, xerr=self.nu_err, fmt="o")
+        
+        if draws is not None:
+            max_samples = draws
+        elif max_samples is None:
+            max_samples = 1000
+
+        thin = samples["delta_nu"].shape[0] // max_samples
+        thinned_samples = jax.tree_map(lambda x: x[::thin], samples)
+        n_pred = jnp.linspace(self.n.min(), self.n.max(), 201)
+        nu_pred = jax.vmap(func, in_axes=(0, None))(thinned_samples, n_pred)
+        x_pred = (nu_pred - n_pred*delta_nu) % delta_nu
+        
+        if ax is None:
+            ax = plt.gca()
+            
+        properties = {"color": color}
+        if color is None:
+            properties.update(next(ax._get_lines.prop_cycler))
+        
+        if draws is None:
+            x_med = np.median(x_pred, axis=0)
+            nu_med = np.median(nu_pred, axis=0)
+            ax.plot(x_med, nu_med, **properties)
+
+            if intervals is not None:
+                # intervals is an iterable of two-tuples
+                for interval in intervals:
+                    assert isinstance(interval, tuple)  # raise errors here
+                    assert len(interval) == 2
+                    x_lower, x_upper = np.quantile(x_pred, interval, axis=0)
+                    ax.fill_betweenx(nu_med, x_lower, x_upper, alpha=alpha, **properties)
+        else:
+            ax.plot(x_pred.T, nu_pred.T, alpha=alpha, **properties)
+        
         return ax
