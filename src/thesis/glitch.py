@@ -22,7 +22,6 @@ PARAM_NAMES = [
     'log_sigma'
 ]
 
-
 def estimate_asy(n, nu, nu_err=None):
     w = None if nu_err is None else jnp.broadcast_to(1/nu_err, nu.shape)
     popt, pcov = jnp.polyfit(n.astype(float), nu, 1, w=w, cov=True)
@@ -98,44 +97,56 @@ class GlitchModel(Model):
         'log_sigma': r"$\ln(\sigma)$",
     }
     
-    def __init__(self, prior: JointDistribution, *, n, nu, nu_err=None):
+    def __init__(self, prior: JointDistribution, *, 
+                 n, nu, nu_err=None, kernel_scale=5.0, kernel_amplitude=0.5):
         super().__init__(prior)
         self.n = n
         self.nu = nu
         self.nu_err = nu_err
-    
+        self.kernel_scale = kernel_scale  # In units of radial order
+        self.kernel_amplitude = kernel_amplitude  # As a fraction of delta_nu
+
     @staticmethod
     def _oscillation(nu, tau, phi):
         return jnp.sin(4 * jnp.pi * tau * nu + phi)
 
-    def smooth_component(self, params, n):
+    @staticmethod
+    def smooth_component(params, n):
         return params["delta_nu"] * (n + params["epsilon"])
-    
-    def helium_amp(self, params, nu):
+
+    @staticmethod
+    def helium_amp(params, nu):
         return params["delta_nu"] * jnp.exp(params["log_alpha_he"]) * nu \
             * jnp.exp(- jnp.exp(params["log_beta_he"]) * nu**2)
 
-    def helium_osc(self, params, nu):
-        return self._oscillation(nu, jnp.exp(params["log_tau_he"]), params["phi_he"])
+    @staticmethod
+    def helium_osc(params, nu):
+        return GlitchModel._oscillation(nu, jnp.exp(params["log_tau_he"]), params["phi_he"])
 
-    def helium_glitch(self, params, nu):
-        return self.helium_amp(params, nu) * self.helium_osc(params, nu)
+    @staticmethod
+    def helium_glitch(params, nu):
+        return GlitchModel.helium_amp(params, nu) * GlitchModel.helium_osc(params, nu)
 
-    def bcz_amp(self, params, nu):
+    @staticmethod
+    def bcz_amp(params, nu):
         return params["delta_nu"] * jnp.exp(params["log_alpha_cz"]) / nu**2
 
-    def bcz_osc(self, params, nu):
-        return self._oscillation(nu, jnp.exp(params["log_tau_cz"]), params["phi_cz"])
+    @staticmethod
+    def bcz_osc(params, nu):
+        return GlitchModel._oscillation(nu, jnp.exp(params["log_tau_cz"]), params["phi_cz"])
 
-    def bcz_glitch(self, params, nu):
-        return self.bcz_amp(params, nu) * self.bcz_osc(params, nu)
+    @staticmethod
+    def bcz_glitch(params, nu):
+        return GlitchModel.bcz_amp(params, nu) * GlitchModel.bcz_osc(params, nu)
 
-    def glitch(self, params, nu):
-        return self.helium_glitch(params, nu) + self.bcz_glitch(params, nu)
+    @staticmethod
+    def glitch(params, nu):
+        return GlitchModel.helium_glitch(params, nu) + GlitchModel.bcz_glitch(params, nu)
 
     def build_gp(self, params):
         # kernel = jnp.exp(params["log_amp"]) * kernels.ExpSquared(jnp.exp(params["log_scale"]))
-        kernel = 0.5*params["delta_nu"] * kernels.ExpSquared(5.0)
+        kernel = self.kernel_amplitude * params["delta_nu"] \
+            * kernels.ExpSquared(self.kernel_scale)
         
         def mean(n):
             nu_sm = self.smooth_component(params, n)
@@ -212,8 +223,9 @@ class GlitchModel(Model):
             
         return ax
 
-    def plot_echelle(self, key, samples, kind="full", intervals=None, draws=None,
-                     max_samples=None, color=None, alpha=0.33, ax=None):
+    def plot_echelle(self, key, samples, kind="full", delta_nu=None,
+                     intervals=None, draws=None, max_samples=None, 
+                     color=None, alpha=0.33, ax=None):
         
         if kind == "full":
             func = lambda params, n: self.sample(key, params, n)
@@ -225,12 +237,16 @@ class GlitchModel(Model):
         else:
             raise ValueError(f"Kind '{kind}' is not one of ['full', 'asy', 'gp'].")
 
-        delta_nu = samples["delta_nu"].mean()
-        
+        if delta_nu is None:
+            delta_nu = samples["delta_nu"].mean()
+
+        if ax is None:
+            ax = plt.gca()
+
         if self.nu_err is None:
-            plt.plot(self.nu%delta_nu, self.nu, "o")
+            ax.plot(self.nu%delta_nu, self.nu, ".")
         else:
-            plt.errorbar(self.nu%delta_nu, self.nu, xerr=self.nu_err, fmt="o")
+            ax.errorbar(self.nu%delta_nu, self.nu, xerr=self.nu_err, fmt=".")
         
         if draws is not None:
             max_samples = draws
@@ -242,9 +258,6 @@ class GlitchModel(Model):
         n_pred = jnp.linspace(self.n.min(), self.n.max(), 201)
         nu_pred = jax.vmap(func, in_axes=(0, None))(thinned_samples, n_pred)
         x_pred = (nu_pred - n_pred*delta_nu) % delta_nu
-        
-        if ax is None:
-            ax = plt.gca()
             
         properties = {"color": color}
         if color is None:
