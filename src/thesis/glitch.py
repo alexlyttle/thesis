@@ -45,21 +45,24 @@ class GlitchPrior(JointDistribution):
         
         distributions["delta_nu"] = delta_nu
         distributions["epsilon"] = epsilon
-
+        
         log_tau_he = distributions.setdefault("log_tau_he", Normal(
             jnp.log(0.2/2/delta_nu.mean),  # tau ~ 0.2 tau0
             jnp.sqrt(0.04 + delta_nu.variance/delta_nu.mean**2)  # 0.2
         ))
         
         log_beta_he = distributions.setdefault("log_beta_he", Normal(
-            2*(log_tau_he.mean + jnp.log(0.1*jnp.pi)) + jnp.log(8.0),  # beta ~ 8 * (np.pi * 0.1 * tau)**2
-            jnp.sqrt(0.25 + 4*log_tau_he.variance)  # 0.5
+            2*(log_tau_he.mean + jnp.log(0.08*jnp.pi)) + jnp.log(8.0),  # beta ~ 8 * (np.pi * 0.08 * tau)**2
+            # jnp.sqrt(0.25 + 4*log_tau_he.variance)  # 0.5
+            2*jnp.sqrt(log_tau_he.variance)
         ))
         # beta = 8 * pi**2 * delta**2
-        
+        # what if we introduced lam = 1/beta to discourage large beta?
+
         distributions.setdefault("log_alpha_he", Normal(
             0.5*(log_beta_he.mean -  jnp.log(jnp.pi)) + jnp.log(0.5*0.1), # gamma ~ 1/2 * 0.1 * sqrt(beta/pi)
-            jnp.sqrt(0.64 + 0.25*log_beta_he.variance)  # 0.8
+            # jnp.sqrt(0.64 + 0.25*log_beta_he.variance)  # 0.8
+            0.5*jnp.sqrt(log_beta_he.variance)
         ))
         # alpha_he = (dgamma / gamma)_min = alpha_he / sqrt(2pi) / delta_he
         # a_he = delta_nu * alpha_he
