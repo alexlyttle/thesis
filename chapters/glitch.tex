@@ -515,3 +515,26 @@ Equation \ref{eq:asy-glitch} would make a better mean function than the linear a
 %     \delta f_\bcz &= a_\bcz f^{-2} \, \sin(2\pi\,t_\bcz f + \phi_\bcz)
 % \end{align}
 % %
+\begin{figure}
+    \centering
+    \includegraphics{figures/glitch-test-obs.pdf}
+    \caption{Echelle plot of simulated observed \(l=0\) mode frequency data from model star S for worst-, better-, and best-case scenarios.}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics{figures/glitch-test-signal.pdf}
+    \caption{50 random draws from the V19 and GP methods showing the total glitch signal, \(\delta\nu = \delta\nu_\helium + \delta\nu_\bcz\), as a function of frequency, \(\nu\). The data points plot in blue are the median smooth component model at \(n\) subtracted from the observed modes \(\nu_n^\mathrm{obs}\) with their observed uncertainty \(\sigma_\mathrm{obs}\).}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics{figures/glitch-test-tau.pdf}
+    \caption{Samples from the V19 and GP methods for the acoustic depths of the helium glitch (\(\tau_\helium\)) and base of the convective zone (\(\tau_\bcz\)). The sound-speed gradient from Figure \ref{fig:sound-speed-gradient} is over-plot with a grey dashed line.}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics{figures/glitch-test-amplitude.eps}
+    \caption{Samples of the helium glitch amplitude at a reference frequency of \SI{3000}{\micro\hertz} fit with the V19 and GP methods for the worst-, better-, and best-case test data. The tallest bar in the V19 method panel is cropped with its value displayed in green text.}
+\end{figure}
