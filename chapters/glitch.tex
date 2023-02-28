@@ -466,46 +466,110 @@ The p-mode frequencies (\(\nu_{nl}\)) for a slowly rotating star are given by so
 %
 where \(\varepsilon\) is some small offset depending on the boundary conditions, and \(\nu_0\) is inverse of the sound travel time across the stellar diameter. As mentioned previously, \(\nu_0 \simeq \langle \Delta\nu_{nl} \rangle\) where \(\Delta\nu_{nl}\) is the difference between modes of consecutive \(n\). Fitting this equation, or measuring \(\langle \Delta\nu_{nl} \rangle\) can at most hold information about the mean density of the star \needcite. The modes can be further approximated by a polynomial with increasing order in \(n\) \citep{Ulrich1986}, but the physical meaning of its coefficients become difficult to interpret.
 
-We want to extend this model to include parameters which carry more information about the star. Particularly, we want to model the acoustic glitch signatures in \(\nu_{nl}\) which arise from helium ionisation and the base of the convective zone (BCZ). In the previous section, we found the functional forms of \(\delta\nu\) arising from such glitches. Adding these to Equation \ref{eq:asy} should give us a model, \(g(n, l)\), which we can fit to \(\nu_{nl}\) obtained from peakbagging. Such a model could look something like this,
+We want to extend this model to include parameters which carry more information about the star. Particularly, we want to model the acoustic glitch signatures in \(\nu_{nl}\) which arise from helium ionisation and the base of the convective zone (BCZ). \todo{link this to the hierarchical model}. In the previous section, we found the functional forms of \(\delta\nu\) arising from such glitches. Adding these to Equation \ref{eq:asy} should give us a model, \(f(n, l)\), which we can fit to \(\nu_{nl}\) obtained from peakbagging. Such a model could look something like this,
 %
 \begin{equation}
-    g(n, l) = \nu_\mathrm{sm} + \delta\nu_\helium + \delta\nu_\bcz
+    f(n, l) = \tilde{\nu} + \delta\nu_\helium + \delta\nu_\bcz
 \end{equation}
 %
 where,
 %
 \begin{equation}
-    \nu_\mathrm{sm} = \nu_0 \sum_{k=0}^{N-1} a_k^{(l)} n^k,
+    \tilde{\nu} = \nu_0 \sum_{k=0}^{N-1} a_k^{(l)} n^k,
 \end{equation}
 %
-is an \(N\)-th order polynomial represents the smooth component of the frequencies with coefficients \(a_k^{(l)}\). Directly fitting the glitch this way has been done before \citep[e.g.][]{Verma.Raodeo.ea2019}. However, there are drawbacks to using a polynomial in the fit. Whilst a polynomial with \(N = \infty\) can represent any function, this is completely impractical here. If \(N\) is too low, then it will not be flexible enough, biasing \(\delta\nu_\helium\) and \(\delta\nu_\bcz\). Yet, if \(N\) is too high, then it will over-fit and the glitch will be missed. Regularising the polynomial is one solution to over-fitting, but this adds extra parameters to tune. Finally, a finite polynomial represents only a small fraction of function space, leading to our model to be systematically biased to a particular functional form.
-
-\todo{Show the drawbacks of this fit by plotting the residuals}
-
-In this thesis, we suggest and evaluate an alternative model for \(g(n, l)\) which can both be infinitely flexible and easily controlled with fewer parameters. This is a GP. The GP represents a probability distribution over function space, meaning that we can quantify the systematic uncertainty associated with the function conditioned on the data.
-
-We will start by only modelling radial oscillation modes (\(l = 0\)), but this method may be extended to higher angular degree in the future. One way of doing this could be to introduce a new variable \(x = n + l/2\), or to expand the input dimensions to include \(l\). We write our model \(\nu_n = g(n)\), for which we have dropped the subscript \(l\), as a random draw from a GP,
-%
-\begin{equation}
-    g(\vect{n}) \sim \mathcal{GP}\left[ m_\theta(\vect{n}), k_\theta(\vect{n}, \vect{n}') \right]
-\end{equation}
-%
-where \(m\) and \(k\) are the mean and kernel functions which depend on parameters \(\theta\). The mean function describes where we expect \(\nu_n\) to be. This should come from known physical processes. However, we do not know the full functional form of \(\nu_n\), so we introduce the kernel function to describe additional correlation between modes. \todo{This is clunky, rethink}.
-
-\begin{equation}
-    m(n) = \nu_\asy + \delta\nu_\helium + \delta\nu_\bcz \label{eq:asy-glitch}
-\end{equation}
-%
-where the first term is the asymptotic approximation for \(l=0\), \(\nu_\asy = (n + \varepsilon) \nu_0\), and the glitch terms are given by,
+is an \(N\)-th order polynomial represents the smooth component of the frequencies with coefficients \(a_k^{(l)}\). The glitch terms due to helium ionisation and the base of the convective zone are,
 %
 \begin{align}
     \delta\nu_\helium &= \alpha_\helium \nu_0 \nu \, \ee^{-\beta_\helium \nu^2} \sin(4\pi\tau_\helium\nu + \phi_\helium),\\
-    \delta\nu_\bcz &= \alpha_\bcz \nu_0 \nu^{-2} \, \sin(4\pi\tau_\bcz\nu + \phi_\bcz)
+    \delta\nu_\bcz &= \alpha_\bcz \nu_0 \nu^{-2} \, \sin(4\pi\tau_\bcz\nu + \phi_\bcz).
+\end{align}
+%
+The parameters \(\alpha_\helium \simeq \Gamma_\heII\) and \(\beta_\helium \propto \Delta_\heII^2\) relate to the area and variance of the Gaussian-like depression in \(\gamma\) caused by the second ionisation of helium. We neglect contribution by the first ionisation of helium \todo{why?}. The amplitude parameter for the BCZ glitch, \(\alpha_\bcz \propto \Delta_{\bcz}\) is proportional to the difference in the second density derivative at the base of the convective zone and has units of frequency squared. The approximate acoustic depths of second helium ionisation and the BCZ are given by \(\tau_\helium\) and \(\tau_\bcz\) respectively, and \(\phi\) represents a phase constant.
+
+Directly fitting the glitch this way has been done before \citep[e.g.][]{Verma.Raodeo.ea2019}. However, there are drawbacks to using a polynomial in the fit. Whilst a polynomial with \(N = \infty\) can represent any function, this is completely impractical here. If \(N\) is too low, then it will not be flexible enough, biasing \(\delta\nu_\helium\) and \(\delta\nu_\bcz\). Yet, if \(N\) is too high, then it will over-fit and the glitch will be missed. Regularising the polynomial is one solution to over-fitting, but this adds extra parameters to tune. Finally, a finite polynomial represents only a small fraction of function space, leading to our model to be systematically biased to a particular functional form.
+
+\defcitealias{Verma.Raodeo.ea2019}{V19}
+
+In the following sections, we will compare the method from \citet[][hereafter V19]{Verma.Raodeo.ea2019} with a new method defined in this work. We fit the glitch to radial order (\(l = 0\)) modes only, but both methods can be extended to incorporate higher order modes.
+
+\subsection{Data}
+
+
+\subsubsection{Test Star}
+
+We created three sets of test data for worst-, better-, and best-case scenarios to compare the two methods. Firstly, radial order modes were calculated using \textsc{GYRE} \citep{Townsend.Teitler2013} for stellar model S. We then selected different numbers of modes (\(N\)) symmetrically about a reference frequency \(\nu_\mathrm{ref} = \SI{2900}{\micro\hertz}\) close to the expected frequency at maximum power of the star. For each test case, we added differing amounts of Gaussian noise (scaled by \(\sigma_n\)) to the frequencies. The parameters for each test case are shown in Table \ref{tab:glitch-test-obs} and plot in Figure \ref{fig:glitch-test-obs}.
+
+\begin{table}
+    \centering
+    \caption{Test observations of mode frequency \(\nu_n\) in units of \si{\micro\hertz} for radial order \(n\). The scale of the Gaussian noise added to each column is given by \(\sigma_n\) and \(N\) are the number of `observed' radial orders. The final column shows the true values of \(\nu_n\) for model star S.}
+    \label{tab:glitch-test-obs}
+    \input{tables/glitch-test-obs.tex}
+\end{table}
+
+\begin{figure}
+    \centering
+    \includegraphics{figures/glitch-test-obs.pdf}
+    \caption{Echelle plot of simulated observed \(l=0\) mode frequency data from model star S for worst-, better-, and best-case scenarios.}
+    \label{fig:glitch-test-obs}
+\end{figure}
+
+\subsubsection{16 Cygni}
+
+\subsection{Methods}
+
+We only modelling radial oscillation modes (\(l = 0\)), but these methods may be extended to higher angular degree in the future.
+
+\subsubsection{The V19 Method (A)}
+
+The model, \(f_{\theta_A}(n)\), is a special case of Equation \ref{}, where the smooth component is modelled as a 4-th order polynomial,
+%
+\begin{equation}
+    \tilde{\nu} = \sum_{k=0}^{4} b_k n^k,
+\end{equation}
+%
+where \(b_k = a_k \nu_0\).
+
+The model parameters are \(\theta_A = (b_0, \dots, b_4, a_\helium, \beta_\helium, \tau_\helium, \phi_\helium, a_\bcz, \tau_\bcz, \phi_\bcz)\) where the glitch amplitude parameters \(a_i = \alpha_i\nu_0\). These are optimised by minimising a \(\chi^2\) cost function with a regularisation term, 
+%
+\begin{equation}
+    \chi^2 = \sum_n \left( \frac{\nu_n - f_{\theta_A}(n)}{\sigma_n} \right)^2 + \lambda^2 \sum_n \left( \frac{\dd^3 \tilde{\nu}}{\dd n^3} \right)^2.
+\end{equation}
+%
+where the regularisation parameter is \(\lambda\).
+
+Initial parameters are chosen uniformly at random within
+
+\subsubsection{The GP Method (B)}
+
+The second method is designed to better capture our uncertainty on the glitch parameters given the data. We used a Gaussian Process (GP) instead of a high-order polynomial to model the correlated noise in the mode frequencies. The GP represents a probability distribution over function space, meaning that we can quantify the systematic uncertainty associated with the functional form of $f$ conditioned on the data. We write our model for a set of modes \(\vect{n}\) as a random draw from a GP,
+%
+\begin{equation}
+    f_{\theta_B}(\vect{n}) \sim \mathcal{GP}\left[ m_{\theta_B}(\vect{n}), k_{\theta_B}(\vect{n}, \vect{n}') \right]
+\end{equation}
+%
+where \(m\) and \(k\) are the mean and kernel functions which depend on parameters \(\theta_B\). We can control our prior over the function space through the parametrisation of the kernel function. The mean function describes where we expect \(\nu_n\) to be given some approximate physical reasoning.
+
+\begin{equation}
+    m(n) = \tilde{\nu} + \delta\nu_\helium + \delta\nu_\bcz \label{eq:asy-glitch}
+\end{equation}
+%
+where the first term comes from the the asymptotic approximation, \(\tilde{\nu} = (n + \varepsilon) \nu_0\), and the glitch terms are given by,
+%
+\begin{align}
+    \delta\nu_\helium &= \alpha_\helium \nu_0 \tilde{\nu} \, \ee^{-\beta_\helium \tilde{\nu}^2} \sin(4\pi\tau_\helium\tilde{\nu} + \phi_\helium),\\
+    \delta\nu_\bcz &= \alpha_\bcz \nu_0 \tilde{\nu}^{-2} \, \sin(4\pi\tau_\bcz\tilde{\nu} + \phi_\bcz)
 \end{align}
 %
 representing the acoustic glitch signature of helium ionisation and the base of the convective zone respectively. The parameters \(\alpha_\helium \simeq \Gamma_\heII\) and \(\beta_\helium \propto \Delta_\heII^2\) relate to the area and variance of the Gaussian-like depression in \(\gamma\) caused by the second ionisation of helium. We neglect contribution by the first ionisation of helium \todo{why?}. The amplitude parameter for the BCZ glitch, \(\alpha_\bcz \propto \Delta_{\bcz}\) is relates to the difference in the second density derivative at the base of the convective zone and has units of frequency squared. The approximate acoustic depths of second helium ionisation and the BCZ are given by \(\tau_\helium\) and \(\tau_\bcz\) respectively, and \(\phi\) represents a phase constant.
 
-Equation \ref{eq:asy-glitch} would make a better mean function than the linear asymptotic expression, but it is no longer a forward model because it has \(\nu_n\) on both sides. Solutions for \(\nu_n\) cannot be found analytically. This leaves us with two options: solve Equation \ref{eq:asy-glitch} numerically within the mean function, or approximate the arguments of \(\delta_\helium\) and \(\delta_\bcz\) with the linear asymptotic form. We can estimate the error in the latter method using the former.
+We used the squared exponential kernel,
+%
+\begin{equation}
+    k(\vect{n}, \vect{n}') = \alpha_k \nu_0 \, \ee^{- {||\vect{n} - \vect{n}'||^2}/{2\lambda_k^2}}
+\end{equation}
+%
+where \(\alpha_k\) is the amplitude factor and \(\lambda_k\) is the length scale (in units of radial order). It was convenient to scale the amplitude by \(\nu_0\) since \todo{}. This describes the covariance between modes at different \(n\). The closer the modes are to each other, the higher the covariance.
 
 % Rearranged into dimensionless quantities, \(f = \nu/\nu_0\), \(t = \tau/\tau_0\), \(a_\helium = \nu_0\alpha_\helium\), \(b_\helium = \nu_0 \beta_\helium\), and \(a_\bcz = \alpha_\bcz/\nu_0^2\),
 % %
@@ -515,11 +579,10 @@ Equation \ref{eq:asy-glitch} would make a better mean function than the linear a
 %     \delta f_\bcz &= a_\bcz f^{-2} \, \sin(2\pi\,t_\bcz f + \phi_\bcz)
 % \end{align}
 % %
-\begin{figure}
-    \centering
-    \includegraphics{figures/glitch-test-obs.pdf}
-    \caption{Echelle plot of simulated observed \(l=0\) mode frequency data from model star S for worst-, better-, and best-case scenarios.}
-\end{figure}
+
+\subsection{Results}
+
+\subsubsection{Test Star}
 
 \begin{figure}
     \centering
@@ -530,7 +593,7 @@ Equation \ref{eq:asy-glitch} would make a better mean function than the linear a
 \begin{figure}
     \centering
     \includegraphics{figures/glitch-test-tau.pdf}
-    \caption{Samples from the V19 and GP methods for the acoustic depths of the helium glitch (\(\tau_\helium\)) and base of the convective zone (\(\tau_\bcz\)). The sound-speed gradient from Figure \ref{fig:sound-speed-gradient} is over-plot with a grey dashed line.}
+    \caption{Samples from the V19 and GP methods for the acoustic depths of the helium glitch (\(\tau_\helium\)) and base of the convective zone (\(\tau_\bcz\)). The sound-speed gradient from Figure \ref{fig:sound-speed-gradient} is over-plot with a grey dashed line. \todo{Overplot initial guesses and priors}.}
 \end{figure}
 
 \begin{figure}
@@ -538,3 +601,5 @@ Equation \ref{eq:asy-glitch} would make a better mean function than the linear a
     \includegraphics{figures/glitch-test-amplitude.eps}
     \caption{Samples of the helium glitch amplitude at a reference frequency of \SI{3000}{\micro\hertz} fit with the V19 and GP methods for the worst-, better-, and best-case test data. The tallest bar in the V19 method panel is cropped with its value displayed in green text.}
 \end{figure}
+
+\subsubsection{16 Cygni}
