@@ -528,9 +528,9 @@ The model, \(f_{A}(n)\), is a special case of Equation \ref{}, where the smooth 
     f_A(n) = \tilde{\nu}_n + \delta_\helium(\tilde{\nu}_n) + \delta_\bcz(\tilde{\nu}_n);\quad \tilde{\nu}_n = \sum_{k=0}^{4} b_k n^k,
 \end{equation}
 %
-where \(b_k = a_k \nu_0\).
+where \(b_k \equiv a_k \nu_0\).
 
-The model parameters are \(\theta_A = (b_0, \dots, b_4, a_\helium, \beta_\helium, \tau_\helium, \phi_\helium, a_\bcz, \tau_\bcz, \phi_\bcz)\) where the glitch amplitude parameters \(a_i = \alpha_i\nu_0\). These are optimised by minimising a \(\chi^2\) cost function with a regularisation term, 
+The model parameters are \(\theta_A = (b_0, \dots, b_4, a_\helium, \beta_\helium, \tau_\helium, \phi_\helium, a_\bcz, \tau_\bcz, \phi_\bcz)\) where the glitch amplitude parameters \(a_i \equiv \alpha_i\nu_0\). These are optimised by minimising a \(\chi^2\) cost function with a regularisation term, 
 %
 \begin{equation}
     \chi^2 = \sum_n \left( \frac{\nu_n - f_{A}(n)}{\sigma_n} \right)^2 + \lambda^2 \sum_n \left( \frac{\dd^3 \tilde{\nu}_n}{\dd n^3} \right)^2.
@@ -538,7 +538,7 @@ The model parameters are \(\theta_A = (b_0, \dots, b_4, a_\helium, \beta_\helium
 %
 where the regularisation parameter is \(\lambda\).
 
-Initial parameters are chosen uniformly at random within
+Initial parameters are chosen uniformly at random within the bounds specified in \citet{Verma.Raodeo.ea2019}.
 
 \subsubsection{The GP Method (B)}
 
@@ -603,20 +603,39 @@ The log-likelihood function,
 
 \todo{Prior should be a table/gathered equations with each parameter and their distribution}
 
-We based our prior on \(\tau_\helium\) and \(\tau_\bcz\) by observing how they scale with acoustic radius \(\tau_0\) in the grid of stellar models from \citep{Lyttle.Davies.ea2021}. Typically, \(\tau_\helium/\tau_0 \approx 0.2\) and \(\tau_\bcz/\tau_0 \approx 0.6\) for main sequence solar-like oscillators. We saw an example of this relation in Figure \ref{fig:gamma-sound-speed}. Therefore, we form our prior distributions from these relations using our prior on \(\nu_0\), with an additional spread of 20 per cent to account for variance with stellar properties.
+Priors on \(\nu_0\) and \(\varepsilon\). In practice, the prior for \(\nu_0\) and \(\epsilon\) can come from global estimates of \(\langle\Delta\nu_n\rangle\) or a linear fit to the modes.
+%
+\begin{gather*}
+    \nu_0 \sim \mathcal{N}(\overline{\nu}_0, s_{\nu_0}^2), \quad \varepsilon \sim \mathcal{N}(\overline{\varepsilon}, s_\varepsilon^2),%\\
+    % \phi_\helium, \phi_\bcz \sim \mathcal{U}\left(0, 2\pi\right),
+\end{gather*}
+%
 
-Priors on \(\nu_0\) and \(\epsilon\). In practice, the prior for \(\nu_0\) and \(\epsilon\) can come from global measurements of \(\langle\Delta\nu\rangle\) and 
-
-The prior on the phase parameters \(\phi_\helium\) and \(\phi_\bcz\) was uniform from 0 to \(2\pi\).
+The prior on the phase parameters \(\phi_\helium\) and \(\phi_\bcz\) was uniform from 0 to \(2\pi\). \todo{For \(\phi\) we map from unconstrained space to periodic space with modulo to allow for boundaries. Put this in a bit that explains the prior transform.}
 
 Priors for the remaining parameters follow a log-normal distribution to ensure they are positive. We also exploit the property that the scale of a normal distribution in natural log-space is approximately the scale in real-space as a fraction of the distribution mean.
 
+We based our prior on \(\tau_\helium\) and \(\tau_\bcz\) by observing how they scale with acoustic radius \(\tau_0\) in the grid of stellar models from \citep{Lyttle.Davies.ea2021}. Typically, \(\tau_\helium/\tau_0 \approx 0.2\) and \(\tau_\bcz/\tau_0 \approx 0.6\) for main sequence solar-like oscillators (see, e.g. Figure \ref{fig:gamma-sound-speed}). Therefore, we form our prior distributions from these relations using our prior on \(\nu_0\), with an additional spread of 20 per cent to account for variance with stellar properties.
+
+\begin{gather*}
+    \ln\tau_\helium \sim \mathcal{N}\left[ \ln\overline{\tau}_\helium, \, s_{\ln\tau}^2 \right], \quad \ln\tau_\bcz \sim \mathcal{N}\left[ \ln 3\,\overline{\tau}_\helium, \, s_{\ln\tau}^2 \right],\\
+    \overline{\tau}_\helium = 1/10\overline{\nu}_0, \quad s_{\ln\tau}^2 = (1/5)^2 + (s_{\nu_0}/\overline{\nu}_0)^2,
+\end{gather*}
+
 A prior on the glitch amplitude parameters is less trivial. We assume that the width of the helium ionisation region is about 8 per cent of the acoustic depth of the region, \(\Delta_\helium/\tau_\helium \approx 0.08\), and then convert this to \(\beta_\helium\) by assuming Equation \ref{}. We then center a prior for \(\alpha_\helium\) to satisfy a maximum depth of 0.1 in \(\delta\gamma/\gamma\) caused by helium ionisation. For both \(\alpha_\helium\) and \(\beta_\helium\), we scale the distribution by 20 and 40 per cent of their mean respectively. We verified that these priors are sensible by checking that the prior amplitude at \(\nu_\mathrm{ref}\) peaks between \SIrange{0}{1}{\micro\hertz}, decaying thereafter. \todo{Plot the priors for amplitude at reference frequency, or draws from the amplitude over frequency}.
 
-We chose to derive the prior on \(\alpha_\bcz/\nu_0 \approx \SI{30}{\micro\hertz}\) such that the BCZ glitch amplitude is approximately \SI{0.1}{\micro\hertz} at \(\nu_\mathrm{ref}\). We scaled the distribution by 80 per cent of the mean to account for our uncertainty in the BCZ glitch amplitude.
+\begin{gather*}
+    \ln\beta_\helium \sim \mathcal{N}\left[ \ln\overline{\beta}_\helium, \, 4 s_{\ln\tau}^2 \right], \quad \ln\alpha_\helium \sim \mathcal{N}\left[ \ln({\overline{\beta}_\helium}/{400\pi})^{1/2}, \, s_{\ln\tau}^2 \right],\\
+    \overline{\beta}_\helium = 32 \pi^2 \overline{\tau}_\helium^2 / 625,
+\end{gather*}
 
-The prior for \(\sigma\)
+We chose to derive the prior on \(\alpha_\bcz/\nu_0 \approx \SI{30}{\micro\hertz}\) such that the BCZ glitch amplitude is approximately \SI{0.1}{\micro\hertz} at \(\nu_\mathrm{ref}\). We scaled the distribution by 80 per cent of the mean to account for our uncertainty in the BCZ glitch amplitude. The prior for \(\sigma\) also
 
+\begin{equation*}
+    \ln\alpha_\bcz \sim \mathcal{N}\left[ \ln 30\overline{\nu}_0, \, (4/5)^2 + (s_{\nu_0}/\overline{\nu}_0)^2\right], \quad \ln\sigma \sim \mathrm{N}\left( - \ln 100, 4\right),
+\end{equation*}
+
+The shape and scale parameters for the prior distributions are summarised in Table \ref{}. 
 % Rearranged into dimensionless quantities, \(f = \nu/\nu_0\), \(t = \tau/\tau_0\), \(a_\helium = \nu_0\alpha_\helium\), \(b_\helium = \nu_0 \beta_\helium\), and \(a_\bcz = \alpha_\bcz/\nu_0^2\),
 % %
 % \begin{align}
