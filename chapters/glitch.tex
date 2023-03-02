@@ -635,7 +635,15 @@ We chose to derive the prior on \(\alpha_\bcz/\nu_0 \approx \SI{30}{\micro\hertz
     \ln\alpha_\bcz \sim \mathcal{N}\left[ \ln 30\overline{\nu}_0, \, (4/5)^2 + (s_{\nu_0}/\overline{\nu}_0)^2\right], \quad \ln\sigma \sim \mathrm{N}\left( - \ln 100, 4\right),
 \end{equation*}
 
-The shape and scale parameters for the prior distributions are summarised in Table \ref{}. 
+The shape and scale parameters for the prior distributions are summarised in Table \ref{}.
+
+\begin{table}
+    \centering
+    \caption{The mean and variance for the prior normal distributions on each parameter. \todo{add 16 Cyg}}
+    \label{tab:glitch-prior}
+    \input{tables/glitch-test-prior.tex}
+\end{table}
+
 % Rearranged into dimensionless quantities, \(f = \nu/\nu_0\), \(t = \tau/\tau_0\), \(a_\helium = \nu_0\alpha_\helium\), \(b_\helium = \nu_0 \beta_\helium\), and \(a_\bcz = \alpha_\bcz/\nu_0^2\),
 % %
 % \begin{align}
@@ -648,6 +656,8 @@ The shape and scale parameters for the prior distributions are summarised in Tab
 \subsection{Results}
 
 \subsubsection{Test Star}
+
+
 
 \begin{figure}
     \centering
