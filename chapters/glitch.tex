@@ -655,28 +655,45 @@ The shape and scale parameters for the prior distributions are summarised in Tab
 
 \subsection{Results}
 
+In this section, we compare the results from both methods on the test star and \todo{16 Cyg and 3 model stars with different helium abundance}.
+
 \subsubsection{Test Star}
 
-
+In Figure \ref{fig:glitch-test-signal}, we plot the total predicted glitch, \(\delta\nu\) using 50 draws from the posterior distribution on the model parameters for both methods. The median background model is subtracted from the observed \(\nu_n\) over-plot. For each scenario, both methods predict similar glitches. The \citetalias{Verma.Raodeo.ea2019} method has more extreme multimodality in all cases. For example, the better case shows a high-amplitude BCZ glitch solution which is not present with the GP method. This is likely because the GP method uses a prior which reduces the probability of extreme solutions --- a consequence of the Bayesian methodology. The \citetalias{Verma.Raodeo.ea2019} also appears to be over-confident in its multiple glitch solutions for the best case, compared to the GP method. This is a sign that there is uncertainty in the \citetalias{Verma.Raodeo.ea2019} model not being accounted. In the best-case scenario, the tow methods appear to differ at low frequency. We expect this is due to the different smooth background models. \todo{elaborate}.
 
 \begin{figure}
     \centering
     \includegraphics{figures/glitch-test-signal.pdf}
     \caption{50 random draws from the V19 and GP methods showing the total glitch signal, \(\delta\nu = \delta_\helium(\nu) + \delta_\bcz(\nu)\), as a function of frequency, \(\nu\). The data points plot in blue are the median smooth component model at \(\vect{n}\) subtracted from the observed modes \(\vect{\nu}_\obs\) with their observed uncertainty \(\sigma_\obs\).}
+    \label{fig:glitch-test-signal}
 \end{figure}
+
+It is difficult to determine which method does a better job at finding glitch parameters. The glitch model is an approximation and the exact physical meaning of the parameters is unknown. However, we plot the posterior distributions of the glitch acoustic depths, \(\tau_\helium\) and \(\tau_\bcz\), in Figure \ref{fig:glitch-test-tau} and compared them to the sound speed gradient of the test star from Figure \ref{fig:sound-speed-gradient}. For the worst case, both methods gave broad distributions for the acoustic depths, compatible with their respective initial guesses and priors. The \citetalias{Verma.Raodeo.ea2019} method initial guesses appeared to underestimate \(\tau_\bcz\), whereas the GP method prior was broad enough to encompass a wide range of possible \(\tau_\bcz\). In the better and best cases, we found that the \citetalias{Verma.Raodeo.ea2019} had strong multimodality as a consequence of not incorporating a formal prior in their model. For example, the better case found solutions for \(\tau_\helium\) far deeper into the star than we would expect, at around \SI{1500}{\second} and \SI{2500}{\second}. The solutions for \(\tau_\helium\) in the best case appeared more compatible with the location of the trough in sound speed gradient due to the second ionisation of helium. This could be a result of the GP doing a better job of absorbing the first helium ionisation component than the 4-th order polynomial.
 
 \begin{figure}
     \centering
     \includegraphics{figures/glitch-test-tau.pdf}
-    \caption{Samples from the V19 and GP methods for the acoustic depths of the helium glitch (\(\tau_\helium\)) and base of the convective zone (\(\tau_\bcz\)). The sound-speed gradient from Figure \ref{fig:sound-speed-gradient} is over-plot with a grey dashed line. \todo{Overplot initial guesses and priors}.}
+    \caption{Samples from the V19 and GP methods for the acoustic depths of the helium glitch (\(\tau_\helium\)) and base of the convective zone (\(\tau_\bcz\)). The sound-speed gradient from Figure \ref{fig:sound-speed-gradient} is over-plot with a grey dashed line.}
+    \label{fig:glitch-test-tau}
 \end{figure}
+
+Using the glitch parameters as a helium diagnostic could involve measuring the amplitude of the helium glitch at a reference frequency such as \(\nu_{\max}\). We should expect solutions for this reference amplitude to converge on a value as the data quality increases from worst to best. It is also important that the uncertainty of the reference amplitude is accurate if using it to constrain helium abundance in a population of stars. We compared reference amplitudes at \(\nu_\mathrm{ref}\) from both methods in Figure \ref{fig:glitch-test-amplitude}. The \citetalias{Verma.Raodeo.ea2019} method preferred zero-amplitude solutions for the worst and better cases than the best case, which could bias population inference on towards lower values of helium abundance. On the other hand, the GP method reflects the prior in the worst case, with the width of the distribution shrinking as the data improves. In the best case, the \citetalias{Verma.Raodeo.ea2019} method found \(A_\mathrm{ref} = 0.347_{-0.005}^{+0.006}\), whereas the GP method found \(A_\mathrm{ref} = 0.297_{-0.043}^{+0.044}\).
+
+\todo{Why not use delta gamma / gamma as the probe of helium abundance? That is proportional to alpha / sqrt(beta). Then, an update to this method can use this and beta as a parameter and then work out alpha from that, since beta should scale with tau and the depth is a signature of helium abundance. Be careful as number of modes correlates with delta nu value of fit.}
+
+\todo{Comment on how V19 stuggles to find DY/DZ with their method, and finds unusually low values of initial helium. This could be a result of their fitting method.}
 
 \begin{figure}
     \centering
     \includegraphics{figures/glitch-test-amplitude.pdf}
     \caption{Samples of the helium glitch amplitude at a reference frequency of \SI{3000}{\micro\hertz} fit with the V19 and GP methods for the worst-, better-, and best-case test data. The tallest bar in the V19 method panel is cropped with its value displayed in green text.}
+    \label{fig:glitch-test-amplitude}
 \end{figure}
 
-\subsubsection{16 Cygni}
-
 \todo{In discussion can show some plots of \(\tau/\tau_0\) in model stars and how they relate to temperature, could use temperature to influence prior.}
+
+\subsubsection{Correlation with helium}
+
+\todo{Fit the three model stars and plot amplitude against helium abundance at surface and initial}.
+
+\subsubsection{16 Cygni}
