@@ -88,7 +88,7 @@ class GlitchPrior(JointDistribution):
 class GlitchModel(Model):
 
     symbols = {
-        'delta_nu': r"$\Delta\nu$",
+        'delta_nu': r"$\nu_0$",
         'epsilon': r"$\varepsilon$",
         'log_tau_he': r"$\ln(\tau_\mathrm{He})$",
         'log_beta_he': r"$\ln(\beta_\mathrm{He})$",
