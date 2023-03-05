@@ -568,7 +568,7 @@ The GP likelihood for some set of observations \(\vect{\nu}_\obs = \{\nu_{n_i}^\
     \vect{\nu}_\obs \sim \mathcal{N}\left[ \vect{\mu}, \, \vect{K} + (\sigma^2 + \sigma_\obs^2) \vect{I} \right] \label{eq:gp-like}
 \end{equation}
 %
-where \(\vect{\mu} = m(\vect{n})\) and \(\vect{K} = k(\vect{n}, \vect{n})\). The scales of Gaussian noise in the model and observations are \(\sigma\) and \(\sigma_\obs\) respectively, and \(\vect{I}\) is an \(N \times N\) identity matrix. 
+where \(\vect{\mu} = m(\vect{n})\) and \(\vect{K} = k(\vect{n}, \vect{n})\). The scales of Gaussian noise in the model and observations are \(\sigma\) and \(\sigma_\obs\) respectively, and \(\vect{I}\) is an \(N \times N\) identity matrix. We included the model noise term \(\sigma\) to account for the difference between values of the glitch terms evaluated at \(\tilde{\nu}_n\) and the `true' mode frequencies.
 
 To make noiseless predictions of mode frequencies \(\vect{\nu}_\star\) at new radial orders \(\vect{n}_\star\), we drew from the following multivariate normal distribution \needcite[Rasmussen and Williams],
 %
