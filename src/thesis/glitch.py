@@ -155,9 +155,19 @@ class GlitchModel(Model):
             nu_sm = self.smooth_component(params, n)
             dnu = self.glitch(params, nu_sm)
             return nu_sm + dnu
+        
+        # Alternative to sigma param, more stable when uncertainty is small?
+        # Uses Newton's method to account for difference in dnu at nu_sm and nu
+        # Seems to predict significantly smaller amplitudes
+        # glitch_value_and_grad = jax.value_and_grad(lambda nu: self.glitch(params, nu))
+        # def mean(n):
+        #     nu0 = self.smooth_component(params, n)
+        #     nu0 += self.glitch(params, nu0)
+        #     dnu, dnu_grad = glitch_value_and_grad(nu0)
+        #     return nu0 - dnu / (dnu_grad - 1)
 
         diag = jnp.exp(2*params["log_sigma"])
-        # diag = 1e-8
+        # diag = 1e-8  # Jitter
         if self.nu_err is not None:
             diag += self.nu_err**2
         
