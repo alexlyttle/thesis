@@ -103,9 +103,9 @@ class GlitchModel(Model):
     def __init__(self, prior: JointDistribution, *, 
                  n, nu, nu_err=None, kernel_scale=5.0, kernel_amplitude=0.5):
         super().__init__(prior)
-        self.n = n
-        self.nu = nu
-        self.nu_err = nu_err
+        self.n = jnp.asarray(n, dtype=jnp.int_)
+        self.nu = jnp.asarray(nu, dtype=jnp.float_)
+        self.nu_err = jnp.asarray(nu_err, dtype=jnp.float_)
         self.kernel_scale = kernel_scale  # In units of radial order
         self.kernel_amplitude = kernel_amplitude  # As a fraction of delta_nu
 
@@ -155,9 +155,9 @@ class GlitchModel(Model):
             nu_sm = self.smooth_component(params, n)
             dnu = self.glitch(params, nu_sm)
             return nu_sm + dnu
-        
+
         diag = jnp.exp(2*params["log_sigma"])
-#         diag = 1e-4
+        # diag = 1e-8
         if self.nu_err is not None:
             diag += self.nu_err**2
         
@@ -227,16 +227,16 @@ class GlitchModel(Model):
         return ax
 
     def plot_echelle(self, key, samples, kind="full", delta_nu=None,
-                     intervals=None, draws=None, max_samples=None, 
+                     intervals=None, draws=None, 
                      color=None, alpha=0.33, ax=None):
         
         if kind == "full":
-            func = lambda params, n: self.sample(key, params, n)
+            func = lambda k, p, n: self.sample(k, p, n)
         elif kind == "asy":
             func = self.smooth_component
         elif kind == "gp":
-            func = lambda params, n: self.smooth_component(params, n) \
-                + self.sample(key, params, n, include_mean=False) 
+            func = lambda k, p, n: self.smooth_component(p, n) \
+                + self.sample(k, p, n, include_mean=False) 
         else:
             raise ValueError(f"Kind '{kind}' is not one of ['full', 'asy', 'gp'].")
 
@@ -251,17 +251,19 @@ class GlitchModel(Model):
         else:
             ax.errorbar(self.nu%delta_nu, self.nu, xerr=self.nu_err, fmt=".")
         
-        if draws is not None:
-            max_samples = draws
-        elif max_samples is None:
-            max_samples = 1000
 
-        thin = samples["delta_nu"].shape[0] // max_samples
+        if draws is None:
+            thin = 1
+        else:
+            thin = samples["delta_nu"].shape[0] // draws
+
         thinned_samples = jax.tree_map(lambda x: x[::thin], samples)
+
+        keys = jax.random.split(key, thinned_samples["delta_nu"].shape[0])
         n_pred = jnp.linspace(self.n.min(), self.n.max(), 201)
-        nu_pred = jax.vmap(func, in_axes=(0, None))(thinned_samples, n_pred)
+        nu_pred = jax.vmap(func, in_axes=(0, 0, None))(keys, thinned_samples, n_pred)
         x_pred = (nu_pred - n_pred*delta_nu) % delta_nu
-            
+
         properties = {"color": color}
         if color is None:
             properties.update(next(ax._get_lines.prop_cycler))
