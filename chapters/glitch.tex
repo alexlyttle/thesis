@@ -684,14 +684,21 @@ It is difficult to determine which method does a better job at finding glitch pa
 
 Using the glitch parameters as a helium diagnostic could involve measuring the amplitude of the helium glitch at a reference frequency such as \(\nu_{\max}\). We should expect solutions for this reference amplitude (\(A_\mathrm{ref}\)) to converge on a value as the data quality increases from worst to best. It is also important that the uncertainty of the reference amplitude is accurate if using it to constrain helium abundance in a population of stars. We compared reference amplitudes at \(\nu_\mathrm{ref}\) from both methods in Figure \ref{fig:glitch-test-amplitude}. The \citetalias{Verma.Raodeo.ea2019} method preferred low-amplitude solutions for the worst and better cases than the best case. If using this method on a population of stars, this could bias inference towards lower values of helium abundance. On the other hand, the GP method reflects our prior in the worst case, with the width of the distribution shrinking as the data improves. In the best case, the \citetalias{Verma.Raodeo.ea2019} method found \(A_\mathrm{ref} = 0.347_{-0.005}^{+0.006}\), whereas the GP method found \(A_\mathrm{ref} = 0.297_{-0.043}^{+0.044}\).
 
+In both methods, the samples for \(\alpha_\helium\) and \(\beta_helium\) were correlated. This was expected, because larger values of \(\beta_helium\) can be compensated for with a larger amplitude factor \(\alpha_\helium\). In the GP method, we did not include this expected correlation in our prior. However, in future work, we should devise a multivariate prior for the amplitude parameters to account for this. We found that having broader priors on \(\alpha_\helium\) and \(\beta_helium\) lead to the model predicting unrealistic glitches. Our ability to test the influence of the prior is limited if we cannot relax its effect.
+
 \todo{Why not use delta gamma / gamma as the probe of helium abundance? That is proportional to alpha / sqrt(beta). Then, an update to this method can use this and beta as a parameter and then work out alpha from that, since beta should scale with tau and the depth is a signature of helium abundance. Be careful as number of modes correlates with delta nu value of fit.}
 
 \todo{Comment on how V19 stuggles to find DY/DZ with their method, and finds unusually low values of initial helium. This could be a result of their fitting method.}
 
 \todo{In discussion can show some plots of \(\tau/\tau_0\) in model stars and how they relate to temperature, could use temperature to influence prior.}
 
-\subsubsection{Correlation with helium}
+\subsubsection{16 Cygni A}
 
-\todo{Fit the three model stars and plot amplitude against helium abundance at surface and initial}.
 
-\subsubsection{16 Cygni}
+
+\begin{figure}
+    \centering
+    \includegraphics{figures/glitch-16cyga.pdf}
+    \caption{}
+    \label{fig:glitch-16cyga}
+\end{figure}
