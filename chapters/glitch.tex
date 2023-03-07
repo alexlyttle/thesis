@@ -471,7 +471,7 @@ We want to extend this model to include parameters which carry more information 
 In the previous section, we found the functional forms of \(\delta\nu\) arising from acoustic glitches. Adding these to Equation \ref{eq:asy} should give us a model, \(f(n, l)\), which we can fit to \(\nu_{nl}\) obtained from peakbagging. Such a model could look something like this,
 %
 \begin{equation}
-    f(n, l) = \tilde{\nu}_{nl} + \delta(\tilde{\nu}_{nl}) \label{eq:general-glitch}
+    f(n, l) = \tilde{\nu}_{nl} + \delta\nu \label{eq:general-glitch}
 \end{equation}
 %
 where \(\tilde{\nu}_{nl}\) represents the smooth component of the function, for example
@@ -480,7 +480,7 @@ where \(\tilde{\nu}_{nl}\) represents the smooth component of the function, for 
     \tilde{\nu}_{nl} = \nu_0 \sum_{k=0}^{K} a_k^{(l)} n^k, \label{eq:poly}
 \end{equation}
 %
-could be a \(K\)-th order polynomial with coefficients \(a_k^{(l)}\). The glitches contained in \(\delta(\nu)\) are low-amplitude and rapidly varying. We could add any glitch term here as appropriate for the star. In the case of solar-like oscillators we have focussed on glitches due to helium ionisation and the base of the convective zone, which we write as,
+could be a \(K\)-th order polynomial with coefficients \(a_k^{(l)}\). The glitches contained in \(\delta\nu\) are comparatively small and rapidly varying. We could add any glitch term here as appropriate for the star. In the case of solar-like oscillators we assume \(\delta\nu = \delta_\helium(\nu) + \delta_\bcz(\nu)\), where,
 %
 \begin{align}
     \delta_\helium(\nu) &= \alpha_\helium \nu_0 \nu \, \ee^{-\beta_\helium \nu^2} \sin(4\pi\tau_\helium\nu + \phi_\helium), \label{eq:he-glitch}\\
@@ -550,7 +550,7 @@ We used a Gaussian Process (GP) instead of a high-order polynomial to model the 
     f_{B}(\vect{n}) \sim \mathcal{GP}\left[ m(\vect{n}), k(\vect{n}, \vect{n}') \right]
 \end{equation}
 %
-where \(m\) and \(k\) are the mean and kernel functions which depend on parameters \(\vect{\theta}_B\)\footnote{We use the convention that some random variable \(y\) drawn from a distribution \(q\) given parameters \(x\) may be written as \(y \sim q(x)\).}. The mean function describes where we expect \(\nu_n\) to be given some approximate physical reasoning. Therefore, we define our mean function for any \(n\) as,
+where \(m\) and \(k\) are the mean and kernel functions which depend on parameters \(\vect{\theta}_B\)\footnote{In this section we use the convention that some random variable \(y\) drawn from a distribution \(q\) given parameters \(x\) may be written as \(y \sim q(x)\).}. The mean function describes where we expect \(\nu_n\) to be given some approximate physical reasoning. Therefore, we define our mean function for any \(n\) as,
 %
 \begin{equation}
     m(n) = \tilde{\nu}_n + \delta_\helium(\tilde{\nu}_n) + \delta_\bcz(\tilde{\nu}_n); \quad \tilde{\nu}_n = (n + \varepsilon) \nu_0, \label{eq:asy-glitch}
@@ -572,9 +572,7 @@ The GP likelihood for some set of observations \(\vect{\nu}_\obs = \{\nu_{n_i}^\
     \vect{\nu}_\obs \sim \mathcal{N}\left[ \vect{\mu}, \, \vect{K} + (\sigma^2 + \sigma_\obs^2) \vect{I} \right] \label{eq:gp-like}
 \end{equation}
 %
-where \(\vect{\mu} = m(\vect{n})\) and \(\vect{K} = k(\vect{n}, \vect{n})\). The scales of Gaussian noise in the model and observations are \(\sigma\) and \(\sigma_\obs\) respectively, and \(\vect{I}\) is an \(N \times N\) identity matrix. We included the model noise term \(\sigma\) to account for the difference between values of the glitch terms evaluated at \(\tilde{\nu}_n\) and the `true' mode frequencies.
-
-To make noiseless predictions of mode frequencies \(\vect{\nu}_\star\) at new radial orders \(\vect{n}_\star\), we drew from the following multivariate normal distribution \needcite[Rasmussen and Williams],
+where \(\vect{\mu} = m(\vect{n})\) and \(\vect{K} = k(\vect{n}, \vect{n})\). The scales of Gaussian noise in the model and observations are \(\sigma\) and \(\sigma_\obs\) respectively, and \(\vect{I}\) is an \(N \times N\) identity matrix. We included the model noise term \(\sigma\) to account for the difference between values of the glitch terms evaluated at \(\tilde{\nu}_n\) and the `true' mode frequencies. To make noiseless predictions of mode frequencies \(\vect{\nu}_\star\) at new radial orders \(\vect{n}_\star\), we drew from the following multivariate normal distribution \needcite[Rasmussen and Williams],
 %
 \begin{equation}
     \vect{\nu}_\star \mid \vect{\nu}_\obs \sim \mathcal{N} \left[ \vect{\mu}_\star + \vect{K}_\star^\mathsf{T} \, \vect{K}_\obs^{\,-1} \, (\vect{\nu}_\obs - \vect{\mu}), \, \vect{K}_{\star\star} - \vect{K}_\star^\mathsf{T} \, \vect{K}_\obs^{\,-1} \, \vect{K}_\star \right]
@@ -587,7 +585,7 @@ where,
     \vect{K}_{\star\star} = k(\vect{n}_\star, \vect{n}_\star), \quad \vect{K}_\obs = \vect{K} + (\sigma^2 + \sigma_\obs^2) \vect{I}.
 \end{gather*}
 %
-% This satisfies the consistency requirement that 
+% This satisfies the consistency requirement that GP must specify any mode \(\nu_n \sim \mathcal{N}(\mu_n, K_{nn})\) where \(K_{nn}\) is the sub-matrix of the covariance of 
 
 To estimate the probability of our model parameters given observations of mode frequencies, we used Bayes' theorem. Hence, we write the posterior probability density as, 
 %
@@ -601,7 +599,7 @@ where \(\mathcal{L}(\vect{\theta}_B)\) is the likelihood of the data given the m
     \ln\mathcal{L}_B \propto - \frac12 \left[ {(\vect{\nu}_\obs - \vect{\mu})^\mathsf{T} \vect{K}_\obs^{\,-1} (\vect{\nu}_\obs - \vect{\mu})} - \ln(\det \vect{K}_\obs) \right].
 \end{equation}
 %
-The prior transform for model parameters \(\vect{\theta}_B = (\nu_0, \varepsilon, \alpha_\helium, \beta_\helium, \tau_\helium, \phi_\helium, a_\bcz, \tau_\bcz, \phi_\bcz, \sigma)\) is the inverse cumulative distribution function associated with the prior density function \(p(\vect{\theta}_B)\). We defined the prior independently for each of \(\vect{\theta}_B\) such that the total prior is the product of prior density functions for each parameter, \(p(\vect{\theta}_B) = \prod_j p(\theta_{j})\).
+The prior transform for model parameters \(\vect{\theta}_B = (\nu_0, \varepsilon, \alpha_\helium, \beta_\helium, \tau_\helium, \phi_\helium, a_\bcz, \tau_\bcz, \phi_\bcz, \sigma)\) is the inverse cumulative distribution function associated with the prior distribution \(p(\vect{\theta}_B)\). We defined the prior independently for each of \(\vect{\theta}_B\) such that the total prior is the product of prior distributions for each parameter, \(p(\vect{\theta}_B) = \prod_j p(\theta_{j})\). In the following paragraphs, we specify our choice of prior distributions for each parameter.
 
 Starting with the parameters for \(\tilde{\nu}\), we chose to sample them from normal distributions,
 %
@@ -610,7 +608,7 @@ Starting with the parameters for \(\tilde{\nu}\), we chose to sample them from n
     % \phi_\helium, \phi_\bcz \sim \mathcal{U}\left(0, 2\pi\right),
 \end{gather*}
 %
-centred on \(\overline{\nu}_0\) and \(\overline{\varepsilon}\) and scaled by \(s_{\nu_0}\) and \(s_\varepsilon\). In practice, the location and scale parameters could come from global estimates of \(\langle\Delta\nu_n\rangle\) or a linear fit to the modes. For the test stars, we determined \(\overline{\nu}_0\) and \(\overline{\varepsilon}\) from a linear fit to the true mode frequencies and added a representative uncertainty given later in Table \ref{tab:glitch-prior}.
+centred on \(\overline{\nu}_0\) and \(\overline{\varepsilon}\) and scaled by \(s_{\nu_0}\) and \(s_\varepsilon\). In practice, the location and scale parameters could come from global estimates of \(\langle\Delta\nu_n\rangle\) or a linear fit to the modes. For the test stars, we determined \(\overline{\nu}_0\) and \(\overline{\varepsilon}\) from a linear fit to the true mode frequencies and added a representative uncertainty given later in Table \ref{tab:glitch-prior}. For 16 Cyg A, we used measurements of \(\langle\Delta\nu_n\rangle\) and \(\nu_{\max}\) from \citet{Lund.SilvaAguirre.ea2017} to estimate \(\overline{\nu}_0\) and \(\overline{\varepsilon}\).
 
 % Priors for the following parameters follow a log-normal distribution to ensure they are positive. We also exploit the property that the scale of a normal distribution in natural log-space is approximately the scale in real-space as a fraction of the distribution mean.
 
@@ -714,3 +712,9 @@ For both methods, we calculated the helium glitch amplitude at a reference frequ
     \caption{Results for the glitch fit to 16 Cyg A using the \citetalias{Verma.Raodeo.ea2019} method (\emph{left}) and GP method (\emph{right}). The top panel shows 50 draws from the posterior prediction of \(\delta\nu = \delta_\helium(\nu) + \delta_\bcz(\nu)\) with the observed \(\nu_n\) minus the median smooth background component of the model. The middle and bottom panels shows the posterior sample probability density for the acoustic depths and reference amplitudes of the glitches respectively.}
     \label{fig:glitch-16cyga}
 \end{figure}
+
+\subsubsection{Improvements to the model}
+
+It is important that the GP model has a robust and physically motivated prior. However, some assumptions we have made could lead to an incorrect prior and bias the results. For example, the outer convective zone gets shallower for hotter stars (approaching \(T_\mathrm{eff} \approx \SI{7000}{\kelvin}\)) making the assumption that \(\tau_\bcz/\tau_0 \approx 0.6\) an overestimate. There is a notable temperature dependence to \(\tau_\bcz/\tau_0\) observed in the grid of stellar models which could instead be exploited when constructing the prior. Additionally, there is strong correlation between the helium amplitude parameters \(\alpha_\helium\) and \(\beta_\helium\). For our prior to reflect realistic glitches, these parameters should be drawn from a multivariate distribution parametrised by their covariance.
+
+Once the GP method is good enough to run on the grid of stellar models, we could use the results to inform an empirical prior to then apply to observed stars. This could lead to some model-dependence but the prior could be relaxed slightly to account for this.
