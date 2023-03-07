@@ -498,12 +498,12 @@ In the following sections, we will compare the method from \citet[][hereafter V1
 
 \subsubsection{Test Star}
 
-We created three sets of test data for worst-, better-, and best-case scenarios to compare the two methods. Firstly, radial order modes were calculated using \textsc{GYRE} \citep{Townsend.Teitler2013} for stellar model S. We then selected different numbers of modes (\(N\)) symmetrically about a reference frequency \(\nu_\mathrm{ref} = \SI{2900}{\micro\hertz}\) close to the expected frequency at maximum power of the star. For each test case, we added differing amounts of Gaussian noise (scaled by \(\sigma_\obs\)) to the frequencies. The parameters for each test case are shown in Table \ref{tab:glitch-test-obs} and plot in Figure \ref{fig:glitch-test-obs}.
+We created three sets of test data for worst-, better-, and best-case scenarios to compare the two methods. Firstly, radial order modes were calculated using \textsc{GYRE} \citep{Townsend.Teitler2013} for stellar model S. We then selected different numbers of modes (\(N\)) symmetrically about a reference frequency \(\nu_\mathrm{ref} = \SI{2900}{\micro\hertz}\) close to the expected frequency at maximum power of the star. For each test case, we added differing amounts of Gaussian noise (scaled by \(\sigma_\obs\)) to the frequencies. The parameters for each test case are shown in Table \ref{tab:glitch-obs} and plot in Figure \ref{fig:glitch-test-obs}.
 
 \begin{table}
     \centering
-    \caption{Test observations of mode frequency \(\nu_n\) at radial order \(n\) for model star S. \(N\) are the number of `observed' radial orders and the scale of the Gaussian noise added to each column is given by \(\sigma_\obs\). The final column shows the true values of \(\nu_n\).}
-    \label{tab:glitch-test-obs}
+    \caption{Observations of mode frequency \(\nu_n\) at radial order \(n\) for model star S (left) and 16 Cyg A (right). \(N\) are the number of `observed' radial orders and the scale of the Gaussian noise added to each column is given by \(\sigma_\obs\) where appropriate. The values and their uncertainties for 16 Cyg A come from \citet{Lund.SilvaAguirre.ea2017}.}
+    \label{tab:glitch-obs}
     \input{tables/glitch-test-obs.tex}
 \end{table}
 
@@ -514,11 +514,13 @@ We created three sets of test data for worst-, better-, and best-case scenarios 
     \label{fig:glitch-test-obs}
 \end{figure}
 
-\subsubsection{16 Cygni}
+\subsubsection{16 Cyg}
+
+We used the asteroseismic benchmark star 16 Cyg A as an example with which to compare glitch fitting methods. We adopted values for 16 radial mode frequencies observed by \citet{Lund.SilvaAguirre.ea2017}. The mode frequencies and their associated uncertainties are given in Table \ref{tab:glitch-obs}. The glitch has been previously studied for 16 Cyg A \citep[with its binary companion 16 Cyg B][]{Verma.Faria.ea2014}, making it a useful subject for comparison.
 
 \subsection{Methods}
 
-We only modelling radial oscillation modes (\(l = 0\)), but these methods may be extended to higher angular degree in the future.
+We only modelled radial oscillation modes (\(l = 0\)), but these methods may be extended to higher angular degree in the future.
 
 \subsubsection{The V19 Method (A)}
 
@@ -620,7 +622,7 @@ We derived a prior on \(\tau_\helium\) and \(\tau_\bcz\) by observing how they s
 A prior on the glitch amplitude parameters is less trivial. We assume that the width of the helium ionisation region is about 8 per cent of the acoustic depth of the region, \(\Delta_\helium/\tau_\helium \approx 0.08\), and then convert this to \(\beta_\helium\) by assuming Equation \ref{}. We then center a prior for \(\alpha_\helium\) to satisfy a maximum depth of 0.1 in \(\delta\gamma/\gamma\) caused by helium ionisation. For both \(\alpha_\helium\) and \(\beta_\helium\), we scale the distribution by 20 and 40 per cent of their mean respectively. We verified that these priors are sensible by checking that the prior amplitude at \(\nu_\mathrm{ref}\) peaks between \SIrange{0}{1}{\micro\hertz}, decaying thereafter. \todo{Plot the priors for amplitude at reference frequency, or draws from the amplitude over frequency}.
 
 \begin{gather*}
-    \ln\beta_\helium \sim \mathcal{N}\left( \ln\overline{\beta}_\helium, \, 4 s_{\ln\tau}^2 \right), \quad \ln\alpha_\helium \sim \mathcal{N}\left[ \ln({\overline{\beta}_\helium}/{400\pi})^{1/2}, \, s_{\ln\tau}^2 \right],\\
+    \ln\beta_\helium \sim \mathcal{N}\left( \ln\overline{\beta}_\helium, \, 4 s_{\ln\tau}^2 \right), \quad \ln\alpha_\helium \sim \mathcal{N}\left[ 1/2 \, \ln({\overline{\beta}_\helium}/{400\pi}), \, s_{\ln\tau}^2 \right],\\
     \overline{\beta}_\helium = \frac{32}{625} \, \pi^2 \overline{\tau}_\helium^2,
 \end{gather*}
 
@@ -673,7 +675,9 @@ In Figure \ref{fig:glitch-test-signal}, we plot the total predicted glitch, \(\d
     \label{fig:glitch-test-tau}
 \end{figure}
 
-It is difficult to determine which method does a better job at finding glitch parameters. The glitch model is an approximation and the exact physical meaning of the parameters is unknown. However, we plot the posterior distributions of the glitch acoustic depths, \(\tau_\helium\) and \(\tau_\bcz\), in Figure \ref{fig:glitch-test-tau} and compared them to the sound speed gradient of the test star from Figure \ref{fig:sound-speed-gradient}. For the worst case, both methods gave broad distributions for the acoustic depths, compatible with their respective initial guesses and priors. The \citetalias{Verma.Raodeo.ea2019} method initial guesses appeared to underestimate \(\tau_\bcz\), whereas the GP method prior was broad enough to encompass a wide range of possible \(\tau_\bcz\). In the better and best cases, we found that the \citetalias{Verma.Raodeo.ea2019} had strong multimodality as a consequence of not incorporating a formal prior in their model. For example, the better case found solutions for \(\tau_\helium\) far deeper into the star than we would expect, at around \SI{1500}{\second} and \SI{2500}{\second}. The solutions for \(\tau_\helium\) in the best case appeared more compatible with the location of the trough in sound speed gradient due to the second ionisation of helium. This could be a result of the GP doing a better job of absorbing the first helium ionisation component than the 4-th order polynomial.
+It is difficult to determine which method does a better job at finding glitch parameters. The glitch model is an approximation and the exact physical meaning of the parameters is unknown. However, we plot the posterior distributions of the glitch acoustic depths, \(\tau_\helium\) and \(\tau_\bcz\), in Figure \ref{fig:glitch-test-tau} and compared them to the sound speed gradient of the test star from Figure \ref{fig:sound-speed-gradient}. For the worst case, both methods gave broad distributions for the acoustic depths, compatible with their respective initial guesses and priors. The \citetalias{Verma.Raodeo.ea2019} method initial guesses appeared to underestimate \(\tau_\bcz\), whereas the GP method prior was broad enough to encompass a wide range of possible \(\tau_\bcz\). In the better and best cases, we found that the \citetalias{Verma.Raodeo.ea2019} had strong multimodality as a consequence of not incorporating a formal prior in their model. For example, the better case found solutions for \(\tau_\helium\) far deeper into the star than we would expect, at around \SI{1500}{\second} and \SI{2500}{\second}. 
+
+One problem with our choice of glitch functions, predicted by \citet{Houdek.Gough2007} and shown in \citet{Verma.Faria.ea2014}, is that the values for \(\tau_\helium\) obtained are under-predicted compared to the true location of the second ionisation of helium. This is because \(\delta_\helium(\nu)\) does not include the smaller glitch component due to the first ionisation of helium. This is located at a slightly lower \(\tau\), so the period of the resulting glitch fit is slightly increased. We can see this for the fit to the best star with the \citetalias{Verma.Raodeo.ea2019} method in Figure \ref{fig:glitch-test-tau}. The respective solutions for \(\tau_\helium\) from the GP method are more compatible with the location of the second ionisation trough \todo{quantify this}. This could be a result of the GP doing a better job of absorbing the first helium ionisation component than the 4-th order polynomial.
 
 \begin{figure}
     \centering
@@ -682,7 +686,9 @@ It is difficult to determine which method does a better job at finding glitch pa
     \label{fig:glitch-test-amplitude}
 \end{figure}
 
-Using the glitch parameters as a helium diagnostic could involve measuring the amplitude of the helium glitch at a reference frequency such as \(\nu_{\max}\). We should expect solutions for this reference amplitude (\(A_\mathrm{ref}\)) to converge on a value as the data quality increases from worst to best. It is also important that the uncertainty of the reference amplitude is accurate if using it to constrain helium abundance in a population of stars. We compared reference amplitudes at \(\nu_\mathrm{ref}\) from both methods in Figure \ref{fig:glitch-test-amplitude}. The \citetalias{Verma.Raodeo.ea2019} method preferred low-amplitude solutions for the worst and better cases than the best case. If using this method on a population of stars, this could bias inference towards lower values of helium abundance. On the other hand, the GP method reflects our prior in the worst case, with the width of the distribution shrinking as the data improves. In the best case, the \citetalias{Verma.Raodeo.ea2019} method found \(A_\mathrm{ref} = 0.347_{-0.005}^{+0.006}\), whereas the GP method found \(A_\mathrm{ref} = 0.297_{-0.043}^{+0.044}\).
+Using the glitch parameters as a helium diagnostic could involve measuring the amplitude of the helium glitch at a reference frequency such as \(\nu_{\max}\). We should expect solutions for this reference amplitude (\(A_\mathrm{ref}\)) to converge on a value as the data quality increases from worst to best. It is also important that the uncertainty of the reference amplitude is accurate if using it to constrain helium abundance in a population of stars. We compared reference amplitudes at \(\nu_\mathrm{ref}\) from both methods in Figure \ref{fig:glitch-test-amplitude}. The \citetalias{Verma.Raodeo.ea2019} method preferred low-amplitude solutions for the worst and better cases than the best case. If using this method on a population of stars, this could bias inference towards lower values of helium abundance. On the other hand, the GP method reflects our prior in the worst case, with the width of the distribution shrinking as the data improves. In the best case, the \citetalias{Verma.Raodeo.ea2019} method found \(A_\mathrm{ref} = 0.347_{-0.005}^{+0.006}\), whereas the GP method found \(A_\mathrm{ref} = 0.296_{-0.036}^{+0.042}\).
+
+In both methods, the samples for \(\alpha_\helium\) and \(\beta_\helium\) were correlated. This was expected, because larger values of \(\beta_\helium\) can be compensated for with a larger amplitude factor \(\alpha_\helium\). In the GP method, we did not include this expected correlation in our prior. However, in future work, we should devise a multivariate prior for the amplitude parameters to account for this. We found that having broader priors on \(\alpha_\helium\) and \(\beta_\helium\) lead to the model predicting unrealistic glitches. Our ability to test the influence of the prior is limited if we cannot relax its effect.
 
 \todo{Why not use delta gamma / gamma as the probe of helium abundance? That is proportional to alpha / sqrt(beta). Then, an update to this method can use this and beta as a parameter and then work out alpha from that, since beta should scale with tau and the depth is a signature of helium abundance. Be careful as number of modes correlates with delta nu value of fit.}
 
@@ -690,8 +696,13 @@ Using the glitch parameters as a helium diagnostic could involve measuring the a
 
 \todo{In discussion can show some plots of \(\tau/\tau_0\) in model stars and how they relate to temperature, could use temperature to influence prior.}
 
-\subsubsection{Correlation with helium}
+\subsubsection{16 Cyg A}
 
-\todo{Fit the three model stars and plot amplitude against helium abundance at surface and initial}.
+Both methods yielded values of \(\tau_\helium\) within 1-\(\sigma\) of each other: \(917_{-53}^{+50} \, \mathrm{s}\) for the \citetalias{Verma.Raodeo.ea2019} method and \(931_{-88}^{+59} \, \mathrm{s}\) for the GP method.
 
-\subsubsection{16 Cygni}
+\begin{figure}
+    \centering
+    \includegraphics{figures/glitch-16cyga.pdf}
+    \caption{}
+    \label{fig:glitch-16cyga}
+\end{figure}
