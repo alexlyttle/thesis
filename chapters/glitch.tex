@@ -733,6 +733,12 @@ For both methods, we calculated the helium glitch amplitude at a reference frequ
     \item Potential limitations of the method
 \end{itemize}
 
+The first evident difference between the two methods is that \citetalias{Verma.Raodeo.ea2019} found several extreme solutions for \(\delta\nu\) whereas GP did not. We expected this because the GP method used a prior on the model parameters.
+
+Secondly, we found a smaller amplitude \(\delta\nu\) at low frequency with the GP method than with the \citetalias{Verma.Raodeo.ea2019} method. We found that this was a result of the different smooth background models.
+
+In the best case and 16 Cyg A, the GP method found a higher \(\tau_\helium\) than the  \citetalias{Verma.Raodeo.ea2019} method. It is possible that the GP is better able to pick up the small glitch signal from the first ionisation of helium than the polynomial. As a result, the GP method may be better at finding the true properties of the second ionisation glitch. For example, the large lower uncertainty in \(\tau_\helium\) for 16 Cyg A from the GP method could indicate solutions for the first ionisation being picked up.
+
 It is important that the GP model has a robust and physically motivated prior. However, some assumptions we have made could lead to an incorrect prior and bias the results. For example, the outer convective zone gets shallower for hotter stars (approaching \(\teff \approx \SI{7000}{\kelvin}\)) making the assumption that \(\tau_\bcz/\tau_0 \approx 0.6\) an overestimate. There is a notable temperature dependence to \(\tau_\bcz/\tau_0\) observed in the grid of stellar models which could instead be exploited when constructing the prior. Additionally, there is strong correlation between the helium amplitude parameters \(\alpha_\helium\) and \(\beta_\helium\). For our prior to reflect realistic glitches, these parameters should be drawn from a multivariate distribution parametrised by their covariance.
 
 % \todo{In discussion can show some plots of \(\tau/\tau_0\) in model stars and how they relate to temperature, could use temperature to influence prior.}
@@ -744,9 +750,5 @@ In both methods, the samples for \(\alpha_\helium\) and \(\beta_\helium\) were c
 A potential limitation of the GP method is that we calculate the glitch at \(\tilde{\nu}_n\) from the linear asymptotic equation (Equation \ref{}). In regions where the gradient of \(\delta(\nu)\) and the difference between \(\tilde{\nu}_n\) and the true frequency are high, this leads to notable differences between the mean function and the true frequency (\(\sim \SI{0.1}{\micro\hertz}\)) which the GP kernel function cannot absorb. We accounted for this uncertainty due to this by adding Gaussian noise parametrised by \(\sigma\). However, for the best star, \(\sigma \approx 0.05\) which is larger than the observational uncertainty \(\sigma_\obs = 0.01\). This limits our method's inference ability for the best asteroseismic targets. One solution is to replace \(\tilde{\nu}_n\) with a quadratic \citep[e.g.][]{Nielsen.Davies.ea2021} which better approximates \(\nu_n\). Alternatively, we could use Newton's method to solve the mean function for \(\nu\).
 
 Using the glitch parameters as a helium diagnostic could involve measuring the amplitude of the helium glitch at a reference frequency such as \(\nu_{\max}\). We should expect solutions for this reference amplitude (\(A_\mathrm{ref}\)) to converge on a value as the data quality increases from worst to best. It is also important that the uncertainty of the reference amplitude is accurate if using it to constrain helium abundance in a population of stars. If using V19 method on a population of stars, this could bias inference towards lower values of helium abundance.
-
-This was caused by the difference in smooth background models, with the GP appearing to be more flexible than the polynomial. In future work, we could test the accuracy of the GP background by making predictions for lower \(n\) modes and seeing which method does better.
-
-The large lower uncertainty from the GP method result could arise from our method picking up the small signal due to He\,\textsc{i} ionisation.
 
 \todo{Conclusion}
