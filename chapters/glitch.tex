@@ -58,7 +58,7 @@ Firstly, we propose solutions to the wave for each region by considering reflect
 %
 where complex coefficients \(A\) and \(C\) represent reflections, and \(B\) and \(D\) represent transmissions, at \(x_0 \pm \delta x\) respectively. Later, we will substitute the left-travelling wave (\(- \xi\{-k, -\delta k\}\)) after determining the values of the coefficients.
 
-\begin{figure}
+\begin{figure}[!tbp]
     \centering
     \includegraphics{figures/glitch-1d-example-diagram.pdf}
     \caption[A diagram showing a one-dimensional medium with a small structural perturbation.]{A diagram showing a one-dimensional medium split into three regions. 1: Fixed at \(x=0\) with a constant speed of sound \(c\); 2: A small structural perturbation centred at \(x=x_0\) with width \(2\delta x\) and constant speed of sound \(c + \delta c\); 3: Fixed at \(x=L\) with a constant speed of sound \(c\).}
@@ -138,7 +138,7 @@ The functional form of \(\delta\omega\) appears to have a linear component and a
 
 Furthermore, an increasing change in sound speed (\(\delta c\)) increases the amplitude of \(\delta\omega\). This result is intuitive, as we expect a perturbation in \(c\) to be proportional to a perturbation in \(\omega\). Finally, increasing both \(\delta x\) and \(\delta c\) increases the slope of \(\delta\omega\). The sensitivity of a mode to the glitch increases with \(n\) and depends on how much the wave changes in the glitch region. A larger glitch allows modes of smaller \(n\) to `see' the glitch region, thus increasing the linear slope of \(\delta\omega\).
 
-\begin{figure}
+\begin{figure}[!tbp]
     \centering
     \includegraphics{figures/glitch-1d-example-results.pdf}
     \caption{The change in mode frequency induced by a change in sound speed of \(\delta c\) from \(x_0 - \delta x\) to \(x_0 + \delta x\) in a one-dimensional medium, bound such that \(x \in [0, 1]\) (see Figure \ref{fig:1d-diagram}). Outside of the perturbation the speed of sound, \(c=1\).
@@ -152,7 +152,7 @@ Furthermore, an increasing change in sound speed (\(\delta c\)) increases the am
 
 The small phase offset \(\epsilon\) in Equation \ref{eq:1d-phase} is required for the wave function to satisfy the boundary conditions at \(x = 0\). However, adding \(\epsilon\) shifts the effective location of \(x_0\) --- it changes the scale of the \(x\)-axis by a factor of \((1 + \epsilon)\). We plot \(\epsilon\) against \(\omega\) in Figure \ref{fig:1d-phase} and show that its magnitude is \(\sim 10^{-4}\), much smaller than the location and size of region 2. The oscillation caused by the glitch also shows up in Figure \ref{fig:1d-phase}, with its properties affected in a similar way to Figure \ref{fig:1d-results}.
 
-\begin{figure}
+\begin{figure}[!tbp]
     \centering
     \includegraphics{figures/glitch-1d-example-phase.pdf}
     \caption{The same as Figure \ref{fig:1d-results} but showing the phase offset \(\epsilon\) required to satisfy the boundary conditions.}
@@ -173,7 +173,7 @@ We fit Equation \ref{eq:1d-domega-func} to \(\delta\omega_n\) obtained from a gl
 
 % NOTE: Could take this further to show a1 = 2 dc dtau / L and a2 = dc / L
 
-\begin{figure}
+\begin{figure}[!tbp]
     \centering
     \includegraphics{figures/glitch-1d-fit.pdf}
     \caption{Best fit of Equation \ref{eq:1d-domega-func} to \(\delta\omega_n\) for \(n=1,\dots,50\), \(L=1\), and \(c=1\).}
@@ -214,7 +214,7 @@ where the acoustic radius of the star\footnote{Not to be confused with the glitc
 
 In Figure \ref{fig:sound-speed-gradient}, we show the sound speed gradient with respect to \(\tau\) for model S \todo{Define model S in a previous chapter}. We see how the speed of sound changes smoothly throughout the star. In the convective envelope, where p-modes propagate, there is a noticeable wiggle around \SI{700}{\second} and a sharp change in direction at its base. The first is caused by the ionisation of helium, which affects \(\gamma\) by increasing the number of free electrons and thus modifying the free energy of the gas. We explore this further in Section \ref{sec:helium-glitch}. The second is due to a discontinuity in the second temperature gradient as the structure moves from convectively unstable to radiative, which will be discussed in Section \ref{sec:bcz-glitch} \todo{Put a few references here of work which has studied these before}.
 
-\begin{figure}
+\begin{figure}[!tbp]
     \centering
     \includegraphics{figures/sound-speed-gradient.pdf}
     \caption{The sound speed gradient (\(\dd c/\dd \tau\)) of model S plot against the acoustic depth (\(\tau\)). The fractional radius to the photosphere base is given on the top axis. The convective envelope is shaded and the bases of the photosphere and convective zone are marked with dashed lines.}
@@ -227,7 +227,7 @@ In this section, we will first show how the sound speed inside a solar-like star
 
 The speed of sound in the star is proportional to \(\gamma\). As a chemical species in the star ionises, the number of particles and thus chemical potential of the species changes. This induces a gradient in the thermal free energy of the gas which relates to the pressure and entropy of the gas. Therefore, we expect ionisation to cause a change in the pressure-density gradient at constant entropy, \(\gamma\). Using an approximate form for the first adiabatic exponent from \citet{Houdayer.Reese.ea2021}, we show how \(\gamma\) is affected by the ionisation of helium and hydrogen in Figure \ref{fig:gamma-zones}. We see that hydrogen ionisation has the largest effect on \(\gamma\) close to the surface of the star. The first and second ionisations of helium occur deeper in the star, at higher temperatures. We can see that the second ionisation of helium has a greater affect on \(\gamma\) than the first. This is because the ionisation energy of He\,\textsc{ii} is higher than He\,\textsc{i} and the ground state degeneracy of He\,\textsc{ii} is less than He\,\textsc{i}.
 
-\begin{figure}
+\begin{figure}[!tbp]
     \centering
     \includegraphics{figures/adiabatic-ionisation-regions.pdf}
     \caption{The depressions in the first adiabatic exponent (\(\gamma\)) caused by the ionisation of hydrogen (H), and the first and second ionisations of helium (He\,\textsc{i} and He\,\textsc{ii}). The x-axis is the fractional acoustic depth from the surface of the star, \(\tau/\tau_0\).}
@@ -272,7 +272,7 @@ where \(q = 2\) for hydrogen, \(q = 1\) for helium, \(\overline{m} = M/N\) is th
 
 In Figure \ref{fig:gamma-temp-density} we plot \(\gamma\) as a function of pressure and temperature. The first panel illustrates the three ionisation regions of hydrogen and helium. The value of \(\gamma\) decreases when the ionisation reaction is occurring. The magnitude of the effect depends primarily on the temperature-density profile of the star. Additionally, in the second panel we see that an increase in helium abundance decreases \(\gamma\) in the helium ionisation regions. A temperature-density profile from model S is shown to see how the star probes the ionisation regions. We can imagine a hotter star shifting this line such that ionisation occurs closer to the surface. Similarly, the effect on \(\gamma\) would be smaller in denser star. Although helium abundance dominates the effect on \(\gamma\), there is still some dependence on other stellar quantities.
 
-\begin{figure}
+\begin{figure}[!tbp]
     \centering
     \includegraphics{figures/adiabatic-ionisation-temp.pdf}
     \caption{Temperature-density profile of a Sun-like star. \emph{Top:} The first adiabatic exponent \(\gamma\) as a function of temperature and density, calculated using Equation \ref{eq:gamma1} for a helium mass fraction, \(Y=0.25\). \emph{Bottom:} The change in \(\gamma\) induced by a change in helium abundance, \(\Delta Y = 0.1\). In both panels, the dashed line shows the temperature-density profile of model S.}
@@ -281,7 +281,7 @@ In Figure \ref{fig:gamma-temp-density} we plot \(\gamma\) as a function of press
 
 To show the effect of small changes in \(\gamma\) on the sound speed, we plot the sound speed gradient in Figure \ref{fig:gamma-sound-speed}. The three models shown were evolved to the same central temperature with different initial helium abundances. The dominant effect of helium abundance appears as a Gaussian-like depression in \(\gamma\) around the second ionisation of helium. We see how larger helium abundance increases the width and depression in \(\gamma\), which is reflected in the sound speed gradient. A larger \(Y\) also leads to a relative reduction in hydrogen abundance. This slightly shrinks the width of the hydrogen ionisation region.
 
-\begin{figure}
+\begin{figure}[!tbp]
     \centering
     \includegraphics{figures/helium-ionisation-sound-speed.pdf}
     \caption{The effect on the sound speed profile for three solar-like stars with initial helium mass fractions of 0.26 (\emph{solid}), 0.28 (\emph{dashed}), and 0.3 (\emph{dot-dashed}). The models were each evolved to a central helium mass fraction of 0.6. \emph{Top:} The first adiabatic exponent \(gamma\). \emph{Bottom:} The sound speed gradient \(\dd c/\dd t\) where \(t = \tau/\tau_0\) is the fractional acoustic depth (plot on the x-axis).}
@@ -321,7 +321,7 @@ The perturbations \(\delta\mathcal{E}\) and \(\delta\mathcal{I}\) depend on chan
 %
 where \(\mathcal{K}_{a, b}\) gives the relative effect on \(\omega\) due to a perturbation in a state variable \(a\) at fixed \(b\), at a given \(r\). These kernels are defined fully in \citet{Gough.Thompson1991}.
 
-\begin{figure}
+\begin{figure}[!tbp]
     \centering
     \includegraphics{figures/kernels.pdf}
     \caption{Structure kernels (\(\mathcal{K}_{c^2,\rho}, \mathcal{K}_{\rho,c^2}\)) scaled by the stellar radius as a function of fractional acoustic depth. The kernels were computed for three radial oscillation modes (\(n=15,21,26\)) using oscillation calculations for stellar model S.}
@@ -432,7 +432,7 @@ where \(\phi_\heII = 2(\epsilon_\heII + \pi/4)\), and \(\nu_0 = (2 \tau_0)^{-1}\
 
 The sensitivity of p-modes to glitches gets smaller further into the star. However, we should not neglect the effect of a discontinuity at the base of the convective zone. This arises 
 
-\begin{figure}
+\begin{figure}[!tbp]
     \centering
     \includegraphics{figures/bcz-density-gradient.pdf}
     \caption{Discontinuity in the density gradient at the base of the convective zone for three solar-like stars with initial helium mass fractions of 0.26 (\emph{solid}), 0.28 (\emph{dashed}), and 0.3 (\emph{dot-dashed}).}
@@ -504,7 +504,7 @@ In this section, we briefly outline the data used to compare our new method with
     \input{tables/glitch-test-obs.tex}
 \end{table}
 
-\begin{figure}
+\begin{figure}[!tbp]
     \centering
     \includegraphics{figures/glitch-test-obs.pdf}
     \caption{Echelle plot of simulated true and `observed' radial mode frequency data from model star S for worst-, better-, and best-case scenarios.}
@@ -668,7 +668,7 @@ In this section, we compare the results from both methods on the test star and 1
 
 \subsubsection{Test Star}
 
-\begin{figure}
+\begin{figure}[!tbp]
     \centering
     \includegraphics{figures/glitch-test-signal.pdf}
     \caption{50 random draws from the V19 and GP methods showing the total glitch signal, \(\delta\nu = \delta_\helium(\nu) + \delta_\bcz(\nu)\), as a function of frequency, \(\nu\). The data points plot in blue are the median smooth component model at \(\vect{n}\) subtracted from the observed modes \(\vect{\nu}_\obs\) with their observed uncertainty \(\sigma_\obs\).}
@@ -677,7 +677,7 @@ In this section, we compare the results from both methods on the test star and 1
 
 In Figure \ref{fig:glitch-test-signal}, we plot the predicted glitch component, \(\delta\nu\), using 50 draws from the posterior distribution on the model parameters for both methods. We subtracted the median background component from the observed \(\nu_n\) over-plot. For each scenario, both methods predicted similar median glitch components. However, the \citetalias{Verma.Raodeo.ea2019} method showed more extreme multimodality in all cases. For example, the better case showed a high-amplitude (\(\sim \SI{2}{\micro\hertz}\)) BCZ glitch solution which is not present with the GP method. Such a large signal would indicate a highly unlikely density discontinuity at the BCZ. The GP method did not find such solutions because the prior reduced the likelihood of unrealistic solutions --- a consequence of the Bayesian methodology. The \citetalias{Verma.Raodeo.ea2019} method also appeared to be more confident in its glitch solutions for the best case compared to the GP method. Additionally, the two methods differed by \(\sim \SI{1}{\micro\hertz}\) at low frequency in the best case.
 
-\begin{figure}
+\begin{figure}[!tbp]
     \centering
     \includegraphics{figures/glitch-test-tau.pdf}
     \caption{Samples from the V19 and GP methods for the acoustic depths of the helium glitch (\(\tau_\helium\)) and base of the convective zone (\(\tau_\bcz\)). The sound-speed gradient from Figure \ref{fig:sound-speed-gradient} is over-plot with a grey dashed line.}
@@ -692,7 +692,7 @@ As predicted by \citet{Houdek.Gough2007} and shown in \citet{Verma.Faria.ea2014}
 
 \todo{include numbers for \(\tau\) in a table compared with \(\tau\) from the }
 
-\begin{figure}
+\begin{figure}[!tbp]
     \centering
     \includegraphics{figures/glitch-test-amplitude.pdf}
     \caption{Samples of the helium glitch amplitude at a reference frequency of \SI{3000}{\micro\hertz} fit with the V19 and GP methods for the worst-, better-, and best-case test data. The tallest bar in the V19 method panel is cropped with its value displayed in green text.}
@@ -715,7 +715,7 @@ The \citetalias{Verma.Raodeo.ea2019} method found \(\tau_\helium = 917_{-53}^{+5
 
 For both methods, we calculated the helium glitch amplitude at a reference frequency of \SI{2188.5}{\micro\hertz} equivalent to the value of \(\nu_{\max}\) obtained by \citet{Lund.SilvaAguirre.ea2017}. Samples from their posteriors are shown in the bottom panel of Figure \ref{fig:glitch-16cyga}. We found \(A_\helium^\mathrm{ref} = 0.260_{-0.065}^{+0.050}\) for the \citetalias{Verma.Raodeo.ea2019} method, and \(A_\helium^\mathrm{ref} = 0.333_{-0.073}^{+0.081}\) for the GP method. Both values were about 1-\(\sigma\) apart.
 
-\begin{figure}
+\begin{figure}[!tbp]
     \centering
     \includegraphics{figures/glitch-16cyga.pdf}
     \caption{Results for the glitch fit to 16 Cyg A using the \citetalias{Verma.Raodeo.ea2019} method (\emph{left}) and GP method (\emph{right}). The top panel shows 50 draws from the posterior prediction of \(\delta\nu = \delta_\helium(\nu) + \delta_\bcz(\nu)\) with the observed \(\nu_n\) minus the median smooth background component of the model. The middle and bottom panels shows the posterior sample probability density for the acoustic depths and reference amplitudes of the glitches respectively.}
@@ -735,9 +735,33 @@ For both methods, we calculated the helium glitch amplitude at a reference frequ
 
 The first evident difference was that the \citetalias{Verma.Raodeo.ea2019} method found several extreme solutions for \(\delta\nu\) whereas GP method did not. We expected this because the GP method used a prior on the model parameters. We tested relaxing the prior on \(\vect{\theta}_B\) and recovered similar solutions to the \citetalias{Verma.Raodeo.ea2019} method. Therefore, care should be taken over the choice of prior on \(\vect{\theta}_B\) to realistically reflect our expectation.
 
-Secondly, we found a smaller amplitude \(\delta\nu\) at low frequency with the GP method than with the \citetalias{Verma.Raodeo.ea2019} method. This was particularly visible in the best case and 16 Cyg A. We found that this was a result of the different smooth background models \todo{A plot of the background model may help here}. The GP background component turns back towards the asymptotic solution at low frequency whereas the \citetalias{Verma.Raodeo.ea2019} method moves away from it. 
+\begin{figure}[!tbp]
+    \centering
+    \includegraphics{figures/glitch-test-smooth.pdf}
+    \caption{Echelle-like plots for the best case scenario. The orange lines show 50 draws from the posterior model predictions with the glitch component removed (\(f(n) - \delta\nu\)) for both methods. The predictions are made from a lower radial order \(n=8\) than the observed modes. The true values from model S are shown for each mode. Some radial orders (\(n\)) are shown next to the modes for context.}
+    \label{fig:best-smooth}
+\end{figure}
 
-In the best case and 16 Cyg A, the GP method found a higher \(\tau_\helium\) than the  \citetalias{Verma.Raodeo.ea2019} method. It is possible that the GP is better able to pick up the small glitch signal from the first ionisation of helium than the polynomial. As a result, the GP method may be better at finding the true properties of the second ionisation glitch. For example, the large lower uncertainty in \(\tau_\helium\) for 16 Cyg A from the GP method could indicate solutions for the first ionisation being picked up.
+Secondly, we found a smaller amplitude \(\delta\nu\) at low frequency with the GP method than with the \citetalias{Verma.Raodeo.ea2019} method. This was particularly visible in the best case and in 16 Cyg A. We found that this was a result of the different smooth background models. In Figure \ref{fig:best-smooth} we can see the smooth component of each model extended to lower order modes. The GP background component turns back towards the asymptotic solution at a higher \(\nu \approx \SI{1900}{\micro\hertz}\) than the \citetalias{Verma.Raodeo.ea2019} method at \(\nu \approx \SI{1500}{\micro\hertz}\). This appears to be more consistent with the smooth behaviour of the true modes. For the \citetalias{Verma.Raodeo.ea2019} method, the smooth component is confidently incorrect outside of the observed frequencies, whereas the GP method predicts closer to the truth with increasing uncertainty further from the observations. Therefore, it appears that the GP provides a more accurate representation of the true underlying function than the polynomial.
+
+\begin{figure}[!tbp]
+    \centering
+    \begin{subfigure}{1.0\textwidth}
+        \centering
+        \includegraphics{figures/glitch-test-res.pdf}
+        \caption{Test star (best case).}
+    \end{subfigure}
+
+    \begin{subfigure}{1.0\textwidth}
+        \centering
+        \includegraphics{figures/glitch-16cyga-res.pdf}
+        \caption{16 Cyg A.}
+    \end{subfigure}
+    \caption{The difference between \(f(n) - \delta\nu\) predicted by the \citetalias{Verma.Raodeo.ea2019} method (A) and the GP method (B). The glitch components from the GP method are plot in gray for context. The 68 per cent confidence region is shaded for each line.}
+    \label{fig:smooth-res}
+\end{figure}
+
+In the best case and 16 Cyg A, the GP method found a higher \(\tau_\helium\) than the \citetalias{Verma.Raodeo.ea2019} method. It is possible that the GP is better able to distinguish between He\,\textsc{i} and He\,\textsc{ii} ionisation than the polynomial. To check this, we plotted the difference between the model predictions with the glitch subtracted in Figure \ref{fig:smooth-res}. We saw a clear oscillatory signal in the differences. The period of this signal in the test star corresponded to an acoustic depth of \(\sim \SI{500}{\second}\), matching the location of He\,\textsc{i} ionisation in model S. The oscillatory signal was less pronounced for 16 Cyg A, but corresponded to an acoustic depth of \(\sim \SI{700}{\second}\). The polynomial was unable to pick up this signal, thus lowering its value for \(\tau_\helium\). As a result, we expect GP method to more accurately determine the acoustic depth of the second helium ionisation zone.
 
 We have seen how the prior helps the GP method prior helps eliminate unrealistic glitch solutions. However, if some of our prior assumptions are incorrect they may bias the results. For example, the outer convective region gets shallower as stars get hotter (approaching \(\teff \approx \SI{7000}{\kelvin}\)) making the assumption that \(\tau_\bcz/\tau_0 \approx 0.6\) an overestimate. There is a notable temperature dependence to \(\tau_\bcz/\tau_0\) observed in the grid of stellar models which could instead be exploited when constructing the prior. 
 
