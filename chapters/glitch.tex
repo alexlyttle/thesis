@@ -46,6 +46,13 @@ representing the physical component of the wave, where \(r\) and \(\phi\) are th
 %
 where \(n\) is a non-zero integer (the \(n=0\) solution would give \(\xi=0\) everywhere).
 
+\begin{figure}[!tb]
+    \centering
+    \includegraphics{figures/glitch-1d-example-diagram.pdf}
+    \caption[A diagram showing a one-dimensional medium with a small structural perturbation.]{A diagram showing a one-dimensional medium split into three regions. 1: Fixed at \(x=0\) with a constant speed of sound \(c\); 2: A small structural perturbation centred at \(x=x_0\) with width \(2\delta x\) and constant speed of sound \(c + \delta c\); 3: Fixed at \(x=L\) with a constant speed of sound \(c\).}
+    \label{fig:1d-diagram}
+\end{figure}
+
 Now, let us suppose there is a small structural perturbation (or glitch) in the medium at position \(x_0\) with half-width \(\delta x\). Figure \ref{fig:1d-diagram} shows this system divided into 3 regions, with region 2 containing the glitch. In region 2, the speed of sound is \(c + \delta c\) and the corresponding wave number is \(k + \delta k\). We want to find the frequencies which correspond to standing waves in this system and compare them to that of the homogeneous medium above. We will show that the resulting eigenfrequencies oscillate with an amplitude and period that relates to the properties of the glitch.
 
 Firstly, we propose solutions to the wave for each region by considering reflection and transmission at each boundary. Initially ignoring the wave superposed by a reflection at \(x=L\),
@@ -57,13 +64,6 @@ Firstly, we propose solutions to the wave for each region by considering reflect
 \end{align}
 %
 where complex coefficients \(A\) and \(C\) represent reflections, and \(B\) and \(D\) represent transmissions, at \(x_0 \pm \delta x\) respectively. Later, we will substitute the left-travelling wave (\(- \xi\{-k, -\delta k\}\)) after determining the values of the coefficients.
-
-\begin{figure}[!tbp]
-    \centering
-    \includegraphics{figures/glitch-1d-example-diagram.pdf}
-    \caption[A diagram showing a one-dimensional medium with a small structural perturbation.]{A diagram showing a one-dimensional medium split into three regions. 1: Fixed at \(x=0\) with a constant speed of sound \(c\); 2: A small structural perturbation centred at \(x=x_0\) with width \(2\delta x\) and constant speed of sound \(c + \delta c\); 3: Fixed at \(x=L\) with a constant speed of sound \(c\).}
-    \label{fig:1d-diagram}
-\end{figure}
 
 The boundary conditions for this system are found by enforcing spacial continuity at \(x - \delta x\) and \(x + \delta x\),
 %
@@ -132,12 +132,6 @@ Finally, we can impose the boundary condition \(\xi_3(L, t) = 0\) to solve for \
 %
 The glitch affects the amplitude and phase of the wave, because if we set \(\epsilon = 0\) and \(D = 1\) we recover the homogeneous frequency solutions (Equation \ref{eq:omega-n}). Unfortunately, solving Equation \ref{eq:1d-glitch-sol} for \(\omega\) is not possible analytically. However, we can find individual roots (or modes, \(\omega_n\)) numerically.
 
-We find \(\omega_n\) by solving Equation \ref{eq:1d-glitch-sol} using Newton's method for \(n = 1,\dots,50\), with \(c=1\), \(L=1\), and several values of \(x_0\), \(\delta x\), and \(\delta c\). Initial guesses are obtained from the homogeneous medium solutions (\(\omega_n^0\)) in Equation \ref{eq:omega-n}. The difference between the solutions for \(\omega_n\) and those from the homogeneous medium, \(\delta \omega_n = \omega_n - \omega_n^0\), are shown in Figure \ref{fig:1d-results}. We can see an oscillation in \(\delta\omega\) induced by the glitch. Physically, this arises from the change in phase required to satisfy the boundary conditions of the glitch region. As the wave nodes pass in and out of the region with changing \(n\), the sensitivity of the wave to the glitch oscillates. The overall sensitivity to the glitch depends on how much the wave changes inside the glitch, hence why low \(n\) modes have smaller \(\delta\omega\).
-
-The functional form of \(\delta\omega\) appears to have a linear component and a short period oscillation modulated by a longer period. As the location of the glitch (\(x_0\)) gets smaller, the short-term oscillation period of \(\delta\omega\) decreases. If we imagine the spacial distribution of nodes in the system as a function of \(n\), the density of nodes is larger towards the centre of the system. The oscillation arises from the nodes passing in and out of the glitch region with changing \(n\). Therefore, where the density of wave nodes is higher, we expect the oscillation period of \(\delta\omega\) to be shorter. Similarly, as the the half-width of the glitch (\(\delta x\)) increases, the longer-term modulation period increases. 
-
-Furthermore, an increasing change in sound speed (\(\delta c\)) increases the amplitude of \(\delta\omega\). This result is intuitive, as we expect a perturbation in \(c\) to be proportional to a perturbation in \(\omega\). Finally, increasing both \(\delta x\) and \(\delta c\) increases the slope of \(\delta\omega\). The sensitivity of a mode to the glitch increases with \(n\) and depends on how much the wave changes in the glitch region. A larger glitch allows modes of smaller \(n\) to `see' the glitch region, thus increasing the linear slope of \(\delta\omega\).
-
 \begin{figure}[!tbp]
     \centering
     \includegraphics{figures/glitch-1d-example-results.pdf}
@@ -148,9 +142,13 @@ Furthermore, an increasing change in sound speed (\(\delta c\)) increases the am
     \label{fig:1d-results}
 \end{figure}
 
-%This may be interpreted as the nodes of each standing wave passing in and out of region 2 with increasing \(n\). Where there is a node, the wave is least sensitive to a change in structure, and 
+We find \(\omega_n\) by solving Equation \ref{eq:1d-glitch-sol} using Newton's method for \(n = 1,\dots,50\), with \(c=1\), \(L=1\), and several values of \(x_0\), \(\delta x\), and \(\delta c\). Initial guesses are obtained from the homogeneous medium solutions (\(\omega_n^0\)) in Equation \ref{eq:omega-n}. The difference between the solutions for \(\omega_n\) and those from the homogeneous medium, \(\delta \omega_n = \omega_n - \omega_n^0\), are shown in Figure \ref{fig:1d-results}. We can see an oscillation in \(\delta\omega\) induced by the glitch. Physically, this arises from the change in phase required to satisfy the boundary conditions of the glitch region. As the wave nodes pass in and out of the region with changing \(n\), the sensitivity of the wave to the glitch oscillates. The overall sensitivity to the glitch depends on how much the wave changes inside the glitch, hence why low \(n\) modes have smaller \(\delta\omega\).
 
-The small phase offset \(\epsilon\) in Equation \ref{eq:1d-phase} is required for the wave function to satisfy the boundary conditions at \(x = 0\). However, adding \(\epsilon\) shifts the effective location of \(x_0\) --- it changes the scale of the \(x\)-axis by a factor of \((1 + \epsilon)\). We plot \(\epsilon\) against \(\omega\) in Figure \ref{fig:1d-phase} and show that its magnitude is \(\sim 10^{-4}\), much smaller than the location and size of region 2. The oscillation caused by the glitch also shows up in Figure \ref{fig:1d-phase}, with its properties affected in a similar way to Figure \ref{fig:1d-results}.
+The functional form of \(\delta\omega\) appears to have a linear component and a short period oscillation modulated by a longer period. As the location of the glitch (\(x_0\)) gets smaller, the short-term oscillation period of \(\delta\omega\) decreases. If we imagine the spacial distribution of nodes in the system as a function of \(n\), the density of nodes is larger towards the centre of the system. The oscillation arises from the nodes passing in and out of the glitch region with changing \(n\). Therefore, where the density of wave nodes is higher, we expect the oscillation period of \(\delta\omega\) to be shorter. Similarly, as the the half-width of the glitch (\(\delta x\)) increases, the longer-term modulation period increases. 
+
+Furthermore, an increasing change in sound speed (\(\delta c\)) increases the amplitude of \(\delta\omega\). This result is intuitive, as we expect a perturbation in \(c\) to be proportional to a perturbation in \(\omega\). Finally, increasing both \(\delta x\) and \(\delta c\) increases the slope of \(\delta\omega\). The sensitivity of a mode to the glitch increases with \(n\) and depends on how much the wave changes in the glitch region. A larger glitch allows modes of smaller \(n\) to `see' the glitch region, thus increasing the linear slope of \(\delta\omega\).
+
+%This may be interpreted as the nodes of each standing wave passing in and out of region 2 with increasing \(n\). Where there is a node, the wave is least sensitive to a change in structure, and 
 
 \begin{figure}[!tbp]
     \centering
@@ -158,6 +156,8 @@ The small phase offset \(\epsilon\) in Equation \ref{eq:1d-phase} is required fo
     \caption{The same as Figure \ref{fig:1d-results} but showing the phase offset \(\epsilon\) required to satisfy the boundary conditions.}
     \label{fig:1d-phase}
 \end{figure}
+
+The small phase offset \(\epsilon\) in Equation \ref{eq:1d-phase} is required for the wave function to satisfy the boundary conditions at \(x = 0\). However, adding \(\epsilon\) shifts the effective location of \(x_0\) --- it changes the scale of the \(x\)-axis by a factor of \((1 + \epsilon)\). We plot \(\epsilon\) against \(\omega\) in Figure \ref{fig:1d-phase} and show that its magnitude is \(\sim 10^{-4}\), much smaller than the location and size of region 2. The oscillation caused by the glitch also shows up in Figure \ref{fig:1d-phase}, with its properties affected in a similar way to Figure \ref{fig:1d-results}.
 
 Finding an approximate solution for \(\delta\omega\) is beyond the scope of this simple example. However, we can show that by modelling \(\delta\omega\), we can recover information about the structural glitch. Let us build a model \(\delta\omega = f(\omega)\). Looking at Figure \ref{fig:1d-results}, we propose a form for \(f\),
 %
@@ -167,18 +167,18 @@ Finding an approximate solution for \(\delta\omega\) is beyond the scope of this
 %
 where \(a_1\) and \(a_2\) are coefficients which are both functions of \(\delta x\) and \(\delta c\). Parameters \(\tau_1\) and \(\tau_2\) are the `frequencies' (units of time\footnote{A frequency in \(\omega\) would have units of time, but shouldn't be confused with a periodicity in \(\omega\).}) of oscillations in \(\delta\omega\), which are functions of \(\delta x\) and \(x_0\) respectively.
 
-We fit Equation \ref{eq:1d-domega-func} to \(\delta\omega_n\) obtained from a glitch located at \(x_0 = 0.9\), with half-width \(\delta x = 0.02\), and change in sound speed \(\delta c = 0.03\). The best fitting line is shown in Figure \ref{fig:1d-fit}. We will see that \(\tau_1 \simeq 2\delta\tau\), where \(\delta\tau\) is half the acoustic width of the glitch --- the time at which sound takes to transverse the region. The second `frequency' \(\tau_2 \simeq 2\tau_0\), where \(\tau_0\) is the sound travel time from the nearest edge to the centre of the glitch, \(x_0\). Since the speed of sound \(c(x) \approx 1\) throughout the medium, \(x_0 \simeq L - \tau_0\). Our example fit yields \(\tau_1 \approx \SI{0.0389}{\second\per\radian}\) and \(\tau_2 \approx \SI{0.199}{\second\per\radian}\), approximately recovering the input glitch half-width of \num{0.02} and location of \num{0.9}.
-
-\todo{Repeating this for different glitch parameters,  how the `frequencies' \(\tau_1\) and \(\tau_2\) relate to the half-width and location of the glitch respectively.}
-
-% NOTE: Could take this further to show a1 = 2 dc dtau / L and a2 = dc / L
-
-\begin{figure}[!tbp]
+\begin{figure}[!tb]
     \centering
     \includegraphics{figures/glitch-1d-fit.pdf}
     \caption{Best fit of Equation \ref{eq:1d-domega-func} to \(\delta\omega_n\) for \(n=1,\dots,50\), \(L=1\), and \(c=1\).}
     \label{fig:1d-fit}
 \end{figure}
+
+We fit Equation \ref{eq:1d-domega-func} to \(\delta\omega_n\) obtained from a glitch located at \(x_0 = 0.9\), with half-width \(\delta x = 0.02\), and change in sound speed \(\delta c = 0.03\). The best fitting line is shown in Figure \ref{fig:1d-fit}. We will see that \(\tau_1 \simeq 2\delta\tau\), where \(\delta\tau\) is half the acoustic width of the glitch --- the time at which sound takes to transverse the region. The second `frequency' \(\tau_2 \simeq 2\tau_0\), where \(\tau_0\) is the sound travel time from the nearest edge to the centre of the glitch, \(x_0\). Since the speed of sound \(c(x) \approx 1\) throughout the medium, \(x_0 \simeq L - \tau_0\). Our example fit yields \(\tau_1 \approx \SI{0.0389}{\second\per\radian}\) and \(\tau_2 \approx \SI{0.199}{\second\per\radian}\), approximately recovering the input glitch half-width of \num{0.02} and location of \num{0.9}.
+
+\todo{Repeating this for different glitch parameters,  how the `frequencies' \(\tau_1\) and \(\tau_2\) relate to the half-width and location of the glitch respectively.}
+
+% NOTE: Could take this further to show a1 = 2 dc dtau / L and a2 = dc / L
 
 It would not be hard to believe that a similar oscillation could be found in the mode frequencies of a star, although its structure is more complicated. We showed that fitting to \(\delta\omega\) we may can recover properties of a glitch. In the next section, we will build upon this analogy and explore acoustic glitches in stars.
 
@@ -212,20 +212,18 @@ Firstly, let us consider the sound speed profile of a Sun-like star. Particularl
 %
 where the acoustic radius of the star\footnote{Not to be confused with the glitch location, \(\tau_0\), in Section\ref{sec:1d-glitch}.}, \(\tau_0 = \tau(0)\), relates approximately to the average large frequency separation \(\langle\Delta\nu_{nl}\rangle^{-1} \simeq 2\tau_0\).
 
-In Figure \ref{fig:sound-speed-gradient}, we show the sound speed gradient with respect to \(\tau\) for model S \todo{Define model S in a previous chapter}. We see how the speed of sound changes smoothly throughout the star. In the convective envelope, where p-modes propagate, there is a noticeable wiggle around \SI{700}{\second} and a sharp change in direction at its base. The first is caused by the ionisation of helium, which affects \(\gamma\) by increasing the number of free electrons and thus modifying the free energy of the gas. We explore this further in Section \ref{sec:helium-glitch}. The second is due to a discontinuity in the second temperature gradient as the structure moves from convectively unstable to radiative, which will be discussed in Section \ref{sec:bcz-glitch} \todo{Put a few references here of work which has studied these before}.
-
-\begin{figure}[!tbp]
+\begin{figure}[!tb]
     \centering
     \includegraphics{figures/sound-speed-gradient.pdf}
     \caption{The sound speed gradient (\(\dd c/\dd \tau\)) of model S plot against the acoustic depth (\(\tau\)). The fractional radius to the photosphere base is given on the top axis. The convective envelope is shaded and the bases of the photosphere and convective zone are marked with dashed lines.}
     \label{fig:sound-speed-gradient}
 \end{figure}
 
+In Figure \ref{fig:sound-speed-gradient}, we show the sound speed gradient with respect to \(\tau\) for model S \todo{Define model S in a previous chapter}. We see how the speed of sound changes smoothly throughout the star. In the convective envelope, where p-modes propagate, there is a noticeable wiggle around \SI{700}{\second} and a sharp change in direction at its base. The first is caused by the ionisation of helium, which affects \(\gamma\) by increasing the number of free electrons and thus modifying the free energy of the gas. We explore this further in Section \ref{sec:helium-glitch}. The second is due to a discontinuity in the second temperature gradient as the structure moves from convectively unstable to radiative, which will be discussed in Section \ref{sec:bcz-glitch} \todo{Put a few references here of work which has studied these before}.
+
 \subsection{Helium ionisation glitch}\label{sec:helium-glitch}
 
 In this section, we will first show how the sound speed inside a solar-like star is affected by the ionisation of hydrogen and helium. Then, we will see that an increase in helium abundance increases the effect of helium ionisation on the speed of sound. Starting with the variational principle, we derive a commonly used form of the glitch signature found in the mode frequencies. In the process, we show that the oscillation modes are sensitive to changes in sound speed near the surface.
-
-The speed of sound in the star is proportional to \(\gamma\). As a chemical species in the star ionises, the number of particles and thus chemical potential of the species changes. This induces a gradient in the thermal free energy of the gas which relates to the pressure and entropy of the gas. Therefore, we expect ionisation to cause a change in the pressure-density gradient at constant entropy, \(\gamma\). Using an approximate form for the first adiabatic exponent from \citet{Houdayer.Reese.ea2021}, we show how \(\gamma\) is affected by the ionisation of helium and hydrogen in Figure \ref{fig:gamma-zones}. We see that hydrogen ionisation has the largest effect on \(\gamma\) close to the surface of the star. The first and second ionisations of helium occur deeper in the star, at higher temperatures. We can see that the second ionisation of helium has a greater affect on \(\gamma\) than the first. This is because the ionisation energy of He\,\textsc{ii} is higher than He\,\textsc{i} and the ground state degeneracy of He\,\textsc{ii} is less than He\,\textsc{i}.
 
 \begin{figure}[!tbp]
     \centering
@@ -233,6 +231,8 @@ The speed of sound in the star is proportional to \(\gamma\). As a chemical spec
     \caption{The depressions in the first adiabatic exponent (\(\gamma\)) caused by the ionisation of hydrogen (H), and the first and second ionisations of helium (He\,\textsc{i} and He\,\textsc{ii}). The x-axis is the fractional acoustic depth from the surface of the star, \(\tau/\tau_0\).}
     \label{fig:gamma-zones}
 \end{figure}
+
+The speed of sound in the star is proportional to \(\gamma\). As a chemical species in the star ionises, the number of particles and thus chemical potential of the species changes. This induces a gradient in the thermal free energy of the gas which relates to the pressure and entropy of the gas. Therefore, we expect ionisation to cause a change in the pressure-density gradient at constant entropy, \(\gamma\). Using an approximate form for the first adiabatic exponent from \citet{Houdayer.Reese.ea2021}, we show how \(\gamma\) is affected by the ionisation of helium and hydrogen in Figure \ref{fig:gamma-zones}. We see that hydrogen ionisation has the largest effect on \(\gamma\) close to the surface of the star. The first and second ionisations of helium occur deeper in the star, at higher temperatures. We can see that the second ionisation of helium has a greater affect on \(\gamma\) than the first. This is because the ionisation energy of He\,\textsc{ii} is higher than He\,\textsc{i} and the ground state degeneracy of He\,\textsc{ii} is less than He\,\textsc{i}.
 
 Let us consider a star of mass \(M\) with hydrogen and helium mass fractions of \(X\) and \(Y\) respectively. To demonstrate the effect of ionisation and stellar structure on \(\gamma\), we will use equations from \citet{Houdayer.Reese.ea2021} to approximate \(\gamma\) in a solar-like star as a function of temperature and density,
 %
@@ -270,16 +270,14 @@ where \(n_\mathbb{X} = N_\mathbb{X} / N\) is the number density and \(\chi_\math
 %
 where \(q = 2\) for hydrogen, \(q = 1\) for helium, \(\overline{m} = M/N\) is the mean mass, and \(g_\mathbb{X}^i\) is the ground-state degeneracy of ionisation state \(i\). We used these equations to produce Figures \ref{fig:gamma-zones} and \ref{fig:gamma-temp-density}.
 
-In Figure \ref{fig:gamma-temp-density} we plot \(\gamma\) as a function of pressure and temperature. The first panel illustrates the three ionisation regions of hydrogen and helium. The value of \(\gamma\) decreases when the ionisation reaction is occurring. The magnitude of the effect depends primarily on the temperature-density profile of the star. Additionally, in the second panel we see that an increase in helium abundance decreases \(\gamma\) in the helium ionisation regions. A temperature-density profile from model S is shown to see how the star probes the ionisation regions. We can imagine a hotter star shifting this line such that ionisation occurs closer to the surface. Similarly, the effect on \(\gamma\) would be smaller in denser star. Although helium abundance dominates the effect on \(\gamma\), there is still some dependence on other stellar quantities.
-
-\begin{figure}[!tbp]
+\begin{figure}[!tb]
     \centering
     \includegraphics{figures/adiabatic-ionisation-temp.pdf}
     \caption{Temperature-density profile of a Sun-like star. \emph{Top:} The first adiabatic exponent \(\gamma\) as a function of temperature and density, calculated using Equation \ref{eq:gamma1} for a helium mass fraction, \(Y=0.25\). \emph{Bottom:} The change in \(\gamma\) induced by a change in helium abundance, \(\Delta Y = 0.1\). In both panels, the dashed line shows the temperature-density profile of model S.}
     \label{fig:gamma-temp-density}
 \end{figure}
 
-To show the effect of small changes in \(\gamma\) on the sound speed, we plot the sound speed gradient in Figure \ref{fig:gamma-sound-speed}. The three models shown were evolved to the same central temperature with different initial helium abundances. The dominant effect of helium abundance appears as a Gaussian-like depression in \(\gamma\) around the second ionisation of helium. We see how larger helium abundance increases the width and depression in \(\gamma\), which is reflected in the sound speed gradient. A larger \(Y\) also leads to a relative reduction in hydrogen abundance. This slightly shrinks the width of the hydrogen ionisation region.
+In Figure \ref{fig:gamma-temp-density} we plot \(\gamma\) as a function of pressure and temperature. The first panel illustrates the three ionisation regions of hydrogen and helium. The value of \(\gamma\) decreases when the ionisation reaction is occurring. The magnitude of the effect depends primarily on the temperature-density profile of the star. Additionally, in the second panel we see that an increase in helium abundance decreases \(\gamma\) in the helium ionisation regions. A temperature-density profile from model S is shown to see how the star probes the ionisation regions. We can imagine a hotter star shifting this line such that ionisation occurs closer to the surface. Similarly, the effect on \(\gamma\) would be smaller in denser star. Although helium abundance dominates the effect on \(\gamma\), there is still some dependence on other stellar quantities.
 
 \begin{figure}[!tbp]
     \centering
@@ -287,6 +285,8 @@ To show the effect of small changes in \(\gamma\) on the sound speed, we plot th
     \caption{The effect on the sound speed profile for three solar-like stars with initial helium mass fractions of 0.26 (\emph{solid}), 0.28 (\emph{dashed}), and 0.3 (\emph{dot-dashed}). The models were each evolved to a central helium mass fraction of 0.6. \emph{Top:} The first adiabatic exponent \(gamma\). \emph{Bottom:} The sound speed gradient \(\dd c/\dd t\) where \(t = \tau/\tau_0\) is the fractional acoustic depth (plot on the x-axis).}
     \label{fig:gamma-sound-speed}
 \end{figure}
+
+To show the effect of small changes in \(\gamma\) on the sound speed, we plot the sound speed gradient in Figure \ref{fig:gamma-sound-speed}. The three models shown were evolved to the same central temperature with different initial helium abundances. The dominant effect of helium abundance appears as a Gaussian-like depression in \(\gamma\) around the second ionisation of helium. We see how larger helium abundance increases the width and depression in \(\gamma\), which is reflected in the sound speed gradient. A larger \(Y\) also leads to a relative reduction in hydrogen abundance. This slightly shrinks the width of the hydrogen ionisation region.
 
 To see how a change in \(\gamma\) affects the mode frequencies, we will consider the sensitivity of a given mode to structural changes in the star. We can get there by starting with the variational principle \citep{Chandrasekhar1964},
 %
@@ -432,7 +432,7 @@ where \(\phi_\heII = 2(\epsilon_\heII + \pi/4)\), and \(\nu_0 = (2 \tau_0)^{-1}\
 
 The sensitivity of p-modes to glitches gets smaller further into the star. However, we should not neglect the effect of a discontinuity at the base of the convective zone. This arises 
 
-\begin{figure}[!tbp]
+\begin{figure}[!tb]
     \centering
     \includegraphics{figures/bcz-density-gradient.pdf}
     \caption{Discontinuity in the density gradient at the base of the convective zone for three solar-like stars with initial helium mass fractions of 0.26 (\emph{solid}), 0.28 (\emph{dashed}), and 0.3 (\emph{dot-dashed}).}
@@ -504,7 +504,7 @@ In this section, we briefly outline the data used to compare our new method with
     \input{tables/glitch-test-obs.tex}
 \end{table}
 
-\begin{figure}[!tbp]
+\begin{figure}[!tb]
     \centering
     \includegraphics{figures/glitch-test-obs.pdf}
     \caption{Echelle plot of simulated true and `observed' radial mode frequency data from model star S for worst-, better-, and best-case scenarios.}
@@ -688,7 +688,7 @@ We plotted posterior distributions of the glitch acoustic depths, \(\tau_\helium
 
 As predicted by \citet{Houdek.Gough2007} and shown in \citet{Verma.Faria.ea2014}, the the values for \(\tau_\helium\) obtained were under-predicted compared to the location of the trough due to the second ionisation of helium. This is because \(\delta\nu_\helium\) does not include the smaller glitch component due to the first ionisation of helium, located at a smaller \(\tau\). We can see this for the best star fit with the \citetalias{Verma.Raodeo.ea2019} method which finds \(\tau_\helium = \SI{619(15)}{\second}\). The depression in \(\gamma\) due to He\,\textsc{ii} ionisation in the respective stellar model is located at \SI{733}{\second}. On the other hand, the GP method found \(\tau_\helium = \SI{696(19)}{\second}\). This could be a result of the GP absorbing the first helium ionisation component than the 4-th order polynomial. We should note that the calculation of \(\tau\) in the models depends on where in the star we choose \(\tau=0\).
 
-\begin{figure}[!tbp]
+\begin{figure}[!tb]
     \centering
     \includegraphics{figures/glitch-test-amplitude.pdf}
     \caption{Samples of the helium glitch amplitude at a reference frequency of \SI{3000}{\micro\hertz} fit with the V19 and GP methods for the worst-, better-, and best-case test data. The tallest bar in the V19 method panel is cropped with its value displayed in green text.}
