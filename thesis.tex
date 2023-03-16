@@ -19,7 +19,7 @@
 %% PACKAGES -------------------------------------------------------------------
 %
 % Packages and setup are in packages.sty
-\usepackage{packages}
+\usepackage{packages}    % Use 'print' option for print version (reduced color)
 \usepackage{aas_macros}
 
 % Add any additional packages below or at the bottom of packages.sty
@@ -37,7 +37,12 @@
 
 % Specify which files to include (for faster compile time)
 \includeonly{
-  chapters/glitch
+  chapters/introduction,
+  chapters/hbm,
+  chapters/nn,
+  chapters/lyttle21,
+  chapters/glitch,
+  chapters/conclusion
 }
 
 %% TITLEPAGE DETAILS ----------------------------------------------------------
@@ -95,8 +100,11 @@
   %
   % Add your chapters here
   \include{chapters/introduction}
+  \include{chapters/hbm}
+  \include{chapters/nn}
   \include{chapters/lyttle21}
   \include{chapters/glitch}
+  \include{chapters/conclusion}
   
   %% BIBLIOGRAPHY -------------------------------------------------------------
   %

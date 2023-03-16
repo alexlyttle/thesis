@@ -44,8 +44,6 @@ To provide a means of calculating luminosities, we used \emph{Gaia} Data Release
 
 We determined luminosities, $L$ for the sample using the direct method of \textsc{isoclassify} \citep{Huber.Zinn.ea2017, Berger.Huber.ea2020} with \emph{K\textsubscript{S}}-band photometry, \emph{Gaia} DR2 parallaxes, ASPCAP $\metallicity$ and $\teff$, and asteroseismic $\log g$ as inputs. This involved computing absolute \emph{K\textsubscript{S}}-band magnitudes using the \emph{Gaia} DR2 parallaxes and extinctions determined by the 3D galactic reddening maps of \citet{Green.Schlafly.ea2018}. We determined absolute bolometric magnitudes by interpolating the MIST bolometric correction tables as a function of $\teff$, $\log g$ and $\metallicity$ \citep{Dotter2016, Choi.Dotter.ea2016}. We adopted the uncertainty of \SI{0.02}{\magnitude} assumed by \textsc{isoclassify} for both the extinctions and bolometric corrections, corresponding to typical systematic errors in extinction maps and bolometric fluxes \citep[e.g.][]{Zinn.Pinsonneault.ea2019a,Tayar.Claytor.ea2020}. We obtained luminosities for the sample with a median uncertainty of 3.4 per cent.
 
-The final sample comprised 81 stars for which we had complete data for $\teff$, $\metallicity$, $\dnu$, and $L$ to use as inputs for our stellar modelling method -- see Table \ref{tab:data}. In Fig. \ref{fig:data}, we show the HR diagram for the sample plot in context with a series of stellar evolutionary tracks at solar metallicity.
-
 \begin{table*}
 	\centering
 	\caption{The observables and their respective uncertainties for 5 stars in the sample of 81 stars. The whole table is available as supplementary material.}
@@ -53,12 +51,14 @@ The final sample comprised 81 stars for which we had complete data for $\teff$, 
 	\input{tables/stars_inputs.tex}
 \end{table*}
 
-\begin{figure}
+\begin{figure}[!tb]
     \centering
-    \includegraphics[width=\linewidth]{figures/context.png}
+    \includegraphics{figures/context.png}
     \caption{The luminosity, $L$ against effective temperature, $\teff$ of the sample of 81 \emph{Kepler} dwarfs and subgiants studied in this work. Each stars is coloured according to metallicity. The grey lines depict evolutionary tracks with $\metallicity_\mathrm{init}=\SI{0.0}{\dex}$, $Y_\mathrm{init}=0.28$ and $\mlt=1.9$ for different stellar masses. The current position of the Sun is shown by the $\odot$ symbol.}
     \label{fig:data}
 \end{figure}
+
+The final sample comprised 81 stars for which we had complete data for $\teff$, $\metallicity$, $\dnu$, and $L$ to use as inputs for our stellar modelling method -- see Table \ref{tab:data}. In Fig. \ref{fig:data}, we show the HR diagram for the sample plot in context with a series of stellar evolutionary tracks at solar metallicity.
 
 \section{Methods}\label{sec:meth}
 
@@ -187,6 +187,13 @@ We made predictions for each star using the trained ANN, $\{\log(\tau)_i, T_{\ma
 %
 where $N_\mathrm{obs}$ is the number of observed variables. We chose to use observed $\teff$, $L$, $\dnu$, and $\metallicity$ collated for our sample as described in Section \ref{sec:data}.
 
+\begin{figure}[!tb]
+    \centering
+    \includegraphics{figures/partial_pool_pgm.png}
+    \caption{A probabilistic graphical model (PGM) of the partially-pooled (PP) hierarchical model. Nodes outside of the grey rectangle represent the hyperparameters in the model. Nodes inside the grey rectangle represent individual stellar parameters. Dark grey nodes represent observables which each have their respective observational uncertainties given by the solid black nodes. The direction of the arrows represent the dependencies in the generative model.}
+    \label{fig:pgm}
+\end{figure}
+
 It follows that the posterior PDF for a population of $N_\mathrm{stars}$ stars for the NP model is, 
 %
 \begin{equation}
@@ -257,14 +264,6 @@ where, $x \sim \ln\mathcal{N}(m, \sigma)$ represents a random variable drawn fro
 %
 
 We produced a PGM for the model, depicted in Fig. \ref{fig:pgm}. The hyperparameters are shown outside of the grey box containing the individual stellar parameters to represent the hierarchical aspect of the model.
-
-%
-\begin{figure}
-    \includegraphics[width=\linewidth]{figures/partial_pool_pgm.png}
-    \caption{A probabilistic graphical model (PGM) of the partially-pooled (PP) hierarchical model. Nodes outside of the grey rectangle represent the hyperparameters in the model. Nodes inside the grey rectangle represent individual stellar parameters. Dark grey nodes represent observables which each have their respective observational uncertainties given by the solid black nodes. The direction of the arrows represent the dependencies in the generative model.}
-    \label{fig:pgm}
-\end{figure}
-%
 
 \subsubsection{Max-pooled model}\label{sec:mp}
 
@@ -370,9 +369,7 @@ We obtained values for the hyperparameters for each of the models and present th
 	\input{tables/hyperparam_results.tex}
 \end{table*}
 
-Fig. \ref{fig:corners-pp} shows the joint and marginal distributions (corner plot) output by the PP and PPS model. We see an anti-correlation between $\Delta Y / \Delta Z$ and $\mu_\alpha$, expected due to the degeneracy between the two parameters in the stellar evolutionary models. In Fig. \ref{fig:corners-mp}, we also show the corner plot for the MP and MPS model output. Similarly, we see an anti-correlation between $\Delta Y / \Delta Z$ and $\mlt$.
-
-\begin{figure*}
+\begin{figure}
     \begin{subfigure}[b]{.5\linewidth}
         \centering
         \includegraphics[width=\textwidth]{figures/corner_plot_pp.png}
@@ -383,9 +380,9 @@ Fig. \ref{fig:corners-pp} shows the joint and marginal distributions (corner plo
     \end{subfigure}
     \caption{Corner plots showing the joint and marginalised sampled posterior distributions for the hyperparameters for the PP (left) and PPS (right) models. The vertical dashed lines give the 16th, 50th and 84th percentiles.}
     \label{fig:corners-pp}
-\end{figure*} 
+\end{figure} 
 
-\begin{figure*}
+\begin{figure}
     \begin{subfigure}[b]{.5\linewidth}
         \centering
         \includegraphics[width=\textwidth]{figures/corner_plot_mp.png}
@@ -396,17 +393,18 @@ Fig. \ref{fig:corners-pp} shows the joint and marginal distributions (corner plo
     \end{subfigure}
     \caption{The same as Fig. \ref{fig:corners-pp} but for the MP (left) and MPS (right) models.}
     \label{fig:corners-mp}
-\end{figure*} 
+\end{figure} 
 
-We present the helium enrichment relation resulting from the PPS model in Fig. \ref{fig:helium}. In this figure, we plot the individual results for $Y_\mathrm{init}$ and $Z_\mathrm{init}$ for each of the stars from the NP and PPS models. This is an example of shrinkage in the HBM; the estimates for individual stellar parameters move towards the mean of the population when they are pooled.
+Fig. \ref{fig:corners-pp} shows the joint and marginal distributions (corner plot) output by the PP and PPS model. We see an anti-correlation between $\Delta Y / \Delta Z$ and $\mu_\alpha$, expected due to the degeneracy between the two parameters in the stellar evolutionary models. In Fig. \ref{fig:corners-mp}, we also show the corner plot for the MP and MPS model output. Similarly, we see an anti-correlation between $\Delta Y / \Delta Z$ and $\mlt$.
 
-% FIGURE SHOWING HELIUM FOR PPS MODEL
-\begin{figure}
+\begin{figure}[!tb]
     \centering
-    \includegraphics[width=\linewidth]{figures/zi_yi_results_plot.png}
+    \includegraphics{figures/zi_yi_results_plot.png}
     \caption{The results for initial helium fraction ($Y_\mathrm{init}$) against initial heavy-element fraction ($Z_\mathrm{init}$) for each star from the PPS model are shown by the black markers. The mean helium enrichment, $\mu_Y = Y_P + (\Delta Y / \Delta Z) Z_\mathrm{init}$ with its 68 per cent credible interval are shown in blue by a solid line and shaded region respectively. The population spread, $\mu_Y \pm \sigma_Y$ and its 68 per cent credible interval are shown in orange by a dashed line and shaded region respectively. The individual results from the NP model are shown by the light grey markers.}
     \label{fig:helium}
 \end{figure}
+
+We present the helium enrichment relation resulting from the PPS model in Fig. \ref{fig:helium}. In this figure, we plot the individual results for $Y_\mathrm{init}$ and $Z_\mathrm{init}$ for each of the stars from the NP and PPS models. This is an example of shrinkage in the HBM; the estimates for individual stellar parameters move towards the mean of the population when they are pooled.
 
 \section{Discussion}\label{sec:dis}
 
@@ -450,7 +448,7 @@ Secondly, our choice of \citet{Asplund.Grevesse.ea2009} solar chemical mixture d
 
 Although updated, much of our observable data is comparable to that of \citetalias{Serenelli.Johnson.ea2017}, with the exception of $\teff$. The preferred results from \citetalias{Serenelli.Johnson.ea2017} were determined using a photometric $\teff$ scale which we found to be on average $\sim \SI{170}{\kelvin}$ greater than our spectroscopic scale from DR14. In \citetalias{Serenelli.Johnson.ea2017}, they saw a similar offset between the DR13 $\teff$ available at the time. They found a median difference in mass, radius, and age of approximately $-6$, $-2$, and $+35$ per cent respectively with results from the photometric $\teff$ scale subtracted from the spectroscopic scale.
 
-\begin{figure*}
+\begin{figure}
     \centering
     \begin{subfigure}[b]{.33\linewidth}
         \centering
@@ -466,13 +464,11 @@ Although updated, much of our observable data is comparable to that of \citetali
     \end{subfigure}%
     \caption{Kernel density estimates (KDEs) of the distribution of statistical uncertainties in the results from each model compared with those of \citepalias{Serenelli.Johnson.ea2017} for the sample of APOKASC dwarfs and subgiants.}
     \label{fig:unc-comp}
-\end{figure*}
+\end{figure}
 
 In Fig. \ref{fig:unc-comp} we compare our statistical uncertainties for $M$, $R$, and $\tau$ with those for the equivalent stars from \citetalias{Serenelli.Johnson.ea2017}. We found that the NP model yielded comparable uncertainties to \citetalias{Serenelli.Johnson.ea2017} but note that these are likely underestimated due the influence of the prior boundaries for $Y_\mathrm{init}$ and $\mlt$. We expected larger uncertainties because we included additional free parameters ($Y_\mathrm{init}$ and $\mlt$) over the work of \citetalias{Serenelli.Johnson.ea2017}. However, when we treat these parameters hierarchically, we saw a reduction in uncertainties from all of the pooled models. This is because our prior assumptions about the population allows for the sharing of information between the stars. This uncertainty reduction scales with the number of stars in our sample, demonstrated by the results for the synthetic stars in Fig. \ref{fig:shrinkage}. Thus, hierarchically modelling our population resulted in improved statistical uncertainties in stellar fundamental parameters.
 
-In the following subsection, we compare the results between our PPS model with that of \citetalias{Serenelli.Johnson.ea2017} for mass, radius, and age with reference to Fig. \ref{fig:comp}. We preferred the PPS model for comparison because it utilised the high-precision data available for the Sun as a star to help calibrate the sample, while partially pooling both $Y_\mathrm{init}$ and $\mlt$ to allow for small variations within the population.
-
-\begin{figure*}
+\begin{figure}
     \centering
     \begin{subfigure}[b]{.33\linewidth}
         \includegraphics[width=\linewidth]{figures/mass_comp.png}
@@ -485,7 +481,9 @@ In the following subsection, we compare the results between our PPS model with t
     \end{subfigure}%
     \caption{The mean and standard deviation in age, mass and radius results from the PPS model compared with the results (using the photometric temperature scale) from \citetalias{Serenelli.Johnson.ea2017}.}
     \label{fig:comp}
-\end{figure*}
+\end{figure}
+
+In the following subsection, we compare the results between our PPS model with that of \citetalias{Serenelli.Johnson.ea2017} for mass, radius, and age with reference to Fig. \ref{fig:comp}. We preferred the PPS model for comparison because it utilised the high-precision data available for the Sun as a star to help calibrate the sample, while partially pooling both $Y_\mathrm{init}$ and $\mlt$ to allow for small variations within the population.
 
 \subsubsection{Mass, radius, and age}
 
