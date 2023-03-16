@@ -11,3 +11,34 @@
 %
 %
 \chapter{Hierarchical Bayesian Models}
+
+We observe some property of a star, \(z\) with some instrumental noise characterised by \(\sigma_z\). This example we be an analogy for helium enrichment.
+
+We model \(z\) as some known function of unknown parameters \(x\) and \(y\),
+%
+\begin{equation}
+    f(x, y) = x - 2y + 3.
+\end{equation}
+%
+
+Bayes' theorem,
+%
+\begin{equation}
+    p(x, y \mid z) \propto p(z \mid x, y) \, p(x, y)
+\end{equation}
+%
+
+Follow this through by independently observing \(\vect{z} = \{z_i\}_{i=1}^N\). Model the stars and notice that there is some correlation between \(x\) and \(y\). How can we include this correlation in our model?
+
+Hierarchical, we assume that the model parameters depend on population-level parameters, \(\phi\),
+%
+\begin{equation}
+    p(\vect{x}, \vect{y}, \phi \mid \vect{z}) \propto p(\vect{z} \mid \vect{x}, \vect{y}) \, p(\vect{y} \mid \vect{x}, \phi) \, p(\vect{x}, \phi)
+\end{equation}
+%
+
+Max pooled, we assume \(y = a + bx\), so \(\phi = (a, b)\).
+
+Partially-pooled, we assume \(y \sim \mathcal{N}(a + bx, \sigma_y^2)\), so \(\phi = (a, b, \sigma_y)\).
+
+Maybe just do the partially-pooled case and say that the max-pooled is good when we know the parameter follows some absolute law.
