@@ -74,8 +74,10 @@
 %% CITATIONS
 %
 \usepackage[%
-  style=authoryear,
-  natbib=true
+  style=authoryear-comp,
+  natbib=true,
+%   uniquename=false,  % Uncomment this if don't care about unique author names in text.
+  uniquelist=false   % Uncomment this if don't care about author lists in text.
   ]{biblatex}
 
 \newcommand{\serenelli}{S17}
@@ -89,6 +91,7 @@
 \usepackage{longtable}
 \usepackage{booktabs}
 \usepackage{lscape}
+\usepackage{multirow}
 
 
 %% OTHER PACKAGES
@@ -98,6 +101,7 @@
 \usepackage{emptypage}  % Make skipped pages blank
 \usepackage{tocbibind}  % Add TOC and bibliography to TOC
 \usepackage{lipsum}     % For placeholder text
+\usepackage{nicefrac}
 
 \usepackage[acronym,toc]{glossaries}
 \makeglossaries
@@ -107,9 +111,45 @@
 %
 % Define your new commands here, e.g.
 %
-% \newcommand{\dd}{\mathrm{d}}  % For the derivative 'd'
+\newcommand{\dd}{\mathrm{d}}  % For the derivative 'd'
+\newcommand{\ee}{\mathrm{e}}  % For Euler's constant 'e'
+
 \newcommand{\numax}{\ensuremath{{\nu_\mathrm{max}}}}
 \newcommand{\dnu}{\ensuremath{\Delta\nu}}
 \newcommand{\metallicity}{\ensuremath{[\mathrm{M}/\mathrm{H}]}}
 \newcommand{\teff}{\ensuremath{T_\mathrm{eff}}}
 \newcommand{\mlt}{\ensuremath{{\alpha_\mathrm{MLT}}}}
+\newcommand{\real}{\ensuremath{{\mathrm{Re}}}}
+\newcommand{\imag}{\ensuremath{{\mathrm{Im}}}}
+\newcommand{\hydrogen}{\ensuremath{{\mathrm{H}}}}
+\newcommand{\helium}{\ensuremath{{\mathrm{He}}}}
+\newcommand{\heI}{\ensuremath{{\mathrm{I}}}}
+\newcommand{\heII}{\ensuremath{{\mathrm{II}}}}
+\newcommand{\bcz}{\ensuremath{{\mathrm{cz}}}}
+\newcommand{\asy}{\ensuremath{{\mathrm{asy}}}}
+\newcommand{\obs}{\ensuremath{{\mathrm{obs}}}}
+
+\newcommand*{\todo}[1]{{\color{red}(TODO: #1)}}
+\newcommand*{\needcite}[1][]{{\color{red}(\def\temp{#1}\ifx\temp\empty\else\temp,~\fi citation needed)}}
+
+% Vector calculus
+% Vector:
+\newcommand*{\vect}[1]{\bm{#1}}  % Bold
+% \newcommand*{\vect}[1]{\vec{#1}}  % Over-arrow
+
+% Divergence:
+% \newcommand*{\dive}[1]{\nabla \cdot #1}  % Del-dot
+\newcommand*{\dive}[1]{\mathrm{div} #1}  % Roman text
+
+%% LINKS
+\newcommand{\gitremote}{https://github.com/alexlyttle/thesis}
+\newcommand{\gitbranch}{glitch}  % TODO: automate
+
+
+%% INFO
+% Layout and Margins
+% A4 paper:                       21 x 29.7 cm (8.27 x 11.69 in)
+% Margins (in, out, top, bottom): 3, 2, 2, 2 cm
+% Usable space:                   16 x 25.7 cm (6.3 x 10.1 in)
+% Max figure width (suggested):   15.2 cm (~ 6 in)
+% Max figure height (suggested):  22.8 cm (~ 9 in)
