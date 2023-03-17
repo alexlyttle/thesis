@@ -12,33 +12,46 @@
 %
 \chapter{Hierarchical Bayesian Models}
 
-We observe some property of a star, \(z\) with some instrumental noise characterised by \(\sigma_z\). This example we be an analogy for helium enrichment.
+We observe apparent visual magnitude (\(v_i\)) and dimensionless parallax (\(\varpi_i\)) of \(i= 1,\dots,N_\mathrm{stars}\) stars each at some dimensionless distance (\(d_i\)) from the observer. Each observable is measured independently with Gaussian noise characterised by \(\sigma_{v,i} = 0.1\) and \(\sigma_{\varpi,i} = 0.01\) respectively.
 
-We model \(z\) as some known function of unknown parameters \(x\) and \(y\),
 %
 \begin{equation}
-    f(x, y) = x - 2y + 3.
+    v_i = V_i + 5 \log_{10} d_i,
 \end{equation}
 %
+
+\begin{figure}[!tb]
+    \centering
+    \includegraphics{figures/simple-pgm.pdf}
+    \caption{Simple.}
+\end{figure}
 
 Bayes' theorem,
 %
 \begin{equation}
-    p(x, y \mid z) \propto p(z \mid x, y) \, p(x, y)
+    p(d_i, V_i \mid \varpi_i, v_i) \propto p(\varpi_i, v_i \mid d_i, V_i) \, p(d_i, V_i)
 \end{equation}
 %
 
-Follow this through by independently observing \(\vect{z} = \{z_i\}_{i=1}^N\). Model the stars and notice that there is some correlation between \(x\) and \(y\). How can we include this correlation in our model?
+\begin{figure}[!tb]
+    \centering
+    \includegraphics{figures/hbm-pgm.pdf}
+    \caption{HBM.}
+\end{figure}
 
-Hierarchical, we assume that the model parameters depend on population-level parameters, \(\phi\),
+Hierarchical, we assume that the model parameters depend on population-level parameters,
 %
 \begin{equation}
-    p(\vect{x}, \vect{y}, \phi \mid \vect{z}) \propto p(\vect{z} \mid \vect{x}, \vect{y}) \, p(\vect{y} \mid \vect{x}, \phi) \, p(\vect{x}, \phi)
+    p(\mu_d, \sigma_d, \vect{d}, \vect{V} \mid \vect{\varpi}, \vect{v}) \propto p(\vect{\varpi}, \vect{v} \mid \vect{d}, \vect{V}) \, p(\vect{d} \mid \mu_d, \sigma_d) \, p(\mu_d, \sigma_d, \vect{V})
 \end{equation}
 %
 
-Max pooled, we assume \(y = a + bx\), so \(\phi = (a, b)\).
-
-Partially-pooled, we assume \(y \sim \mathcal{N}(a + bx, \sigma_y^2)\), so \(\phi = (a, b, \sigma_y)\).
+We assume \(d_i \sim \mathcal{N}(\mu_d, \sigma_d^2)\).
 
 Maybe just do the partially-pooled case and say that the max-pooled is good when we know the parameter follows some absolute law.
+
+\begin{figure}[p]
+    \centering
+    \includegraphics{figures/hbm-results.pdf}
+    \caption{Results.}
+\end{figure}
