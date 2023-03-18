@@ -38,7 +38,7 @@ Before introducing the model, introduce and plot the mock data and
 \begin{figure}[tb]
     \centering
     \includegraphics{figures/simple-pgm.pdf}
-    \caption{Simple.}
+    \caption{Simple PGM.}
 \end{figure}
 
 Bayes' theorem,
@@ -51,7 +51,7 @@ Bayes' theorem,
 We modelled the likelihood as the product of normal distributions, assuming \(\varpi_i\) and \(\appmag_i\) were observed independently,
 %
 \begin{equation}
-    p(\varpi_i, \appmag_i \mid d_i, \absmag_i) = \mathcal{N}(\varpi_i \mid d_i^{\,-1}, \sigma_{\varpi, i}^2) \, \mathcal{N}(\appmag_i \mid \absmag_i + 5\log_{10}d_i \, , \sigma_{\appmag, i}^2).
+    p(\varpi_i, \appmag_i \mid d_i, \absmag_i) = \mathcal{N}(\varpi_i \mid d_i^{\,-1}, \sigma_{\varpi, i}^2) \, \mathcal{N}(\appmag_i \mid \absmag_i + 5\log_{10}d_i \, , \sigma_{\appmag, i}^2).\label{eq:hbm-like}
 \end{equation}
 %
 
@@ -68,22 +68,37 @@ where \(\mathcal{U}(x \,|\, a, b)\) is a uniform distribution over \(x\) from \(
 \begin{figure}[!tb]
     \centering
     \includegraphics{figures/hbm-pgm.pdf}
-    \caption{HBM.}
+    \caption{HBM PGM.}
 \end{figure}
 
-Hierarchical,
+Here, we will introduce an alternative, hierarchical model which includes the known correlation between distances to the stars. We assumed the stars are all members of the same open cluster. Therefore, their distances should be characterised by some distribution. For this example, we assumed that each distance is drawn from a normal distribution characterised by new \emph{hyper-parameters} \(\mu_d\) and \(\sigma_d\),
 %
 \begin{equation}
-    p(\mu_d, \sigma_d, \vect{d}, \vect{\absmag} \mid \vect{\varpi}, \vect{\appmag}) \propto p(\vect{\varpi}, \vect{\appmag} \mid \vect{d}, \vect{\absmag}) \, p(\vect{d} \mid \mu_d, \sigma_d) \, p(\mu_d, \sigma_d, \vect{\absmag})
+    d_i \sim \mathcal{N}(\mu_d, \sigma_d^2).
 \end{equation}
 %
+The hyper-parameters are so-called because they take a single value for the population of stars.
 
-We assume \(d_i \sim \mathcal{N}(\mu_d, \sigma_d^2)\).
-
-Maybe just do the partially-pooled case and say that the max-pooled is good when we know the parameter follows some absolute law.
+Each stellar distance, \(d_i\), is no longer independent. Hence, we modified the posterior probability distribution to account for this new correlation,
+%
+\begin{equation}
+    p(\mu_d, \sigma_d, \vect{d}, \vect{\absmag} \mid \vect{\varpi}, \vect{\appmag}) \propto p(\vect{\varpi}, \vect{\appmag} \mid \vect{d}, \vect{\absmag}) \, p(\vect{d} \mid \mu_d, \sigma_d) \, p(\mu_d, \sigma_d, \vect{\absmag}),
+\end{equation}
+%
+where \(p(\vect{\varpi}, \vect{\appmag} \mid \vect{d}, \vect{\absmag})\) is the likelihood --- the product of Equation \ref{eq:hbm-like} from \(i=1\) to \(N_\mathrm{stars}\). The conditional distribution on distance is,
+%
+\begin{equation}
+    p(\vect{d} \mid \mu_d, \sigma_d) = \prod_{i=1}^{N_\mathrm{stars}} \mathcal{N}(d_i \mid \mu_d, \sigma_d^2),
+\end{equation}
+%
+and \(p(\mu_d, \sigma_d, \vect{\absmag})\) is the prior probability distribution for the independent model parameters. All the new information lies in the prior, with the likelihood unchanged.
 
 \begin{figure}[p]
     \centering
     \includegraphics{figures/hbm-results.pdf}
     \caption{Results.}
 \end{figure}
+
+\section[Stellar inference]{Inferring stellar parameters}
+
+Typically stars are modelling independently of each other. However, there a several factors which could correlate from star-to-star. \todo{Introduce the idea of hierarchically modelling stars. Finish by explaining that this is slow and difficult to do ad hoc, e.g. propose initial parameters from population distribution and evolve a model. We would like a way to emulate MESA etc. This leads to the next section on emulating stellar models with machine learning.}
