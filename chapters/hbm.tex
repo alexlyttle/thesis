@@ -19,9 +19,16 @@
 \newcommand{\appmag}{\ensuremath{\mathrm{v}}}
 \newcommand{\absmag}{\ensuremath{\mathrm{V}}}
 
-In this section, we use the example of measuring distances to stars in an open cluster to demonstrate a hierarchical Bayesian model.
+In this section, we use the example of measuring distances to stars in an open cluster to demonstrate a hierarchical Bayesian model. This example is loosely based on the work of \citet{Leistedt.Hogg2017}, which presents a hierarchical model to improve distances from \emph{Gaia} \citep{GaiaCollaboration.Prusti.ea2016}.
 
 We created a set of data.
+
+\begin{table}[tb]
+    \centering
+    \caption{}
+    \label{tab:hbm-data}
+    \input{tables/hbm-data}
+\end{table}
 
 We observe the apparent visual magnitude (\(\appmag_i\)) and dimensionless parallax (\(\varpi_i\)) of \(i = 1,\dots,N_\mathrm{stars}\) stars, each at some dimensionless distance (\(d_i\)) from the observer. Each observable is measured independently with Gaussian noise characterised by \(\sigma_{\appmag,i} = 0.1\) and \(\sigma_{\varpi,i} = 0.01\) respectively.
 
