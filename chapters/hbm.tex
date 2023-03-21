@@ -118,11 +118,9 @@ We show the probabilistic graphical model of the HBM in Figure \ref{fig:hbm-pgm}
 
 To infer the model parameters, we need to calculate the marginalised posterior distributions for each parameter. We could obtain this analytically by integrating the full posterior distribution over all model parameters except for the parameter of interest. Alternatively, we can approximate the marginalised posterior using a Markov Chain Monte Carlo (MCMC) sampling algorithm. We chose the latter approach because it is scalable to more complicated models where the marginalisation is not analytically solvable.
 
-We used the No U-Turn Sampler \citep[NUTS;][]{Hoffman.Gelman2014} as implemented in the \textsc{NumPyro} Python package \citep{Phan.Pradhan.ea2019,Bingham.Chen.ea2019} to sample from the approximate posterior distribution for both models. We took 1500 samples, with the first 500 samples discarded as `warmup' steps, for each of 10 chains. For the HBM, we increased the target accept probability from 0.8 to 0.98 to minimise the number of divergences encountered during sampling. The resulting marginalised posterior samples amounted to \num{10000} per parameter.
+We used the No U-Turn Sampler \citep[NUTS;][]{Hoffman.Gelman2014} as implemented in the \textsc{NumPyro} Python package \citep{Phan.Pradhan.ea2019,Bingham.Chen.ea2019} to sample from the approximate posterior distribution for both models. We took 1500 samples, with the first 500 samples discarded as `warmup' steps, repeated over 10 MCMC chains. For the HBM, we increased the target accept probability from 0.8 to 0.98, to minimise the number of divergences encountered during sampling. The resulting marginalised posterior samples amounted to \num{10000} per parameter.
 
 \subsection{Comparing the models}
-
-
 
 \begin{figure}[p]
     \centering
@@ -131,18 +129,41 @@ We used the No U-Turn Sampler \citep[NUTS;][]{Hoffman.Gelman2014} as implemented
     \label{fig:hbm-results}
 \end{figure}
 
+We compared the difference between model parameters and their true values in Figure \ref{fig:hbm-results}. The HBM showed clear improvement over the simple model in all parameters except for \(\appmag\).
+
+\todo{Hand-wavy why apparent magnitude saw no improvement was because the observational noise on parallax had a larger impact on the distance than with apparent magnitude. \(\appmag \propto \log_{10}d\), whereas \(\varpi = d^{-1}\). Additionally, the fractional uncertainty on parallax was greater than that of apparent magnitude. The noise budget is dominated by the parallax, so this is the first to be improved by better distances. \(\sigma_\varpi/\varpi = \sigma_d \varpi\), but \(\sigma_\appmag / \appmag \propto \sigma_d \varpi / \appmag\)}
 
 \begin{figure}[tb]
     \centering
     \includegraphics{figures/hbm-dist-corr.pdf}
-    \caption{}
+    \caption{A corner plot showing the marginalised and joint posterior distributions of the distance to the first three stars. The simple model is shown in \emph{blue} and the HMB is shown in \emph{orange}. The true values are given by the \emph{black} lines. The range of the distributions are limited to 98 per cent of the simple model's marginalised posteriors.}
     \label{fig:hbm-corr}
 \end{figure}
+
+In Figure \ref{fig:hbm-corr}, we compared the joint and marginalised posteriors of the distance to a few of the stars. The HBM found distances to higher precision, with typical standard deviations of \(s_{d,i} \approx 0.4\) compared to \(s_{d,i} \approx 1.2\) from the simple model. We also noticed a one-to-one correlation between \(d\) present in the HBM but not in the simple model. This was a result of the correlation introduction by the population-prior on \(d\). For each distance, we saw how a lower value in one corresponded to a lower value for the others. This represents our belief that cluster members should share a similar distance. On the other hand, the simple model suggested it was, for example, just as likely to find one star at a distance of 9 and another at 12 as it would be for both to be at a distance of 11.
+
+\begin{figure}[tb]
+    \centering
+    \includegraphics{figures/hbm-global.pdf}
+    \caption{The joint and marginalised posterior distributions for the mean (\(\mu_d\)) and standard deviation (\(\sigma_d\)) of stellar distances in the cluster. The simple model is shown in \emph{blue} and the HMB is shown in \emph{orange}. The true values are given by the \emph{black} lines.}
+    \label{fig:hbm-global}
+\end{figure}
+
+One consequence of the HBM was that it parametrised the population mean (\(\mu_d\)) and standard deviation (\(\sigma_d\)) of the distances to stars in the cluster independently from the observed noise. For the simple model, we estimated \(\mu_d\) and \(\sigma_d\) by taking the sample mean and standard deviation of distances in the cluster for each posterior sample. We compared the resulting posterior distributions for \(\mu_d\) and \(\sigma_d\) from the two models in Figure \ref{fig:hbm-global}. We found the mean distance from the simple model was \(\mu_d = 10.50 \pm 0.27\), whereas the HBM was more accurate with \(\mu_d = 10.01 \pm 0.24\). We also found the simple model massively overestimated the standard deviation of cluster distances with \(\sigma_d = 1.815_{-0.293}^{+0.360}\), compared to the HBM's more accurate value of \(\sigma_d = 0.131_{-0.088}^{+0.280}\). The simple model cannot easily distinguish between the uncertainty on individual distances and the spread of the population.
 
 \subsection{Scaling with the number of stars}
 
 We repeated the HBM for \(N_\mathrm{stars}=80\) and \(N_\mathrm{stars}=320\). We generated the true and observed parameters in the same way as described at the beginning of \ref{sec:hbm-dist}.
 
+\begin{figure}[tb]
+    \centering
+    \includegraphics{figures/hbm-extended.pdf}
+    \caption{}
+    \label{fig:hbm-extended}
+\end{figure}
+
+Figure \ref{fig:hbm-extended} shows how the distance estimates improved with increasing number of stars observed, \(N_\mathrm{stars}=(20,80,320)\). Unsurprisingly, the standard deviation on \(\mu_d\) decreased by a factor of \(N_\mathrm{stars}^{1/2}\) each time, with \(s_{\mu_d} \approx (0.24, 0.12, 0.06)\). We also expected a similar reduction in uncertainty for individual distances, albeit limited by the observational noise. Typical standard deviations for \(d_i\) were \(s_{d,i} \approx (0.30, 0.17, 0.15)\). We found the distance uncertainties halved from \(20\) to \(80\) stars, but this effect lessened with 320 stars. This demonstrated the value of an HBM in getting the most out a limited number of noisy observations.
+
 \section[Stellar inference]{Inferring stellar parameters}
 
-Typically stars are modelling independently of each other. However, there a several factors which could correlate from star-to-star. \todo{Introduce the idea of hierarchically modelling stars. Finish by explaining that this is slow and difficult to do ad hoc, e.g. propose initial parameters from population distribution and evolve a model. We would like a way to emulate MESA etc. This leads to the next section on emulating stellar models with machine learning.}
+Typically, we model stars independently of each other. However, there a several factors which could correlate from star-to-star. \todo{Introduce the idea of hierarchically modelling stars. Finish by explaining that this is slow and difficult to do ad hoc, e.g. propose initial parameters from population distribution and evolve a model. We would like a way to emulate MESA etc. This leads to the next section on emulating stellar models with machine learning.}
