@@ -18,14 +18,14 @@ In Bayesian inference, we depend on the concept of our model \emph{a priori} ---
 
 A Bayesian model determines the \emph{a posteriori} probability of its parameters, \(\theta\) given observables, (\(y\)) using Bayes' theorem. The model parameters predict the observables through a generative model, for example \(y = f(\theta)\). \todo{Don't be too textbook-like, this prob not needed.}
 
-Let us consider observing a population of stars to determine their properties. \todo{Give examples of publications which do this in a star-by-star bayesian way, e.g. BASTA}. For example, the BASTA code determines stellar ages, masses and other parameters using Bayesian inference. Models like this treat each star in the population independently. However, there are cases where a priori stellar parameters may not be independent of each other. We expect stars in an open cluster to have formed at a similar time, have similar chemical abundances and be at a similar distance from the observer. We also expect the chemical abundances of stars in the galaxy to be enriched in a predictable way. \todo{Later can expand on this with references to how we think they enriched}.
+Let us consider observing a population of stars to determine their properties. \todo{Give examples of publications which do this in a star-by-star bayesian way, e.g. BASTA}. For example, the BASTA code determines stellar ages, masses and other parameters using Bayesian inference \citep{SilvaAguirre.Davies.ea2015,AguirreBorsen-Koch.Rorsted.ea2022}. Models like this treat each star in the population independently. However, there are cases where a priori stellar parameters may not be independent of each other. We expect stars in an open cluster to have formed at a similar time, have similar chemical abundances and be at a similar distance from the observer. We also expect the chemical abundances of stars in the galaxy to be enriched in a predictable way. \todo{Later can expand on this with references to how we think they enriched}.
 
 \section[Stellar distances]{Stellar distances in an open cluster analogue}\label{sec:hbm-dist}
 
 \newcommand{\appmag}{\ensuremath{\mathrm{v}}}
 \newcommand{\absmag}{\ensuremath{\mathrm{V}}}
 
-In this section, we use the example of measuring distances to stars in an open cluster to demonstrate a hierarchical Bayesian model. This example is loosely based on the work of \citet{Leistedt.Hogg2017}, which presents a hierarchical model of the colour-magnitude diagram to improve distances from \emph{Gaia} \citep{GaiaCollaboration.Prusti.ea2016}. 
+In this section, we use the example of measuring distances to stars in an open cluster to demonstrate a hierarchical Bayesian model (HBM). This example is loosely based on the work of \citet{Leistedt.Hogg2017}, which presents a hierarchical model of the colour-magnitude diagram to improve distances from \emph{Gaia} \citep{GaiaCollaboration.Prusti.ea2016}. However, instead of considering the population distributions over magnitude and colour, we build a hierarchy over the stellar distances.
 
 We created a dataset analogous to an open cluster of \(N_\mathrm{stars}\) stars. We gave each \(i\)-th star a dimensionless distance (\(d_i\)) from the observer drawn randomly from a normal distribution with a mean of 10 and standard deviation of 0.1. Then, we converted these to parallax using the relation \(\varpi = d^{-1}\). We also gave each star an absolute visual magnitude (\(\absmag_i\)) drawn randomly from a standard normal distribution. To get the apparent magnitudes (\(\appmag_i\)) for each star, we used the relation \(\appmag_i = \absmag_i + 5 \log_{10} d_i\).
 
@@ -36,9 +36,11 @@ We created a dataset analogous to an open cluster of \(N_\mathrm{stars}\) stars.
     \input{tables/hbm-data}
 \end{table}
 
-We simulated noisy observations of \(\varpi_i\) and \(\appmag\) by randomly drawing from a normal distribution centred on their true values with standard deviations of \(\sigma_{\appmag,i} = 0.1\) and \(\sigma_{\varpi,i} = 0.01\) respectively. We repeated this for \(N_\mathrm{stars}=20\) stars and present the true values and observables in Table \ref{tab:hbm-data}.
+We simulated noisy observations of \(\varpi_i\) and \(\appmag\) by randomly drawing from a normal distribution centred on their true values with standard deviations of \(\sigma_{\appmag,i} = 0.1\) and \(\sigma_{\varpi,i} = 0.01\) respectively. We repeated this for \(N_\mathrm{stars}=20\) stars and present the true values and observables in Table \ref{tab:hbm-data}. For real-world context, the uncertainties on \(\varpi\) from \emph{Gaia} DR3 are approximately \SI{0.02}{\milli\arcsecond} for stars with \emph{Gaia} G-band magnitudes of less than 15. Therefore, if our choice of \(\sigma_{\varpi,i}\) was representative of \emph{Gaia} uncertainties, then the distance to our stellar cluster would be \(\sim \SI{5}{\kilo\parsec}\). An example open cluster at this distance is NGC 6791, at \SI{4}{\kilo\parsec} \citep{Brogaard.Bruntt.ea2011}.
 
-\subsection{Simple model}
+In Sections \ref{sec:simple-model}, we describe a simple Bayesian model for determining distances and absolute magnitudes of stars in the cluster. Then, we define the HBM in Section \ref{sec:hbm-model} which incorporates a population-level distribution over distance. We outline our method for inferring model parameters in Section \ref{sec:hbm-inf} and then compare results from the models in Section \ref{sec:hbm-comp}. Finally, we explore how the HBM scales with the number of stars observed in Section \ref{sec:hbm-scale}.
+
+\subsection{Simple model}\label{sec:simple-model}
 
 We started with a simple model which treats each star independently. Using Bayes' theorem, we write the posterior probability density of the model parameters, \(d_i, \absmag_i\) given the observed parameters \(\varpi_i, \appmag_i\) as,
 %
@@ -73,7 +75,7 @@ where \(\mathcal{U}(x \,|\, a, b)\) is a uniform distribution over \(x\) from \(
 
 In Figure \ref{fig:simple-pgm}, we show a probabilistic graphical model of the simple model. This shows the connections between parameters in the model. There is no hierarchy in this model because each parameter exists within the box, meaning no information is shared between stars. However, we know that the stellar distances are correlated. For example, it is highly unlikely that one star in the cluster is at a distance of 5 and another is at a distance of 15. If we can exploit this expectation, we could improve our prior and thus improve the inference of \(d_i\) and \(\absmag_i\).
 
-\subsection{Hierarchical model}
+\subsection{Hierarchical model}\label{sec:hbm-model}
 
 In this section, we present a hierarchical Bayesian model (HBM) which includes the known correlation between distances to the stars in this open cluster analogue. We assumed the stars are all members of the same open cluster. Therefore, their distances can be modelled by some distribution. For this example, we assumed that each distance is drawn from a normal distribution characterised by new \emph{hyperparameters} \(\mu_d\) and \(\sigma_d\),
 %
@@ -120,13 +122,13 @@ We chose to use a log-normal prior for \(\sigma_d\) to ensure that the parameter
 
 We show the probabilistic graphical model of the HBM in Figure \ref{fig:hbm-pgm}. Here, we show how all individual stellar parameters depend on \(\mu_d\) and \(\sigma_d\). We can imagine extending this framework to multiple levels, or adding additionally hyperparameters.
 
-\subsection{Inferring the model parameters}
+\subsection{Inferring the model parameters}\label{sec:hbm-inf}
 
 To infer the model parameters, we need to calculate the marginalised posterior distributions for each parameter. We could obtain this analytically by integrating the full posterior distribution over all model parameters except for the parameter of interest. Alternatively, we can approximate the marginalised posterior using a Markov Chain Monte Carlo (MCMC) sampling algorithm. We chose the latter approach because it is scalable to more complicated models where the marginalisation is not analytically solvable.
 
 We used the No U-Turn Sampler \citep[NUTS;][]{Hoffman.Gelman2014} as implemented in the \textsc{NumPyro} Python package \citep{Phan.Pradhan.ea2019,Bingham.Chen.ea2019} to sample from the approximate posterior distribution for both models. We took 1500 samples, with the first 500 samples discarded as `warmup' steps, repeated over 10 MCMC chains. For the HBM, we increased the target accept probability from 0.8 to 0.98, to minimise the number of divergences encountered during sampling. The resulting marginalised posterior samples amounted to \num{10000} per parameter.
 
-\subsection{Comparing the models}
+\subsection{Comparing the models}\label{sec:hbm-comp}
 
 \begin{figure}[p]
     \centering
@@ -157,7 +159,7 @@ In Figure \ref{fig:hbm-corr}, we compared the joint and marginalised posteriors 
 
 One consequence of the HBM was that it parametrised the population mean (\(\mu_d\)) and standard deviation (\(\sigma_d\)) of the distances to stars in the cluster independently from the observed noise. For the simple model, we estimated \(\mu_d\) and \(\sigma_d\) by taking the sample mean and standard deviation of distances in the cluster for each posterior sample. We compared the resulting posterior distributions for \(\mu_d\) and \(\sigma_d\) from the two models in Figure \ref{fig:hbm-global}. We found the mean distance from the simple model was \(\mu_d = 10.50 \pm 0.27\), whereas the HBM was more accurate with \(\mu_d = 10.01 \pm 0.24\). We also found the simple model massively overestimated the standard deviation of cluster distances with \(\sigma_d = 1.815_{-0.293}^{+0.360}\), compared to the HBM's more accurate value of \(\sigma_d = 0.131_{-0.088}^{+0.280}\). The simple model cannot easily distinguish between the uncertainty on individual distances and the spread of the population.
 
-\subsection{Scaling with the number of stars}
+\subsection{Scaling with the number of stars}\label{sec:hbm-scale}
 
 To test how the model scales with number of stars, we repeated the HBM method for different \(N_\mathrm{stars}\). We randomly generated true and observed parameters in the same way as described at the beginning of \ref{sec:hbm-dist} for 320 stars. The observables were different to the last section, but drawn from the same distributions. We then sampled from the HBM for the first 20, 80 and 320 stars. These represented ratios in \(N_\mathrm{stars}^{1/2}\) of \(1\), \(1/2\) and \(1/4\) respectively.
 

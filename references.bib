@@ -31,6 +31,23 @@
   keywords = {asteroseismology,planetary systems,stars: individual (TIC 200723869/TOI-257),techniques: photometric,techniques: radial velocities,techniques: spectroscopic}
 }
 
+@article{AguirreBorsen-Koch.Rorsted.ea2022,
+  title = {The {{BAyesian STellar}} Algorithm ({{BASTA}}): A Fitting Tool for Stellar Studies, Asteroseismology, Exoplanets, and {{Galactic}} Archaeology},
+  shorttitle = {The {{BAyesian STellar}} Algorithm ({{BASTA}})},
+  author = {{Aguirre B{\o}rsen-Koch}, V. and R{\o}rsted, J. L. and Justesen, A. B. and Stokholm, A. and Verma, K. and Winther, M. L. and Knudstrup, E. and Nielsen, K. B. and Sahlholdt, C. and Larsen, J. R. and Cassisi, S. and Serenelli, A. M. and Casagrande, L. and {Christensen-Dalsgaard}, J. and Davies, G. R. and Ferguson, J. W. and Lund, M. N. and Weiss, A. and White, T. R.},
+  year = {2022},
+  month = jan,
+  journal = {\mnras},
+  volume = {509},
+  pages = {4344--4364},
+  issn = {0035-8711},
+  doi = {10.1093/mnras/stab2911},
+  urldate = {2023-03-22},
+  abstract = {We introduce the public version of the BAyesian STellar Algorithm (BASTA), an open-source code written in PYTHON to determine stellar properties based on a set of astrophysical observables. BASTA has been specifically designed to robustly combine large data sets that include asteroseismology, spectroscopy, photometry, and astrometry. We describe the large number of asteroseismic observations that can be fit by the code and how these can be combined with atmospheric properties (as well as parallaxes and apparent magnitudes), making it the most complete analysis pipeline available for oscillating main-sequence, subgiant, and red giant stars. BASTA relies on a set of pre-built stellar isochrones or a custom-designed library of stellar tracks, which can be further refined using our interpolation method (both along and across stellar tracks or isochrones). We perform recovery tests with simulated data that reveal levels of accuracy at the few percent level for radii, masses, and ages when individual oscillation frequencies are considered, and show that asteroseismic ages with statistical uncertainties below 10 per cent are within reach if our stellar models are reliable representations of stars. BASTAis extensively documented and includes a suite of examples to support easy adoption and further development by new users.},
+  keywords = {asteroseismology,Astrophysics - Astrophysics of Galaxies,Astrophysics - Earth and Planetary Astrophysics,Astrophysics - Solar and Stellar Astrophysics,methods: numerical,methods: statistical,stars: fundamental parameters},
+  annotation = {ADS Bibcode: 2022MNRAS.509.4344A}
+}
+
 @article{Ahumada.Prieto.ea2020,
   ids = {Ahumada:2020},
   title = {The 16th {{Data Release}} of the {{Sloan Digital Sky Surveys}}: {{First Release}} from the {{APOGEE-2 Southern Survey}} and {{Full Release}} of {{eBOSS Spectra}}},
@@ -1150,6 +1167,23 @@
   year = {1968}
 }
 
+@article{Cunha.Roxburgh.ea2021,
+  title = {{{PLATO}} Hare-and-Hounds Exercise: Asteroseismic Model Fitting of Main-Sequence Solar-like Pulsators},
+  shorttitle = {{{PLATO}} Hare-and-Hounds Exercise},
+  author = {Cunha, M. S. and Roxburgh, I. W. and {Aguirre B{\o}rsen-Koch}, V. and Ball, W. H. and Basu, S. and Chaplin, W. J. and Goupil, M.-J. and Nsamba, B. and Ong, J. and Reese, D. R. and Verma, K. and Belkacem, K. and Campante, T. and {Christensen-Dalsgaard}, J. and Clara, M. T. and Deheuvels, S. and Monteiro, M. J. P. F. G. and Noll, A. and Ouazzani, R. M. and R{\o}rsted, J. L. and Stokholm, A. and Winther, M. L.},
+  year = {2021},
+  month = dec,
+  journal = {\mnras},
+  volume = {508},
+  number = {4},
+  pages = {5864--5885},
+  issn = {0035-8711},
+  doi = {10.1093/mnras/stab2886},
+  urldate = {2023-03-22},
+  abstract = {Asteroseismology is a powerful tool to infer fundamental stellar properties. The use of these asteroseismic-inferred properties in a growing number of astrophysical contexts makes it vital to understand their accuracy. Consequently, we performed a hare-and-hounds exercise where the hares simulated data for six artificial main-sequence stars and the hounds inferred their properties based on different inference procedures. To mimic a pipeline such as that planned for the PLATO mission, all hounds used the same model grid. Some stars were simulated using the physics adopted in the grid, others a different one. The maximum relative differences found (in absolute value) between the inferred and true values of the mass, radius, and age were 4.32, 1.33, and 11.25 per cent, respectively. The largest systematic differences in radius and age were found for a star simulated assuming gravitational settling, not accounted for in the model grid, with biases of -0.88 per cent (radius) and 8.66 per cent (age). For the mass, the most significant bias (-3.16 per cent) was found for a star with a helium enrichment ratio outside the grid range. Moreover, an \textasciitilde 7 per cent dispersion in age was found when adopting different prescriptions for the surface corrections or shifting the classical observations by {$\pm$}1{$\sigma$}. The choice of the relative weight given to the classical and seismic constraints also impacted significantly the accuracy and precision of the results. Interestingly, only a few frequencies were required to achieve accurate results on the mass and radius. For the age the same was true when at least one l = 2 mode was considered.},
+  langid = {english}
+}
+
 @article{Cyburt.Fields.ea2016,
   title = {Big Bang Nucleosynthesis: {{Present}} Status},
   shorttitle = {Big Bang Nucleosynthesis},
@@ -1836,6 +1870,22 @@
   keywords = {Meteorites: abundances,Solar spectroscopy,Sun: abundances}
 }
 
+@article{Grumitt.Jew.ea2020,
+  title = {Hierarchical {{Bayesian CMB}} Component Separation with the {{No-U-Turn Sampler}}},
+  author = {Grumitt, R. D. P. and Jew, Luke R. P. and Dickinson, C.},
+  year = {2020},
+  month = aug,
+  journal = {\mnras},
+  volume = {496},
+  pages = {4383--4401},
+  issn = {0035-8711},
+  doi = {10.1093/mnras/staa1857},
+  urldate = {2023-03-22},
+  abstract = {In this paper, we present a novel implementation of Bayesian cosmic microwave background (CMB) component separation. We sample from the full posterior distribution using the No-U-Turn Sampler (NUTS), a gradient-based sampling algorithm. Alongside this, we introduce new foreground modelling approaches. We use the mean shift algorithm to define regions on the sky, clustering according to naively estimated foreground spectral parameters. Over these regions we adopt a complete pooling model, where we assume constant spectral parameters, and a hierarchical model, where we model individual pixel spectral parameters as being drawn from underlying hyperdistributions. We validate the algorithm against simulations of the LiteBIRD and C-Band All-Sky Survey (C-BASS) experiments, with an input tensor-to-scalar ratio of r = 5 \texttimes{} 10-3. Considering multipoles 30 {$\leq$} {$\mathscr{l}$} {$<$} 180, we are able to recover estimates for r. With LiteBIRD-only observations, and using the complete pooling model, we recover r = (12.9 {$\pm$} 1.4) \texttimes{} 10-3. For C-BASS and LiteBIRD observations we find r = (9.0 {$\pm$} 1.1) \texttimes{} 10-3 using the complete pooling model, and r = (5.2 {$\pm$} 1.0) \texttimes{} 10-3 using the hierarchical model. Unlike the complete pooling model, the hierarchical model captures pixel-scale spatial variations in the foreground spectral parameters, and therefore produces cosmological parameter estimates with reduced bias, without inflating their uncertainties. Measured by the rate of effective sample generation, NUTS offers performance improvements of {$\sim$}103 over using Metropolis-Hastings to fit the complete pooling model. The efficiency of NUTS allows us to fit the more sophisticated hierarchical foreground model that would likely be intractable with non-gradient-based sampling algorithms.},
+  keywords = {Astrophysics - Cosmology and Nongalactic Astrophysics,Cosmic background radiation,cosmology: observations,methods: data analysis,methods: statistical,radio continuum: general},
+  annotation = {ADS Bibcode: 2020MNRAS.496.4383G}
+}
+
 @article{Grunblatt.Huber.ea2017,
   title = {Seeing {{Double}} with {{K2}}: {{Testing Re-inflation}} with {{Two Remarkably Similar Planets}} around {{Red Giant Branch Stars}}},
   shorttitle = {Seeing {{Double}} with {{K2}}},
@@ -2309,6 +2359,15 @@
   urldate = {2020-09-22},
   abstract = {We present a new determination of the primordial helium mass fraction  Yp , based on 93 spectra of 86 low-metallicity extragalactic H II regions, and taking into account the latest developments concerning systematic effects. These include collisional and fluorescent enhancements of He I recombination lines, underlying He I stellar absorption lines, collisional and fluorescent excitation of hydrogen lines, and temperature and ionization structure of the H II region. Using Monte Carlo methods to solve simultaneously for the above systematic effects, we find the best value to be Yp = 0.2565 {$\pm$} 0.0010 (stat.) {$\pm$} 0.0050 (syst.). This value is higher at the 2{$\sigma$} level than the value given by standard big bang nucleosynthesis, implying deviations from it. The effective number of light neutrino species N {$\nu$} is equal to 3.68+0.80 -0.70 (2{$\sigma$}) and 3.80+0.80 -0.70 (2{$\sigma$}) for a neutron lifetime {$\tau$} n equal to 885.4 {$\pm$} 0.9 s and 878.5 {$\pm$} 0.8 s, respectively, i.e., it is larger than the experimental value of 2.993 {$\pm$} 0.011.},
   keywords = {galaxies: abundances,galaxies: irregular,galaxies: ISM,ISM: abundances}
+}
+
+@article{Jordan2011,
+  title = {What Are the Open Problems in {{Bayesian}} Statistics?},
+  author = {Jordan, Michael I.},
+  year = {2011},
+  month = mar,
+  journal = {International Society for Bayesian Analysis Bulletin},
+  pages = {1--4}
 }
 
 @article{Kahn1961,
@@ -3589,6 +3648,22 @@
   keywords = {cosmology: observations,distance scale,parallaxes}
 }
 
+@article{Rodrigues.Girardi.ea2014,
+  title = {Bayesian Distances and Extinctions for Giants Observed by {{Kepler}} and {{APOGEE}}},
+  author = {Rodrigues, Tha{\'i}se S. and Girardi, L{\'e}o and Miglio, Andrea and Bossini, Diego and Bovy, Jo and Epstein, Courtney and Pinsonneault, Marc H. and Stello, Dennis and Zasowski, Gail and Allende Prieto, Carlos and Chaplin, William J. and Hekker, Saskia and Johnson, Jennifer A. and M{\'e}sz{\'a}ros, Szabolcs and Mosser, Beno{\^i}t and Anders, Friedrich and Basu, Sarbani and Beers, Timothy C. and Chiappini, Cristina and {da Costa}, Luiz A. N. and Elsworth, Yvonne and Garc{\'i}a, Rafael A. and Garc{\'i}a P{\'e}rez, Ana E. and Hearty, Fred R. and Maia, Marcio A. G. and Majewski, Steven R. and Mathur, Savita and Montalb{\'a}n, Josefina and Nidever, David L. and Santiago, Basilio and Schultheis, Mathias and Serenelli, Aldo and Shetrone, Matthew},
+  year = {2014},
+  month = dec,
+  journal = {\mnras},
+  volume = {445},
+  pages = {2758--2776},
+  issn = {0035-8711},
+  doi = {10.1093/mnras/stu1907},
+  urldate = {2023-03-24},
+  abstract = {We present a first determination of distances and extinctions for individual stars in the first release of the APOKASC catalogue, built from the joint efforts of the Apache Point Observatory Galactic Evolution Experiment (APOGEE) and the Kepler Asteroseismic Science Consortium (KASC). Our method takes into account the spectroscopic constraints derived from the APOGEE Stellar Parameters and Chemical Abundances Pipeline, together with the asteroseismic parameters from KASC. These parameters are then employed to estimate intrinsic stellar properties, including absolute magnitudes, using the Bayesian tool PARAM. We then find the distance and extinction that best fit the observed photometry in Sloan Digital Sky Survey (SDSS), 2MASS, and WISE passbands. The first 1989 giants targetted by APOKASC are found at typical distances between 0.5 and 5 kpc, with individual uncertainties of just {$\sim$}1.8 per cent. Our extinction estimates are systematically smaller than provided in the Kepler Input Catalogue and by the Schlegel et al. maps. Distances to individual stars in the NGC 6791 and NGC 6819 star clusters agree to within their credible intervals. Comparison with the APOGEE red clump and SAGA catalogues provide another useful check, exhibiting agreement with our measurements to within a few per cent. Overall, present methods seem to provide excellent distance and extinction determinations for the bulk of the APOKASC sample. Approximately one third of the stars present broad or multiple-peaked probability density functions and hence increased uncertainties. Uncertainties are expected to be reduced in future releases of the catalogue, when a larger fraction of the stars will have seismically determined evolutionary status classifications.},
+  keywords = {Astrophysics - Solar and Stellar Astrophysics,stars: distances,stars: fundamental parameters},
+  annotation = {ADS Bibcode: 2014MNRAS.445.2758R}
+}
+
 @article{Rogers.Nayfonov2002,
   title = {Updated and {{Expanded OPAL Equation-of-State Tables}}: {{Implications}} for {{Helioseismology}}},
   shorttitle = {Updated and {{Expanded OPAL Equation-of-State Tables}}},
@@ -3718,6 +3793,22 @@
   keywords = {python,statistical analysis}
 }
 
+@article{Sandquist.Jessen-Hansen.ea2016,
+  title = {The {{Age}} and {{Distance}} of the {{Kepler Open Cluster NGC}} 6811 from an {{Eclipsing Binary}}, {{Turnoff Star Pulsation}}, and {{Giant Asteroseismology}}},
+  author = {Sandquist, Eric L. and {Jessen-Hansen}, J. and Shetrone, Matthew D. and Brogaard, Karsten and Meibom, S{\o}ren and Leitner, Marika and Stello, Dennis and Bruntt, Hans and Antoci, Victoria and Orosz, Jerome A. and Grundahl, Frank and Frandsen, S{\o}ren},
+  year = {2016},
+  month = nov,
+  journal = {\apj},
+  volume = {831},
+  pages = {11},
+  issn = {0004-637X},
+  doi = {10.3847/0004-637X/831/1/11},
+  urldate = {2023-03-24},
+  abstract = {We present the analysis of an eccentric, partially eclipsing long-period (P = 19.23 days) binary system KIC 9777062 that contains main-sequence stars near the turnoff of the intermediate-age open cluster NGC 6811. The primary is a metal-lined Am star with a possible convective blueshift to its radial velocities, and one star (probably the secondary) is likely to be a {$\gamma$} Dor pulsator. The component masses are 1.603 {$\pm$} 0.006(stat.) {$\pm$} 0.016(sys.) and 1.419 {$\pm$} 0.003 {$\pm$} 0.008 \{M\}{$\odot$} , and the radii are 1.744 {$\pm$} 0.004 {$\pm$} 0.002 and 1.544 {$\pm$} 0.002 {$\pm$} 0.002 \{R\}{$\odot$} . The isochrone ages of the stars are mildly inconsistent: the age from the mass-radius combination for the primary (1.05 {$\pm$} 0.05 {$\pm$} 0.09 Gyr, where the last quote was systematic uncertainty from models and metallicity) is smaller than that from the secondary (1.21 {$\pm$} 0.05 {$\pm$} 0.15 Gyr) and is consistent with the inference from the color-magnitude diagram (1.00 {$\pm$} 0.05 Gyr). We have improved the measurements of the asteroseismic parameters {$\Delta\nu$} and {$\nu$} max for helium-burning stars in the cluster. The masses of the stars appear to be larger (or alternately, the radii appear to be smaller) than predicted from isochrones using the ages derived from the eclipsing stars. The majority of stars near the cluster turnoff are pulsating stars: we identify a sample of 28 {$\delta$} Sct, 15 {$\gamma$} Dor, and 5 hybrid types. We used the period-luminosity relation for high-amplitude {$\delta$} Sct stars to fit the ensemble of the strongest frequencies for the cluster members, finding \{(m-M)\}V=10.37+/- 0.03. This is larger than most previous determinations, but smaller than values derived from the eclipsing binary (10.47 {$\pm$} 0.05). Based on observations made with the Hobby-Eberly Telescope, which is a joint project of the University of Texas at Austin, the Pennsylvania State University, Stanford University, Ludwig-Maximilians-Universit\"at M\"unchen, and Georg-August-Universit\"at G\"ottingen, and with the Nordic Optical Telescope, operated by the Nordic Optical Telescope Scientific Association at the Observatorio del Roque de los Muchachos, La Palma, Spain, of the Instituto de Astrofisica de Canarias.},
+  keywords = {asteroseismology,Astrophysics - Solar and Stellar Astrophysics,binaries: eclipsing,binaries: spectroscopic,open clusters and associations: individual: NGC 6811,stars: distances,stars: variables: delta Scuti},
+  annotation = {ADS Bibcode: 2016ApJ...831...11S}
+}
+
 @article{Sandquist.Stello.ea2020,
   title = {Variability in the {{Massive Open Cluster NGC}} 1817 from {{K2}}: {{A Rich Population}} of {{Asteroseismic Red Clump}}, {{Eclipsing Binary}}, and {{Main-sequence Pulsating Stars}}},
   shorttitle = {Variability in the {{Massive Open Cluster NGC}} 1817 from {{K2}}},
@@ -3732,6 +3823,21 @@
   urldate = {2021-02-11},
   abstract = {We present a survey of variable stars detected in K2 Campaign 13 within  the massive intermediate-age ({$\sim$}1 Gyr) open cluster NGC 1817. We identify a complete sample of 44 red clump stars in the cluster, and have measured asteroseismic quantities ({$\nu$}max and/or {$\Delta\nu$}) for 29 of them. Five stars showed suppressed dipole modes, and the occurrence rates indicate that mode suppression is unaffected by evolution through core helium burning. A subset of the giants in NGC 1817 (and in the similarly aged cluster NGC 6811) have {$\nu$}max and {$\Delta\nu$} values at or near the maximum observed for core helium-burning stars, indicating they have core masses near the minimum for fully nondegenerate helium ignition. Further asteroseismic study of these stars can constrain the minimum helium core mass in red clump stars and the physics that determines this limit. Two giant stars show photometric variations on timescales similar to previously measured spectroscopic orbits. Thirteen systems in the field show eclipses, but only five are probable cluster members. We identify 32 {$\delta$} Sct pulsators, 27 {$\gamma$} Dor candidates, and 7 hybrids that are probable cluster members, with most being new detections. We used the ensemble properties of the {$\delta$} Sct stars to identify stars with possible radial pulsation modes. Among the oddities we have uncovered are: an eccentric orbit for a short-period binary containing a {$\delta$} Sct pulsating star; a rare subgiant within the Hertzsprung gap showing {$\delta$} Sct pulsations; and two hot {$\gamma$} Dor pulsating star candidates.},
   keywords = {1160,1557,1595,1599,2050,444,73}
+}
+
+@article{Sankaran.Holmes2023,
+  title = {Generative {{Models}}: {{An Interdisciplinary Perspective}}},
+  shorttitle = {Generative {{Models}}},
+  author = {Sankaran, Kris and Holmes, Susan P.},
+  year = {2023},
+  journal = {Annu. Rev. Stat. Its Appl.},
+  volume = {10},
+  number = {1},
+  pages = {325--352},
+  doi = {10.1146/annurev-statistics-033121-110134},
+  urldate = {2023-03-22},
+  abstract = {By linking conceptual theories with observed data, generative models can support reasoning in complex situations. They have come to play a central role both within and beyond statistics, providing the basis for power analysis in molecular biology, theory building in particle physics, and resource allocation in epidemiology, for example. We introduce the probabilistic and computational concepts underlying modern generative models and then analyze how they can be used to inform experimental design, iterative model refinement, goodness-of-fit evaluation, and agent based simulation. We emphasize a modular view of generative mechanisms and discuss how they can be flexibly recombined in new problem contexts. We provide practical illustrations throughout, and code for reproducing all examples is available at https://github.com/krisrs1128/generative\_review. Finally, we observe how research in generative models is currently split across several islands of activity, and we highlight opportunities lying at disciplinary intersections.},
+  keywords = {agent based models,decision-making,experimental design,generative models,goodness-of-fit,model evaluation,particle filter,simulation}
 }
 
 @article{Scargle1982,
@@ -4144,6 +4250,22 @@
   abstract = {Targeted observations of possible exomoon host systems will remain difficult to obtain and time-consuming to analyse in the foreseeable future. As such, time-domain surveys such as Kepler, K2, and TESS will continue to play a critical role as the first step in identifying candidate exomoon systems, which may then be followed up with premier ground- or space-based telescopes. In this work, we train an ensemble of convolutional neural networks (CNNs) to identify candidate exomoon signals in single-transit events observed by Kepler. Our training set consists of \textasciitilde 27 000 examples of synthetic, planet-only, and planet + moon single transits, injected into Kepler light curves. We achieve up to 88 per cent classification accuracy with individual CNN architectures and 97 per cent precision in identifying the moons in the validation set when the CNN ensemble is in total agreement. We then apply the CNN ensemble to light curves from 1880 Kepler Objects of Interest with periods {$>$}10 d (\textasciitilde 57 000 individual transits), and further test the accuracy of the CNN classifier by injecting planet transits into each light curve, thus quantifying the extent to which residual stellar activity may result in false positive classifications. We find a small fraction of these transits contain moon-like signals, though we caution against strong inferences of the exomoon occurrence rate from this result. We conclude by discussing some ongoing challenges to utilizing neural networks for the exomoon search.},
   keywords = {Astrophysics - Earth and Planetary Astrophysics,Computer Science - Machine Learning,notion,planets and satellites: detection},
   annotation = {ADS Bibcode: 2021MNRAS.508.2620T}
+}
+
+@incollection{Teh.Jordan2010,
+  title = {Hierarchical {{Bayesian}} Nonparametric Models with Applications},
+  booktitle = {Bayesian {{Nonparametrics}}},
+  author = {Teh, Yee Whye and Jordan, Michael I.},
+  editor = {Holmes, Chris and Hjort, Nils Lid and M{\"u}ller, Peter and Walker, Stephen G.},
+  year = {2010},
+  series = {Cambridge {{Series}} in {{Statistical}} and {{Probabilistic Mathematics}}},
+  pages = {158--207},
+  publisher = {{Cambridge University Press}},
+  address = {{Cambridge}},
+  doi = {10.1017/CBO9780511802478.006},
+  urldate = {2023-03-22},
+  abstract = {Hierarchical modeling is a fundamental concept in Bayesian statistics. The basic idea is that parameters are endowed with distributions which may themselves introduce new parameters, and this construction recurses. In this review we discuss the role of hierarchical modeling in Bayesian nonparametrics, focusing on models in which the infinite-dimensional parameters are treated hierarchically. For example, we consider a model in which the base measure for a Dirichlet process is itself treated as a draw from another Dirichlet process. This yields a natural recursion that we refer to as a hierarchical Dirichlet process. We also discuss hierarchies based on the Pitman\textendash Yor process and on completely random processes. We demonstrate the value of these hierarchical constructions in a wide range of practical applications, in problems in computational biology, computer vision and natural language processing.IntroductionHierarchical modeling is a fundamental concept in Bayesian statistics. The basic idea is that parameters are endowed with distributions which may themselves introduce new parameters, and this construction recurses. A common motif in hierarchical modeling is that of the conditionally independent hierarchy, in which a set of parameters are coupled by making their distributions depend on a shared underlying parameter. These distributions are often taken to be identical, based on an assertion of exchangeability and an appeal to de Finetti's theorem.},
+  isbn = {978-0-521-51346-3}
 }
 
 @misc{Tenachi.Ibata.ea2023,
