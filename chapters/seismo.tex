@@ -12,7 +12,7 @@
 %
 \chapter[Asteroseismology]{Asteroseismology of Solar-Like Oscillators}
 
-Several decades ago, 5-minute oscillations of solar surface radial velocity were observed by \citet{Leighton.Noyes.ea1962}, leading to the inference of acoustic waves trapped beneath the solar photosphere \citep{Ulrich1970}. A further decade of study culminated in the measurement of individual oscillation modes in the Doppler shift \citep{Claverie.Isaak.ea1979} and total irradiance \citep{Woodard.Hudson1983a}. Initially thought to be short-lived irregularities on the surface, these modes were found to be compatible with stochastically excited standing waves penetrating deep into the Sun. Later, \citet{Deubner.Gough1984} introduced the word \emph{helioseismology} to describe the study of the solar interior using observation of these modes. Analogous to (geo)seismology, the characterisation and modelling of these oscillations lead to new insight into the solar interior, from measuring differential rotation \citep{Deubner.Ulrich.ea1979} to solving the mismatch between predicted and measured solar neutrino production \citep{Bahcall.Ulrich1988}.
+Several decades ago, 5-minute oscillations of solar surface radial velocity were observed by \citet{Leighton.Noyes.ea1962}, leading to the inference of acoustic waves trapped beneath the solar photosphere \citep{Ulrich1970}. A further decade of study culminated in the measurement of individual oscillation modes in the Doppler radial velocity \citep{Claverie.Isaak.ea1979} and total irradiance \citep{Woodard.Hudson1983a} of the Sun. Initially thought to be short-lived irregularities on the surface, these modes were found to be compatible with stochastically excited standing waves penetrating deep into the Sun. Later, \citet{Deubner.Gough1984} introduced the word \emph{helioseismology}, analogous to (geo)seismology, to describe the study of the solar interior using observations of these modes. Helioseismology was soon responsible for breakthrough solar research, from measuring differential rotation \citep{Deubner.Ulrich.ea1979} to solving the mismatch between predicted and measured solar neutrino production \citep{Bahcall.Ulrich1988}.
 
 % \begin{figure}[tbp]
 %     \raggedleft
@@ -74,40 +74,56 @@ Several decades ago, 5-minute oscillations of solar surface radial velocity were
 
 % The oscillations are stochastically excited at the stellar surface. Something about the wave fronts for each mode. How increasing angular degree corresponds to the angle of incidence at the stellar surface. Due to the monotonically increasing sound speed towards the centre of the star, the wavefront bends. We can see the turning points of the wavefronts in Figure \ref{fig:seismo-wavefronts}. Each modes propagation depth allows us to probe different regions of the star. In the case of the Sun, differential rotation. In other stars, low orders only visible.
 
-Astronomers initially debated the mechanism driving solar oscillation modes attributed to standing pressure waves (so-called \emph{p-modes}). \citet{Goldreich.Keeley1977} suggested what became the prevailing theory, that the p-modes were stochastically excited by near-surface convection. Hence, we might expect solar-like oscillations to be present in other stars which have a convective envelope similar to the Sun. Shortly after, \citet{Christensen-Dalsgaard1984} introduced the term \emph{asteroseismology} --- the study of the internal structure of stars with many oscillation modes present. This differentiated it from studying the oscillations of classical variable stars where a small number of modes can only constrain the density of the star. Solar-like oscillations were first discovered in a few bright stars, notably Procyon and \(\alpha\) Cen A \citep{Gelly.Grec.ea1986}, with individual modes resolved by \citet{Martic.Schmitt.ea1999} and \citet{Bouchy.Carrier2001} respectively.
+Astronomers initially debated the mechanism driving solar oscillation modes attributed to standing pressure waves (so-called \emph{p-modes}). \citet{Goldreich.Keeley1977} suggested what became the prevailing theory, that the p-modes were stochastically excited by near-surface convection. Hence, we might expect solar-like oscillations to be present in other stars which have a convective envelope similar to the Sun. Shortly after, \citet{Christensen-Dalsgaard1984} introduced the term \emph{asteroseismology} --- the study of the internal structure of stars with many oscillation modes present.  Shortly thereafter, solar-like oscillations were discovered in a few bright stars. Among the first solar-like oscillators discovered were Procyon and \(\alpha\) Cen A \citep{Gelly.Grec.ea1986}, with individual modes later resolved by \citet{Martic.Schmitt.ea1999} and \citet{Bouchy.Carrier2001} respectively.
 
 % in \(\varepsilon\) Eri \citep{Noyes.Baliunas.ea1984}
 
 % \citet{Christensen-Dalsgaard1982} suggested that the limited precision of the radial velocity method made observing solar-like oscillations in many other stars difficult.
-Instrumental and atmospheric noise largely limited the progress of asteroseismology to studies of small number of bright stars. With the advent of large-scale missions like \emph{CoRoT}, \emph{Kepler} and \emph{TESS}, we have gone from observing a handful to many thousands of solar-like oscillators. As such, asteroseismology has become a powerful tool for studying large populations of stars.
+Instrumental and atmospheric noise largely limited the progress of asteroseismology to studies of small number of bright stars. With the advent of large-scale missions like \emph{CoRoT}, \emph{Kepler} and \emph{TESS}, we have gone from observing a handful to many thousands of solar-like oscillators. As such, asteroseismology has become a powerful tool for studying large populations of stars \citep[e.g.][]{Serenelli.Johnson.ea2017,Pinsonneault.Elsworth.ea2018}.
+
+% \begin{figure}[tb]
+%     \raggedleft
+%     \begin{subfigure}[b]{0.25\linewidth}
+%         \includegraphics[width=\linewidth]{figures/spherical_harmonics/0_0.png}
+%         \caption*{$l=0$}
+%     \end{subfigure}%
+%     \begin{subfigure}[b]{0.25\linewidth}
+%         \includegraphics[width=\linewidth]{figures/spherical_harmonics/1_0.png}
+%         \caption*{$l=1$}
+%     \end{subfigure}%
+%     \begin{subfigure}[b]{0.25\linewidth}
+%         \includegraphics[width=\linewidth]{figures/spherical_harmonics/2_0.png}
+%         \caption*{$l=2$}
+%     \end{subfigure}%
+%     \begin{subfigure}[b]{0.25\linewidth}
+%         \includegraphics[width=\linewidth]{figures/spherical_harmonics/3_0.png}
+%         \caption*{$l=3$}
+%     \end{subfigure}%
+%     \caption{Exaggerated spherical harmonic oscillation modes for a few angular degrees ($l$). Red and blue represent represent regions extended radial outward and inward respectively. These regions oscillate between blue and red, with the white regions representing stationary nodes. \todo{Rotate these to show all of the nodes on the surface}.}
+%     \label{fig:spherical-harmonics}
+% \end{figure}
 
 \begin{figure}[tb]
-    \raggedleft
-    \begin{subfigure}[b]{0.25\linewidth}
-        \includegraphics[width=\linewidth]{figures/spherical_harmonics/0_0.png}
-        \caption*{$l=0$}
-    \end{subfigure}%
-    \begin{subfigure}[b]{0.25\linewidth}
-        \includegraphics[width=\linewidth]{figures/spherical_harmonics/1_0.png}
-        \caption*{$l=1$}
-    \end{subfigure}%
-    \begin{subfigure}[b]{0.25\linewidth}
-        \includegraphics[width=\linewidth]{figures/spherical_harmonics/2_0.png}
-        \caption*{$l=2$}
-    \end{subfigure}%
-    \begin{subfigure}[b]{0.25\linewidth}
-        \includegraphics[width=\linewidth]{figures/spherical_harmonics/3_0.png}
-        \caption*{$l=3$}
-    \end{subfigure}%
-    \caption{Exaggerated spherical harmonic oscillation modes for a few angular degrees ($l$). Red and blue represent represent regions extended radial outward and inward respectively. These regions oscillate between blue and red, with the white regions representing stationary nodes. \todo{Rotate these to show all of the nodes on the surface}.}
+    \centering
+    \includegraphics[trim={0 0.2in 0 0},clip]{figures/spherical_harmonics.pdf}
+    \caption{Spherical harmonic oscillation modes for a few angular degrees ($l$). The colourmap represents the radial displacement at the surface, with \emph{blue} and \emph{red} corresponding to displacement outward and inward respectively. These regions oscillate between blue and red, with the white regions representing stationary nodes.}
     \label{fig:spherical-harmonics}
 \end{figure}
 
-The p-mode oscillations are solutions to standing acoustic waves inside a star, governed by its interior physics and structure. Such spherical harmonic oscillators have unique solutions for integers (\(n, l\)). The radial order (\(n\)) is proportional to the number of radial nodes and the angular degree (\(l\)) is the number of nodes on a spherical shell of the star. We show a representation of this for the first four angular degrees in Figure \ref{fig:spherical-harmonics}. For each \(l\) there exists \(2l+1\) solutions with different azimuthal order (\(m\)) corresponding to the different orientations of the nodes over the spherical shell. In the case of a rotating or asymmetric star, the observed mode frequencies split for different \(m\) via the Doppler effect. Hereafter, we consider the case of a slowly rotating, spherically symmetric star, such that solutions of different \(m\) are approximately the same frequency.
+The p-mode oscillations are solutions to standing acoustic waves trapped inside a star, governed by its interior physics and structure. Such spherical harmonic oscillators have unique solutions for integers (\(n, l\)). The radial order (\(n\)) is proportional to the number of radial nodes and the angular degree (\(l\)) is the number of nodes on a spherical shell of the star. We show a representation of this for the first four angular degrees in Figure \ref{fig:spherical-harmonics}. For each \(l\) there exists \(2l+1\) solutions with different azimuthal order (\(m\)) corresponding to the different orientations of the nodes over the spherical shell. In the case of a rotating or asymmetric star, the observed mode frequencies split for different \(m\) via the Doppler effect. Hereafter, we consider the case of a slowly rotating, spherically symmetric star, such that solutions of different \(m\) are approximately the same frequency.
 
-Some stuff on how integrating brightness over the surface means the first few modes are observable.
+Different angular degrees probe different depths into the star. With the Sun, the surface can be resolved allowing for high angular degree modes to be studied. However, integrating over the solar surface, high angular degree modes cancel out leaving only \(l \leq 3\) detectable \needcite.
 
-P-modes in the solar-like oscillators are driven by near-surface convection. Typically, the timescale of this process drives high-order modes (\(n \sim 20\)). \citet{Tassoul1980} found that the mode frequencies could be approximated with the following expression by assuming the asymptotic limit where \(l/n \rightarrow 0\),
+\begin{figure}[tb]
+    \centering
+    \includegraphics{figures/seismo-psd.pdf}
+    \caption{The power spectral density of 16 Cyg A. The inset plot highlights the comb of peaks comprising a Gaussian-like hump in the larger plot.}
+    \label{fig:seismo-psd}
+\end{figure}
+
+P-modes in solar-like oscillators are driven by near-surface convection. Typically, the timescale of this process drives high-order modes (\(n \sim 20\)). \todo{Good place to introduce the power spectrum}
+
+If we consider a wave in a one-dimensional homogeneous medium, then we would expect each mode of oscillation to be an integer multiple of the fundamental mode. While the case for a star is more complicated, we can also approximate the frequencies for different modes as a multiple of some fundamental mode. \citet{Tassoul1980} found that the mode frequencies could be approximated with the following expression by assuming the asymptotic limit where \(l/n \rightarrow 0\),
 %
 \begin{equation}
     \nu_{nl} \simeq \left(n + \frac{l}{2} + \varepsilon\right) \nu_0,
@@ -119,16 +135,9 @@ where \(\varepsilon\) is some constant offset, \(\nu_0\) is the inverse of the a
     \nu_0 = \left(2 \int_{0}^{R} \frac{\dd r}{c(r)}\right)^{-1},
 \end{equation}
 %
-and \(c(r)\) is the sound speed as a function of radius.
+and \(c(r)\) is the sound speed as a function of radius. The difference between consecutive modes of the same order \(\Delta\nu_{nl} = \nu_{nl} - \nu_{n-1\,l}\). In the same asymptotic limit, we expect \(\Delta\nu_{nl}\) to approximate \(\nu_0\). Therefore, we can reason that some measure of a global \(\Delta\nu\) (e.g. the average \(\langle\Delta\nu_{nl}\rangle\)) can give insight into the mean density of the star.
 
-The difference between consecutive modes of the same order \(\Delta\nu_{nl} = \nu_{nl} - \nu_{n-1\,l}\). In the same asymptotic limit, we expect \(\Delta\nu_{nl}\) to approximate \(\nu_0\). Therefore, we can reason that some measure of a global \(\Delta\nu\) (e.g. the average \(\langle\Delta\nu_{nl}\rangle\)) can give insight into the mean density of the star.
-
-\begin{figure}[tb]
-    \centering
-    \includegraphics{figures/seismo-psd.pdf}
-    \caption{The power spectral density of 16 Cyg A. The inset plot highlights the comb of peaks comprising a Gaussian-like hump in the larger plot.}
-    \label{fig:seismo-psd}
-\end{figure}
+The asymptotic expression helps us identify modes in a star. If the asymptotic expression was exact, we would expect odd and even modes to line up. But echelle plot shows that there is some small difference.
 
 The 16 Cyg binary star system is home to two well-studied solar-like oscillators. As an example of what these observations look like, we will consider 16 Cyg A. Observed by \emph{Kepler} \todo{details like quarters}, the Kepler Asteroseismic Science Operations Center (KASOC\footnote{\url{https://kasoc.phys.au.dk}}) processed the light curve to extract the oscillation power spectrum. The details of their data reduction and processing can be found in \needcite. Briefly, creating a periodogram using the Lomb-Scargle method \citep{Lomb1976,Scargle1982}. We show the full power spectrum in Figure \ref{fig:seismo-psd}. We can see a clear Gaussian-like bump at around \SI{2000}{\micro\hertz}. Enlarging this, we see that it comprises a repeating patten of equally-spaced peaks.
 
