@@ -100,10 +100,10 @@ fig = plt.figure(figsize=(6, 6))
 ax = fig.add_subplot()
 
 ax.plot(r['bp']-r['rp'], G, 'k.', ms=1, alpha=0.2, rasterized=True, zorder=0)
-ax.hist2d(r['bp']-r['rp'], G, cmap='cmc.grayC', bins=200, cmin=10, norm=PowerNorm(gamma=1/3))
+ax.hist2d(r['bp']-r['rp'], G, cmap='cmc.oslo', bins=200, cmin=10, norm=PowerNorm(gamma=1/3), rasterized=True)
 
 # ax.plot(df['bp_rp'], kG, 'k.', ms=1, alpha=0.2, rasterized=True, zorder=2)
-ax.hist2d(df['bp_rp'], kG, cmap='cmc.lajolla', bins=200, cmin=10, norm=PowerNorm(gamma=1/3))
+ax.hist2d(df['bp_rp'], kG, cmap='cmc.batlowK', bins=200, cmin=10, norm=PowerNorm(gamma=1/3), rasterized=True)
 
 # for mass, group in grid.groupby("dirname"):
 #     mags = bc_func(group[["effective_T", "log_g"]])
