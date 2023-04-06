@@ -12,7 +12,7 @@ from matplotlib.colors import PowerNorm
 from astropy.table import Table
 # from scipy.interpolate import LinearNDInterpolator
 
-GAIA_FILENAME = 'data/gaia_HR.npy'
+GAIA_FILENAME = 'data/gaia_200pc.npy'
 KPLR_FILENAME = 'data/gaia_kplr_1arcsec.fits'
 # BC_FILENAME = "data/bc.csv"
 # GRID_FILENAME = "/var/local/Scratch/shared/data/mesa_grids/grid2p5a/grid.h5"
@@ -56,7 +56,9 @@ phot_g_mean_mag AS g,
 parallax,
 e_bp_min_rp_val AS e_bp_rp,
 phot_bp_mean_mag AS bp,
-phot_rp_mean_mag AS rp
+phot_rp_mean_mag AS rp,
+teff_val AS teff,
+lum_val AS lum
 FROM gaiadr2.gaia_source
 WHERE parallax_over_error > 10
 AND parallax > 5
@@ -94,15 +96,20 @@ df = df.loc[
 
 G = r['g'] + 5 * np.log10(r['parallax']) - 10
 kG = df["phot_g_mean_mag"] + 5 * np.log10(df['parallax']) - 10
+# mask = (~np.isnan(r["teff"]) & ~np.isnan(r["lum"]))
+# logL = np.log10(r["lum"][mask])
+# logTeff = np.log10(r["teff"][mask])
 
 print("Making plot.")
 fig = plt.figure(figsize=(6, 6))
 ax = fig.add_subplot()
 
+# ax.hist2d(logTeff, logL, cmap='cmc.oslo', bins=200, cmin=10, 
+        #   norm=PowerNorm(gamma=1/3), rasterized=True)
+
 ax.plot(r['bp']-r['rp'], G, 'k.', ms=1, alpha=0.2, rasterized=True, zorder=0)
 ax.hist2d(r['bp']-r['rp'], G, cmap='cmc.oslo', bins=200, cmin=10, norm=PowerNorm(gamma=1/3), rasterized=True)
 
-# ax.plot(df['bp_rp'], kG, 'k.', ms=1, alpha=0.2, rasterized=True, zorder=2)
 ax.hist2d(df['bp_rp'], kG, cmap='cmc.batlowK', bins=200, cmin=10, norm=PowerNorm(gamma=1/3), rasterized=True)
 
 # for mass, group in grid.groupby("dirname"):
