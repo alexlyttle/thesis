@@ -12,15 +12,7 @@
 %
 \chapter{Introduction}
 
-\todo{Set the scene: Importance of determining stellar parameters.}
-
-\todo{How stellar parameters are normally determinded}
-
-\todo{Then asteroseismology came along and changed the game}
-
-\todo{Outline thesis. Asteroseismology explain terms. Then HBMs, followed by the paper. Finally a foray into acoustic glitches to provide more insight on helium.}
-
-Since the late 19th century, astronomers have been trying to understand the physical structure and evolution of the Sun and other stars. While little was known at the time, researchers started by gathering data in an effort The invention of the spectrograph by \citet{Draper1874} allowed astronomers to systematically classify stars by their brightness in different wavelengths of light \citep{Maury.Pickering1897}. 
+Since the late 19th century, astronomers have been trying to understand the physical structure and evolution of the Sun and other stars. While little was known at the time, researchers started by gathering data in an effort to build a picture of the night sky. The invention of the spectrograph by \citet{Draper1874} allowed astronomers to systematically classify stars by their brightness in different wavelengths of light \citep{Maury.Pickering1897}. 
 
 % \citet{Hertzsprung1909} made early estimates of absolute magnitude from the widths of the spectral lines
 
@@ -32,9 +24,9 @@ Explaining structure in the HR diagram involved studying open clusters of stars.
 
 % Observations of stars in clusters, assumed to have similar ages and chemical abundances, showed how stars of different mass evolved across the HR diagram with time.
 
-The luminosity and effective temperature could be estimated from the magnitude and colour of the stars. From luminosity and temperature, we could derive the radius of stars. Early stellar mass estimates came from visual and spectroscopic binaries. Spectroscopy provides abundances of chemical species ionised in the stellar atmosphere. However, except for the Sun, stellar age and helium abundance has no model-independence. The latter ionisations at temperatures and densities higher than the surface of stars like the Sun.
+% The luminosity and effective temperature could be estimated from the magnitude and colour of the stars. From luminosity and temperature, we could derive the radius of stars. Early stellar mass estimates came from visual and spectroscopic binaries. Spectroscopy provides abundances of chemical species ionised in the stellar atmosphere. However, except for the Sun, stellar age and helium abundance has no model-independence. The latter ionisations at temperatures and densities higher than the surface of stars like the Sun.
 
-\citet{Payne1925} proposed that stars were comprised of mostly hydrogen and helium.
+\citet{Payne1925} proposed that stars were comprised of mostly hydrogen and helium. 
 
 How did stars evolve and sustain themselves?
 
@@ -44,31 +36,25 @@ More complex stellar models developed in the late 20th century.
 
 Fast-forwarding to the last few decades, astronomers have been interested in the chemo-dynamical evolution of stars in the Milky Way and the characterisation of exoplanets. Regarding the former, for example, ages and chemical abundances of stars have lead to the discovery of the Gaia-Enceladus Sausage. For the latter, stellar masses have contributed to the inferred exoplanet properties.
 
+We expand on modelling stars in Section \ref{sec:modelling-stars}
+
+We expand on asteroseismology in Section \ref{sec:seismo}.
+
 % On a similar timescale, the field of helioseismology emerged. Starting by observing oscillations on the surface of the Sun. When applied to other stars, asteroseismology. This gave highly precise measurements of the oscillation modes. Solar-like oscillators oscillate like the Sun. These provided an independent way to test stellar models and determine masses and radii from the scaling relations.
 
-With asteroseismology providing more precise observables, the systematics in stellar models have been highlighted. With no observed counterpart, stellar age has the most uncertainty.
-
-\todo{This bit introduces the issue of adding a prior and a hierarchical prior.}
-
-Stellar model-based properties are often found on a star-by-star basis. For example, minimising the likelihood of observables across a grid of 1D evolutionary models. While this approach can be fast and effective, it fails to weight the likelihood by our prior beliefs. For example, the universe is 14 billion years old, yet some stellar models return ages greater than this. This is usually attributed to systematic bias in our models, but what if we can parametrise this bias? Then, our prior on age can inform us of where our bias lies. The statistical framework for incorporating prior beliefs is known as Bayesian inference. This has been applied recently to stellar parameters (BASTA). However, we can do better by including prior beliefs on the distribution of a population of stars.
-
-In Chapter \ref{}, we start by outlining the asteroseismology of solar-like oscillators.
-
-Then, we introduce hierarchical Bayesian models in Chapter \ref{}. We explore a simple HBM in the context of astronomy and show how it can improve the estimates of stellar parameters.
-
-Following that, we present a hierarchical model of helium enrichment on a population of dwarf and subgiant stars observed by \emph{Kepler} in Chapter \ref{}. While such a method improves upon and tackles bias in our choice of helium enrichment, there is more helium abundance information to be gained from asteroseismology.
-
-Finally, in Chapter \ref{}, we explore signatures of helium abundance in the oscillation modes of stars. We present a new method for characterising these glitches.
-
-\section[Asteroseismology]{Asteroseismology of Solar-Like Oscillators}
+\section[Asteroseismology]{Asteroseismology of Solar-Like Oscillators}\label{sec:seismo}
 
 \todo{Should this be a small chapter?}
+
+\subsection{A Brief History of Asteroseismology}
 
 Several decades ago, 5-minute oscillations in the radial velocity of the solar surface were observed by \citet{Leighton.Noyes.ea1962}, leading to the inference of acoustic waves trapped beneath the solar photosphere \citep{Ulrich1970}. A further decade of study culminated in the measurement of regular patterns of individual oscillation modes in the Doppler radial velocity \citep{Claverie.Isaak.ea1979} and total irradiance \citep{Woodard.Hudson1983a} of the Sun. Initially thought to be short-lived irregularities on the surface, these modes were found to be compatible with stochastically excited standing waves penetrating deep into the Sun. Later, \citet{Deubner.Gough1984} introduced the word \emph{helioseismology} (analogous to geo-seismology) to describe the study of the solar interior using observations of these modes. Helioseismology was soon responsible for breakthrough solar research, from measuring differential rotation \citep{Deubner.Ulrich.ea1979} to solving the mismatch between predicted and measured solar neutrino production \citep{Bahcall.Ulrich1988}.
 
 Astronomers initially debated the mechanism driving solar oscillations in the form of standing pressure waves (or \emph{p modes}). \citet{Goldreich.Keeley1977} suggested what became the prevailing theory, that the p modes were stochastically excited by near-surface convection. Hence, we might expect solar-like oscillations to be present in other stars which have a convective envelope similar to the Sun. Shortly thereafter, \citet{Christensen-Dalsgaard1984} introduced the term \emph{asteroseismology} --- the study of the internal structure of stars with many observable modes of oscillation. Subsequently, solar-like oscillations were discovered in a few bright stars. Among the first were Procyon and \(\alpha\) Cen A \citep{Gelly.Grec.ea1986}, with individual modes later resolved by \citet{Martic.Schmitt.ea1999} and \citet{Bouchy.Carrier2001} respectively.
 
 Instrumental and atmospheric noise limited the progress of asteroseismology with ground-based equipment to studies of small number of bright dwarf stars. Asteroseismology requires high-cadence (\(\sim \SIrange{1}{10}{\minute}\)) brightness observations over long time-periods (\(\sim \SI{1}{\year}\)) with precisions of \todo{precision}. The first dedicated space-based missions which met these requirements arrived in the late 2000s, accelerating progress in the field. Initially, the \emph{CoRoT} mission \citep{Baglin.Auvergne.ea2006} detected solar-like oscillations in thousands of red giant stars \citep{DeRidder.Barban.ea2009,Mosser.Belkacem.ea2010}. Then, the \emph{Kepler} mission \citep{Borucki.Koch.ea2010} yielded oscillations in thousands more red giants \citep{Pinsonneault.Elsworth.ea2014} and hundreds of main sequence stars similar to the Sun \citep{Serenelli.Johnson.ea2017}. Most recently, \emph{TESS} \citep{Ricker.Winn.ea2015} has added thousands more dwarf and giant stars to the roster of solar-like oscillators \citep{Hon.Huber.ea2021,SilvaAguirre.Stello.ea2020,Hatt.Nielsen.ea2023}.
+
+\subsection{Theory of solar-like oscillations}
 
 \begin{figure}[tb]
     \centering
@@ -121,7 +107,7 @@ The asymptotic expression helps us identify modes in a star. If the first term o
 % %
 % \begin{align}
 %     \left(\frac{R}{\si{\solarradius}}\right) &\simeq \left(\frac{\numax}{\numax_{,\odot}}\right) \left(\frac{\dnu}{\dnu_\odot}\right)^{-2} \left(\frac{\teff}{\teff_{,\odot}}\right)^{1/2},\\
-%     \left(\frac{M}{\si{\solarmass}}\right) &\simeq \left(\frac{\numax}{\numax_{,\odot}}\right)^3 \left(\frac{\dnu}{\dnu_\odot}\right)^{-4} \left(\frac{\teff}{\teff_{,\odot}}\right)^{3/2}.
+%     \left(\frac{M}{\si{\soNonlarmass}}\right) &\simeq \left(\frac{\numax}{\numax_{,\odot}}\right)^3 \left(\frac{\dnu}{\dnu_\odot}\right)^{-4} \left(\frac{\teff}{\teff_{,\odot}}\right)^{3/2}.
 % \end{align}
 % %
 % Using these relations directly can provide quick-look, independent mass and radius estimates \citep[e.g.][]{Pinsonneault.Elsworth.ea2018}.
@@ -129,3 +115,37 @@ The asymptotic expression helps us identify modes in a star. If the first term o
 % We can also use individual modes and compare with models. Worth noting the surface term here.
 
 \todo{final pargraph rounding out section.}
+
+\section{Modelling Stars the Bayesian Way}\label{sec:modelling-stars}
+
+% The phrase `modelling stars' can be confusing. We often use it to describe the process of numerically simulating the physics of a star. Some examples of such simulations are one-dimensional stellar evolution codes (e.g. MESA) and three-dimensional hydrodynamical simulations \todo{e.g. other}. However, we also use the word `model' in probabilistic inference to refer to the process of generating predictions with some set of model parameters given some observed data \citep[e.g.][]{Hogg.Bovy.ea2010}. In this thesis, we prefer the phrase `modelling stars' to mean the entire process of inferring stellar parameters using a generative model. To model a given star, we may need to compute many stellar simulations, but the overall model compares these simulations to data in a probabilistic way. To avoid confusion where possible, we refer to numerical models of stars as either stellar simulations or evolutionary models.
+
+\todo{Something about how astronomers want stellar masses and stuff. These help with uncovering the chemodynamical history of the milky way. Ages help find mergers. Also masses are good for exoplanets. }
+
+In some cases, certain stellar parameters can be estimated directly from observables using empirical relationships. For example, mass-luminosity relation, or asteroseismic scaling relations.
+
+Alternatively, we compare the results of stellar evolutionary models to observed data. These models come from physical simulations which take inputs (e.g. the initial mass and metallicity) and output observable parameters (e.g. luminosity and effective temperature). For example, the software package `Modules for Experiments in Stellar Astrophysics' (MESA) originally developed by \citet{Paxton.Bildsten.ea2011} is a one-dimensional stellar evolution code. Assuming spherical symmetry, MESA simulates the structure and evolution of a star along a one-dimensional radial slice. At its core, the code numerically solves a series of differential equations which govern the interior dynamics of the star \citep[see e.g.][]{Kippenhahn.Weigert.ea2013}.
+
+With the advent of high-precision asteroseismology, we can also compare measurements of oscillation mode frequencies to simulations. For example, the GYRE code developed by \citet{Townsend.Teitler2013} uses the output of MESA to compute oscillation modes for a given \(n\) and \(l\). While the physics of p mode propagation in the star is relatively well-known \citep[see e.g.][]{Aerts.Christensen-Dalsgaard.ea2010}, our understanding of the atmospheric boundary conditions are not. As such, there is a known discrepancy between the simulated and observed p modes. The nature of this \citep{Ball.Gizon2014}.
+
+The comparison method is where we focus in this thesis. There are many ways of optimising for stellar parameters.
+
+% With the advent of high-precision asteroseismology for many stars, astronomers have a plethora of observables to constrain physical models of stellar evolution. 
+
+A la carte modelling involves producing and optimising dedicated stellar models for a given star. Many parameters can be optimised this way, but it is slow.
+
+Grid-based modelling involves producing a large grid of stellar models and computing the likelihood across the grid. Some examples. Assumptions must be made on approximations of stellar physics such as helium and MLT. Also overshoot, diffusion, rotation, solar abundances and opacity tables.
+
+Studies which look at systematics. Often compare different codes.
+
+With some observables, these methods are good enough. Systematics within the uncertainty budget.
+
+With asteroseismology providing more precise observables, the systematics in stellar models have been highlighted. With no observed counterpart, stellar age has the most uncertainty.
+
+% Stellar model-based properties are often found on a star-by-star basis. For example, minimising the likelihood of observables across a grid of 1D evolutionary models. While this approach can be fast and effective, it fails to weight the likelihood by our prior beliefs. For example, the universe is 14 billion years old, yet some stellar models return ages greater than this. This is usually attributed to systematic bias in our models, but what if we can parametrise this bias? Then, our prior on age can inform us of where our bias lies. The statistical framework for incorporating prior beliefs is known as Bayesian inference. This has been applied recently to stellar parameters (BASTA). However, we can do better by including prior beliefs on the distribution of a population of stars.
+
+In the next chapter, we introduce hierarchical Bayesian models. We explore a simple HBM in the context of astronomy and show how it can improve the estimates of stellar parameters.
+
+Following that, we present a hierarchical model of helium enrichment on a population of dwarf and subgiant stars observed by \emph{Kepler} in Chapter \ref{}. While such a method improves upon and tackles bias in our choice of helium enrichment, there is more helium abundance information to be gained from asteroseismology.
+
+Finally, in Chapter \ref{}, we explore signatures of helium abundance in the oscillation modes of stars. We present a new method for characterising these glitches.
