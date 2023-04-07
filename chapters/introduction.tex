@@ -144,6 +144,17 @@ With asteroseismology providing more precise observables, the systematics in ste
 
 % Stellar model-based properties are often found on a star-by-star basis. For example, minimising the likelihood of observables across a grid of 1D evolutionary models. While this approach can be fast and effective, it fails to weight the likelihood by our prior beliefs. For example, the universe is 14 billion years old, yet some stellar models return ages greater than this. This is usually attributed to systematic bias in our models, but what if we can parametrise this bias? Then, our prior on age can inform us of where our bias lies. The statistical framework for incorporating prior beliefs is known as Bayesian inference. This has been applied recently to stellar parameters (BASTA). However, we can do better by including prior beliefs on the distribution of a population of stars.
 
+\section{Thesis Outline}
+
+\begin{figure}
+    \centering
+    \includegraphics{figures/hr-diagram.pdf}
+    \caption[Colour-magnitude diagram highlighting the region occupied by dwarf and subgiant solar-like oscillators.]{Colour-magnitude diagram highlighting the region occupied by solar-like oscillators. The data are \emph{Gaia} green, blue, and red band magnitudes given by G, G\textsubscript{BP}, and G\textsubscript{RP} respectively. The absolute magnitude \(M_\mathrm{G}\) is calculated from \emph{Gaia} parallaxes neglecting extinction. The \emph{greyscale} 2D histogram shows the density of \emph{Gaia} DR3 targets with parallax \(>\SI{5}{\milli\aarcsec}\) (distance \(<\SI{200}{\parsec}\)). The \emph{coloured} 2D histogram shows the density of all \emph{Kepler} targets in \emph{Gaia} DR3. MIST stellar evolutionary tracks at solar metallicity are given by the \emph{black lines} for \SIrange{0.8}{1.4}{\solarmass} in steps of \SI{0.1}{\solarmass}. The points in the inset axes correspond to solar-like oscillators with references given in the legend, where \emph{yellow} represents confirmed planet hosts. The Sun is shown by an \(\odot\) symbol.}
+    \label{fig:hr-diagram}
+\end{figure}
+
+Remember to acknowledge\footnote{\url{https://gaia-kepler.fun/}}
+
 In the next chapter, we introduce hierarchical Bayesian models. We explore a simple HBM in the context of astronomy and show how it can improve the estimates of stellar parameters.
 
 Following that, we present a hierarchical model of helium enrichment on a population of dwarf and subgiant stars observed by \emph{Kepler} in Chapter \ref{}. While such a method improves upon and tackles bias in our choice of helium enrichment, there is more helium abundance information to be gained from asteroseismology.

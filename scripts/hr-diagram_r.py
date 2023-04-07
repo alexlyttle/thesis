@@ -128,11 +128,11 @@ print("Making plot.")
 fig = plt.figure(figsize=(6, 6))
 ax = fig.add_subplot()
 
-cmap = cm.grayC_r
-ax.plot(r['bp']-r['rp'], G, '.', c=cmap.colors[0], ms=1, alpha=0.2, rasterized=True, zorder=0)
-ax.hist2d(r['bp']-r['rp'], G, cmap=cmap, bins=200, cmin=10, norm=PowerNorm(gamma=1/3), rasterized=True, zorder=1)
+cmap = cm.grayC
+# ax.plot(r['bp']-r['rp'], G, '.', c=cmap.colors[0], ms=1, alpha=0.2, rasterized=True, zorder=0)
+ax.hist2d(r['bp']-r['rp'], G, cmap=cmap, bins=200, norm=PowerNorm(gamma=1/3), rasterized=True, zorder=1)
 
-cmap = cm.devon
+cmap = cm.devon_r
 ax.plot(df['bp_rp'], kG, '.', c=cmap.colors[0], ms=1, alpha=0.2, rasterized=True, zorder=1)
 ax.hist2d(df['bp_rp'], kG, cmap=cmap, bins=200, cmin=10, norm=PowerNorm(gamma=1/3), rasterized=True, zorder=2)
 
@@ -150,18 +150,19 @@ ax.invert_yaxis()
 
 axins = ax.inset_axes([0.45, 0.45, 0.53, 0.53])
 
-cmap = cm.grayC_r
-axins.plot(r['bp']-r['rp'], G, '.', c=cmap.colors[0], ms=1, alpha=0.2, rasterized=True, zorder=0)
-axins.hist2d(r['bp']-r['rp'], G, cmap=cmap, bins=200, cmin=10, norm=PowerNorm(gamma=1/3), rasterized=True, zorder=1)
-cmap = cm.devon
-axins.plot(df['bp_rp'], kG, '.', c=cmap.colors[0], ms=1, alpha=0.2, rasterized=True, zorder=0)
-axins.hist2d(df['bp_rp'], kG, cmap=cmap, bins=200, cmin=10, norm=PowerNorm(gamma=1/3), rasterized=True, zorder=1)
+cmap = cm.grayC
+# axins.plot(r['bp']-r['rp'], G, '.', c=cmap.colors[0], ms=1, alpha=0.2, rasterized=True, zorder=0)
+axins.hist2d(r['bp']-r['rp'], G, cmap=cmap, bins=200, norm=PowerNorm(gamma=1/3), rasterized=True, zorder=1)
+
+cmap = cm.devon_r
+# axins.plot(df['bp_rp'], kG, '.', c=cmap.colors[0], ms=1, alpha=0.2, rasterized=True, zorder=0)
+# axins.hist2d(df['bp_rp'], kG, cmap=cmap, bins=200, cmin=10, norm=PowerNorm(gamma=1/3), rasterized=True, zorder=1)
 for mass in [0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4]:
     _, _, _, mags = tracks.interp_mag([mass] + params, bands)
-    axins.plot(mags[:, 1]-mags[:, 2], mags[:, 0], "-", color="k")
+    axins.plot(mags[:, 1]-mags[:, 2], mags[:, 0], "-", color="white")
 
 mask = df["kepid"].isin(s17) & ~df["kepid"].isin(d16) & ~df["kepid"].isin(l17)
-ls, = axins.plot(df.loc[mask, 'bp_rp'], kG.loc[mask], "o", ms=4, c="k", alpha=0.5, label="Serenelli et al. (2017)")
+ls, = axins.plot(df.loc[mask, 'bp_rp'], kG.loc[mask], "o", ms=4, c="white", alpha=0.5, label="Serenelli et al. (2017)")
 
 c = cm.buda.resampled(2).colors
 mask = df["kepid"].isin(l17)
@@ -186,6 +187,6 @@ ax.legend(handles=[ld, ll, ls], loc="lower right", facecolor=c, edgecolor=c)
 plt.show()
 print("Saving plot.")
 fig.tight_layout()
-fig.savefig("../figures/hr-diagram.pdf", format="pdf", dpi=300)
+fig.savefig("../figures/hr-diagram_r.pdf", format="pdf", dpi=300)
 
 print("Done.")
