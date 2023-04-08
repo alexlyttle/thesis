@@ -161,7 +161,7 @@ for mass in [0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4]:
     axins.plot(mags[:, 1]-mags[:, 2], mags[:, 0], "-", color="k")
 
 mask = df["kepid"].isin(s17) & ~df["kepid"].isin(d16) & ~df["kepid"].isin(l17)
-ls, = axins.plot(df.loc[mask, 'bp_rp'], kG.loc[mask], "o", ms=4, c="k", alpha=0.5, label="Serenelli et al. (2017)")
+ls, = axins.plot(df.loc[mask, 'bp_rp'], kG.loc[mask], "o", ms=4, c="k", markerfacecolor="none", label="Serenelli et al. (2017)")
 
 c = cm.buda.resampled(2).colors
 mask = df["kepid"].isin(l17)
