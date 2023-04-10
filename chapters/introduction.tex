@@ -26,13 +26,11 @@ Explaining structure in the HR diagram involved studying open clusters of stars.
 
 % The luminosity and effective temperature could be estimated from the magnitude and colour of the stars. From luminosity and temperature, we could derive the radius of stars. Early stellar mass estimates came from visual and spectroscopic binaries. Spectroscopy provides abundances of chemical species ionised in the stellar atmosphere. However, except for the Sun, stellar age and helium abundance has no model-independence. The latter ionisations at temperatures and densities higher than the surface of stars like the Sun.
 
-The question of what stars were made of and how they sustained themselves still remained. Spectroscopy revealed abundances of elements excited in stellar atmospheres, but gave little insight into elements which ionised deeper in the star. \citet{Payne1925} proposed that stars were comprised of mostly hydrogen and helium. The idea was radical at the time, but was confirmed by further research. 
+The question of what stars were made of and how they sustained themselves still remained. Spectroscopy revealed abundances of elements excited in stellar atmospheres, but gave little insight into elements which ionised deeper in the star. \citet{Payne1925} proposed that stars were comprised of mostly hydrogen and helium. The idea was radical at the time, but was later followed up with albeit and overestimate but not totally wrong estimate of helium abundance of 40 per cent by \citet{Schwarzschild1946}. In the 1940s, advancements in nuclear science spawned the theory of stellar nucleosynthesis \citep{Hoyle1946}.
 
-How did stars evolve and sustain themselves?
+More complex stellar models developed throughout the second half of the 20th century.
 
-Hoyle, Fowler, Chandrasekhar formed a theory of nucleosynthesis, the production of elements in the star.
-
-More complex stellar models developed in the late 20th century.
+Today, astronomers have a huge abundance on data.
 
 Fast-forwarding to the last few decades, astronomers have been interested in the chemo-dynamical evolution of stars in the Milky Way and the characterisation of exoplanets. Regarding the former, for example, ages and chemical abundances of stars have lead to the discovery of the Gaia-Enceladus Sausage. For the latter, stellar masses have contributed to the inferred exoplanet properties.
 
@@ -40,12 +38,11 @@ We expand on asteroseismology in Section \ref{sec:seismo}.
 
 We expand on modelling stars in Section \ref{sec:modelling-stars}
 
-
 % On a similar timescale, the field of helioseismology emerged. Starting by observing oscillations on the surface of the Sun. When applied to other stars, asteroseismology. This gave highly precise measurements of the oscillation modes. Solar-like oscillators oscillate like the Sun. These provided an independent way to test stellar models and determine masses and radii from the scaling relations.
 
 \section[Solar-Like Oscillators]{Asteroseismology of Solar-Like Oscillators}\label{sec:seismo}
 
-\todo{Should this be a small chapter?}
+In this section, we briefly recall a history and theory of asteroseismology. 
 
 \subsection{A Brief History of Asteroseismology}
 
@@ -133,11 +130,11 @@ There are a handful of existing methods for determining stellar parameters throu
 
 % With the advent of high-precision asteroseismology for many stars, astronomers have a plethora of observables to constrain physical models of stellar evolution. 
 
-A la carte modelling involves producing and optimising dedicated stellar models for a given star. Many parameters can be optimised this way, but it is slow.
+% A la carte modelling involves producing and optimising dedicated stellar models for a given star. Many parameters can be optimised this way, but it is slow.
 
-Grid-based modelling involves producing a large grid of stellar models and computing the likelihood across the grid. Some examples. Assumptions must be made on approximations of stellar physics such as helium and MLT. Also overshoot, diffusion, rotation, solar abundances and opacity tables.
+% Grid-based modelling involves producing a large grid of stellar models and computing the likelihood across the grid. Some examples. Assumptions must be made on approximations of stellar physics such as helium and MLT. Also overshoot, diffusion, rotation, solar abundances and opacity tables.
 
-Modelling stars the Bayesian way involves estimating the probability of stellar parameters (e.g. \(\theta = \text{mass, age}, \dots\)) given observations (\(y\)). We can do this starting with Bayes' theorem for the \emph{posterior} probability density,
+Modelling stars the Bayesian way involves estimating the probability of stellar parameters (e.g. \(\theta = \text{mass, age}, \dots\)) given observations (\(y = \text{luminosity, effective temperature}\)). We can do this starting with Bayes' theorem for the \emph{posterior} probability density,
 %
 \begin{equation}
     p(\theta \mid y) = \frac{p(y \mid \theta)\,p(\theta)}{p(y)},
@@ -145,10 +142,14 @@ Modelling stars the Bayesian way involves estimating the probability of stellar 
 %
 where \(p(y \mid \theta)\) is the likelihood, \(p(\theta)\) is the \emph{prior}, and \(p(y)\) is the \emph{evidence}. The prior encodes our expectation for \(\theta\). If our data are bad, then the prior dominates and we return our current belief. However, if the data are good enough, then they have more influence on the posterior and our belief is updated. As a result, we can use the Bayesian methodology to systematically update our beliefs. 
 
-Marginalised probability distribution.
+Marginalised probability distribution,
+%
+\begin{equation}
+    p(\theta_i \mid y) = \int_{\vect{\theta}_{j \neq i}} p(\vect{\theta} \mid y) \dd \vect{\theta}_{j \neq i}
+\end{equation}
+%
 
 In practice, our likelihood depends on our choice of model. The model is the function which maps \(\theta\) to observable parameters, \(\tilde{y} = f(\theta)\). When modelling stars, this function is rarely analytical. Therefore, the posterior distribution must be estimated using a numerical method. Some methods include Markov Chain Monte Carlo and nested sampling \needcite. Typically, these methods involve multiple calls to \(f\) with different values of \(\theta\). This presents a problem when using stellar evolutionary models like MESA. These models are slow to evaluate and computationally expensive.
-
 
 % For example, if we used MESA as our model, \(\theta\) would represent inputs to the code. 
 
@@ -171,7 +172,7 @@ We focus on dwarf and subgiant solar-like oscillators partly because it makes se
 \begin{figure}
     \centering
     \includegraphics{figures/hr-diagram.pdf}
-    \caption[Colour-magnitude diagram highlighting the region occupied by dwarf and subgiant solar-like oscillators.]{Colour-magnitude diagram highlighting the region occupied by solar-like oscillators. The data are \emph{Gaia} green, blue, and red band magnitudes given by G, G\textsubscript{BP}, and G\textsubscript{RP} respectively. The absolute magnitude (\(M_\mathrm{G}\)) is calculated from \emph{Gaia} magnitude and parallax neglecting extinction. The \emph{greyscale} 2D histogram shows the density of \emph{Gaia} DR3 targets with parallax \(>\SI{5}{\milli\aarcsec}\) (distance \(<\SI{200}{\parsec}\)). The \emph{coloured} 2D histogram shows the density of all \emph{Kepler} targets in \emph{Gaia} DR3. MIST stellar evolutionary tracks at solar metallicity are given by the \emph{black lines} for \SIrange{0.8}{1.4}{\solarmass} in steps of \SI{0.1}{\solarmass}. The points in the inset axes correspond to \emph{Kepler} solar-like oscillators with references given in the legend, where \emph{yellow} represents confirmed planet hosts. The Sun is given by the `\(\odot\)' symbol.}
+    \caption[Colour-magnitude diagram highlighting the region occupied by dwarf and subgiant solar-like oscillators.]{Colour-magnitude diagram highlighting the region occupied by solar-like oscillators. The data are \emph{Gaia} green, blue, and red band magnitudes given by G, G\textsubscript{BP}, and G\textsubscript{RP} respectively. The absolute magnitude (\(M_\mathrm{G}\)) is calculated from \emph{Gaia} magnitude and parallax neglecting extinction. The \emph{greyscale} 2D histogram shows the density of \emph{Gaia} DR3 targets with parallax \(>\SI{5}{\milli\aarcsec}\) (distance \(\lesssim\SI{200}{\parsec}\)). The \emph{coloured} 2D histogram shows the density of all \emph{Kepler} targets in \emph{Gaia} DR3. MIST stellar evolutionary tracks at solar metallicity are given by the \emph{black lines} for \SIrange{0.8}{1.4}{\solarmass} in steps of \SI{0.1}{\solarmass}. The points in the inset axes correspond to \emph{Kepler} solar-like oscillators with references given in the legend, where \emph{yellow} represents confirmed planet hosts. The Sun is given by the `\(\odot\)' symbol.}
     \label{fig:hr-diagram}
 \end{figure}
 
@@ -179,7 +180,13 @@ We show a colour-magnitude diagram for context in Figure \ref{fig:hr-diagram}. U
 
 These targets have since been studied extensively. Give some examples.
 
-However, there have been many sources of systematic uncertainty. 
+The modes were identified for a sample of 33 exoplanet host stars by \citet{Davies.Aguirre.ea2016} and modelled by \citet{SilvaAguirre.Davies.ea2015}. With most exoplanet hosts being in their main sequence phase \needcite...
+
+The so-called LEGACY sample modes identified by \citet{Lund.SilvaAguirre.ea2017} modelled by \citet{SilvaAguirre.Lund.ea2017}.
+
+Then the APOKASC project, combining asteroseismology with APOGEE spectroscopy extended the modelling to around 400 dwarf and subgaints \citep{Serenelli.Johnson.ea2017}. Between then and now, there has not been a similar sized catalogue of dwarf stars from K2 and TESS.
+
+However, there have been many sources of systematic uncertainty. Many assumptions were made in the modelling of this sample of stars. It is a perfect test case for new modelling methods. Then the plan is to apply these to future missions like Plato and Nancy Grace Roman.
 
 In the next chapter, we introduce hierarchical Bayesian models. We explore a simple HBM in the context of astronomy and show how it can improve the estimates of stellar parameters.
 
