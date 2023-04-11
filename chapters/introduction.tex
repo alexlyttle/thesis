@@ -12,31 +12,27 @@
 %
 \chapter{Introduction}
 
-Since the late 19th century, astronomers have been trying to understand the physical structure and evolution of the Sun and other stars. While little was known at the time, researchers started by gathering data in an effort to map the night sky. The invention of the spectrograph by \citet{Draper1874} allowed astronomers to systematically classify stars by their brightness in different wavelengths of light \citep{Maury.Pickering1897}.
+Since the late 19th century, astronomers have been trying to understand the physical structure and evolution of the Sun and other stars. They wanted to understand whether other stars were like the Sun and whether they changed with time. Answers to these questions could tell us where we came from and what lay in store for the solar system. While little was known of this at the time, researchers started by gathering data in an effort to map the night sky. The invention of the spectrograph by \citet{Draper1874} allowed astronomers to systematically classify stars by their brightness in different wavelengths of light \citep{Maury.Pickering1897}. This was an pivotal early step towards the large-scale stellar surveys we know of today.
 
 % \citet{Hertzsprung1909} made early estimates of absolute magnitude from the widths of the spectral lines
 
-Early efforts to characterise the stars began by finding relations between their spectral classification and brightness (magnitude) in a given spectral band \citep[e.g.][]{Russell1914}. Astronomers found that stars lay in sequences on what was later called the Hertzsprung-Russell (HR) diagram. For example, the `main sequence' was named as the region where most stars were found and later inferred to be where stars spend most of their life.
+Early efforts to characterise the stars began by finding relations between their spectral classification and brightness (absolute magnitude) in a given spectral band \citep[e.g.][]{Russell1914} on what was later called a Hertzsprung-Russell (HR) diagram. An HR diagram shows the magnitude (or luminosity, \(L\) using bolometric corrections) of a star against its spectral class (or effective temperature, \(\teff\) from Wein's law \needcite). Astronomers found that stars were not uniformly distributed on the HR diagram, but instead lay in distinct sequences. For example, the `main sequence' was named as the region where most stars were found and later inferred to be where stars spend most of their life.
 
-Initial forms of the HR diagram plot the brightness of a star against its spectral class. Later, astronomers made the connection between a stars magnitude in a given spectral band and the total radiated power (luminosity).
+Insight into stellar evolution came about when astronomers ordered open clusters on the HR diagram. Assuming open clusters formed at the same time with similar chemical abundances, the only expected difference between stars were their mass and multiplicity. Coupled with measurements of stellar mass from orbital solutions to binary star systems \todo{example?}, astronomers began to postulate the evolutionary trajectory of a star \needcite. Using systems with known masses, they also found that the luminosity of a star on the main sequence scaled as a power law with its mass, \(M\). With \(\teff\) from spectroscopy, radii from the relation \(L \propto R^2 \teff^4\), and mass from its scaling with \(L\), astronomers could start to study the distributions of fundamental stellar properties in the Milky Way. However, the ages of stars and their internal structure were still a mystery.
 
-Explaining structure in the HR diagram involved studying open clusters of stars. Astronomers expected these groups of stars, found at a similar parallax, to have formed at a similar time with similar chemical abundances. They presumed the remaining variation was for stars of different mass. Therefore, ordering open clusters on an HR diagram showed the evolution of stars of different mass. Furthermore, early measurements of stellar mass came from orbital solutions to visual and spectroscopic binary star systems.
+% Explaining structure in the HR diagram involved studying open clusters of stars. Astronomers expected these groups of stars, found at a similar parallax, to have formed at a similar time with similar chemical abundances. They presumed the remaining variation was for stars of different mass. Therefore, ordering open clusters on an HR diagram showed the evolution of stars of different mass. Furthermore, early measurements of stellar mass came from orbital solutions to visual and spectroscopic binary star systems.
 
 % Observations of stars in clusters, assumed to have similar ages and chemical abundances, showed how stars of different mass evolved across the HR diagram with time.
 
 % The luminosity and effective temperature could be estimated from the magnitude and colour of the stars. From luminosity and temperature, we could derive the radius of stars. Early stellar mass estimates came from visual and spectroscopic binaries. Spectroscopy provides abundances of chemical species ionised in the stellar atmosphere. However, except for the Sun, stellar age and helium abundance has no model-independence. The latter ionisations at temperatures and densities higher than the surface of stars like the Sun.
 
-The question of what stars were made of and how they sustained themselves still remained. Spectroscopy revealed abundances of elements excited in stellar atmospheres, but gave little insight into elements which ionised deeper in the star. \citet{Payne1925} proposed that stars were comprised of mostly hydrogen and helium. The idea was radical at the time, but was later followed up with albeit and overestimate but not totally wrong estimate of helium abundance of 40 per cent by \citet{Schwarzschild1946}. In the 1940s, advancements in nuclear science spawned the theory of stellar nucleosynthesis \citep{Hoyle1946}.
+The question of what stars were made of and how they sustained themselves still remained. Spectroscopy revealed abundances of elements excited in stellar atmospheres, but gave little insight on how these elements were created. \citet{Payne1925} proposed that stars were comprised of mostly hydrogen and helium. The idea was radical at the time, but was later followed up with plausible estimates of solar helium abundance \citep[e.g.][]{Schwarzschild1946}. At the same time, advancements in nuclear science spawned the theory of stellar nucleosynthesis \citep{Hoyle1946}. Stars produced elements heavier than hydrogen and helium through nuclear fusion reactions. This discovery only furthered interest in stellar evolution because the production of these elements were tied to the formation of planets and origin of life in the universe.
 
-More complex stellar models developed throughout the second half of the 20th century.
+In the second half of the 20th century, a new observational method emerged to help answer these questions. Asteroseismology --- the study of stars with many observable modes of oscillation --- allowed astronomers to effectively look inside stars. This insight into stellar structure helped improve stellar models. While asteroseismology spans a wide range of oscillating stars, we choose to focus on stars which oscillation like the Sun. In Section \ref{sec:seismo} we give a brief history and theory of these solar-like oscillators.
 
-Today, astronomers have a huge abundance on data.
+At the same time, the theory of stellar evolution advanced. With this came computational methods for modelling stars \citep{Kippenhahn.Weigert.ea1967}. Astronomers could start to compare empirical relations for fundamental parameters and observations with computational stellar models. Modelling stars became a way to test theories of stellar evolution and estimate the ages of stars. In recent years, the Bayesian framework...  We briefly introduce modelling stars the Bayesian way in Section \ref{sec:modelling-stars}.
 
-Fast-forwarding to the last few decades, astronomers have been interested in the chemo-dynamical evolution of stars in the Milky Way and the characterisation of exoplanets. Regarding the former, for example, ages and chemical abundances of stars have lead to the discovery of the Gaia-Enceladus Sausage. For the latter, stellar masses have contributed to the inferred exoplanet properties.
-
-We expand on asteroseismology in Section \ref{sec:seismo}.
-
-We expand on modelling stars in Section \ref{sec:modelling-stars}
+Today, astronomers have a huge abundance of data to test these stellar models. We introduce the current state of modelling populations of solar-like oscillators with asteroseismology in Section \ref{sec:many-stars}.
 
 % On a similar timescale, the field of helioseismology emerged. Starting by observing oscillations on the surface of the Sun. When applied to other stars, asteroseismology. This gave highly precise measurements of the oscillation modes. Solar-like oscillators oscillate like the Sun. These provided an independent way to test stellar models and determine masses and radii from the scaling relations.
 
@@ -57,7 +53,7 @@ Instrumental and atmospheric noise limited the progress of asteroseismology with
 \begin{figure}[tb]
     \centering
     \includegraphics[trim={0 0.4in 0 0},clip]{figures/spherical_harmonics.pdf}
-    \caption{Spherical harmonic oscillation modes for a few angular degrees ($l$) with azimuthal order \(m=0\). The colour-map represents the radial displacement at the surface, with \emph{red} and \emph{blue} corresponding to displacement inward and outward respectively. These regions oscillate in and out, with the white regions representing stationary nodes on the surface.}
+    \caption[Spherical harmonic oscillation modes for a few angular degrees ($l$) with azimuthal order \(m=0\).]{Spherical harmonic oscillation modes for a few angular degrees ($l$) with azimuthal order \(m=0\). The colour-map represents the radial displacement at the surface, with \emph{red} and \emph{blue} corresponding to displacement inward and outward respectively. These regions oscillate in and out, with the white regions representing stationary nodes on the surface.}
     \label{fig:spherical-harmonics}
 \end{figure}
 
@@ -66,7 +62,7 @@ Oscillations on the surface of a star can be approximated by spherical harmonic 
 \begin{figure}[tb]
     \centering
     \includegraphics{figures/seismo-psd.pdf}
-    \caption{The power spectral density of 16 Cyg A. The inset plot highlights the Gaussian-like power excess in the larger plot.}
+    \caption[The power spectral density of 16 Cyg A.]{The power spectral density of 16 Cyg A. The inset plot highlights the Gaussian-like power excess in the larger plot.}
     \label{fig:seismo-psd}
 \end{figure}
 
@@ -95,7 +91,7 @@ where \(c(r)\) is the sound speed as a function of radius, \(r\), and \(R\) is t
 \begin{figure}[tb]
     \centering
     \includegraphics{figures/seismo-echelle.pdf}
-    \caption{\emph{Left:} A section of the spectral signal-to-noise ratio (SNR) against frequency for 16 Cyg A. The large frequency spacing (\(\Delta\nu\)) between two radial modes is annotated with a double-headed arrow. The shaded region corresponds to a single row (also highlighted) in the echelle plot (\emph{right}). The echelle plot shows the spectral SNR such that a darker colour represents a higher SNR. Each row spans \SI{103.5}{\micro\hertz} and is stacked in order of frequency. The apparent ridges are labelled according to the angular degree (\(l\)) of the modes they represent.}
+    \caption[Signal-to-noise ratio as a function of frequency and echelle diagram for 16 Cyg A.]{\emph{Left:} A section of the spectral signal-to-noise ratio (SNR) against frequency for 16 Cyg A. The large frequency spacing (\(\Delta\nu\)) between two radial modes is annotated with a double-headed arrow. The shaded region corresponds to a single row (also highlighted) in the echelle plot (\emph{right}). The echelle plot shows the spectral SNR such that a darker colour represents a higher SNR. Each row spans \SI{103.5}{\micro\hertz} and is stacked in order of frequency. The apparent ridges are labelled according to the angular degree (\(l\)) of the modes they represent.}
     \label{fig:seismo-echelle}
 \end{figure}
 
@@ -120,9 +116,9 @@ The asymptotic expression helps us identify modes in a star. If the first term o
 
 \todo{Something about how astronomers want stellar masses and stuff. These help with uncovering the chemodynamical history of the milky way. Ages help find mergers. Also masses are good for exoplanets. }
 
-In some cases, stellar parameters can be estimated directly from observables using empirical relationships. For example, mass-luminosity relation, or asteroseismic scaling relations.
+In some cases, stellar parameters can be estimated directly from observables using empirical or direct relationships. For example, mass-luminosity relation, or asteroseismic scaling relations.
 
-Alternatively, we can compare the results of stellar evolutionary models to observed data. These models come from physical simulations which take inputs (e.g. the initial mass and metallicity) and output observable parameters (e.g. luminosity and effective temperature). For example, the software package `Modules for Experiments in Stellar Astrophysics' (MESA), originally developed by \citet{Paxton.Bildsten.ea2011}, is a one-dimensional stellar evolution code. Assuming spherical symmetry, MESA simulates the structure and evolution of a star along a one-dimensional radial slice. At its core, the code numerically solves a series of differential equations which govern the interior dynamics of the star \citep[see e.g.][]{Kippenhahn.Weigert.ea2013}.
+Alternatively, we can compare the results of stellar evolutionary models to observed data. These models come from physical simulations which take inputs (e.g. the initial mass and metallicity) and output observable parameters (e.g. luminosity and effective temperature). For example, the software package `Modules for Experiments in Stellar Astrophysics' (MESA), originally developed by \citet{Paxton.Bildsten.ea2011}, is a one-dimensional stellar evolution code. Assuming spherical symmetry, MESA simulates the structure and evolution of a star along a one-dimensional radial slice. At its core, the code numerically solves a series of differential equations which govern the interior dynamics of the star \citep[see e.g.][]{Kippenhahn.Weigert.ea2013}. Often starting with a cloud of gas, the code evolves the system over dynamical time steps recording physical properties at mesh points inside the star. 
 
 With the advent of high-precision asteroseismology, we can also compare measurements of oscillation mode frequencies to simulations. For example, the GYRE code developed by \citet{Townsend.Teitler2013} uses the output of MESA to compute oscillation modes for a given \(n\) and \(l\). While the physics of p mode propagation in the star is relatively well-known \citep[see e.g.][]{Aerts.Christensen-Dalsgaard.ea2010}, our understanding of the atmospheric boundary conditions are not. As such, there is a known discrepancy between the simulated and observed p modes. The nature of this \citep{Ball.Gizon2014}.
 
@@ -134,22 +130,23 @@ There are a handful of existing methods for determining stellar parameters throu
 
 % Grid-based modelling involves producing a large grid of stellar models and computing the likelihood across the grid. Some examples. Assumptions must be made on approximations of stellar physics such as helium and MLT. Also overshoot, diffusion, rotation, solar abundances and opacity tables.
 
-Modelling stars the Bayesian way involves estimating the probability of stellar parameters (e.g. \(\theta = \text{mass, age}, \dots\)) given observations (\(y = \text{luminosity, effective temperature}\)). We can do this starting with Bayes' theorem for the \emph{posterior} probability density,
+Modelling stars the Bayesian way involves estimating the probability of stellar parameters (e.g. \(\vect{\theta} = \text{mass, age}, \dots\)) given observations (\(\vect{y} = \text{luminosity, effective temperature}, \dots\)). We can do this starting with Bayes' theorem for the \emph{posterior} probability density,
 %
 \begin{equation}
-    p(\theta \mid y) = \frac{p(y \mid \theta)\,p(\theta)}{p(y)},
+    p(\vect{\theta} \mid \vect{y}) = \frac{p(\vect{y} \mid \vect{\theta})\,p(\vect{\theta})}{p(\vect{y})},
 \end{equation}
 %
-where \(p(y \mid \theta)\) is the likelihood, \(p(\theta)\) is the \emph{prior}, and \(p(y)\) is the \emph{evidence}. The prior encodes our expectation for \(\theta\). If our data are bad, then the prior dominates and we return our current belief. However, if the data are good enough, then they have more influence on the posterior and our belief is updated. As a result, we can use the Bayesian methodology to systematically update our beliefs. 
+where \(p(\vect{y} \mid \vect{\theta})\) is the likelihood, \(p(\vect{\theta})\) is the \emph{prior}, and \(p(\vect{y})\) is the \emph{evidence}. The prior encodes our expectation for \(\vect{\theta}\). If our data are bad, then the prior dominates and we return our current belief. However, if the data are good enough, then they have more influence on the posterior and our belief is updated. As a result, we can use the Bayesian methodology to systematically update our beliefs. 
 
-Marginalised probability distribution,
+Let us consider a model with three parameters, \(\vect{\theta} = \theta_1, \theta_2, \theta_3\). The \emph{marginal} posterior probability distribution for \(\theta_1\), for example, is,
 %
 \begin{equation}
-    p(\theta_i \mid y) = \int_{\vect{\theta}_{j \neq i}} p(\vect{\theta} \mid y) \dd \vect{\theta}_{j \neq i}
+    p(\theta_1 \mid \vect{y}) = \iint p(\vect{\theta} \mid \vect{y}) \, \dd \theta_2 \dd \theta_3,
 \end{equation}
 %
+where the bounds of the integral are over all parameter space for \(\theta_2\) and \(\theta_3\).
 
-In practice, our likelihood depends on our choice of model. The model is the function which maps \(\theta\) to observable parameters, \(\tilde{y} = f(\theta)\). When modelling stars, this function is rarely analytical. Therefore, the posterior distribution must be estimated using a numerical method. Some methods include Markov Chain Monte Carlo and nested sampling \needcite. Typically, these methods involve multiple calls to \(f\) with different values of \(\theta\). This presents a problem when using stellar evolutionary models like MESA. These models are slow to evaluate and computationally expensive.
+In practice, our likelihood depends on our choice of model. The model is the function which maps \(\vect{\theta}\) to observable parameters, \(\tilde{\vect{y}} = f(\vect{\theta})\). When modelling stars, this function is rarely analytical. Therefore, the posterior distribution must be estimated using a numerical method. Some methods include Markov Chain Monte Carlo (MCMC) and nested sampling \needcite. Typically, these methods involve multiple calls to \(f\) with different values of \(\vect{\theta}\). This presents a problem when using stellar evolutionary models like MESA. These models are slow to evaluate and computationally expensive.
 
 % For example, if we used MESA as our model, \(\theta\) would represent inputs to the code. 
 
@@ -161,7 +158,7 @@ Next section deals with the scalability.
 
 % Stellar model-based properties are often found on a star-by-star basis. For example, minimising the likelihood of observables across a grid of 1D evolutionary models. While this approach can be fast and effective, it fails to weight the likelihood by our prior beliefs. For example, the universe is 14 billion years old, yet some stellar models return ages greater than this. This is usually attributed to systematic bias in our models, but what if we can parametrise this bias? Then, our prior on age can inform us of where our bias lies. The statistical framework for incorporating prior beliefs is known as Bayesian inference. This has been applied recently to stellar parameters (BASTA). However, we can do better by including prior beliefs on the distribution of a population of stars.
 
-\section[Modelling Stars with Asteroseismology]{Modelling Many Stars with Asteroseismology}
+\section[Modelling Stars with Asteroseismology]{Modelling Many Stars with Asteroseismology}\label{sec:many-stars}
 
 Large scale surveys like \emph{Kepler} and \emph{TESS} have allowed for asteroseismology with many stars. This has allowed astronomers to study regions of the HR diagram in more detail, from main sequence dwarf stars to helium burning red clump stars. While \emph{TESS} is an all-sky survey, it's short baseline of a few months for many stars limits the mode identification and precision with asteroseismology. On the other hand, \emph{Kepler} looked at a single patch of the sky for several years. Currently, \emph{Kepler} still provides the best samples of solar-like oscillators. Therefore, we focus on solar-like oscillators observed by \emph{Kepler} in this thesis, with the potential to apply our methods to future missions with longer baselines.
 
