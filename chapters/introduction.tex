@@ -112,11 +112,9 @@ The asymptotic expression helps us identify modes in a star. If the first term o
 
 \section[Modelling Stars with Asteroseismology]{Modelling Many Stars with Asteroseismology}\label{sec:many-stars}
 
-Large scale surveys like \emph{Kepler} and \emph{TESS} have allowed for asteroseismology with many stars. This has allowed astronomers to study regions of the HR diagram in more detail, from main sequence dwarf stars to helium burning red clump stars. While \emph{TESS} is an all-sky survey, it's short baseline of a few months for many stars limits the mode identification and precision with asteroseismology. On the other hand, \emph{Kepler} looked at a single patch of the sky for several years. Currently, \emph{Kepler} still provides the best samples of solar-like oscillators. Therefore, we focus on solar-like oscillators observed by \emph{Kepler} in this thesis, with the potential to apply our methods to future missions with longer baselines.
+Recent, space-based missions like \emph{Kepler} and \emph{TESS} have allowed for asteroseismology with many stars. This has allowed astronomers to study regions of the HR diagram in more detail, from main sequence dwarf stars to helium burning red clump stars. While \emph{TESS} is an all-sky survey, it observes most stars for approximately a few months which limits the mode identification and precision possible with asteroseismology. On the other hand, \emph{Kepler} looked at a single patch of the sky for several years, leading to better frequency precision and more mode excitation. Currently, \emph{Kepler} still provides the best samples of solar-like oscillators. In this section, we introduce the sample of stars being studied in this thesis relative to the broader astronomical picture.
 
-The majority of solar-like oscillations found with \emph{Kepler} are red giant stars. These have been used for galactic archaeology coupled with Gaia. However, stars spend most of their time on the main sequence. 
-
-We focus on dwarf and subgiant solar-like oscillators partly because it makes sense to start at the beginning of a star's life but also because this is the region where the most planet hosts have been discovered.
+It is not just asteroseismology... High precision parallax from the \emph{Gaia} mission have improved distance estimates.
 
 \begin{figure}
     \centering
@@ -125,15 +123,13 @@ We focus on dwarf and subgiant solar-like oscillators partly because it makes se
     \label{fig:hr-diagram}
 \end{figure}
 
-We show a colour-magnitude diagram for context in Figure \ref{fig:hr-diagram}. Using magnitudes and parallaxes from \emph{Gaia} Data Release 3 \citep[DR3;][]{GaiaCollaboration.Vallenari.ea2022}. We see the Kepler-Gaia cross-match\footnote{\url{https://gaia-kepler.fun}}. The densest region lies in the low- to intermediate-mass main sequence (\SIrange{0.8}{1.2}{\solarmass}).
+In Figure \ref{fig:hr-diagram}, we show a color-magnitude diagram made using magnitudes and parallaxes from \emph{Gaia} Data Release 3 \citep[DR3;][]{GaiaCollaboration.Vallenari.ea2022}. The background distribution shows solar-neighbourhood \emph{Gaia} objects with a parallax greater than \SI{5}{\milli\aarcsec} for context. Over-plot is the distribution of \emph{Kepler} objects cross-matched with \emph{Gaia}\footnote{\url{https://gaia-kepler.fun}}. The densest region lies in the low- to intermediate-mass main sequence (\SIrange{0.8}{1.2}{\solarmass}) but we can also see a clear red giant branch and red clump. The inset plot draws attention to the region occupied by dwarf and subgiant solar-like oscillators. We show some example solar-like oscillators.
 
-These targets have since been studied extensively. Give some examples.
+\citet{Chaplin.Kjeldsen.ea2011} identified the first catalogue of \(\sim 500\) dwarf and subgiant solar-like oscillators in \emph{Kepler} data by measuring \(\dnu\) and \(\numax\). \citet{Chaplin.Basu.ea2014} later determined ages, masses and radii for these stars using the asteroseismic parameters complemented by photometry and ground-based spectroscopy where available. When APOGEE came along, the sample was revisited by \citet{Serenelli.Johnson.ea2017} with a more consistent set of \(\teff\) and metallicity. They achieved precisions of...
 
-The modes were identified for a sample of 33 exoplanet host stars by \citet{Davies.Aguirre.ea2016} and modelled by \citet{SilvaAguirre.Davies.ea2015}. With most exoplanet hosts being in their main sequence phase \needcite...
+For a subset of these stars, the SNR was low enough to identify individual modes. \citet{Appourchaux.Chaplin.ea2012} were among the first to publish individual mode frequencies (\(\nu_{nl}\)) for around 60 stars. These were later modelled by \citet{Metcalfe.Creevey.ea2014} who found increase precision over using \(\dnu\) and \(\numax\) alone. Around the same time, the number of confirmed exoplanets was increasing rapidly \needcite. This lead to a more detailed study of 35 exoplanet host stars by \citet{SilvaAguirre.Davies.ea2015} with modes identified by \citet{Davies.Aguirre.ea2016}. The remaining best targets, referred to as the LEGACY sample, were \citet{Lund.SilvaAguirre.ea2017} \citet{SilvaAguirre.Lund.ea2017}
 
-The so-called LEGACY sample modes identified by \citet{Lund.SilvaAguirre.ea2017} modelled by \citet{SilvaAguirre.Lund.ea2017}.
-
-Then the APOKASC project, combining asteroseismology with APOGEE spectroscopy extended the modelling to around 400 dwarf and subgaints \citep{Serenelli.Johnson.ea2017}. Between then and now, there has not been a similar sized catalogue of dwarf stars from K2 and TESS.
+These targets are still being studied extensively today, despite K2 and TESS.
 
 However, there have been many sources of systematic uncertainty. Many assumptions were made in the modelling of this sample of stars. It is a perfect test case for new modelling methods. Then the plan is to apply these to future missions like Plato and Nancy Grace Roman.
 
@@ -174,8 +170,6 @@ There are no fully analytical solutions for \(f\). Instead, we use numerical sim
 
 We can also predict oscillation mode frequencies (\(\nu_{nl}\)) with simulations. For example, the GYRE code developed by \citet{Townsend.Teitler2013} uses the output of MESA to compute oscillation modes for a given \(n\) and \(l\). While the physics of p mode propagation in the star is relatively well-known \citep[see e.g.][]{Aerts.Christensen-Dalsgaard.ea2010}, our understanding of the atmospheric boundary conditions are not. As such, there is a known discrepancy between the simulated and observed p modes. The nature of this \citep{Ball.Gizon2014}.
 
-\subsection{Examples of Bayesian Stellar Models}
-
 There are some existing methods for determining stellar parameters using the Bayesian approach. \citet{Bazot.Bourguignon.ea2008} used the MCMC algorithm to sample model parameters with on-the-fly stellar model calculation. While this method can be tailored to individual stars, it is very computationally expensive. Each proposed set of \(\vect{\theta}\) spawns a stellar simulation which evolves to a given age. Steps prior to this age are often discarded, and the simulation can take minutes to hours for each set of \(\vect{\theta}\).
 
 A more efficient solution is to sample a discrete grid of models, such as in the BAyesian STellar algorithm (BASTA) developed by \citet{AguirreBorsen-Koch.Rorsted.ea2022}. The authors pre-compute a grid of simulated stars corresponding to a set of relevant input parameters. They weight the grid points according to the prior and then sample using an MCMC algorithm. One downside to this method is that the model cannot make predictions for any set of inputs. This 
@@ -199,8 +193,6 @@ Next section deals with the scalability.
 % Stellar model-based properties are often found on a star-by-star basis. For example, minimising the likelihood of observables across a grid of 1D evolutionary models. While this approach can be fast and effective, it fails to weight the likelihood by our prior beliefs. For example, the universe is 14 billion years old, yet some stellar models return ages greater than this. This is usually attributed to systematic bias in our models, but what if we can parametrise this bias? Then, our prior on age can inform us of where our bias lies. The statistical framework for incorporating prior beliefs is known as Bayesian inference. This has been applied recently to stellar parameters (BASTA). However, we can do better by including prior beliefs on the distribution of a population of stars.
 
 \subsection{Scaling Bayesian Models to Many Stars}
-
-
 
 In the next chapter, we introduce hierarchical Bayesian models. We explore a simple HBM in the context of astronomy and show how it can improve the estimates of stellar parameters.
 
