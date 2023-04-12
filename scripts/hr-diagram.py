@@ -102,9 +102,14 @@ df = df.loc[
     & (df["phot_bp_mean_flux_over_error"] > 20)
 ]
 
-print("Query Serenelli et al. (2017)")
+print("Query Vizier.")
 tlist = Vizier(
-    catalog=["J/ApJS/233/23/table3","J/MNRAS/452/2127/table3","J/ApJ/835/173/table3"], 
+    catalog=[
+        # "J/ApJS/233/23/table3",
+        "J/ApJS/210/1/table1",      # Chaplin et al. (2011, 2014)
+        "J/MNRAS/452/2127/table3",  # Davies et al. (2016)
+        "J/ApJ/835/173/table3"      # Lund et al. (2017)
+    ], 
     columns=["KIC"], 
     row_limit=-1
 ).query_constraints()
@@ -151,17 +156,17 @@ ax.invert_yaxis()
 axins = ax.inset_axes([0.45, 0.45, 0.53, 0.53])
 
 cmap = cm.grayC_r
-axins.plot(r['bp']-r['rp'], G, '.', c=cmap.colors[0], ms=1, alpha=0.2, rasterized=True, zorder=0)
+axins.plot(r['bp']-r['rp'], G, '.', c=cmap.colors[0], ms=2, alpha=0.2, rasterized=True, zorder=0)
 axins.hist2d(r['bp']-r['rp'], G, cmap=cmap, bins=200, cmin=10, norm=PowerNorm(gamma=1/3), rasterized=True, zorder=1)
 cmap = cm.devon
-axins.plot(df['bp_rp'], kG, '.', c=cmap.colors[0], ms=1, alpha=0.2, rasterized=True, zorder=0)
+axins.plot(df['bp_rp'], kG, '.', c=cmap.colors[0], ms=2, alpha=0.2, rasterized=True, zorder=0)
 axins.hist2d(df['bp_rp'], kG, cmap=cmap, bins=200, cmin=10, norm=PowerNorm(gamma=1/3), rasterized=True, zorder=1)
 for mass in [0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4]:
     _, _, _, mags = tracks.interp_mag([mass] + params, bands)
     axins.plot(mags[:, 1]-mags[:, 2], mags[:, 0], "-", color="k")
 
 mask = df["kepid"].isin(s17) & ~df["kepid"].isin(d16) & ~df["kepid"].isin(l17)
-ls, = axins.plot(df.loc[mask, 'bp_rp'], kG.loc[mask], "o", ms=4, c="k", markerfacecolor="none", label="Serenelli et al. (2017)")
+ls, = axins.plot(df.loc[mask, 'bp_rp'], kG.loc[mask], "o", ms=4, c="k", markerfacecolor="none", label="Chaplin et al. (2011)")
 
 c = cm.buda.resampled(2).colors
 mask = df["kepid"].isin(l17)
@@ -182,7 +187,7 @@ ax.indicate_inset_zoom(axins, edgecolor="black")
 axins.invert_yaxis()
 
 c = cmap.colors[len(cmap.colors)//2]
-ax.legend(handles=[ld, ll, ls], loc="lower right", facecolor=c, edgecolor=c)
+ax.legend(handles=[ls, ld, ll], loc="lower right", facecolor=c, edgecolor=c)
 plt.show()
 print("Saving plot.")
 fig.tight_layout()

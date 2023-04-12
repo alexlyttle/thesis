@@ -16,35 +16,6 @@ from astroquery.vizier import Vizier
 
 GAIA_FILENAME = 'data/gaia_200pc.npy'
 KPLR_FILENAME = 'data/gaia_kplr_1arcsec.fits'
-# BC_FILENAME = "data/bc.csv"
-# GRID_FILENAME = "/var/local/Scratch/shared/data/mesa_grids/grid2p5a/grid.h5"
-
-# print("Reading grid.")
-# grid = []
-# for mass in np.arange(0.8, 1.24, 0.04):
-#     df = pd.read_hdf(GRID_FILENAME, key=f"m{mass:.2f}")
-#     grid.append(df)
-# grid = pd.concat(grid, ignore_index=True).reset_index(drop=True)
-# grid = grid.loc[np.isclose(grid.initial_feh, 0.0) & np.isclose(grid.initial_Yinit, 0.28) & np.isclose(grid.initial_MLT, 1.9)]
-
-# if os.path.exists(BC_FILENAME):
-#     bc = pd.read_csv(BC_FILENAME)
-# else:
-#     print("Downloading BCs.")
-#     import io, tarfile
-#     r = requests.get("https://waps.cfa.harvard.edu/MIST/BC_tables/UBVRIplus.txz")
-#     fileobj = io.BytesIO(r.content)
-#     tf = tarfile.open(fileobj=fileobj)
-#     member = tf.getmember("fehp000.UBVRIplus")
-#     file = tf.extractfile(member)
-#     for _ in range(6):
-#         header = file.readline()
-#     names = header.decode("utf-8").lstrip("#").strip().split()
-#     bc = pd.read_table(file, names=names, delimiter="\s+", on_bad_lines="skip")
-#     bc = bc.loc[np.isclose(bc["Av"], 0.0)]
-#     bc.to_csv(BC_FILENAME, index=False)
-
-# bc_func = LinearNDInterpolator(bc[["Teff", "logg"]], bc[["Gaia_G_EDR3", "Gaia_BP_EDR3", "Gaia_RP_EDR3"]])
 
 if os.path.exists(GAIA_FILENAME):
     print("Reading Gaia data.")
@@ -102,9 +73,14 @@ df = df.loc[
     & (df["phot_bp_mean_flux_over_error"] > 20)
 ]
 
-print("Query Serenelli et al. (2017)")
+print("Query Vizier.")
 tlist = Vizier(
-    catalog=["J/ApJS/233/23/table3","J/MNRAS/452/2127/table3","J/ApJ/835/173/table3"], 
+    catalog=[
+        # "J/ApJS/233/23/table3",
+        "J/ApJS/210/1/table1",      # Chaplin et al. (2011, 2014)
+        "J/MNRAS/452/2127/table3",  # Davies et al. (2016)
+        "J/ApJ/835/173/table3"      # Lund et al. (2017)
+    ], 
     columns=["KIC"], 
     row_limit=-1
 ).query_constraints()
@@ -129,11 +105,11 @@ fig = plt.figure(figsize=(6, 6))
 ax = fig.add_subplot()
 
 cmap = cm.grayC
-# ax.plot(r['bp']-r['rp'], G, '.', c=cmap.colors[0], ms=1, alpha=0.2, rasterized=True, zorder=0)
-ax.hist2d(r['bp']-r['rp'], G, cmap=cmap, bins=200, norm=PowerNorm(gamma=1/3), rasterized=True, zorder=1)
+ax.plot(r['bp']-r['rp'], G, '.', c=cmap.colors[-1], ms=1, alpha=0.2, rasterized=True, zorder=0)
+ax.hist2d(r['bp']-r['rp'], G, cmap=cmap, bins=200, cmin=10, norm=PowerNorm(gamma=1/3), rasterized=True, zorder=1)
 
 cmap = cm.devon_r
-ax.plot(df['bp_rp'], kG, '.', c=cmap.colors[0], ms=1, alpha=0.2, rasterized=True, zorder=1)
+ax.plot(df['bp_rp'], kG, '.', c=cmap.colors[-1], ms=1, alpha=0.2, rasterized=True, zorder=1)
 ax.hist2d(df['bp_rp'], kG, cmap=cmap, bins=200, cmin=10, norm=PowerNorm(gamma=1/3), rasterized=True, zorder=2)
 
 # mask = df["kepid"].isin(s17) & ~df["kepid"].isin(d16) & ~df["kepid"].isin(l17)
@@ -151,18 +127,18 @@ ax.invert_yaxis()
 axins = ax.inset_axes([0.45, 0.45, 0.53, 0.53])
 
 cmap = cm.grayC
-# axins.plot(r['bp']-r['rp'], G, '.', c=cmap.colors[0], ms=1, alpha=0.2, rasterized=True, zorder=0)
+axins.plot(r['bp']-r['rp'], G, '.', c=cmap.colors[-1], ms=2, alpha=0.2, rasterized=True, zorder=0)
 axins.hist2d(r['bp']-r['rp'], G, cmap=cmap, bins=200, norm=PowerNorm(gamma=1/3), rasterized=True, zorder=1)
 
 cmap = cm.devon_r
-# axins.plot(df['bp_rp'], kG, '.', c=cmap.colors[0], ms=1, alpha=0.2, rasterized=True, zorder=0)
-# axins.hist2d(df['bp_rp'], kG, cmap=cmap, bins=200, cmin=10, norm=PowerNorm(gamma=1/3), rasterized=True, zorder=1)
+axins.plot(df['bp_rp'], kG, '.', c=cmap.colors[-1], ms=2, alpha=0.2, rasterized=True, zorder=0)
+axins.hist2d(df['bp_rp'], kG, cmap=cmap, bins=200, cmin=10, norm=PowerNorm(gamma=1/3), rasterized=True, zorder=1)
 for mass in [0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4]:
     _, _, _, mags = tracks.interp_mag([mass] + params, bands)
     axins.plot(mags[:, 1]-mags[:, 2], mags[:, 0], "-", color="white")
 
 mask = df["kepid"].isin(s17) & ~df["kepid"].isin(d16) & ~df["kepid"].isin(l17)
-ls, = axins.plot(df.loc[mask, 'bp_rp'], kG.loc[mask], "o", ms=4, c="white", alpha=0.5, label="Serenelli et al. (2017)")
+ls, = axins.plot(df.loc[mask, 'bp_rp'], kG.loc[mask], "o", ms=4, c="white", markerfacecolor="none", label="Chaplin et al. (2011)")
 
 c = cm.buda.resampled(2).colors
 mask = df["kepid"].isin(l17)
@@ -186,7 +162,7 @@ c = cmap.colors[len(cmap.colors)//2]
 ax.legend(handles=[ld, ll, ls], loc="lower right", facecolor=c, edgecolor=c)
 plt.show()
 print("Saving plot.")
-fig.tight_layout()
-fig.savefig("../figures/hr-diagram_r.pdf", format="pdf", dpi=300)
+# fig.tight_layout()
+# fig.savefig("../figures/hr-diagram_r.pdf", format="pdf", dpi=300)
 
 print("Done.")
