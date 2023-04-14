@@ -296,3 +296,5 @@ thesis.pdf
 __pycache__/
 .ipynb_checkpoints/
 *.egg-info/
+
+scripts/data/
