@@ -12,22 +12,24 @@
 %
 \chapter{Conclusion}
 
-We have shown that a hierarchical Bayesian model can improve the precision of inferred stellar parameters while accounting for uncertainty in helium and physics approximations.
+We demonstrated that a hierarchical Bayesian model (HBM) can improve the precision of inferred stellar parameters while accounting for uncertainty in helium abundance and other physics. This provides a framework for modelling large populations of stars at the same time. 
 
-We also showed we can use a Gaussian process to improve measurement of the glitch.
+To emulate the stellar models, we found that a neural network could predict stellar observables to satisfactory precision (see Appendix \ref{apx:hmd}). This gave us a simple model which maps stellar parameters to observables. Future applications of this method include research into automating the training process. Generating the grid of stellar models to use a training data is still an expensive process. There is scope to create an algorithm which computes more stellar evolutionary tracks in regions of parameter space where the neural network performs poorly.
 
-A natural next step would be to include glitch parameter in the HBM.
+Extend the method to include individual modes. We did this with \(\delta\) Scuti-type stars \citep{Scutt.Murphy.ea2023}.
 
-Recently, there have been more dwarf and subgiant stars from \emph{TESS} \citep{Hatt.Nielsen.ea2023}. Apply the HBM to these.
+We showed that we can use a Gaussian Process (GP) to improve measurements of the helium glitch signature in oscillation mode frequencies. The form of mode frequencies as a function of \(n\) is not exactly known, making it a natural candidate for a GP model. Our method showed promise compared to those which have come before \citep[e.g.][]{Verma.Raodeo.ea2019}. We hope to build a more informed prior on the model parameters and publish this method soon with more examples.
 
-How about extending model to large number of red giants? Need to include overshoot.
+A natural next step would be to include helium glitch parameters in the HBM. Our GP glitch model can be ran on both observed and modelled mode frequencies, providing extra parameters to include in our stellar model emulator. This should improve inference of helium abundance for the best SNR stars. Since our HBM models the population distribution of helium, even a small number of stars with good helium constraint will in-turn improve helium estimates for the rest of the population.
+
+Recently, a \citet{Hatt.Nielsen.ea2023} identified a sample of \(\sim 4000\) have been identified in 120- and 20-second cadence \emph{TESS} data. Of these, up to 100 may be appropriate candidates for dwarf and subgiant stars to include in a future iteration of the HBM. Since \emph{TESS} is an all-sky survey, we may be able to test helium enrichment as a function of galactic coordinates.
+
+With upcoming PLATO, talk about numbers of stars 85,000 seismo \citep{Rauer.Catala.ea2014}. A few hundred exoplanets and a handful of habitable zone super-Earths. About the synergy of seismo and exoplanet hunting. Target to observe up to 20,000 bright V < 11 F-K dwarf stars obs over two year periods \citep{Goupil2017}. 
+
+How about extending model to large number of red giants? Need to include other parameters like overshoot. Mode amplitude larger for these brighter targets, making solar-like oscillator datasets sizes much larger (e.g. 10,000s with Kepler)
 
 Clusters of stars like... Apply the HBM to these.
 
-Gyrochronology?
+Also Nancy Grace Roman Space Telescope \citep[formerlly WFIRST;][]{Spergel.Gehrels.ea2015}. Asteroseismology of red giants probing deep into galactic bulge. Good for galactic archaeology. Although noisier than Kepler, and lower amplidue oscillations in infrared, still expecting about 1 mil oscillators \citep{Gould.Huber.ea2015}. Also Roman wants to do microlensing for m-dwarfs and free-floating planets. seismo of microlensing sources to help get distances to source. Not so good synergy with exoplanet detections though.
 
-With upcoming PLATO, talk about numbers of stars
-
-Also Nancy Grace Roman telescope.
-
-Long-term, HAYDN to be a dedicated asteroseismology mission looking at clusters. Lots of scope for HBMs here.
+Long-term, the recently proposed HAYDN mission would be a dedicated asteroseismology mission looking at dense stellar clusters \citep{Miglio.Girardi.ea2021}. Lots of scope for HBMs here.
