@@ -1,7 +1,7 @@
 \chapter[Hierarchically modelling stars]{Hierarchically modelling \emph{Kepler} dwarfs and subgiants to improve inference of stellar properties with asteroseismology}\label{apx:hmd}
 
-\emph{%
-    This appendix is taken from another source and relates to another chapter. Write short introduction.
+\textit{%
+    This chapter is taken verbatim from the appendix of \citet{Lyttle.Davies.ea2021} and is my own original work. It follows on from Chapter \ref{chap:hmd}. In this chapter, we explain the methodology behind the neural network emulator in Section \ref{sec:ann}. We describe the training process and present results for the accuracy of the emulator. In Section \ref{sec:beta}, we briefly show the beta distribution which was used as a prior for some parameters in the main body of work. Finally, we test the hierarchical model on a synthetic population of stars in Section \ref{sec:test-stars}.
 }
 
 \section[Neural Network]{Artificial neural network}\label{sec:ann}
@@ -138,7 +138,7 @@ We found good agreement between the test dataset and ANN predictions, within typ
 
 To represent the accuracy of the ANN, we present the median, $\mu_{1/2}$ and MAD estimator, $\sigma_\mathrm{MAD} = 1.4826\cdot\mathrm{median}(|E(x) - \mu_{1/2}|)$ of the error ($E(x)$) in Table \ref{tab:test}. The median is close to zero for all parameters, showing little systematic bias in the ANN. The MAD is also lower than observational uncertainties quoted in Section \ref{sec:data}. The spread in error for $\dnu$ of $\SI{0.06}{\mu\Hz}$ is comparable to a small number of observations with the best signal-to-noise. However, the error in $\dnu$ predictions is also comparable to other systematic uncertainties in $\dnu$ discussed in Section \ref{subsec:seismo_model}. Therefore, a robust model which takes account of systematic uncertainties pertaining to $\dnu$, including those from the ANN, will be explored in future work (Carboneau et al. in preparation).
 
-\section{Prior distributions}
+\section{Prior distributions}\label{sec:beta}
 
 \begin{figure}[!tb]
     \centering
