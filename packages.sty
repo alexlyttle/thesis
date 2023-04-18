@@ -38,6 +38,8 @@
 \usepackage{setspace}
 \doublespacing
 
+% Short titles only for headers, TOC use long titles
+\usepackage[toctitles]{titlesec}
 
 %% HYPERLINKS
 %
@@ -85,6 +87,9 @@
 \usepackage[%
   style=authoryear-comp,
   natbib=true,
+  url=false,
+  giveninits=true,  % Given name as initials only, uncomment if no compile
+  uniquename=init,  % Very useful, use initials for unique names
 %   uniquename=false,  % Uncomment this if don't care about unique author names in text.
   uniquelist=false   % Uncomment this if don't care about author lists in text.
   ]{biblatex}
@@ -115,7 +120,6 @@
 \usepackage[acronym,toc]{glossaries}
 \makeglossaries
 
-
 %% NEW COMMANDS
 %
 % Define your new commands here, e.g.
@@ -124,9 +128,9 @@
 \newcommand{\ee}{\mathrm{e}}  % For Euler's constant 'e'
 
 \newcommand{\numax}{\ensuremath{{\nu_\mathrm{max}}}}
-\newcommand{\dnu}{\ensuremath{\Delta\nu}}
+\newcommand{\dnu}{\ensuremath{{\Delta\nu}}}
 \newcommand{\metallicity}{\ensuremath{[\mathrm{M}/\mathrm{H}]}}
-\newcommand{\teff}{\ensuremath{T_\mathrm{eff}}}
+\newcommand{\teff}{\ensuremath{{T_\mathrm{eff}}}}
 \newcommand{\mlt}{\ensuremath{{\alpha_\mathrm{MLT}}}}
 \newcommand{\real}{\ensuremath{{\mathrm{Re}}}}
 \newcommand{\imag}{\ensuremath{{\mathrm{Im}}}}
@@ -154,6 +158,7 @@
 \newcommand{\gitremote}{https://github.com/alexlyttle/thesis}
 \newcommand{\gitbranch}{glitch}  % TODO: automate
 
+% \listfiles
 
 %% INFO
 % Layout and Margins
