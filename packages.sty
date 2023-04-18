@@ -23,7 +23,10 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+% Serif and math fonts
 \usepackage{newtxtext, newtxmath}
+% Sans-serif font
+\usepackage{FiraSans}
 
 \usepackage{csquotes}  % When loading babel with biblatex
 
@@ -34,12 +37,19 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 
+% Headers setup
+\fancyhead{}
+\fancyhead[LE,RO]{\sffamily\rightmark}
+\fancyhead[LO,RE]{\sffamily\leftmark}
+\fancyfoot[C]{\thepage}
+
 % Set spacing
 \usepackage{setspace}
 \doublespacing
 
 % Short titles only for headers, TOC use long titles
-\usepackage[toctitles]{titlesec}
+% 'sf' option for sans-serif headings
+\usepackage[toctitles,sf]{titlesec}
 
 %% HYPERLINKS
 %
@@ -101,6 +111,7 @@
 %
 \usepackage{float}
 \usepackage{subcaption}
+\captionsetup{font={sf,small}}  % Uncomment for sans-serif captions
 
 \usepackage{longtable}
 \usepackage{booktabs}
