@@ -30,6 +30,7 @@
 % \usepackage[eulergreek]{sansmath}
 
 \usepackage{csquotes}  % When loading babel with biblatex
+\usepackage{anyfontsize}  % For custom font sizes
 
 
 %% HEADERS & SPACING
@@ -39,10 +40,30 @@
 \pagestyle{fancy}
 
 % Headers setup
-\fancyhead{}
-\fancyhead[LE,RO]{\sffamily\rightmark}
-\fancyhead[LO,RE]{\sffamily\leftmark}
-\fancyfoot[C]{\thepage}
+\fancypagestyle{main}{%
+  \fancyhf{}
+%   \fancyhead{}
+%   \fancyhead[LE,RO]{\sffamily\nouppercase{\rightmark}}
+%   \fancyhead[LO,RE]{\sffamily\nouppercase{\leftmark}}
+  \fancyhead[RO]{\itshape{\rightmark}}
+  \fancyhead[LE]{\itshape{\leftmark}}
+%   \fancyfoot{}
+%   \fancyfoot[C]{\thepage}
+  \fancyfoot[RO]{\thepage}
+  \fancyfoot[LE]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+\fancypagestyle{plain}{%
+%   \fancyfoot{}
+  \fancyhf{}
+%   \fancyfoot[C]{\thepage}
+  \fancyfoot[RO]{\thepage}
+  \fancyfoot[LE]{\thepage}
+}
+
+\pagestyle{main}
 
 % Set spacing
 \usepackage{setspace}
@@ -53,6 +74,12 @@
 \usepackage[toctitles,sf]{titlesec}
 \titleformat*{\subsubsection}{\sffamily\bfseries}  % modify subsubsection headings separately
 \titleformat*{\paragraph}{\sffamily\bfseries}
+
+\titleformat{\chapter}[display]
+{\sffamily\fontsize{64}{72}\selectfont}  % Careful with custom font if change size
+{\filleft\bfseries\thechapter}
+{20pt}
+{\filright\Huge}
 
 %% HYPERLINKS
 %
@@ -114,7 +141,7 @@
 %
 \usepackage{float}
 \usepackage{subcaption}
-\captionsetup{font+=small,labelfont+={sf,bf}}  % Uncomment for small captions and sans-serif bold labels
+\captionsetup{labelfont+={sf,bf}}  % Uncomment for small captions and sans-serif bold labels
 % \captionsetup{font+=sf}  % Uncomment for sans-serif captions
 % Sans serif math in captions
 % \DeclareCaptionFont{sansmath}{\sansmath}
