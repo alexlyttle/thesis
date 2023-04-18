@@ -51,8 +51,8 @@
 % Short titles only for headers, TOC use long titles
 % 'sf' option for sans-serif headings
 \usepackage[toctitles,sf]{titlesec}
-\titleformat*{\subsubsection}{\sffamily\itshape}  % modify subsubsection headings separately
-\titleformat*{\paragraph}{\sffamily\itshape}
+\titleformat*{\subsubsection}{\sffamily\bfseries}  % modify subsubsection headings separately
+\titleformat*{\paragraph}{\sffamily\bfseries}
 
 %% HYPERLINKS
 %
@@ -114,9 +114,11 @@
 %
 \usepackage{float}
 \usepackage{subcaption}
-\captionsetup{font={sf,small},labelfont={bf}}  % Uncomment for sans-serif captions
+\captionsetup{font+=small,labelfont+={sf,bf}}  % Uncomment for small captions and sans-serif bold labels
+% \captionsetup{font+=sf}  % Uncomment for sans-serif captions
+% Sans serif math in captions
 % \DeclareCaptionFont{sansmath}{\sansmath}
-% \captionsetup{font={sf,small,sansmath},labelfont={bf}}
+% \captionsetup{font+={sf,sansmath}}
 
 \usepackage{longtable}
 \usepackage{booktabs}
