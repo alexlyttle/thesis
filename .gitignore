@@ -297,4 +297,4 @@ __pycache__/
 .ipynb_checkpoints/
 *.egg-info/
 
-scripts/data/
+scripts/data/*

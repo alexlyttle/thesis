@@ -37,13 +37,12 @@
 
 % Specify which files to include (for faster compile time)
 \includeonly{
-  % chapters/introduction,
-  % chapters/hbm,
-  % chapters/nn,
-  % chapters/lyttle21,
-  % chapters/glitch,
+  chapters/introduction,
+  chapters/hbm,
+  chapters/lyttle21,
+  chapters/glitch,
   chapters/conclusion,
-  % appendices/lyttle21
+  appendices/lyttle21
 }
 
 %% TITLEPAGE DETAILS ----------------------------------------------------------
@@ -74,7 +73,8 @@
 
 %% ACKNOWLEDGEMENTS -----------------------------------------------------------
 %
-\acknowledgements{\lipsum[3-6]}
+\acknowledgements{%
+This work made use of the gaia-kepler.fun crossmatch database created by Megan Bedell.}
 
 
 %% DOCUMENT ===================================================================
@@ -101,6 +101,7 @@
   %
   % Add your chapters here
   \include{chapters/introduction}
+  \include{chapters/seismo}
   \include{chapters/hbm}
   \include{chapters/nn}
   \include{chapters/lyttle21}
