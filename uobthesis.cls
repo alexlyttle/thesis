@@ -62,20 +62,20 @@
         \includegraphics[width=90mm]{\@logo}
       \else%
         \hspace{0pt}
-      \fi
+      \fi%
 
-      \vfill\Large%
-      \MakeUppercase{\@title}
+      \vfill\LARGE%
+      \MakeUppercase{\@title}%
 
       \vspace{0.5cm}\normalsize%
-      by
+      by\LARGE%% Immediately switch back to large before new line 
 
       \vspace{0.5cm}%
-      \Large\MakeUppercase{\@author}
+      \MakeUppercase{\@author}%
 
       \vfill\normalsize%
       A thesis submitted to the University of Birmingham for the degree of\\
-      \MakeUppercase{Doctor of Philosophy}
+      \MakeUppercase{Doctor of Philosophy}%
     \end{center}
 
     \vspace{1.0cm}
@@ -102,9 +102,9 @@
 
 %% FRONTMATTER
 %
-\newcommand*{\abstract}[1]{\def\@abstract{#1}}
-\newcommand*{\dedication}[1]{\def\@dedication{#1}}
-\newcommand*{\acknowledgements}[1]{\def\@acknowledgements{#1}}
+\newcommand{\abstract}[1]{\def\@abstract{#1}}
+\newcommand{\dedication}[1]{\def\@dedication{#1}}
+\newcommand{\acknowledgements}[1]{\def\@acknowledgements{#1}}
 
 \newcommand*{\abstractname}{Abstract}
 \newcommand*{\thanksname}{Acknowledgements}
