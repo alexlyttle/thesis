@@ -14,6 +14,8 @@
 
 \newif\ifthesis@print\thesis@printfalse
 \DeclareOption{print}{\thesis@printtrue}
+\newif\ifthesis@editor\thesis@editorfalse
+\DeclareOption{editor}{\thesis@editortrue}
 \DeclareOption*{\OptionNotUsed}
 \ProcessOptions\relax
 
@@ -44,8 +46,8 @@
   \fancyhf{}
 %   \fancyhead[LE,RO]{\sffamily\nouppercase{\rightmark}}
 %   \fancyhead[LO,RE]{\sffamily\nouppercase{\leftmark}}
-  \fancyhead[RO]{\itshape{\rightmark}}
-  \fancyhead[LE]{\itshape{\leftmark}}
+  \fancyhead[RO]{\slshape\rightmark}
+  \fancyhead[LE]{\slshape\leftmark}
   \fancyfoot[C]{\thepage}
 %   \fancyfoot[RO]{\thepage}
 %   \fancyfoot[LE]{\thepage}
@@ -68,13 +70,13 @@
 
 % Short titles only for headers, TOC use long titles
 % 'sf' option for sans-serif headings
-\usepackage[toctitles,sf]{titlesec}
-\titleformat*{\subsubsection}{\sffamily\bfseries}  % modify subsubsection headings separately
-\titleformat*{\paragraph}{\sffamily\bfseries}
+\usepackage[toctitles,sf,bf]{titlesec}
+% \titleformat*{\subsubsection}{\sffamily\bfseries}  % modify subsubsection headings separately
+% \titleformat*{\paragraph}{\sffamily\bfseries}
 
 \titleformat{\chapter}[display]
-{\sffamily\fontsize{64}{72}\selectfont}  % Careful with custom font if change size
-{\filleft\bfseries\thechapter}
+{\sffamily\bfseries\fontsize{64}{72}\selectfont}  % Careful with custom font if change size
+{\filleft\thechapter}
 {20pt}
 {\filright\Huge}
 
@@ -158,6 +160,12 @@
 \usepackage{tocbibind}  % Add TOC and bibliography to TOC
 \usepackage{lipsum}     % For placeholder text
 \usepackage{nicefrac}
+
+% For line numbers
+\ifthesis@editor
+  \usepackage{lineno}
+  \linenumbers
+\fi
 
 \usepackage[acronym,toc]{glossaries}
 \makeglossaries
