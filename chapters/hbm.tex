@@ -12,15 +12,13 @@
 %
 \chapter{Hierarchical Bayesian Models}\label{chap:hbm}
 
-\todo{Introduce hierarchical models as a concept. Maybe like in Hall, start with context about generative models. Then show that when we expend models to, e.g. many stars, it is useful to extend our prior to represent correlations in the stellar population. In a sense, creating priors informed by population-level distributions. Here is a good opportunity to reference past work, and maybe expand on some of the background given in the introduction to \citep{Lyttle.Davies.ea2021}.}
+When modelling a single star, we can use a variant of Bayes' theorem (Equation \ref{eq:bayes}) to estimate the posterior probability of its parameters. We choose priors to represent our current knowledge. For example, if we observe a star in the Milky Way at random, we expect its mass to belong to an Initial Mass Function \citep[IMF; e.g.][]{Chabrier2003} without other prior knowledge. In fact, an IMF prior is an input option for BASTA \citep{AguirreBorsen-Koch.Rorsted.ea2022}. Other prior assumptions include a helium enrichment law which determines the star's initial helium abundance from its metallicity, or that its age must not be older than the universe.
 
-In Bayesian inference, we depend on the concept of our model \emph{a priori} --- a probability distribution which represents our prior knowledge of the model before seeing the data.
+Let us consider modelling a large population of stars simultaneously. For example, we may want to create a catalogue of stellar parameters to use in exoplanet and galactic research. We could treat the parameters for each star independently, repeating the modelling procedure for each star in the sample. However, we know that stars belong to population distributions like the IMF. In some cases, these population distributions are not well understood and assuming one exactly can introduce bias into our model. Instead, it could be better to let the data inform such population priors.
 
-A Bayesian model determines the \emph{a posteriori} probability of its parameters, \(\theta\) given observables, (\(y\)) using Bayes' theorem. The model parameters predict the observables through a generative model, for example \(y = f(\theta)\). \todo{Don't be too textbook-like, this prob not needed.}
+Hierarchical (or multi-level) Bayesian models parametrise population-level prior distributions on individual stellar parameters. These population-parameters (\emph{hyperparameters}) which govern the population must themselves have prior distributions as per the Bayesian formalisation. The hierarchical aspect comes from the distinction between hyperparameters which take one value across a population and those which vary from star-to-star. In the next section, we go through an simple example hierarchical model. Then, we discuss a few parameters which could be given the hierarchical treatment in Section \ref{sec:hbm-phys}.
 
-Let us consider observing a population of stars to determine their properties. \todo{Give examples of publications which do this in a star-by-star bayesian way, e.g. BASTA}. For example, the BASTA code determines stellar ages, masses and other parameters using Bayesian inference \citep{SilvaAguirre.Davies.ea2015,AguirreBorsen-Koch.Rorsted.ea2022}. Models like this treat each star in the population independently. However, there are cases where a priori stellar parameters may not be independent of each other. We expect stars in an open cluster to have formed at a similar time, have similar chemical abundances and be at a similar distance from the observer. We also expect the chemical abundances of stars in the galaxy to be enriched in a predictable way. \todo{Later can expand on this with references to how we think they enriched}.
-
-\section[Stellar distances]{Stellar distances in an open cluster analogue}\label{sec:hbm-dist}
+\section[Stellar Distances]{Stellar Distances in an Open Cluster Analogue}\label{sec:hbm-dist}
 
 \newcommand{\appmag}{\ensuremath{\mathrm{v}}}
 \newcommand{\absmag}{\ensuremath{\mathrm{V}}}
@@ -40,7 +38,7 @@ We simulated noisy observations of \(\varpi_i\) and \(\appmag_i\) by randomly dr
 
 In Section \ref{sec:simple-model}, we describe a simple Bayesian model for determining distances and absolute magnitudes of stars in the cluster. Then, we define the HBM in Section \ref{sec:hbm-model} which incorporates a population-level distribution over distance. We outline our method for inferring model parameters in Section \ref{sec:hbm-inf} and then compare results from the models in Section \ref{sec:hbm-comp}. Finally, we explore how the HBM scales with the number of stars observed in Section \ref{sec:hbm-scale}.
 
-\subsection{Simple model}\label{sec:simple-model}
+\subsection{Simple Model}\label{sec:simple-model}
 
 We started with a simxple model which treats each star independently. Using Bayes' theorem, we write the posterior probability density of the model parameters, \(d_i, \absmag_i\) given the observed parameters \(\varpi_i, \appmag_i\) as,
 %
@@ -69,13 +67,13 @@ where \(\mathcal{U}(x \,|\, a, b)\) is a uniform distribution over \(x\) from \(
 \begin{figure}[tb]
     \centering
     \includegraphics{figures/simple-pgm.pdf}
-    \caption{Probabilistic graphical model for the simple (non-hierarchical) model. Parameters are given by circular nodes and connected by arrows showing the direction of dependency. Observed parameters are shaded, and fixed parameters are given by filled dots. The box represents a set of parameters belonging to the \(i\)-th star.}
+    \caption[Probabilistic graphical model for the simple (non-hierarchical) model]{Probabilistic graphical model for the simple (non-hierarchical) model. Parameters are given by circular nodes and connected by arrows showing the direction of dependency. Observed parameters are shaded, and fixed parameters are given by filled dots. The box represents a set of parameters belonging to the \(i\)-th star.}
     \label{fig:simple-pgm}
 \end{figure}
 
 In Figure \ref{fig:simple-pgm}, we show a probabilistic graphical model of the simple model. This shows the connections between parameters in the model. There is no hierarchy in this model because each parameter exists within the box, meaning no parameters are shared between stars. However, we know that the stellar distances are correlated. For example, it is highly unlikely that one star in the cluster is at a distance of 5 and another is at a distance of 15. If we can exploit this expectation, we could improve our prior and thus improve the inference of \(d_i\) and \(\absmag_i\).
 
-\subsection{Hierarchical model}\label{sec:hbm-model}
+\subsection{Hierarchical Model}\label{sec:hbm-model}
 
 In this section, we present an HBM which includes the known correlation between distances to the stars in this open cluster analogue. We assumed the stars are all members of the same open cluster. Therefore, their distances can be modelled by some distribution. For this example, we assumed that each distance is drawn from a normal distribution characterised by new \emph{hyperparameters} \(\mu_d\) and \(\sigma_d\),
 %
@@ -116,24 +114,24 @@ We chose to use a log-normal prior for \(\sigma_d\) to ensure that the parameter
 \begin{figure}[tb]
     \centering
     \includegraphics{figures/hbm-pgm.pdf}
-    \caption{Probabilistic graphical model extension of Figure \ref{fig:simple-pgm} but for the HBM. The hyperparameters exist outside of the box to show that they are the same across the population of stars.}
+    \caption[Probabilistic graphical model for the hierarchical model]{Probabilistic graphical model extension of Figure \ref{fig:simple-pgm} but for the HBM. The hyperparameters exist outside of the box to show that they are the same across the population of stars.}
     \label{fig:hbm-pgm}
 \end{figure}
 
 We show the probabilistic graphical model of the HBM in Figure \ref{fig:hbm-pgm}. Here, we see how all individual stellar parameters depend on \(\mu_d\) and \(\sigma_d\). This is a simple extension of Figure \ref{fig:simple-pgm}, but with parameters existing outside of the box to illustrate the model hierarchy. We can imagine extending this framework to multiple levels, or adding additional hyperparameters.
 
-\subsection{Inferring the model parameters}\label{sec:hbm-inf}
+\subsection{Inferring the Model Parameters}\label{sec:hbm-inf}
 
 To infer the model parameters, we need to calculate the marginalised posterior distributions for each parameter. We could obtain these analytically by integrating the full posterior distribution over all model parameters except for the parameter of interest. Alternatively, we can approximate the marginalised posterior using a Markov Chain Monte Carlo (MCMC) sampling algorithm. We chose the latter approach because it is scalable to more complicated models where the marginalisation is not analytically solvable.
 
 We used the No U-Turn Sampler \citep[NUTS;][]{Hoffman.Gelman2014} as implemented in the \textsc{NumPyro} Python package \citep{Phan.Pradhan.ea2019,Bingham.Chen.ea2019} to sample from the approximate posterior distribution for both models. We took 1500 samples, with the first 500 samples discarded as `warmup' steps, repeated for 10 MCMC chains. We increased the target accept probability from 0.8 to 0.98 for the HBM, to minimise the number of divergences encountered during sampling. The resulting marginalised posterior samples amounted to \num{10000} per parameter.
 
-\subsection{Comparing the models}\label{sec:hbm-comp}
+\subsection{Comparing the Models}\label{sec:hbm-comp}
 
 \begin{figure}[p]
     \centering
     \includegraphics{figures/hbm-results.pdf}
-    \caption{Plots comparing the simple model (\emph{blue}) to the HBM (\emph{orange}). \emph{Left column:} Split violin-plots showing the difference between marginalised posterior distributions for the parameters and their true values. \emph{Right column:} Kernel density estimates of the parameter-truth differences over all \(N_\mathrm{stars}\). Observed values of the parameters are given by empty black circles.}
+    \caption[Plots comparing results from the simple model to the HBM]{Plots comparing results from the simple model (\emph{blue}) to the HBM (\emph{orange}). \emph{Left column:} Split violin-plots showing the difference between marginalised posterior distributions for the parameters and their true values. \emph{Right column:} Kernel density estimates of the parameter-truth differences over all \(N_\mathrm{stars}\). Observed values of the parameters are given by empty black circles.}
     \label{fig:hbm-results}
 \end{figure}
 
@@ -144,7 +142,7 @@ We compared the difference between model parameters and their true values in Fig
 \begin{figure}[!tb]
     \centering
     \includegraphics{figures/hbm-dist-corr.pdf}
-    \caption{A corner plot showing the marginalised and joint posterior distributions of the distance to the first three stars. The simple model is shown in \emph{blue} and the HMB is shown in \emph{orange}. The true values are given by the \emph{black} lines. The range of the distributions are limited to 98 per cent of the simple model's marginalised posteriors.}
+    \caption[A corner plot showing the marginalised and joint posterior distributions of the distance to the first three stars]{A corner plot showing the marginalised and joint posterior distributions of the distance to the first three stars. The simple model is shown in \emph{blue} and the HMB is shown in \emph{orange}. The true values are given by the \emph{black} lines. The range of the distributions are limited to 98 per cent of the simple model's marginalised posteriors.}
     \label{fig:hbm-corr}
 \end{figure}
 
@@ -153,13 +151,13 @@ In Figure \ref{fig:hbm-corr}, we compared the joint and marginalised posteriors 
 \begin{figure}[!tb]
     \centering
     \includegraphics{figures/hbm-global.pdf}
-    \caption{The joint and marginalised posterior distributions for the mean (\(\mu_d\)) and standard deviation (\(\sigma_d\)) of stellar distances in the cluster. The simple model is shown in \emph{blue} and the HMB is shown in \emph{orange}. The true values are given by the \emph{black} lines.}
+    \caption[The joint and marginalised posterior distributions for the mean and standard deviation of stellar distances in the cluster]{The joint and marginalised posterior distributions for the mean (\(\mu_d\)) and standard deviation (\(\sigma_d\)) of stellar distances in the cluster. The simple model is shown in \emph{blue} and the HMB is shown in \emph{orange}. The true values are given by the \emph{black} lines.}
     \label{fig:hbm-global}
 \end{figure}
 
 One consequence of the HBM was that it parametrised the population mean (\(\mu_d\)) and standard deviation (\(\sigma_d\)) of the distances to stars in the cluster independently from the observed noise. For the simple model, we estimated \(\mu_d\) and \(\sigma_d\) by taking the sample mean and standard deviation of distances in the cluster for each posterior sample. We compared the resulting posterior distributions for \(\mu_d\) and \(\sigma_d\) from the two models in Figure \ref{fig:hbm-global}. We found the mean distance from the simple model was \(\mu_d = 10.50 \pm 0.27\), whereas the HBM was more accurate with \(\mu_d = 10.01 \pm 0.24\). We also found the simple model massively overestimated the standard deviation of cluster distances with \(\sigma_d = 1.815_{-0.293}^{+0.360}\), compared to the HBM's more accurate value of \(\sigma_d = 0.131_{-0.088}^{+0.280}\). The simple model cannot easily distinguish between the uncertainty on individual distances and the spread of the population.
 
-\subsection{Scaling with the number of stars}\label{sec:hbm-scale}
+\subsection{Scaling with the Number of Stars}\label{sec:hbm-scale}
 
 To test how the model scales with number of stars, we repeated the HBM method for different \(N_\mathrm{stars}\). We randomly generated true and observed parameters in the same way as described at the beginning of \ref{sec:hbm-dist} for 320 stars. The observables were different to the last section, but drawn from the same distributions. We then sampled from the HBM for the first 20, 80 and 320 stars. These represented ratios in \(N_\mathrm{stars}^{1/2}\) of \(1\), \(2\) and \(4\) respectively.
 
@@ -172,8 +170,14 @@ To test how the model scales with number of stars, we repeated the HBM method fo
 
 Figure \ref{fig:hbm-extended} shows how the distance estimates improved with increasing number of stars observed, \(N_\mathrm{stars}=(20,80,320)\). Unsurprisingly, the standard deviation on \(\mu_d\) decreased by a factor of \(N_\mathrm{stars}^{1/2}\) each time, with \(s_{\mu_d} \approx (0.24, 0.12, 0.06)\). We also expected a similar reduction in uncertainty for individual distances, albeit limited by the observational noise. Typical standard deviations for \(d_i\) were \(s_{d,i} \approx (0.30, 0.17, 0.15)\). As expected, the distance uncertainties also halved from \(20\) to \(80\) stars. However, this effect lessened with 320 stars. This demonstrated the method is still limited by the error budget across all observed parameters. Despite this, the HBM proved to be a useful way of getting more information from a limited number of noisy observations. 
 
-\section[Stellar properties]{Inferring physical properties of stars}
+\section[Stellar Properties]{Inferring Physical Properties of Stars}\label{sec:hbm-phys}
 
-\todo{We have seen a simple example of an HBM on distances to stars. In this thesis, we are interested in determining the physical properties of stars, such as their mass, radius and age.}
+We have seen how a simple HBM can be used to improve the distances and absolute magnitudes of stars in a cluster analogue. This kind of model only represents part of the puzzle for determining ages, masses, and radii in a population of stars. In these Bayesian stellar models (discussed previously in Section \ref{sec:modelling-stars}) we have more parameters which could be considered hierarchically. In this section, we discuss a few possible population distributions which could form a hierarchical model of stellar physics.
 
-Typically, we model stars independently of each other. However, there a several factors which could correlate from star-to-star. \todo{Introduce the idea of hierarchically modelling stars. Finish by explaining that this is slow and difficult to do ad hoc, e.g. propose initial parameters from population distribution and evolve a model. We would like a way to emulate MESA etc. This leads to the next section on emulating stellar models with machine learning.}
+\paragraph{Mass} As mentioned in the introduction to this chapter, an IMF may be used as a prior on the mass of a star. If modelling stars with masses spanning a couple of orders of magnitude, it makes sense to draw their masses from an IMF. To make this hierarchical, we would parametrise the IMF as a conditional distribution which informs individual stellar masses. This way, the population of stars constrains the IMF while in-turn sharing information. In this thesis, we only consider stars in a narrow mass range (\SIrange{0.8}{1.2}{\solarmass}) where the IMF does not change much. However, a mass hierarchy like this may be useful in future work.
+
+\paragraph{Age} We do not expect a star to be older than the universe. This makes the age of the universe a natural upper limit to a prior on stellar age. There are also populations of stars where we expect the age to be tightly related. For example, star systems like binaries and clusters are expected to have been formed at a similar time. Similarly to the distances in Section \ref{sec:hbm-dist}, a hierarchical model in age would parametrise the mean and variance of ages in these systems and in-turn improve other connected model parameters. This sort of analysis could be extended to find mixtures of age distributions in the galaxy which could indicate mergers \citep[e.g. \emph{Gaia}-Enceladus;][]{Helmi.Babusiaux.ea2018}. However, we do not further consider a HBM in age this in this work.
+
+\paragraph{Chemical Abundances} Unlike mass and age, surface abundances of stars can be measured directly with spectroscopy. However, not all abundances are easily measured. For example, helium ionises below the surface of the cool stars being studied in this work. Also, diffusion and settling of elements during stellar evolution means surface abundances differ from formation to time of observation. Similarly to age, we can expect clusters of stars to share initial abundances. However, the distribution of abundances in the Milky Way may also be parametrised. As stars evolve they convert hydrogen into helium and heavier elements. Supernovae enrich the galaxy with these elements monotonically, which go on to constitute new stars. A hierarchical model could include this assumption to tie the abundance of helium to heavier elements.
+
+\paragraph{Approximations of Stellar Physics} A hierarchical model need not be limited to real physical parameters. In stellar modelling, we often approximate stellar physics with \emph{pseudo}-physical parameters. For example, convective energy transfer is approximated by the mixing-length theory \citep[MLT;][]{Gough1977} parametrised by \(\mlt\). The value of \(\mlt\) which best models a star is likely to vary with other stellar parameters. It's effect on observables is small making \(\mlt\) difficult to constrain on a star-by-star basis. Hence, a hierarchical model would be able to condition individual values of \(\mlt\) on its population distribution. A distribution over pseudo-physical parameters is less intuitive, yet the HBM would allow us to build one empirically. In addition to the initial helium abundance, \(\mlt\) is modelled hierarchically in Chapter \ref{chap:hmd}.
