@@ -10,7 +10,7 @@
 % all distributions of LaTeX version 2005/12/01 or later.
 %
 %
-\chapter[Acoustic glitches]{Acoustic glitches as a signature of helium abundance}\label{chap:glitch}
+\chapter[Acoustic Glitches]{Acoustic Slitches as a Signature of Helium Abundance}\label{chap:glitch}
 
 So far in this thesis, we have shown that a hierarchical Bayesian model can be used to infer the helium abundance distribution in a stellar population. We also found how this improves the inference of fundamental stellar parameters. However, there is limited information about helium abundance in the stellar observables used (e.g. \(L, \teff, \Delta\nu\)).
 
@@ -24,7 +24,7 @@ Secondly, we show what causes acoustic glitches in solar-like oscillators in Sec
 
 Finally, we introduce a new method for modelling the glitch signature in Section \ref{sec:glitch-model}. 
 
-\section[1D example]{A one-dimensional example of a glitch}\label{sec:1d-glitch}
+\section[1D example]{A One-Dimensional Example of a Glitch}\label{sec:1d-glitch}
 
 A rapid variation in the structure of a medium induces an oscillation (\(\delta\omega\)) in the eigenfrequencies. To demonstrate this, we will explore a simple one-dimensional example \citep[e.g][]{Verner2005}. Consider a medium bound from \(x=0\) to \(x=L\) in which pressure waves can propagate at constant speed \(c\). The longitudinal displacement of the wave \(\xi\) must obey the wave equation,
 %
@@ -186,7 +186,7 @@ It would not be hard to believe that a similar oscillation could be found in the
 
 % NOTES: When it comes to fitting the helium glitch, consider first fitting a GP to the modes with a free noise term. Fix the kernel scale to a series of values and show that we can see the glitch in the residuals. Of course, this leaves the question of what kernel scale to use. Well, we could just model everything at once!
 
-\section[Glitches in stars]{Acoustic glitches in solar-like oscillators}\label{sec:glitch-star}
+\section[Glitches in Stars]{Acoustic Glitches in Solar-Like Oscillators}\label{sec:glitch-star}
 
 In the previous section, we considered a glitch in a homogeneous medium, where the speed of sound is constant everywhere else. In a star, the adiabatic sound speed is not constant. It depends on the density (\(\rho\)) and pressure (\(P\)),
 %
@@ -221,7 +221,7 @@ where the acoustic radius of the star\footnote{Not to be confused with the glitc
 
 In Figure \ref{fig:sound-speed-gradient}, we show the sound speed gradient with respect to \(\tau\) for model S \todo{Define model S in a previous chapter}. We see how the speed of sound changes smoothly throughout the star. In the convective envelope, where p-modes propagate, there is a noticeable wiggle around \SI{700}{\second} and a sharp change in direction at its base. The first is caused by the ionisation of helium, which affects \(\gamma\) by increasing the number of free electrons and thus modifying the free energy of the gas. We explore this further in Section \ref{sec:helium-glitch}. The second is due to a discontinuity in the second temperature gradient as the structure moves from convectively unstable to radiative, which will be discussed in Section \ref{sec:bcz-glitch} \todo{Put a few references here of work which has studied these before}.
 
-\subsection{Helium ionisation glitch}\label{sec:helium-glitch}
+\subsection{Helium Ionisation Glitch}\label{sec:helium-glitch}
 
 In this section, we will first show how the sound speed inside a solar-like star is affected by the ionisation of hydrogen and helium. Then, we will see that an increase in helium abundance increases the effect of helium ionisation on the speed of sound. Starting with the variational principle, we derive a commonly used form of the glitch signature found in the mode frequencies. In the process, we show that the oscillation modes are sensitive to changes in sound speed near the surface.
 
@@ -428,7 +428,7 @@ To get this in a more familiar form in terms of cyclic frequency \citep[e.g.][]{
 %
 where \(\phi_\heII = 2(\epsilon_\heII + \pi/4)\), and \(\nu_0 = (2 \tau_0)^{-1}\) is the inverse acoustic diameter of the star.
 
-\subsection{Base of the convective zone glitch}\label{sec:bcz-glitch}
+\subsection{Base of the Convective Zone Glitch}\label{sec:bcz-glitch}
 
 The sensitivity of p-modes to glitches gets smaller further into the star. However, we should not neglect the effect of a discontinuity at the base of the convective zone. This arises 
 
@@ -462,7 +462,7 @@ For high-order modes, \(\tau_0 \omega \gg 1\) and thus \(\tan^{-1}(2\tau_0\omega
 %
 where \(\phi_\bcz\) is some approximately constant phase term.
 
-\section[Modelling the glitch]{Modelling glitches in stellar oscillations}\label{sec:glitch-model}
+\section[Modelling the Glitch]{Modelling Glitches in Stellar Oscillations}\label{sec:glitch-model}
 
 Let us consider a non-rotating star which oscillates at frequencies \(\nu_{nl}\), where \(n\) and \(l\) are the radial order and angular degree of the modes. We may model the modes as the sum of a smoothly-varying component, \(\tilde{f}(n, l)\), and quickly-varying, small change in frequency, \(\delta\nu\), arising from glitches in the stellar structure,
 %
@@ -708,7 +708,7 @@ Both methods found similar values for \(\tau_\helium\) but relatively different 
 
 We calculated the helium glitch amplitude at a reference frequency of \SI{2188.5}{\micro\hertz}, equivalent to the value of \(\nu_{\max}\) obtained by \citet{Lund.SilvaAguirre.ea2017}. Samples from both posteriors are shown in the bottom panel of Figure \ref{fig:glitch-16cyga}. We found \(A_\helium^\mathrm{ref} = 0.260_{-0.065}^{+0.050}\) for the \citetalias{Verma.Raodeo.ea2019} method, and \(A_\helium^\mathrm{ref} = 0.333_{-0.073}^{+0.081}\) for the GP method. Both values were about 1-\(\sigma\) apart. Additionally, both methods found \(A_\bcz^\mathrm{ref} \sim 0.1\), with the GP method favouring a smaller value. The \citetalias{Verma.Raodeo.ea2019} method found some solutions with \(A_\bcz^\mathrm{ref}\) larger than \(A_\helium^\mathrm{ref}\), something we would not expect because the modes are less sensitive to structural changes deeper in the star.
 
-\begin{figure}[!tbp]
+\begin{figure}[!tb]
     \centering
     \includegraphics{figures/glitch-16cyga.pdf}
     \caption{Results for the glitch fit to 16 Cyg A using the \citetalias{Verma.Raodeo.ea2019} method (\emph{left}) and GP method (\emph{right}). The top panel shows 50 draws from the posterior prediction of \(\delta\nu = \delta\nu_\helium + \delta\nu_\bcz\) with the observed \(\nu_n\) minus the median smooth background component of the model. The middle and bottom panels shows the posterior sample probability density for the acoustic depths and reference amplitudes of the glitches respectively.}
@@ -728,7 +728,7 @@ We calculated the helium glitch amplitude at a reference frequency of \SI{2188.5
 
 Throughout this work, we found a smaller \(\delta\nu\) amplitude at low frequency with the GP method than with the \citetalias{Verma.Raodeo.ea2019} method. This was particularly visible in the best case and in 16 Cyg A. We expected this was a result of the different smooth background models. In Figure \ref{fig:best-smooth} we plotted the smooth component of each model extended to lower order, unobserved modes. We found the GP background component has a turning point at \(\nu \approx \SI{1900}{\micro\hertz}\), higher than the \citetalias{Verma.Raodeo.ea2019} method at \(\nu \approx \SI{1500}{\micro\hertz}\). The smooth component of the \citetalias{Verma.Raodeo.ea2019} method was confidently incorrect outside of the observed frequencies. Conversely, the GP method predicted closer to the truth with increasing uncertainty further from the observations. Therefore, it appears that the GP provided a more accurate representation of the true underlying function than the polynomial.
 
-\begin{figure}[!tbp]
+\begin{figure}[!tb]
     \centering
     \includegraphics[trim={0.4in 0.2in 0 0},clip]{figures/glitch-res.pdf}
     \caption{The difference between the model without the glitch components (\(f(n) - \delta\nu\)) predicted by the \citetalias{Verma.Raodeo.ea2019} method (A) and the GP method (B). The glitch components from the GP method are plot in gray for context. The 68 per cent confidence region is shaded for each line.}

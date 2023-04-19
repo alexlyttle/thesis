@@ -1,10 +1,10 @@
-\chapter[Hierarchically modelling stars]{Hierarchically modelling \emph{Kepler} dwarfs and subgiants to improve inference of stellar properties with asteroseismology}\label{apx:hmd}
+\chapter[Hierarchically Modelling Stars]{Hierarchically Modelling \emph{Kepler} Dwarfs and Subgiants to Improve Inference of Stellar Properties with Asteroseismology}\label{apx:hmd}
 
 \textit{%
     This chapter is taken verbatim from the appendix of \citet{Lyttle.Davies.ea2021} and is my own original work. It follows on from Chapter \ref{chap:hmd}. In this chapter, we explain the methodology behind the neural network emulator in Section \ref{sec:ann}. We describe the training process and present results for the accuracy of the emulator. In Section \ref{sec:beta}, we briefly show the beta distribution which was used as a prior for some parameters in the main body of work. Finally, we test the hierarchical model on a synthetic population of stars in Section \ref{sec:test-stars}.
 }
 
-\section[Neural Network]{Artificial neural network}\label{sec:ann}
+\section{Artificial Neural Network}\label{sec:ann}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -45,7 +45,7 @@ To fit the ANN, we used a set of training data, $\boldsymbol{\mathbb{D}}_\mathrm
 
 We trained the ANN using \textsc{TensorFlow} \citep{Abadi.Barham.ea2016}. We varied the architecture, number of batches, choice of loss function, optimizer, and regularisation during the optimisation phase. For each set of ANN parameters, we initialised the ANN with a random set of weights and biases and minimized the loss over a given number of \emph{epochs}. An epoch is defined as one iteration through the entire training dataset, $\boldsymbol{\mathbb{D}}_\mathrm{train}$. We tracked the loss for each ANN using an independent validation dataset to determine the most effective choice of ANN parameters (see Appendix \ref{sec:opt}).
 
-\subsection{Train, validation, and test data}\label{sec:train}
+\subsection{Train, Validation, and Test Data}\label{sec:train}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -138,7 +138,7 @@ We found good agreement between the test dataset and ANN predictions, within typ
 
 To represent the accuracy of the ANN, we present the median, $\mu_{1/2}$ and MAD estimator, $\sigma_\mathrm{MAD} = 1.4826\cdot\mathrm{median}(|E(x) - \mu_{1/2}|)$ of the error ($E(x)$) in Table \ref{tab:test}. The median is close to zero for all parameters, showing little systematic bias in the ANN. The MAD is also lower than observational uncertainties quoted in Section \ref{sec:data}. The spread in error for $\dnu$ of $\SI{0.06}{\mu\Hz}$ is comparable to a small number of observations with the best signal-to-noise. However, the error in $\dnu$ predictions is also comparable to other systematic uncertainties in $\dnu$ discussed in Section \ref{subsec:seismo_model}. Therefore, a robust model which takes account of systematic uncertainties pertaining to $\dnu$, including those from the ANN, will be explored in future work (Carboneau et al. in preparation).
 
-\section{Prior distributions}\label{sec:beta}
+\section{Prior Distributions}\label{sec:beta}
 
 \begin{figure}[!tb]
     \centering
@@ -149,7 +149,7 @@ To represent the accuracy of the ANN, we present the median, $\mu_{1/2}$ and MAD
 
 We chose a transformed beta distribution (see Equation \ref{eq:beta}) as the prior for the non-pooled stellar parameters as an alternative to a uniform distribution. Fig. \ref{fig:beta} shows the beta distribution compared with a uniform distribution for some parameter $x$ from 0 to 1. We found that the continuously differentiable nature of the beta distribution was preferred by the NUTS over the uniform distribution.
 
-\section[Synthetic stars]{The synthetic population}\label{sec:test-stars}
+\section{The Synthetic Population}\label{sec:test-stars}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -159,7 +159,7 @@ In this section, we present the results for the NP, PP, and MP models run on a s
 
 We evolved the synthetic stars to randomly chosen ages using \textsc{MESA}. We then took the output $\tau$, $\teff$, $L$, $\dnu$, and $\metallicity_\mathrm{surf}$ from the models and used these as true values for each of the stars. We added random noise to the observed quantities centred on the true values with a standard deviation of 2.2 per cent in $\teff$, 3.5 per cent in $L$, \SI{0.9}{\micro\hertz} in $\dnu$, and \SI{0.07}{\dex} in $\metallicity_\mathrm{surf}$ chosen to be representative of the APOKASC sample.
 
-\subsection{Stellar parameters}
+\subsection{Stellar Parameters}
 
 We found that the NP model recovered the true values for the individual stellar parameters, but the uncertainties were unreliable. The observational quantities alone were not good enough to constrain $Y_\mathrm{init}$ and $\mlt$. As a result, their distributions were truncated at the bounds of their priors. These boundary effects skewed the marginalised posterior means for $Y_\mathrm{init}$ and $\mlt$ towards the centre of the prior (0.28 and 2.0 respectively).
 
@@ -176,7 +176,7 @@ We reran the PP model with 10 and 50 stars chosen randomly from the sample of sy
 
 In Fig. \ref{fig:shrinkage} we also see a similar reduction in uncertainty for $\tau$, $M$, and $R$, with all models improve upon the NP model. However, we do not see the same effect in $Z_\mathrm{init}$ for which the uncertainty appears dominated by observations of $\metallicity_\mathrm{surf}$ .
 
-\subsection{Population parameters}
+\subsection{Population Parameters}
 
 \begin{figure}
     \centering
@@ -196,7 +196,7 @@ In Fig. \ref{fig:test-corners-pp}, we see that the PP model also recovers the hy
 
 Fig. \ref{fig:test-corners-mp} shows the hyperparameter results for the MP model. Here, $\mlt$ was assumed to be the same for all stars. This model also recovers the true hyperparameters for helium well, and the assumed value for $\mlt$ is within uncertainty of the true $\mu_\alpha$.
 
-\section{The Sun as a star}\label{sec:sun-res}
+\section{The Sun as a Star}\label{sec:sun-res}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
