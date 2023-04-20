@@ -22,11 +22,13 @@ Acoustic glitches in Sun-like stars arise from sharp variations in their structu
 
 The glitch could be further studied in stars other than the Sun with the advent of space-based missions. With \emph{CoRoT} providing evidence of solar-like oscillations in red giants, \citet{Miglio.Montalban.ea2010,Mazumdar.Michel.ea2012} found evidence of glitch in red giants. Sample of \emph{Kepler} stars \citep{Mazumdar.Monteiro.ea2012,Mazumdar.Monteiro.ea2014,Verma.Raodeo.ea2017} compare fitting directly and to second differences. For example, 16 Cyg A and B \citet{Verma.Faria.ea2014}. Then \citet{Verma.Raodeo.ea2019} extended this to model to determine helium abundances. Using a variety of stellar models they were not able to find a consistent helium enrichment law.
 
-Finally, we introduce a new method for modelling the glitch signature in Section \ref{sec:glitch-model}. In particular, we focus on the statistical treatment of uncertainty in the glitch model and its parameters. We apply a Bayesian approach to fitting the glitch for the first time, using a Gaussian process to model correlated noise in the mode frequencies.
+Finally, we introduce a new method for modelling the glitch signature in Section \ref{sec:glitch-model}. In particular, we focus on the statistical treatment of uncertainty in the glitch model and its parameters. We apply a Bayesian approach to fitting the glitch for the first time, using a Gaussia process to model correlated noise in the mode frequencies.
 
 \section[1D example]{A One-Dimensional Example of a Glitch}\label{sec:1d-glitch}
 
-A rapid variation in the structure of a medium induces an periodic perturbation (\(\delta\omega\)) to the eigenfrequencies. To demonstrate this, we will explore a simple one-dimensional example \citep[e.g][]{Verner2005}. Consider a medium bound from \(x=0\) to \(x=L\) in which pressure waves can propagate at constant speed \(c\). The longitudinal displacement of the wave \(\xi\) must obey the wave equation,
+\newcommand*{\glitch}{\ensuremath{{\mathrm{g}}}}
+
+A rapid variation in the structure of a medium induces a periodic perturbation (\(\delta\omega\)) to the eigenfrequencies. To demonstrate this, we will explore a simple one-dimensional example \citep[e.g][]{Verner2005}. Consider a medium bound from \(x=0\) to \(x=L\) in which pressure waves can propagate at constant speed \(c\). The longitudinal displacement of the wave \(\xi\) must obey the wave equation,
 %
 \begin{equation}
     \frac{\partial^2\xi(x, t)}{\partial t^2} = c^2 \frac{\partial^2\xi(x, t)}{\partial x^2},
@@ -55,11 +57,11 @@ where \(n\) is a non-zero integer (the \(n=0\) solution would give \(\xi=0\) eve
 \begin{figure}[!tb]
     \centering
     \includegraphics{figures/glitch-1d-example-diagram.pdf}
-    \caption[A diagram showing a one-dimensional medium with a small structural perturbation.]{A diagram showing a one-dimensional medium split into three regions. 1: Fixed at \(x=0\) with a constant speed of sound \(c\); 2: A small structural perturbation centred at \(x=x_0\) with width \(2\delta x\) and constant speed of sound \(c + \delta c\); 3: Fixed at \(x=L\) with a constant speed of sound \(c\).}
+    \caption[A diagram showing a one-dimensional medium with a small structural perturbation.]{\todo{Redo plots with new glitch location symbol} A diagram showing a one-dimensional medium split into three regions. 1: Fixed at \(x=0\) with a constant speed of sound \(c\); 2: A small structural perturbation centred at \(x=x_\glitch\) with width \(2\delta x\) and constant speed of sound \(c + \delta c\); 3: Fixed at \(x=L\) with a constant speed of sound \(c\).}
     \label{fig:1d-diagram}
 \end{figure}
 
-Now, let us suppose there is a small structural perturbation (or glitch) in the medium at position \(x_0\) with half-width \(\delta x\). Figure \ref{fig:1d-diagram} shows this system divided into 3 regions, with region 2 containing the glitch. In region 2, the speed of sound is \(c + \delta c\) and the corresponding wave number is \(k + \delta k\). We want to find the frequencies which correspond to standing waves in this system and compare them to that of the homogeneous medium above. We will show that the resulting perturbation to the eigenfrequencies (\(\delta\omega\)) is periodic, with an amplitude and period that relates to the properties of the glitch.
+Now, let us suppose there is a small structural perturbation (or glitch) in the medium at position \(x_\glitch\) with half-width \(\delta x\). Figure \ref{fig:1d-diagram} shows this system divided into 3 regions, with region 2 containing the glitch. In region 2, the speed of sound is \(c + \delta c\) and the corresponding wave number is \(k + \delta k\). We want to find the frequencies which correspond to standing waves in this system and compare them to that of the homogeneous medium above. We will show that the resulting perturbation to the eigenfrequencies (\(\delta\omega\)) is periodic, with an amplitude and period that relates to the properties of the glitch.
 
 Firstly, we propose solutions to the wave for each region by considering reflection and transmission at each boundary. Initially ignoring the wave superposed by a reflection at \(x=L\),
 %
@@ -69,23 +71,23 @@ Firstly, we propose solutions to the wave for each region by considering reflect
     \xi_3(x, t) &= D \ee^{i(\omega t - k x)}, \label{eq:xi3-r}
 \end{align}
 %
-where complex coefficients \(A\) and \(C\) represent reflections, and \(B\) and \(D\) represent transmissions, at \(x_0 \pm \delta x\) respectively. Later, we will substitute the left-travelling wave (\(- \xi\{-k, -\delta k\}\)) after determining the values of the coefficients.
+where complex coefficients \(A\) and \(C\) represent reflections, and \(B\) and \(D\) represent transmissions, at \(x_\glitch \pm \delta x\) respectively. Later, we will substitute the left-travelling wave (\(- \xi\{-k, -\delta k\}\)) after determining the values of the coefficients.
 
 The internal boundary conditions for this system are found by enforcing spacial continuity at \(x - \delta x\) and \(x + \delta x\),
 %
 \begin{align*}
-    \xi_1(x_0 - \delta x, t) &= \xi_2(x_0 - \delta x, t), \\
-    \xi_2(x_0 + \delta x, t) &= \xi_3(x_0 + \delta x, t), \\
-    \frac{\partial \xi_1}{\partial x}(x_0 - \delta x, t) &= \frac{\partial \xi_2}{\partial x}(x_0 - \delta x, t), \\
-    \frac{\partial \xi_2}{\partial x}(x_0 + \delta x, t) &= \frac{\partial \xi_3}{\partial x}(x_0 + \delta x, t).
+    \xi_1(x_\glitch - \delta x, t) &= \xi_2(x_\glitch - \delta x, t), \\
+    \xi_2(x_\glitch + \delta x, t) &= \xi_3(x_\glitch + \delta x, t), \\
+    \frac{\partial \xi_1}{\partial x}(x_\glitch - \delta x, t) &= \frac{\partial \xi_2}{\partial x}(x_\glitch - \delta x, t), \\
+    \frac{\partial \xi_2}{\partial x}(x_\glitch + \delta x, t) &= \frac{\partial \xi_3}{\partial x}(x_\glitch + \delta x, t).
 \end{align*}
 %
 Solving these simultaneously with the Python package \textsc{sympy} gives the following equations for the complex coefficients\footnote{The code for these derivations are available at \url{\gitremote/tree/\gitbranch/notebooks}},
 %
 \begin{align}
-    A &= \delta k (2k + \delta k) (1 - \ee^{4i \delta x (k + \delta k)}) \ee^{- 2i k (x_0 - \delta x)} \alpha^{-1}, \\
-    B &= 2 k (2k + \delta k) \ee^{4i \delta x (k + \delta k)} \ee^{i \delta k (x_0 - \delta x)} \alpha^{-1}, \\
-    C &= 2 k \delta k \ee^{- i (x_0 - \delta x) (2k + \delta k)} \alpha^{-1}, \\
+    A &= \delta k (2k + \delta k) (1 - \ee^{4i \delta x (k + \delta k)}) \ee^{- 2i k (x_\glitch - \delta x)} \alpha^{-1}, \\
+    B &= 2 k (2k + \delta k) \ee^{4i \delta x (k + \delta k)} \ee^{i \delta k (x_\glitch - \delta x)} \alpha^{-1}, \\
+    C &= 2 k \delta k \ee^{- i (x_\glitch - \delta x) (2k + \delta k)} \alpha^{-1}, \\
     D &= 4 k (k + \delta k) \ee^{2 i \delta x (2k + \delta k)} \alpha^{-1},
 \end{align}
 %
@@ -98,7 +100,7 @@ where,
 Now we have solutions for the coefficients, we can superpose the right-travelling wave, \(\xi\{k, \delta k\} \rightarrow - \xi\{-k, -\delta k\}\) to get the full solution for the wave function. Substituting \(k \rightarrow -k\) and \(\delta k \rightarrow -\delta k\) into the coefficients yields their complex conjugates, \((\overline{A},\overline{B},\overline{C},\overline{D})\). This allows us to rewrite the wave functions into a more flexible form. For example, substituting Euler's formula, \(A = (r_A/2) \ee^{i\phi_A}\) and \(\overline{A} = (r_A/2) \ee^{-i\phi_A}\), Equation \ref{eq:xi1-r} now becomes,
 %
 \begin{equation}
-    \xi_1(x, t) = \ee^{i \omega t} \left[ \frac{r_A}{2} \left( \ee^{i(kx + \phi_A)} - \ee^{-i(kx + \phi_A)} \right) - \left( \ee^{ikx} - \ee^{-ikx} \right) \right] \label{eq:xi1}
+    \xi_1(x, t) = \ee^{i \omega t} \left[ \frac{r_A}{2} \left( \ee^{i(kx + \phi_A)} - \ee^{-i(kx + \phi_A)} \right) - \left( \ee^{ikx} - \ee^{-ikx} \right) \right], \label{eq:xi1}
 \end{equation}
 %
 where its real component is,
@@ -130,21 +132,21 @@ Finally, we can impose the boundary condition \(\xi_3(L, t) = 0\) to solve for \
     \real[D] \sin[k(L + \epsilon)] - \imag[D] \cos[k(L + \epsilon)] &=0. \label{eq:1d-glitch-sol}
 \end{align}
 %
-The glitch affects the amplitude and phase of the wave. If we set \(\epsilon = 0\) and \(D = 1\) we recover the homogeneous frequency solutions (Equation \ref{eq:omega-n}). Unfortunately, solving Equation \ref{eq:1d-glitch-sol} for \(\omega\) is not possible analytically. However, we can find individual roots (or modes, \(\omega_n\)) numerically.
+The glitch affects the amplitude and phase of the wave. If we set \(\epsilon = 0\) and \(D = 1\) we recover the homogeneous frequency solutions (Equation \ref{eq:omega-n}). Unfortunately, solving Equation \ref{eq:1d-glitch-sol} for \(\omega\) is not possible analytically. However, we can find individual roots (or oscillation modes) numerically.
 
 \begin{figure}[!tbp]
     \centering
     \includegraphics{figures/glitch-1d-example-results.pdf}
-    \caption{The change in mode frequency induced by a change in sound speed of \(\delta c\) from \(x_0 - \delta x\) to \(x_0 + \delta x\) in a one-dimensional medium, bound such that \(x \in [0, 1]\) (see Figure \ref{fig:1d-diagram}). Outside of the perturbation the speed of sound, \(c=1\).
+    \caption{The change in mode frequency induced by a change in sound speed of \(\delta c\) from \(x_\glitch - \delta x\) to \(x_\glitch + \delta x\) in a one-dimensional medium, bound such that \(x \in [0, 1]\) (see Figure \ref{fig:1d-diagram}). Outside of the perturbation the speed of sound, \(c=1\).
     The frequencies in the top panel are offset by \(\omega_0\).
     Points are joined by straight lines to guide the eye.
     }
     \label{fig:1d-results}
 \end{figure}
 
-We find \(\omega_n\) by solving Equation \ref{eq:1d-glitch-sol} using Newton's method for \(n = 1,\dots,50\). Using dimensionless units of length and time, we set \(c=1\), \(L=1\), and test several values of \(x_0\), \(\delta x\), and \(\delta c\). Initial guesses are obtained from the homogeneous medium solutions (\(\omega_n^0\)) in Equation \ref{eq:omega-n}. The difference between the solutions for \(\omega_n\) and those from the homogeneous medium, \(\delta \omega_n = \omega_n - \omega_n^0\), are shown in Figure \ref{fig:1d-results}. We can see an periodic component of \(\delta\omega\) induced by the glitch. Physically, this arises from the change in phase required to satisfy the boundary conditions of the glitch region. As the wave nodes pass in and out of the region with changing \(n\), the sensitivity of the wave to the glitch oscillates. The overall sensitivity to the glitch depends on how much the wave changes inside the glitch, hence why low \(n\) modes have smaller \(\delta\omega\).
+Let us use \(\omega'_n\) to denote the solutions to Equation \ref{eq:1d-glitch-sol}, where \(n\) is a positive integer. We find \(\omega'_n\) by solving Equation \ref{eq:1d-glitch-sol} using Newton's method for \(n = 1,\dots,50\). Using dimensionless units of length and time, we set \(c=1\), \(L=1\), and test several values of \(x_\glitch\), \(\delta x\), and \(\delta c\). Initial guesses for \(\omega'_n\) are obtained from the homogeneous medium solutions in Equation \ref{eq:omega-n}. The difference between the solutions for \(\omega'_n\) and those from the homogeneous medium, \(\delta \omega_n = \omega'_n - \omega_n\), are shown in Figure \ref{fig:1d-results}. We can see a periodic component of \(\delta\omega\) induced by the glitch. Physically, this arises from the change in phase required to satisfy the boundary conditions of the glitch region. As the wave nodes pass in and out of the region with changing \(n\), the sensitivity of the wave to the glitch oscillates. The overall sensitivity to the glitch depends on how much the wave changes inside the glitch, hence why low \(n\) modes have smaller \(\delta\omega\).
 
-The functional form of \(\delta\omega\) appears to have a linear component and a short period oscillation modulated by a longer period. As the location of the glitch (\(x_0\)) gets smaller, the short period of \(\delta\omega\) decreases. If we imagine the spacial distribution of nodes in the system as a function of \(n\), the density of nodes is larger towards the centre of the system. The periodicity arises from the nodes passing in and out of the glitch region with changing \(n\). Therefore, where the density of wave nodes is higher, we expect the short period of \(\delta\omega\) to decrease. Similarly, as the the half-width of the glitch (\(\delta x\)) increases, the longer period increases. 
+The functional form of \(\delta\omega\) appears to have a linear component and a short period oscillation modulated by a longer period. As the location of the glitch (\(x_\glitch\)) gets smaller, the short period of \(\delta\omega\) decreases. If we imagine the spacial distribution of nodes in the system as a function of \(n\), the density of nodes is larger towards the centre of the system. The periodicity arises from the nodes passing in and out of the glitch region with changing \(n\). Therefore, where the density of wave nodes is higher, we expect the short period of \(\delta\omega\) to decrease. Similarly, as the the half-width of the glitch (\(\delta x\)) increases, the longer period increases. 
 
 Furthermore, an increasing change in sound speed (\(\delta c\)) increases the amplitude of \(\delta\omega\). This result is intuitive, as we expect a perturbation in \(c\) to be proportional to a perturbation in \(\omega\). Finally, increasing both \(\delta x\) and \(\delta c\) increases the slope of \(\delta\omega\). The sensitivity of a mode to the glitch increases with \(n\) and depends on how much the wave changes in the glitch region. A larger glitch allows modes of smaller \(n\) to `see' the glitch region, thus increasing the linear slope of \(\delta\omega\).
 
@@ -157,7 +159,7 @@ Furthermore, an increasing change in sound speed (\(\delta c\)) increases the am
     \label{fig:1d-phase}
 \end{figure}
 
-The small phase offset \(\epsilon\) in Equation \ref{eq:1d-phase} is required for the wave function to satisfy the boundary conditions at \(x = 0\). However, adding \(\epsilon\) shifts the effective location of \(x_0\) --- it changes the scale of the \(x\)-axis by a factor of \((1 + \epsilon)\). We plot \(\epsilon\) against \(\omega\) in Figure \ref{fig:1d-phase} and show that its magnitude is \(\sim 10^{-4}\), much smaller than the location and size of region 2. The periodicity caused by the glitch also shows up in Figure \ref{fig:1d-phase}, with its properties affected in a similar way to Figure \ref{fig:1d-results}.
+The small phase offset \(\epsilon\) in Equation \ref{eq:1d-phase} is required for the wave function to satisfy the boundary conditions at \(x = 0\). However, adding \(\epsilon\) shifts the effective location of \(x_\glitch\) --- it changes the scale of the \(x\)-axis by a factor of \((1 + \epsilon)\). We plot \(\epsilon\) against \(\omega\) in Figure \ref{fig:1d-phase} and show that its magnitude is \(\sim 10^{-4}\), much smaller than the location and size of region 2. The periodicity caused by the glitch also shows up in Figure \ref{fig:1d-phase}, with its properties affected in a similar way to Figure \ref{fig:1d-results}.
 
 Finding an approximate solution for \(\delta\omega\) is beyond the scope of this example. However, we can show that by modelling \(\delta\omega\), we can recover information about the structural glitch. Let us build a model \(\delta\omega = f(\omega)\). Looking at Figure \ref{fig:1d-results}, we propose a form for \(f\),
 %
@@ -165,7 +167,7 @@ Finding an approximate solution for \(\delta\omega\) is beyond the scope of this
     f(\omega) = a_1 \omega - a_2 \sin (\tau_1 \omega) \cos (\tau_2 \omega), \label{eq:1d-domega-func}
 \end{equation}
 %
-where \(a_1\) and \(a_2\) are coefficients which are both functions of \(\delta x\) and \(\delta c\). Parameters \(\tau_1\) and \(\tau_2\) are the `frequencies' (with dimensionless units of time\footnote{An angular frequency in \(\omega\)-space has units of time.}) of the periodic component to \(\delta\omega\), which are functions of \(\delta x\) and \(x_0\) respectively.
+where \(a_1\) and \(a_2\) are coefficients which are both functions of \(\delta x\) and \(\delta c\). Parameters \(\tau_1\) and \(\tau_2\) are the `frequencies' (with dimensionless units of time\footnote{An angular frequency in angular frequency space has units of time.}) of the periodic component to \(\delta\omega\), which are functions of \(\delta x\) and \(x_\glitch\) respectively.
 
 \begin{figure}[!tb]
     \centering
@@ -174,7 +176,7 @@ where \(a_1\) and \(a_2\) are coefficients which are both functions of \(\delta 
     \label{fig:1d-fit}
 \end{figure}
 
-We fit Equation \ref{eq:1d-domega-func} to \(\delta\omega_n\) obtained from a glitch located at \(x_0 = 0.9\), with half-width \(\delta x = 0.02\), and change in sound speed \(\delta c = 0.03\). The best fitting line is shown in Figure \ref{fig:1d-fit}. We found \(\tau_1 \approx \num{0.0389}\) and \(\tau_2 \approx \num{0.199}\). This corresponded to \(\tau_1 \simeq 2\delta\tau\), where \(\delta\tau\) is half the acoustic width of the glitch --- the time at which sound takes to transverse the region. Since the speed of sound \(c \approx \num{1}\) throughout the medium, the true value of \(\delta\tau = 0.02\). We also found the second `frequency' \(\tau_2 \simeq 2\tau_0\), where \(\tau_0\) is the sound travel time from the nearest edge to the centre of the glitch (in this case \num{0.1}).
+We fit Equation \ref{eq:1d-domega-func} to \(\delta\omega_n\) obtained from a glitch located at \(x_\glitch = 0.9\), with half-width \(\delta x = 0.02\), and change in sound speed \(\delta c = 0.03\). The best fitting line is shown in Figure \ref{fig:1d-fit}. We found \(\tau_1 \approx \num{0.0389}\) and \(\tau_2 \approx \num{0.199}\). This corresponded to \(\tau_1 \simeq 2\delta\tau\), where \(\delta\tau\) is half the acoustic width of the glitch --- the time at which sound takes to transverse the region. Since the speed of sound \(c \approx \num{1}\) throughout the medium, the true value of \(\delta\tau = 0.02\). We also found the second `frequency' \(\tau_2 \simeq 2\tau_\glitch\), where \(\tau_\glitch\) is the sound travel time from the nearest edge to the centre of the glitch (in this case \num{0.1}).
 
 \todo{Repeating this for different glitch parameters,  how the `frequencies' \(\tau_1\) and \(\tau_2\) relate to the half-width and location of the glitch respectively.}
 
@@ -202,7 +204,7 @@ where \(\gamma \equiv \Gamma_1\) is the first adiabatic exponent,
 %
 at constant entropy, \(S\). \citet{Chandrasekhar1939} introduced three adiabatic exponents (\(\Gamma_1,\Gamma_2,\Gamma_3\)) to describe the non-ideal gas inside a star. However, in this chapter we do not use the other two and hence refer the first as \(\gamma\).
 
-For the most part, \(\gamma\), \(P\), and \(\rho\) change smoothly with radius inside a star. However, a small structural glitch in these quantities would lead to a sudden change in sound speed. In the previous section, we showed how such a perturbation can lead to an periodic perturbation in the eigenfrequencies of pressure waves in a homogeneous medium. Characterising this signal allowed us to measure the properties of the glitch. If similar glitches were present in a star, then we might be able to do the same. In this section, we explore the origins of glitches inside a solar-like star. Then, we see what effect these have on the eigenfrequencies, a quantity we can measure through asteroseismology.
+For the most part, \(\gamma\), \(P\), and \(\rho\) change smoothly with radius inside a star. However, a small structural glitch in these quantities would lead to a sudden change in sound speed. In the previous section, we showed how such a perturbation can lead to a periodic perturbation in the eigenfrequencies of pressure waves in a homogeneous medium. Characterising this signal allowed us to measure the properties of the glitch. If similar glitches were present in a star, then we might be able to do the same. In this section, we explore the origins of glitches inside a solar-like star. Then, we see what effect these have on the eigenfrequencies, a quantity we can measure through asteroseismology.
 
 Firstly, let us consider the sound speed profile of a Sun-like star. Particularly, we want to see how the sound speed changes on the timescale of a pressure wave moving through the star. As discovered in Section \ref{sec:1d-glitch}, a convenient timescale to work with is the acoustic depth, \(\tau\). This is not to be confused with the symbol for the age of the star in Chapter \ref{chap:hmd}. Here, we define \(\tau\) as the time taken for a pressure wave to travel from its surface (\(R\)) to some radius \(r\) under the assumption of spherical symmetry,
 %
@@ -210,7 +212,7 @@ Firstly, let us consider the sound speed profile of a Sun-like star. Particularl
     \tau(r) = \tau_0 - \int_0^{r} \frac{\dd r'}{c(r')},\label{eq:tau}
 \end{equation}
 %
-where \(\tau_0\) is the acoustic radius of the star\footnote{Not to be confused with the glitch location in Section \ref{sec:1d-glitch}.}. We recall from Section \ref{sec:seismo} that \(\nu_0 \equiv (2\tau_0)^{-1}\) may be approximated by the large frequency separation (\(\Delta\nu_{nl}\)) in the asymptotic limit that \(l/n \rightarrow 0\).
+where \(\tau_0\) is the acoustic radius of the star. We recall from Section \ref{sec:seismo} that \(\nu_0 \equiv (2\tau_0)^{-1}\) may be approximated by the large frequency separation (\(\Delta\nu_{nl}\)) in the asymptotic limit that \(l/n \rightarrow 0\).
 
 \begin{figure}[!tb]
     \centering
@@ -386,7 +388,7 @@ where the integral need only be evaluated in the region where \(\delta\gamma / \
 
 \subsubsection{A Functional Form of the Helium Glitch Signature}
 
-We have shown that a perturbation in \(\gamma\) can induce an periodicity in \(\omega\). The functional from of this periodicity depends on \(\delta\gamma/\gamma\). As shown in Figures \ref{fig:gamma-zones} and \ref{fig:gamma-temp-density}, the dominant perturbation due to a change in helium abundance is from the second ionisation of helium. There have been different attempts to approximate \(\delta\gamma/\gamma\,|_\heII\) in the literature, for example using a Dirac delta function or a triangular function \citep{Monteiro.Christensen-Dalsgaard.ea1994, Monteiro.Thompson2005}. In recent years, work modelling the glitch has used the formulation from \citet{Houdek.Gough2007} where the perturbation is modelled with a Gaussian shape,
+We have shown that a perturbation in \(\gamma\) can induce a periodicity in \(\omega\). The functional from of this periodicity depends on \(\delta\gamma/\gamma\). As shown in Figures \ref{fig:gamma-zones} and \ref{fig:gamma-temp-density}, the dominant perturbation due to a change in helium abundance is from the second ionisation of helium. There have been different attempts to approximate \(\delta\gamma/\gamma\,|_\heII\) in the literature, for example using a Dirac delta function or a triangular function \citep{Monteiro.Christensen-Dalsgaard.ea1994, Monteiro.Thompson2005}. In recent years, work modelling the glitch has used the formulation from \citet{Houdek.Gough2007} where the perturbation is modelled with a Gaussian shape,
 %
 \begin{equation}
     \left.\frac{\delta\gamma}{\gamma}\right|_\heII \simeq - \frac{\Gamma_\heII}{\Delta_\heII \sqrt{2\pi}} \, \ee^{- \frac12{(\tau - \tau_\heII)^2}/{\Delta_\heII^2} }, \label{eq:he-gamma}
