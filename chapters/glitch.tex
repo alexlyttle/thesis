@@ -20,7 +20,7 @@ Acoustic glitches in Sun-like stars arise from sharp variations in their structu
 
 \citet{Monteiro.Thompson1998} further developed a model of the He\,\textsc{ii} ionisation glitch signature by accounting for its finite width in the star, later applying it to study the Sun \citep{Monteiro.Thompson2005}. Around the same time, \citet{Basu.Mazumdar.ea2004} showed the amplitude of the He\,\textsc{ii} glitch signature correlated with the fractional helium abundance (\(Y\)) near the surface of Sun-like stars. Since helium ionises below the stellar atmosphere for these stars, asteroseismology was able to probe where spectroscopy could not. A few years later, \citet{Houdek.Gough2007} proposed a closer physical approximation of the He\,\textsc{ii} glitch. They derived the glitch signature which was later used in many studies of solar-like oscillators. In Section \ref{sec:glitch-star}, we show where their glitch model comes from.
 
-The glitch could be further studied in stars other than the Sun with the advent of space-based missions. With \emph{CoRoR} providing evidence of solar-like oscillations in red giants, \citet{Miglio.Montalban.ea2010,Mazumdar.Michel.ea2012} found evidence of glitch in red giants. Sample of \emph{Kepler} stars \citep{Mazumdar.Monteiro.ea2012,Mazumdar.Monteiro.ea2014,Verma.Raodeo.ea2017} compare fitting directly and to second differences. For example, 16 Cyg A and B \citet{Verma.Faria.ea2014}. Then \citet{Verma.Raodeo.ea2019} extended this to model to determine helium abundances. Using a variety of stellar models they were not able to find a consistent helium enrichment law.
+The glitch could be further studied in stars other than the Sun with the advent of space-based missions. With \emph{CoRoT} providing evidence of solar-like oscillations in red giants, \citet{Miglio.Montalban.ea2010,Mazumdar.Michel.ea2012} found evidence of glitch in red giants. Sample of \emph{Kepler} stars \citep{Mazumdar.Monteiro.ea2012,Mazumdar.Monteiro.ea2014,Verma.Raodeo.ea2017} compare fitting directly and to second differences. For example, 16 Cyg A and B \citet{Verma.Faria.ea2014}. Then \citet{Verma.Raodeo.ea2019} extended this to model to determine helium abundances. Using a variety of stellar models they were not able to find a consistent helium enrichment law.
 
 Finally, we introduce a new method for modelling the glitch signature in Section \ref{sec:glitch-model}. In particular, we focus on the statistical treatment of uncertainty in the glitch model and its parameters. We apply a Bayesian approach to fitting the glitch for the first time, using a Gaussian process to model correlated noise in the mode frequencies.
 
@@ -207,10 +207,10 @@ For the most part, \(\gamma\), \(P\), and \(\rho\) change smoothly with radius i
 Firstly, let us consider the sound speed profile of a Sun-like star. Particularly, we want to see how the sound speed changes on the timescale of a pressure wave moving through the star. As discovered in Section \ref{sec:1d-glitch}, a convenient timescale to work with is the acoustic depth, \(\tau\). This is not to be confused with the symbol for the age of the star in Chapter \ref{chap:hmd}. Here, we define \(\tau\) as the time taken for a pressure wave to travel from its surface (\(R\)) to some radius \(r\) under the assumption of spherical symmetry,
 %
 \begin{equation}
-    \tau(r) = \int_R^{r} \frac{\dd r'}{c(r')} \equiv \tau_0 - \int_0^{r} \frac{\dd r'}{c(r')},\label{eq:tau}
+    \tau(r) = \tau_0 - \int_0^{r} \frac{\dd r'}{c(r')},\label{eq:tau}
 \end{equation}
 %
-where the acoustic radius of the star\footnote{Not to be confused with the glitch location, \(\tau_0\), in Section \ref{sec:1d-glitch}.}, \(\tau_0 = \tau(0)\), relates approximately to the average large frequency separation \(\langle\Delta\nu_{nl}\rangle^{-1} \simeq 2\tau_0\).
+where \(\tau_0\) is the acoustic radius of the star\footnote{Not to be confused with the glitch location in Section \ref{sec:1d-glitch}.}. We recall from Section \ref{sec:seismo} that \(\nu_0 \equiv (2\tau_0)^{-1}\) may be approximated by the large frequency separation (\(\Delta\nu_{nl}\)) in the asymptotic limit that \(l/n \rightarrow 0\).
 
 \begin{figure}[!tb]
     \centering
