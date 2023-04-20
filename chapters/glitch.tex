@@ -10,19 +10,21 @@
 % all distributions of LaTeX version 2005/12/01 or later.
 %
 %
-\chapter[Acoustic Glitches]{Acoustic Slitches as a Signature of Helium Abundance}\label{chap:glitch}
+\chapter[Acoustic Glitches]{Acoustic Glitches as a Signature of Helium Abundance}\label{chap:glitch}
 
-So far in this thesis, we have shown that a hierarchical Bayesian model can be used to infer the helium abundance distribution in a stellar population. We also found how this improves the inference of fundamental stellar parameters. However, there is limited information about helium abundance in the stellar observables used (e.g. \(L, \teff, \Delta\nu\)).
+% So far in this thesis, we have shown that a hierarchical Bayesian model can be used to infer the helium abundance distribution in a stellar population. We also found how this improves the inference of fundamental stellar parameters. However, there is limited information about helium abundance in the stellar observables used (e.g. \(L, \teff, \Delta\nu\)).
 
-\todo{Signature of helium first explored by}.
+An acoustic glitch is a sharp variation of the sound speed inside a medium. The presence of a glitch induces a sinusoidal signature in consecutive standing pressure wave modes. The reason for this is not entirely intuitive, so we go through a simple, one-dimensional example in Section \ref{sec:1d-glitch}.
 
-\todo{Some key results from glitch studies}.
+Acoustic glitches in Sun-like stars arise from sharp variations in their structure, such as the base of the convection zone (BCZ) and helium ionisation zones (He\,\textsc{i} and He\,\textsc{ii}). Early work identified glitches in solar oscillation modes by analysing their second differences, \(\Delta_2\nu_{nl} \equiv \nu_{n-1\,l} - 2\nu_{nl} + \nu_{n+1\,l}\). Second and higher-order differences remove some smoothly varying components to the mode frequencies and effectively amplify glitch signatures. Assuming a sharp localised discontinuity in sound speed at He\,\textsc{ii} ionisation and the BCZ, \citet{Basu.Antia.ea1994,Basu1997} were able to model these glitches and measure the extent of convective overshoot below the BCZ.
 
-In Section \ref{sec:1d-glitch}, we begin by showing a sharp change in structure can leave a signature in the eigenfrequencies.
+\citet{Monteiro.Thompson1998} further developed a model of the He\,\textsc{ii} ionisation glitch signature by accounting for its finite width in the star, later applying it to study the Sun \citep{Monteiro.Thompson2005}. Around the same time, \citet{Basu.Mazumdar.ea2004} showed the amplitude of the He\,\textsc{ii} glitch signature correlated with the fractional helium abundance (\(Y\)) near the surface of Sun-like stars. Since helium ionises below the stellar atmosphere for these stars, asteroseismology was able to probe where spectroscopy could not. 
 
-Secondly, we show what causes acoustic glitches in solar-like oscillators in Secion \ref{sec:glitch-star}
+\citet{Houdek.Gough2007} proposed a Gaussian-like shape to approx dip in \(\gamma\) induced by ionistaion. We further explore where this comes from in Section \ref{sec:glitch-star}
 
-Finally, we introduce a new method for modelling the glitch signature in Section \ref{sec:glitch-model}. 
+Since then, this formalisation has been used to model the glitch in many stars. \citet{Miglio.Montalban.ea2010,Mazumdar.Michel.ea2012} found evidence of glitch in red giants. Sample of \emph{Kepler} stars \citep{Mazumdar.Monteiro.ea2012,Mazumdar.Monteiro.ea2014,Verma.Raodeo.ea2017} compare fitting directly and to second differences. For example, 16 Cyg A and B \citet{Verma.Faria.ea2014}. Then \citet{Verma.Raodeo.ea2019} extended this to model to determine helium abundances. Using a variety of stellar models they were not able to find a consistent helium enrichment law.
+
+Finally, we introduce a new method for modelling the glitch signature in Section \ref{sec:glitch-model}. In particular, we focus on the statistical treatment of uncertainty in the glitch model and its parameters. We apply a Bayesian approach to fitting the glitch for the first time, using a Gaussian process to model correlated noise in the mode frequencies.
 
 \section[1D example]{A One-Dimensional Example of a Glitch}\label{sec:1d-glitch}
 
