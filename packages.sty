@@ -121,6 +121,17 @@
 \DeclareSIUnit\aarcsec{as}
 
 
+%% LICENSE
+%
+% This example package lets you choose a Creative Commons license to pass to \license command in' thesis.tex'
+% Feel free to uncomment and use/change this to the license of your choice
+\usepackage[
+    type={CC},      % Creative Commons
+    modifier={by},  % Attribution and Non-Commercial
+    version={4.0},
+]{doclicense}
+
+
 %% CITATIONS
 %
 \usepackage[%
@@ -154,14 +165,17 @@
 
 %% OTHER PACKAGES
 %
-\usepackage{amsmath}    % Mathematical symbols
-\usepackage{bm}         % Bold math
-\usepackage{emptypage}  % Make skipped pages blank
-\usepackage{tocbibind}  % Add TOC and bibliography to TOC
-\usepackage{lipsum}     % For placeholder text
+\usepackage{amsmath}     % Mathematical symbols
+\usepackage{bm}          % Bold math
+\usepackage{emptypage}   % Make skipped pages blank
+\usepackage{tocbibind}   % Add TOC and bibliography to TOC
+\usepackage{lipsum}      % For placeholder text
 \usepackage{nicefrac}
-\usepackage{CJKutf8}    % Chinese/Japanese/Korean characters
-
+\usepackage{CJKutf8}     % Chinese/Japanese/Korean characters
+\usepackage{pgfornament} % Fancy ornaments and borders
+\usepackage{epigraph}    % Epigraphs - quotes at beginning of chapters
+\setlength\epigraphwidth{.66\textwidth}
+\setlength\epigraphrule{0pt}
 
 \usepackage{tikz}       % Diagrams
 \usetikzlibrary{decorations.pathreplacing}
