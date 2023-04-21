@@ -234,21 +234,27 @@ We computed a representative Sun-like model star (hereafter model S) using MESA 
 
 In this section, we will first show how the sound speed inside a solar-like star is affected by the ionisation of hydrogen and helium. Then, we will see that an increase in helium abundance increases the effect of helium ionisation on the speed of sound. Starting with the variational principle, we derive a commonly used form of the glitch signature found in the mode frequencies. In the process, we show that the p modes are sensitive to changes in sound speed near the surface.
 
-\subsubsection{The Effect of Ionisation on \(\gamma\)}
+\subsubsection{The Effect of Helium Abundance on \(\gamma\)}
+
+In the outer convective envelope of Sun-like stars, the temperature (\(\SIrange{e4}{e5}{\kelvin}\)) and density (\(\SIrange{e-5}{e-3}{\gram\per\centi\metre\cubed}\)) is suitable for ionising hydrogen and helium \citep{Eggleton.Faulkner.ea1973}. As a given chemical species in the star ionises, the number of particles and hence chemical potential of the species changes. This induces a gradient in the thermal free energy of the gas which relates to the pressure and entropy of the gas. Therefore, we expect ionisation to cause a change in the pressure-density gradient at constant entropy, \(\gamma\). Since \(\gamma\) relates to the sound speed from Equation \ref{eq:sound}, any sudden change in \(\gamma\) will induce a change in \(c\).
 
 \begin{figure}[!tb]
     \centering
     \includegraphics{figures/adiabatic-ionisation-regions.pdf}
-    \caption[The depressions in the first adiabatic exponent caused by the ionisation of hydrogen and helium]{The depressions in the first adiabatic exponent (\(\gamma\)) caused by the ionisation of hydrogen (H), and the first and second ionisations of helium (He\,\textsc{i} and He\,\textsc{ii}). The horizonal axis is the fractional acoustic depth from the surface of the star, \(\tau/\tau_0\).}
+    \caption[The depressions in the first adiabatic exponent caused by the ionisation of hydrogen and helium.]{The depressions in the first adiabatic exponent (\(\gamma\)) caused by the ionisation of hydrogen (H), and the first and second ionisations of helium (He\,\textsc{i} and He\,\textsc{ii}). The horizonal axis is the fractional acoustic depth from the surface of the star, \(\tau/\tau_0\).}
     \label{fig:gamma-zones}
 \end{figure}
 
-In the outer convective envelope of Sun-like stars, the temperature (\(\SIrange{e4}{e5}{\kelvin}\)) and density (\(\SIrange{e-5}{e-3}{\gram\per\centi\metre\cubed}\)) are suitable for ionising hydrogen and helium \citep{Eggleton.Faulkner.ea1973}. As a chemical species in the star ionises, the number of particles and thus chemical potential of the species changes. This induces a gradient in the thermal free energy of the gas which relates to the pressure and entropy of the gas. Therefore, we expect ionisation to cause a change in the pressure-density gradient at constant entropy, \(\gamma\). Since \(\gamma\) relates to the sound speed from Equation \ref{eq:sound}, any sudden change in \(\gamma\) will induce a change in \(c\).
+In Figure \ref{fig:gamma-zones}, we show \(\gamma\) for model S against fractional acoustic depth, shaded by regions of ionisation. For an ideal monatmoic gas, \(\gamma=5/3\), but \(\gamma < 5/3\) in regions where helium and hydrogen ionise. Close to the surface of the star, hydrogen ionisation has the largest effect on \(\gamma\) because it makes up the majority of stellar matter. The first (He\,\textsc{i}) and second (He\,\textsc{ii}) ionisations of helium occur deeper in the star. We can see that the second ionisation of helium has a greater affect on \(\gamma\) than the first. The effect of the second He ionisation causes a rapid changing in \(\gamma\) over a few per cent in \(\tau\) (equivalent to \(\sim \SI{50}{\second}\) in model S).
 
-In Figure \ref{fig:gamma-zones}, we show \(\gamma\) for model S against fractional acoustic depth, shaded by regions of ionisation. For an ideal monatmoic gas, \(\gamma=5/3\). Close to the surface of the star, we see that hydrogen ionisation has the largest effect on \(\gamma\) because it makes up the majority of stellar matter. The first (He\,\textsc{i}) and second (He\,\textsc{ii}) ionisations of helium occur deeper in the star. We can see that the second ionisation of helium has a greater affect on \(\gamma\) than the first. This is primarily because the ionisation energy of He\,\textsc{i} is higher than He.
+\begin{figure}[tbp]
+    \centering
+    \includegraphics{figures/adiabatic-ionisation-temp.pdf}
+    \caption[Temperature-density profile for a Sun-like star.]{Temperature-density profile for a Sun-like star. \emph{Top:} The first adiabatic exponent \(\gamma\) as a function of temperature and density, calculated using Equation \ref{eq:gamma1} for a helium mass fraction, \(Y=0.25\). \emph{Bottom:} The change in \(\gamma\) induced by a change in helium abundance, \(\Delta Y = 0.1\). In both panels, the dashed line shows the temperature-density profile of model S.\\--- \emph{This figure is a recreation of Fig. 5 in \citet{Houdayer.Reese.ea2021}.}}
+    \label{fig:gamma-temp-density}
+\end{figure}
 
-We were able to isolate the contributions to \(\gamma\) from ionisation using a recent derivation from \citet{Houdayer.Reese.ea2021}. They obtained an approximate formula for \(\gamma\) as a function of temperature (\(T\)) and density valid for the outer convection zone of Sun-like stars.
-
+We were able to isolate the contributions to \(\gamma\) from ionisation using a recent derivation by \citet{Houdayer.Reese.ea2021}. They obtained an approximate formula for \(\gamma\) as a function of temperature (\(T\)) and density valid for the outer convection zone of Sun-like stars. Using their formula, we plot \(\gamma\) for a range of \(T\) and \(\rho\) in Figure \ref{fig:gamma-temp-density}. The first panel illustrates the three ionisation regions of hydrogen and helium. The value of \(\gamma\) decreases when the ionisation reaction is occurring. The magnitude of the effect depends primarily on the temperature-density profile of the star which we can see over-plot for model S. We can imagine a hotter star shifting this line such that ionisation occurs closer to the surface. Additionally, in the second panel we see that an increase in helium abundance by 0.1 decreases \(\gamma\) by up to \(\sim 0.03\) in the helium ionisation region along the model S profile. This shows that a helium abundance correlates with the size of the glitch in \(\gamma\). However, there is clearly still some dependence on other stellar quantities.
 
 % The exact effect of ionisation on \(\gamma\) is not known analytically. However, \citet{Houdayer.Reese.ea2021} recently approximated \(\gamma\) for the convective zone of a Sun-like star in their study of the helium ionisation glitch. In this subsection, we combine the equations derived in their work to help us understand the relation between ionisation and \(\gamma\). Let us consider an \(M\) mass star with fractional hydrogen and helium abundances of \(X\) and \(Y\) respectively. From \citet{Houdayer.Reese.ea2021}, we approximate the first adiabatic exponent as,
 % %
@@ -286,15 +292,6 @@ We were able to isolate the contributions to \(\gamma\) from ionisation using a 
 % %
 % where \(q = 2\) for hydrogen, \(q = 1\) for helium, \(\overline{m} = M/N\) is the mean mass, and \(g_\mathbb{X}^i\) is the ground-state degeneracy of ionisation state \(i\). We used these equations to produce Figures \ref{fig:gamma-zones} and \ref{fig:gamma-temp-density}.
 
-\begin{figure}[tbp]
-    \centering
-    \includegraphics{figures/adiabatic-ionisation-temp.pdf}
-    \caption{Temperature-density profile of a Sun-like star. \emph{Top:} The first adiabatic exponent \(\gamma\) as a function of temperature and density, calculated using Equation \ref{eq:gamma1} for a helium mass fraction, \(Y=0.25\). \emph{Bottom:} The change in \(\gamma\) induced by a change in helium abundance, \(\Delta Y = 0.1\). In both panels, the dashed line shows the temperature-density profile of model S. \emph{This figure is a recreation of Figure 5 in \citet{Houdayer.Reese.ea2021}.}}
-    \label{fig:gamma-temp-density}
-\end{figure}
-
-In Figure \ref{fig:gamma-temp-density} we plot \(\gamma\) as a function of pressure and temperature. The first panel illustrates the three ionisation regions of hydrogen and helium. The value of \(\gamma\) decreases when the ionisation reaction is occurring. The magnitude of the effect depends primarily on the temperature-density profile of the star. Additionally, in the second panel we see that an increase in helium abundance decreases \(\gamma\) in the helium ionisation regions. A temperature-density profile from model S is shown to see how the star probes the ionisation regions. We can imagine a hotter star shifting this line such that ionisation occurs closer to the surface. Similarly, the effect on \(\gamma\) would be smaller in denser star. Although helium abundance dominates the effect on \(\gamma\), there is still some dependence on other stellar quantities.
-
 \subsubsection{The Effect of \(\gamma\) on p Mode Frequencies}
 
 \begin{figure}[tbp]
@@ -304,40 +301,27 @@ In Figure \ref{fig:gamma-temp-density} we plot \(\gamma\) as a function of press
     \label{fig:gamma-sound-speed}
 \end{figure}
 
-To show the effect of small changes in \(\gamma\) on the sound speed, we plot the sound speed gradient in Figure \ref{fig:gamma-sound-speed}. The three models shown were evolved to the same central temperature with different initial helium abundances. The dominant effect of helium abundance appears as a Gaussian-like depression in \(\gamma\) around the second ionisation of helium. We see how larger helium abundance increases the width and depression in \(\gamma\), which is reflected in the sound speed gradient. A larger \(Y\) also leads to a relative reduction in hydrogen abundance. This slightly shrinks the width of the hydrogen ionisation region.
+To show the effect of small changes in \(\gamma\) on the sound speed, we plot the sound speed gradient in Figure \ref{fig:gamma-sound-speed}. The three models shown were evolved to the same central temperature as model S with different initial helium abundances. The dominant effect of helium abundance appears as a Gaussian-like depression in \(\gamma\) around the second ionisation of helium. We see how larger helium abundance increases the width and depression in \(\gamma\), which is reflected in the sound speed gradient. A larger \(Y\) also leads to a relative reduction in hydrogen abundance. This slightly shrinks the width of the hydrogen ionisation region.
 
-To see how a change in \(\gamma\) affects the mode frequencies, we will consider the sensitivity of a given mode to structural changes in the star. We can get there by starting with the variational principle \citep{Chandrasekhar1964},
+To see how a change in \(\gamma\) affects the mode frequencies, we will explore the sensitivity of a mode to structural changes in the star. Starting with the variational principle, we can approximate the characteristic frequencies of a spherically symmetric, slowly rotating star by \citep{Chandrasekhar1964},
 %
 \begin{equation}
     \omega^2 = \frac{\mathcal{E}}{\mathcal{I}}\label{eq:var-prin}
 \end{equation}
 %
-which approximates the characteristic frequencies of a spherically symmetric, slowly rotating star as a function of the mode inertia,
+which is a ratio of \(\mathcal{E}\) (proportional to the mode's energy)
+%
+% \begin{equation}
+%     \mathcal{E} = \int_0^R \left[\gamma P (\dive{\vect{\xi}})^2 + 2(\vect{\xi}\cdot \nabla P) \dive{\vect{\xi}} + (\vect{\xi}\cdot \nabla P) (\vect{\xi}\cdot\nabla\ln\rho)\right] r^2 \, \dd r.
+% \end{equation}
+%
+to its inertia,
 %
 \begin{equation}
-    \mathcal{I} = \int_0^R \vect{\xi} \cdot \vect{\xi} \, \rho r^2 \, \dd r
+    \mathcal{I} = \int_0^R \vect{\xi} \cdot \vect{\xi} \, \rho r^2 \, \dd r.
 \end{equation}
 %
-and \(\mathcal{E}\) which is proportional to the mode energy,
-%
-\begin{equation}
-    \mathcal{E} = \int_0^R \left[\gamma P (\dive{\vect{\xi}})^2 + 2(\vect{\xi}\cdot \nabla P) \dive{\vect{\xi}} + (\vect{\xi}\cdot \nabla P) (\vect{\xi}\cdot\nabla\ln\rho)\right] r^2 \, \dd r.
-\end{equation}
-%
-These equations depend on \(\vect{\xi}\), the Lagrangian perturbation vector of the pulsation mode (the amplitude and direction of the wave). \todo{Explain the meaning of each term}. A structural glitch in the star would cause a small change in frequency (\(\delta\omega\)). Differentiating both sides of Equation \ref{eq:var-prin} with respect to \(\omega\), we get,
-%
-\begin{align}
-    2\omega &= \frac{1}{\mathcal{I}} \left( \frac{\delta\mathcal{E}}{\delta\omega} - \omega^2 \frac{\delta\mathcal{I}}{\delta\omega}\right), \qquad \left[\times \frac{\delta\omega}{2\omega^2}\right] \notag \\
-    \frac{\delta\omega}{\omega} &= \frac{1}{2\,\mathcal{I}} \left(\frac{\delta\mathcal{E}}{\omega^2} - \delta\mathcal{I}\right).
-\end{align}
-%
-The perturbations \(\delta\mathcal{E}\) and \(\delta\mathcal{I}\) depend on changes in the state variables. To see the effect of a change in structure on the modes, it is possible to rewrite this as a function of the so-called structural kernels \(\mathcal{K}_{a,b}\), for example,
-%
-\begin{equation}
-    \frac{\delta\omega}{\omega} = \int_0^R \left(\mathcal{K}_{c^2,\rho} \frac{\delta c^2}{c^2} + \mathcal{K}_{\rho,c^2} \frac{\delta \rho}{\rho} \right) \dd r.\label{eq:kernels}
-\end{equation}
-%
-where \(\mathcal{K}_{a, b}\) gives the relative effect on \(\omega\) due to a perturbation in a state variable \(a\) at fixed \(b\), at a given \(r\). These kernels are defined fully in \citet{Gough.Thompson1991}.
+The amplitude and direction of a pressure wave at a given point in a star are given by the so-called Lagrangian perturbation vector \(\vect{\xi}\). 
 
 \begin{figure}[!tbp]
     \centering
@@ -346,10 +330,25 @@ where \(\mathcal{K}_{a, b}\) gives the relative effect on \(\omega\) due to a pe
     \label{fig:kernels}
 \end{figure}
 
-We plot examples of these kernels in Figure \ref{fig:kernels} for a few radial oscillation modes. Both decay through the star, meaning that the modes are less sensitive to structural changes deeper in the star. The second term of Equation \ref{eq:kernels} is approximately zero, unless there is a sharp change in \(\delta\rho/\rho\) (such as at the base of the convective zone). Also, the first kernel \(\mathcal{K}_{\gamma,\rho} \equiv \mathcal{K}_{c^2,\rho}\) because \(c^2 \propto \rho\). Therefore, we may rewrite Equation \ref{eq:kernels} as
+A structural glitch in the star would cause a small change in frequency (\(\delta\omega\)). Differentiating both sides of Equation \ref{eq:var-prin} with respect to \(\omega\), we get,
+%
+\begin{align}
+    2\omega &= \frac{1}{\mathcal{I}} \left( \frac{\delta\mathcal{E}}{\delta\omega} - \omega^2 \frac{\delta\mathcal{I}}{\delta\omega}\right), \qquad \left[\times \frac{\delta\omega}{2\omega^2}\right] \notag \\
+    \frac{\delta\omega}{\omega} &= \frac{1}{2\,\mathcal{I}} \left(\frac{\delta\mathcal{E}}{\omega^2} - \delta\mathcal{I}\right).
+\end{align}
+%
+Perturbations \(\delta\mathcal{E}\) and \(\delta\mathcal{I}\) depend on changes in the state variables. By perturbing and substituting appropriate forms of \(\mathcal{E}\) and \(\mathcal{I}\), it is possible to rewrite this as a function of the so-called structural kernels \(\mathcal{K}_{a,b}\). For example,
 %
 \begin{equation}
-    \frac{\delta\omega}{\omega} \simeq \int_0^R \mathcal{K}_{\gamma,\rho} \frac{\delta\gamma}{\gamma} \dd r,\label{eq:delta-omega}
+    \frac{\delta\omega}{\omega} = \int_0^R \left(\mathcal{K}_{c^2,\rho} \frac{\delta c^2}{c^2} + \mathcal{K}_{\rho,c^2} \frac{\delta \rho}{\rho} \right) \dd r.\label{eq:kernels}
+\end{equation}
+%
+where \(\mathcal{K}_{a, b}\) gives the relative effect on \(\omega\) due to a perturbation in a state variable \(a\) at fixed \(b\), at a given \(r\). These can show the sensitivity of the wave to a change in state in the star. The kernels are defined in detail in \citet{Gough.Thompson1991}. We plot examples of these kernels in Figure \ref{fig:kernels} for a few radial oscillation modes. Both decay through the star, meaning that the modes are less sensitive to structural changes deeper in the star. 
+
+We can evaluate Equation \ref{eq:kernels} to find the effect on \(\omega\) due to a change in \(\gamma\) from helium ionisation. The first term can be easily rewritten in terms of a change in \(\gamma\) because \(c^2 \propto \gamma\), hence \(\mathcal{K}_{\gamma,\rho} \delta \gamma / \gamma \equiv \mathcal{K}_{c^2,\rho} \delta c^2 / c^2\). Helium ionisation mainly affects \(\gamma\) and barely affects the density, so we can assume \(\delta\rho/\rho \approx 0\) in the ionisation region. Therefore, we may rewrite Equation \ref{eq:kernels} due to a change in \(\gamma\) as,
+%
+\begin{equation}
+    \left.\frac{\delta\omega}{\omega}\right|_\gamma \simeq \int_0^R \mathcal{K}_{\gamma,\rho} \frac{\delta\gamma}{\gamma} \dd r,\label{eq:delta-omega}
 \end{equation}
 %
 where \(\mathcal{K}_{\gamma,\rho}\) is shown in \citet{Gough1993} to satisfy,
@@ -358,39 +357,51 @@ where \(\mathcal{K}_{\gamma,\rho}\) is shown in \citet{Gough1993} to satisfy,
     \omega^2 \mathcal{I}\mathcal{K}_{\gamma,\rho} = \frac12 \gamma P (\dive{\vect{\xi}})^2 r^2.\label{eq:gamma-kernel}
 \end{equation}
 %
-\todo{} show how this gets to, using equations for \(\xi_r\) and pressure perturbation \(P'\) from eq. 24-25 of e.g. \citet{Shibahashi1979}, \(\vect{\xi} = \xi_r \hat{r} + \vect{\xi}_h\) for high-order acoustic modes (where we can ignore the horizontal component of \(\vect{\xi}\)).
+
+Let us first expand the mode inertia, \(\mathcal{I}\). The perturbation vector can be written in terms of a radial and horizontal component, \(\vect{\xi} = \xi_r \hat{r} + \vect{\xi}_h\). In the high-order limit where \(l/n \rightarrow 0\), the horizontal component \(\vect{\xi}_h\) is negligible. Therefore, we can rewrite the mode inertia as,
 %
 \begin{equation}
-    \xi_r \simeq \frac{\psi_0}{r}\sqrt{\frac{K}{\rho}} \cos\psi,\qquad
-    (\dive{\vect{\xi}})^2 \simeq \frac{\psi_0^2 \omega^3}{\gamma P c r^2} \sin^2\psi, \label{eq:xi-approx}
+    \mathcal{I} \simeq \int_0^R \xi_r^2 \rho r^2 \, \dd r.
 \end{equation}
 %
-where \(\psi_0\) is a proportionality constant and the radial wave number \(K \simeq \omega / c\) for high-order acoustic modes. The phase term \(\psi \simeq \omega \tau + \epsilon\) when \(\tau\) is not close to the upper turning point (where the wave is reflected near the stellar surface), and the small offset \(\epsilon\) is a slowly varying function of \(\tau\).
-
-\begin{align}
-    \mathcal{I} &\simeq \int_0^R \xi_r^2 \rho r^2 \, \dd r \notag\\
-    &\simeq \psi_0^2 \int_0^R K \cos^2\psi \, \dd r \notag \\
-    &= \frac12 \omega \psi_0^2 \int_0^R (1 + \cos 2 \psi) \frac{\dd r}{c}
-\end{align}
-%
-Changing to an integral over acoustic depth we can evaluate it for high-order modes where \(\omega_n \ll \tau_0^{\,-1}\),
-%
-\begin{align}
-    \mathcal{I} &\simeq \frac12 \omega \psi_0^2 \int_0^{\tau_0} [1 + \cos 2 (\omega\tau + \epsilon)] \, \dd \tau \simeq \frac12 \omega \psi_0^2 \tau_0.
-\end{align}
-%
-Finally, substituting Equations \ref{eq:gamma-kernel} and \ref{eq:xi-approx} into Equation \ref{eq:delta-omega}, we get,
-%
-\begin{align}
-    \frac{\delta\omega}{\omega} &\simeq \frac{1}{2\omega^2\mathcal{I}} \int \delta\gamma P (\dive{\vect{\xi}})^2 r^2 \, \dd r, \notag \\
-    &\simeq \frac{\omega \psi_0^2}{2 \mathcal{I}} \int \frac{\delta\gamma}{\gamma}\sin^2\psi\frac{\dd r}{c}, \notag \\
-    &= \frac{\omega \psi_0^2}{4 \mathcal{I}} \int \frac{\delta\gamma}{\gamma}(1 - \cos 2\psi)\frac{\dd r}{c}.
-\end{align}
-%
-where the integral need only be evaluated in the region where \(\delta\gamma / \gamma\) is non-zero. We can see that \(\delta\omega\) is split into a smooth and a periodic component. The smooth component may be treated later, but for now we focus on the oscillating part of \(\delta\omega\). Substituting for \(\mathcal{I}\) and \(\psi\), changing to an integral over acoustic depth we get,
+We can use an approximation of \(\xi_r\) from \citet{Gough1993}, 
 %
 \begin{equation}
-    \left.\frac{\delta\omega}{\omega}\right|_\mathrm{osc} \simeq - \frac{1}{2\tau_0} \int \frac{\delta\gamma}{\gamma} \cos 2 (\omega\tau + \epsilon) \, \dd \tau,
+    \xi_r \simeq \frac{\psi_0}{r}\sqrt{\frac{K}{\rho}} \cos\psi,\label{eq:xi-r}
+\end{equation}
+%
+where \(\psi_0\) is a proportionality constant and the radial wave number \(K \simeq \omega / c\) for high-order acoustic modes. The phase term \(\psi \simeq \omega \tau + \epsilon\) when \(\tau\) is not close to the upper turning point (where the wave is reflected near the stellar surface). The small offset \(\epsilon\) is a slowly varying function of \(\tau\). Substituting Equation \ref{eq:xi-r} into the mode inertia gives,
+%
+\begin{align}
+    \mathcal{I} &\simeq \psi_0^2 \int_0^R K \cos^2\psi \, \dd r \notag \\
+    &= \frac12 \omega \psi_0^2 \int_0^R (1 + \cos 2 \psi) \frac{\dd r}{c}.
+\end{align}
+%
+Finally, changing to an integral over the acoustic depth, \(\tau\) we can evaluate the integral for high-order modes where \(\omega_n \ll \tau_0^{\,-1}\),
+%
+\begin{equation}
+    \mathcal{I} \simeq \frac12 \omega \psi_0^2 \int_0^{\tau_0} [1 + \cos 2 (\omega\tau + \epsilon)] \, \dd \tau \simeq \frac12 \omega \psi_0^2 \tau_0.
+\end{equation}
+%
+
+Secondly, we can substitute an approximation for \((\dive{\vect{\xi}})^2\) from \citet{Gough1993},
+%
+\begin{equation}
+    (\dive{\vect{\xi}})^2 \simeq \frac{\psi_0^2 \omega^3}{\gamma P c r^2} \sin^2\psi, \label{eq:div-xi}
+\end{equation}
+%
+into Equation \ref{gamma-kernel} to get,
+%
+\begin{align}
+    \left.\frac{\delta\omega}{\omega}\right|_\gamma &\simeq \frac{1}{2\omega^2\mathcal{I}} \int_0^{R} \delta\gamma P (\dive{\vect{\xi}})^2 r^2 \, \dd r, \notag \\
+    &\simeq \frac{\omega \psi_0^2}{2 \mathcal{I}} \int_0^{R} \frac{\delta\gamma}{\gamma}\sin^2\psi\frac{\dd r}{c}, \notag \\
+    &= \frac{\omega \psi_0^2}{4 \mathcal{I}} \int_0^{R} \frac{\delta\gamma}{\gamma}(1 - \cos 2\psi)\frac{\dd r}{c}.
+\end{align}
+%
+This integral is approximately valid providing the region where \(\delta\gamma/\gamma\) is in the asymptotic limit \todo{and other assumptions}. We can see that \(\delta\omega\) is split into a smooth and a periodic component. The smooth component can be treated later, but for now we focus on the oscillating part of \(\delta\omega\). Substituting for \(\mathcal{I}\) and \(\psi\), changing to an integral over acoustic depth we get,
+%
+\begin{equation}
+    \left.\frac{\delta\omega}{\omega}\right|_{\gamma,\mathrm{osc}} \simeq - \frac{1}{2\tau_0} \int_0^{\tau_0} \frac{\delta\gamma}{\gamma} \cos 2 (\omega\tau + \epsilon) \, \dd \tau.
 \end{equation}
 %
 
@@ -633,7 +644,7 @@ centred on \(\overline{\nu}_0\) and \(\overline{\varepsilon}\) and scaled by \(s
 
 % Priors for the following parameters follow a log-normal distribution to ensure they are positive. We also exploit the property that the scale of a normal distribution in natural log-space is approximately the scale in real-space as a fraction of the distribution mean.
 
-We derived a prior on \(\tau_\helium \cong \tau_\heII\) and \(\tau_\bcz\) by observing how they scale with acoustic radius \(\tau_0\) in the grid of stellar models from \citep{Lyttle.Davies.ea2021} and in \citet{Verma.Rorsted.ea2022}. Typically, the fraction depth of He\,\textsc{ii} ionisation \(\tau_\heII/\tau_0 \approx 0.2\) and BCZ \(\tau_\bcz/\tau_0 \approx 0.6\) for main sequence solar-like oscillators (see, e.g. Figure \ref{fig:gamma-sound-speed}). Therefore, we form our prior distributions from these relations using the relation \({\tau}_0 = (2\nu_0)^{-1}\), with an additional spread of 20 per cent to account for variance with stellar properties. To ensure the parameters remain positive, we defined their priors in natural log-space,
+We derived a prior on \(\tau_\helium \cong \tau_\heII\) and \(\tau_\bcz\) by observing how they scale with acoustic radius \(\tau_0\) in the grid of stellar models from \citet{Lyttle.Davies.ea2021} and in \citet{Verma.Rorsted.ea2022}. Typically, the fraction depth of He\,\textsc{ii} ionisation \(\tau_\heII/\tau_0 \approx 0.2\) and BCZ \(\tau_\bcz/\tau_0 \approx 0.6\) for main sequence solar-like oscillators (see, e.g. Figure \ref{fig:gamma-sound-speed}). Therefore, we form our prior distributions from these relations using the relation \({\tau}_0 = (2\nu_0)^{-1}\), with an additional spread of 20 per cent to account for variance with stellar properties. To ensure the parameters remain positive, we defined their priors in natural log-space,
 %
 \begin{gather*}
     \ln\tau_\helium \sim \mathcal{N}\left[ \ln(\overline{\tau}_\helium), \, s_{\ln\tau}^2 \right], \quad \ln\tau_\bcz \sim \mathcal{N}\left[\ln(3\overline{\tau}_\helium), \, s_{\ln\tau}^2 \right],\\
