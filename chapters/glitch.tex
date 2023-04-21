@@ -56,7 +56,8 @@ where \(n\) is a non-zero integer (the \(n=0\) solution would give \(\xi=0\) eve
 
 \begin{figure}[!tb]
     \centering
-    \includegraphics{figures/glitch-1d-example-diagram.pdf}
+    % \includegraphics{figures/glitch-1d-example-diagram.pdf}
+    \input{figures/glitch-1d-example.tex}
     \caption[A diagram showing a one-dimensional medium with a small structural perturbation.]{\todo{Redo plots with new glitch location symbol} A diagram showing a one-dimensional medium split into three regions. 1: Fixed at \(x=0\) with a constant speed of sound \(c\); 2: A small structural perturbation centred at \(x=x_\glitch\) with width \(2\delta x\) and constant speed of sound \(c + \delta c\); 3: Fixed at \(x=L\) with a constant speed of sound \(c\).}
     \label{fig:1d-diagram}
 \end{figure}
@@ -281,7 +282,7 @@ where \(q = 2\) for hydrogen, \(q = 1\) for helium, \(\overline{m} = M/N\) is th
 \begin{figure}[tbp]
     \centering
     \includegraphics{figures/adiabatic-ionisation-temp.pdf}
-    \caption{Temperature-density profile of a Sun-like star. \emph{Top:} The first adiabatic exponent \(\gamma\) as a function of temperature and density, calculated using Equation \ref{eq:gamma1} for a helium mass fraction, \(Y=0.25\). \emph{Bottom:} The change in \(\gamma\) induced by a change in helium abundance, \(\Delta Y = 0.1\). In both panels, the dashed line shows the temperature-density profile of model S.}
+    \caption{Temperature-density profile of a Sun-like star. \emph{Top:} The first adiabatic exponent \(\gamma\) as a function of temperature and density, calculated using Equation \ref{eq:gamma1} for a helium mass fraction, \(Y=0.25\). \emph{Bottom:} The change in \(\gamma\) induced by a change in helium abundance, \(\Delta Y = 0.1\). In both panels, the dashed line shows the temperature-density profile of model S. \emph{This figure is a recreation of Fig. 5 in \citet{Houdayer.Reese.ea2021}.}}
     \label{fig:gamma-temp-density}
 \end{figure}
 
@@ -292,7 +293,7 @@ In Figure \ref{fig:gamma-temp-density} we plot \(\gamma\) as a function of press
 \begin{figure}[tbp]
     \centering
     \includegraphics{figures/helium-ionisation-sound-speed.pdf}
-    \caption{The effect on the sound speed profile for three solar-like stars with initial helium mass fractions of 0.26 (\emph{solid}), 0.28 (\emph{dashed}), and 0.3 (\emph{dot-dashed}). The models were each evolved to a central helium mass fraction of 0.6. \emph{Top:} The first adiabatic exponent \(gamma\). \emph{Bottom:} The sound speed gradient \(\dd c/\dd t\) where \(t = \tau/\tau_0\) is the fractional acoustic depth (plot on the x-axis).}
+    \caption{The effect on the sound speed profile for three solar-like stars with initial helium mass fractions of 0.26 (\emph{solid}), 0.28 (\emph{dashed}), and 0.3 (\emph{dot-dashed}). The models were each evolved to a central helium mass fraction of 0.6. \emph{Top:} The first adiabatic exponent \(gamma\). \emph{Bottom:} The sound speed gradient \(\dd c/\dd t\) where \(t = \tau/\tau_0\) is the fractional acoustic depth.}
     \label{fig:gamma-sound-speed}
 \end{figure}
 
