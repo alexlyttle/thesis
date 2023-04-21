@@ -138,11 +138,14 @@
   style=authoryear-comp,
   natbib=true,
   url=false,
+  sorting=ynt,      % Allow for year sorting in text, then use refcontext to print bibliography
   giveninits=true,  % Given name as initials only, uncomment if no compile
   uniquename=init,  % Very useful, use initials for unique names
 %   uniquename=false,  % Uncomment this if don't care about unique author names in text.
   uniquelist=false   % Uncomment this if don't care about author lists in text.
   ]{biblatex}
+
+% Allow for ynt sorting in text (https://tex.stackexchange.com/a/361042)
 
 \newcommand{\serenelli}{S17}
 \defcitealias{Serenelli.Johnson.ea2017}{\serenelli}
@@ -165,14 +168,17 @@
 
 %% OTHER PACKAGES
 %
-\usepackage{amsmath}     % Mathematical symbols
-\usepackage{bm}          % Bold math
-\usepackage{emptypage}   % Make skipped pages blank
-\usepackage{tocbibind}   % Add TOC and bibliography to TOC
-\usepackage{lipsum}      % For placeholder text
+\usepackage{amsmath}      % Mathematical symbols
+\usepackage{bm}           % Bold math
+\usepackage{emptypage}    % Make skipped pages blank
+\usepackage{tocbibind}    % Add TOC and bibliography to TOC
+\usepackage{lipsum}       % For placeholder text
 \usepackage{nicefrac}
-\usepackage{CJKutf8}     % Chinese/Japanese/Korean characters
-\usepackage{pgfornament} % Fancy ornaments and borders
+\usepackage{CJKutf8}      % Chinese/Japanese/Korean characters
+\usepackage{pgfornament}  % Fancy ornaments and borders
+% \usepackage[tagged, highstructure]{accessibility} % For accessible tagging
+% \usepackage{axessibility} % For accessible math (screen reader friendly) doesn't work :(
+
 \usepackage{epigraph}    % Epigraphs - quotes at beginning of chapters
 \setlength\epigraphwidth{.66\textwidth}
 \setlength\epigraphrule{0pt}
