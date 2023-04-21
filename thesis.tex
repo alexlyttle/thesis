@@ -75,15 +75,11 @@
 % Optional dedication, edit this or comment out if not appropriate
 \dedication{%
 \begin{center}
-  \textsc{Dedicated to}
-
-  Hannah
-
-  \pgfornament[width=1.5cm,ydelta=-3pt]{70}  % Fancy divider
-  % \pgfornament[width=2.5cm,ydelta=-3pt]{80}  % Simple divider
-
-  \textsc{In Loving Memory of}
-
+  \textsc{Dedicated to}\\
+  Hannah\\
+  \pgfornament[width=1.5cm,ydelta=-3pt]{70}\\  % Fancy divider
+  % \pgfornament[width=2.5cm,ydelta=-3pt]{80}\\  % Simple divider
+  \textsc{In Loving Memory of}\\
   Angela and Barry
 \end{center}
 }
@@ -152,8 +148,10 @@ Finally, I would like to thank my PhD examiners Daniel Reese and Chris Moore, an
   
   %% BIBLIOGRAPHY -------------------------------------------------------------
   %
-  \printbibliography[title=References,heading=bibintoc]
-
+  \begin{refcontext}[sorting=nyt]
+    % Allow for name sorting in references
+    \printbibliography[title=References,heading=bibintoc]
+  \end{refcontext}
   %% APPENDICES ---------------------------------------------------------------
   %
   \appendix
