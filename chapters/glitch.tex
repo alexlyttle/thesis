@@ -226,7 +226,7 @@ In Figure \ref{fig:sound-speed-gradient}, we show the sound speed gradient with 
 
 \subsection{Sun-Like Model Star}\label{sec:model-s}
 
-We computed a representative Sun-like model star (hereafter model S) using MESA \citep[version 12115;][]{Paxton.Bildsten.ea2011,Paxton.Cantiello.ea2013,Paxton.Marchant.ea2015,Paxton.Schwab.ea2018,Paxton.Smolec.ea2019,Jermyn.Bauer.ea2023}. \todo{Insert details about physics used}. We output pulsation profile data in FGONG format to later use when computing oscillation modes in Section \ref{sec:glitch-model}.
+We computed a representative Sun-like model star (hereafter model S) using MESA \citep[version 12115;][]{Paxton.Bildsten.ea2011,Paxton.Cantiello.ea2013,Paxton.Marchant.ea2015,Paxton.Schwab.ea2018,Paxton.Smolec.ea2019,Jermyn.Bauer.ea2023}. The model was computed with an initial mass of \SI{1.0}{\solarmass} to a central fractional hydrogen abundance of 0.6. We used initial fractional helium and heavy-element abundances of 0.28 and 0.02 respectively. The mixing-length was parameterised by \(\alpha_\mlt=1.9\) and a turbulent pressure factor of 1. We evolved the star using element diffusion with MESA's default coefficients \citep{Stanton.Murillo2016}. In addition, we used MESA's default \citet{Grevesse.Sauval1998} solar chemical composition and opacity tables.We also output pulsation profile data in FGONG format to later use when computing oscillation modes in Chapter \ref{chap:glitch-gp}. Our resulting model S had an age of \SI{4.073}{\giga\year}, \(\teff \approx \SI{5682}{\kelvin}\), and \(R \approx \SI{1.014}{\solarradius}\). Since the model was evolved with element diffusion, the surface fractional helium and heavy-element were approximately \num{0.2515} and \num{0.01810} respectively.
 
 \subsection{Helium Ionisation Glitch}\label{sec:helium-glitch}
 
@@ -248,7 +248,7 @@ In Figure \ref{fig:gamma-zones}, we show \(\gamma\) for model S against fraction
 \begin{figure}[tbp]
     \centering
     \includegraphics{figures/adiabatic-ionisation-temp.pdf}
-    \caption[Temperature-density profile for a Sun-like star.]{Temperature-density profile for a Sun-like star. \emph{Top:} The first adiabatic exponent \(\gamma\) as a function of temperature and density, calculated using Equation \ref{eq:gamma1} for a helium mass fraction, \(Y=0.25\). \emph{Bottom:} The change in \(\gamma\) induced by a change in helium abundance, \(\Delta Y = 0.1\). In both panels, the dashed line shows the temperature-density profile of model S.\\--- \emph{This figure is a recreation of Fig. 5 in \citet{Houdayer.Reese.ea2021}.}}
+    \caption[Temperature-density profile for a Sun-like star.]{Temperature-density profile for a Sun-like star. \emph{Top:} The first adiabatic exponent \(\gamma\) as a function of temperature and density, calculated using Eq. 53 of \citet{Houdayer.Reese.ea2021} for a helium mass fraction, \(Y=0.25\). \emph{Bottom:} The change in \(\gamma\) induced by a change in helium abundance, \(\Delta Y = 0.1\). In both panels, the dashed line shows the temperature-density profile of model S.\\--- \emph{This figure is a recreation of Fig. 5 in \citet{Houdayer.Reese.ea2021}.}}
     \label{fig:gamma-temp-density}
 \end{figure}
 
