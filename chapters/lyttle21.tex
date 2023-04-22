@@ -63,7 +63,7 @@ We determined luminosities, $L$ for the sample using the direct method of \texts
 	\input{tables/stars_inputs.tex}
 \end{table*}
 
-\begin{figure}[!tb]
+\begin{figure}[tb]
     \centering
     \includegraphics{figures/context.png}
     \caption{The luminosity, $L$ against effective temperature, $\teff$ of the sample of 81 \emph{Kepler} dwarfs and subgiants studied in this work. Each stars is coloured according to metallicity. The grey lines depict evolutionary tracks with $\metallicity_\mathrm{init}=\SI{0.0}{\dex}$, $Y_\mathrm{init}=0.28$ and $\mlt=1.9$ for different stellar masses. The current position of the Sun is shown by the $\odot$ symbol.}
@@ -199,7 +199,7 @@ We made predictions for each star using the trained ANN, $\{\log(\tau)_i, T_{\ma
 %
 where $N_\mathrm{obs}$ is the number of observed variables. We chose to use observed $\teff$, $L$, $\dnu$, and $\metallicity$ collated for our sample as described in Section \ref{sec:data}.
 
-\begin{figure}[!tb]
+\begin{figure}[tb]
     \centering
     \includegraphics{figures/partial_pool_pgm.png}
     \caption{A probabilistic graphical model (PGM) of the partially-pooled (PP) hierarchical model. Nodes outside of the grey rectangle represent the hyperparameters in the model. Nodes inside the grey rectangle represent individual stellar parameters. Dark grey nodes represent observables which each have their respective observational uncertainties given by the solid black nodes. The direction of the arrows represent the dependencies in the generative model.}
@@ -382,11 +382,13 @@ We obtained values for the hyperparameters for each of the models and present th
 \end{table*}
 
 \begin{figure}
-    \begin{subfigure}[b]{.5\linewidth}
+    \centering
+    \begin{subfigure}[b]{.66\linewidth}
         \centering
         \includegraphics[width=\textwidth]{figures/corner_plot_pp.png}
-    \end{subfigure}%
-    \begin{subfigure}[b]{.5\linewidth}
+    \end{subfigure}
+
+    \begin{subfigure}[b]{.66\linewidth}
         \centering
         \includegraphics[width=\textwidth]{figures/corner_plot_pps.png}
     \end{subfigure}
@@ -395,11 +397,13 @@ We obtained values for the hyperparameters for each of the models and present th
 \end{figure} 
 
 \begin{figure}
-    \begin{subfigure}[b]{.5\linewidth}
+    \centering
+    \begin{subfigure}[b]{.66\linewidth}
         \centering
         \includegraphics[width=\textwidth]{figures/corner_plot_mp.png}
-    \end{subfigure}%
-    \begin{subfigure}[b]{.5\linewidth}
+    \end{subfigure}
+
+    \begin{subfigure}[b]{.66\linewidth}
         \centering
         \includegraphics[width=\textwidth]{figures/corner_plot_mps.png}
     \end{subfigure}
@@ -409,7 +413,7 @@ We obtained values for the hyperparameters for each of the models and present th
 
 Fig. \ref{fig:corners-pp} shows the joint and marginal distributions (corner plot) output by the PP and PPS model. We see an anti-correlation between $\Delta Y / \Delta Z$ and $\mu_\alpha$, expected due to the degeneracy between the two parameters in the stellar evolutionary models. In Fig. \ref{fig:corners-mp}, we also show the corner plot for the MP and MPS model output. Similarly, we see an anti-correlation between $\Delta Y / \Delta Z$ and $\mlt$.
 
-\begin{figure}[!tb]
+\begin{figure}[tb]
     \centering
     \includegraphics{figures/zi_yi_results_plot.png}
     \caption{The results for initial helium fraction ($Y_\mathrm{init}$) against initial heavy-element fraction ($Z_\mathrm{init}$) for each star from the PPS model are shown by the black markers. The mean helium enrichment, $\mu_Y = Y_P + (\Delta Y / \Delta Z) Z_\mathrm{init}$ with its 68 per cent credible interval are shown in blue by a solid line and shaded region respectively. The population spread, $\mu_Y \pm \sigma_Y$ and its 68 per cent credible interval are shown in orange by a dashed line and shaded region respectively. The individual results from the NP model are shown by the light grey markers.}
@@ -460,37 +464,51 @@ Secondly, our choice of \citet{Asplund.Grevesse.ea2009} solar chemical mixture d
 
 Although updated, much of our observable data is comparable to that of \citetalias{Serenelli.Johnson.ea2017}, with the exception of $\teff$. The preferred results from \citetalias{Serenelli.Johnson.ea2017} were determined using a photometric $\teff$ scale which we found to be on average $\sim \SI{170}{\kelvin}$ greater than our spectroscopic scale from DR14. In \citetalias{Serenelli.Johnson.ea2017}, they saw a similar offset between the DR13 $\teff$ available at the time. They found a median difference in mass, radius, and age of approximately $-6$, $-2$, and $+35$ per cent respectively with results from the photometric $\teff$ scale subtracted from the spectroscopic scale.
 
-\begin{figure}
+% \begin{figure}
+%     \centering
+%     \begin{subfigure}[b]{.33\linewidth}
+%         \centering
+%         \includegraphics[width=\linewidth]{figures/sigma_mass.png}
+%     \end{subfigure}%
+%     \begin{subfigure}[b]{.33\linewidth}
+%         \centering
+%         \includegraphics[width=\linewidth]{figures/sigma_rad.png}
+%     \end{subfigure}%
+%     \begin{subfigure}[b]{.33\linewidth}
+%         \centering
+%         \includegraphics[width=\linewidth]{figures/sigma_age.png}
+%     \end{subfigure}%
+%     \caption{Kernel density estimates (KDEs) of the distribution of statistical uncertainties in the results from each model compared with those of \citepalias{Serenelli.Johnson.ea2017} for the sample of APOKASC dwarfs and subgiants.}
+%     \label{fig:unc-comp}
+% \end{figure}
+
+\begin{figure}[!tb]
     \centering
-    \begin{subfigure}[b]{.33\linewidth}
-        \centering
-        \includegraphics[width=\linewidth]{figures/sigma_mass.png}
-    \end{subfigure}%
-    \begin{subfigure}[b]{.33\linewidth}
-        \centering
-        \includegraphics[width=\linewidth]{figures/sigma_rad.png}
-    \end{subfigure}%
-    \begin{subfigure}[b]{.33\linewidth}
-        \centering
-        \includegraphics[width=\linewidth]{figures/sigma_age.png}
-    \end{subfigure}%
-    \caption{Kernel density estimates (KDEs) of the distribution of statistical uncertainties in the results from each model compared with those of \citepalias{Serenelli.Johnson.ea2017} for the sample of APOKASC dwarfs and subgiants.}
+    \includegraphics{figures/unc-comp.png}
+    \caption{Kernel density estimates (KDEs) of the distribution of statistical uncertainties in the results from each model compared with those of \citetalias{Serenelli.Johnson.ea2017} for the sample of APOKASC dwarfs and subgiants.}
     \label{fig:unc-comp}
 \end{figure}
 
 In Fig. \ref{fig:unc-comp} we compare our statistical uncertainties for $M$, $R$, and $\tau$ with those for the equivalent stars from \citetalias{Serenelli.Johnson.ea2017}. We found that the NP model yielded comparable uncertainties to \citetalias{Serenelli.Johnson.ea2017} but note that these are likely underestimated due the influence of the prior boundaries for $Y_\mathrm{init}$ and $\mlt$. We expected larger uncertainties because we included additional free parameters ($Y_\mathrm{init}$ and $\mlt$) over the work of \citetalias{Serenelli.Johnson.ea2017}. However, when we treat these parameters hierarchically, we saw a reduction in uncertainties from all of the pooled models. This is because our prior assumptions about the population allows for the sharing of information between the stars. This uncertainty reduction scales with the number of stars in our sample, demonstrated by the results for the synthetic stars in Fig. \ref{fig:shrinkage}. Thus, hierarchically modelling our population resulted in improved statistical uncertainties in stellar fundamental parameters.
 
-\begin{figure}
+% \begin{figure}
+%     \centering
+%     \begin{subfigure}[b]{.33\linewidth}
+%         \includegraphics[width=\linewidth]{figures/mass_comp.png}
+%     \end{subfigure}%
+%     \begin{subfigure}[b]{.33\linewidth}
+%         \includegraphics[width=\linewidth]{figures/rad_comp.png}
+%     \end{subfigure}%
+%     \begin{subfigure}[b]{.33\linewidth}
+%         \includegraphics[width=\linewidth]{figures/age_comp.png}
+%     \end{subfigure}%
+%     \caption{The mean and standard deviation in age, mass and radius results from the PPS model compared with the results (using the photometric temperature scale) from \citetalias{Serenelli.Johnson.ea2017}.}
+%     \label{fig:comp}
+% \end{figure}
+
+\begin{figure}[!tb]
     \centering
-    \begin{subfigure}[b]{.33\linewidth}
-        \includegraphics[width=\linewidth]{figures/mass_comp.png}
-    \end{subfigure}%
-    \begin{subfigure}[b]{.33\linewidth}
-        \includegraphics[width=\linewidth]{figures/rad_comp.png}
-    \end{subfigure}%
-    \begin{subfigure}[b]{.33\linewidth}
-        \includegraphics[width=\linewidth]{figures/age_comp.png}
-    \end{subfigure}%
+    \includegraphics{figures/param-comp.png}
     \caption{The mean and standard deviation in age, mass and radius results from the PPS model compared with the results (using the photometric temperature scale) from \citetalias{Serenelli.Johnson.ea2017}.}
     \label{fig:comp}
 \end{figure}
