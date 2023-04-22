@@ -58,7 +58,7 @@ We determined luminosities, $L$ for the sample using the direct method of \texts
 
 \begin{table*}
 	\centering
-	\caption{The observables and their respective uncertainties for 5 stars in the sample of 81 stars. The whole table is available as supplementary material.}
+	\caption[The observables and their respective uncertainties for 5 stars in the sample of 81 stars.]{The observables and their respective uncertainties for 5 stars in the sample of 81 stars. The whole table is available as supplementary material for the original article \citep{Lyttle.Davies.ea2021}.}
 	\label{tab:data}
 	\input{tables/stars_inputs.tex}
 \end{table*}
@@ -66,7 +66,7 @@ We determined luminosities, $L$ for the sample using the direct method of \texts
 \begin{figure}[tb]
     \centering
     \includegraphics{figures/context.png}
-    \caption{The luminosity, $L$ against effective temperature, $\teff$ of the sample of 81 \emph{Kepler} dwarfs and subgiants studied in this work. Each stars is coloured according to metallicity. The grey lines depict evolutionary tracks with $\metallicity_\mathrm{init}=\SI{0.0}{\dex}$, $Y_\mathrm{init}=0.28$ and $\mlt=1.9$ for different stellar masses. The current position of the Sun is shown by the $\odot$ symbol.}
+    \caption[The luminosity against effective temperature of the sample of 81 \emph{Kepler} dwarfs and subgiants studied in this work.]{The luminosity, $L$ against effective temperature, $\teff$ of the sample of 81 \emph{Kepler} dwarfs and subgiants studied in this work. Each stars is coloured according to metallicity. The grey lines depict evolutionary tracks with $\metallicity_\mathrm{init}=\SI{0.0}{\dex}$, $Y_\mathrm{init}=0.28$ and $\mlt=1.9$ for different stellar masses. The current position of the Sun is shown by the $\odot$ symbol.}
     \label{fig:data}
 \end{figure}
 
@@ -91,7 +91,7 @@ We also computed an additional set of evolutionary tracks, with input values cho
 
 \begin{table}
 	\centering
-	\caption{Stellar model grid parameters for train and test datasets. $N_\mathrm{track}$ are the numbers of stellar evolutionary tracks for each dimension of the grid, multiplied to a total of \num{17220} tracks.}
+	\caption[Stellar model grid parameters for train and test datasets.]{Stellar model grid parameters for train and test datasets. $N_\mathrm{track}$ are the numbers of stellar evolutionary tracks for each dimension of the grid, multiplied to a total of \num{17220} tracks.}
 	\label{tab:grid}
 	\begin{tabular}{cccc} % four columns, alignment for each
 		\toprule
@@ -202,7 +202,7 @@ where $N_\mathrm{obs}$ is the number of observed variables. We chose to use obse
 \begin{figure}[tb]
     \centering
     \includegraphics{figures/partial_pool_pgm.png}
-    \caption{A probabilistic graphical model (PGM) of the partially-pooled (PP) hierarchical model. Nodes outside of the grey rectangle represent the hyperparameters in the model. Nodes inside the grey rectangle represent individual stellar parameters. Dark grey nodes represent observables which each have their respective observational uncertainties given by the solid black nodes. The direction of the arrows represent the dependencies in the generative model.}
+    \caption[A probabilistic graphical model of the partially-pooled hierarchical model.]{A probabilistic graphical model (PGM) of the partially-pooled (PP) hierarchical model. Nodes outside of the grey rectangle represent the hyperparameters in the model. Nodes inside the grey rectangle represent individual stellar parameters. Dark grey nodes represent observables which each have their respective observational uncertainties given by the solid black nodes. The direction of the arrows represent the dependencies in the generative model.}
     \label{fig:pgm}
 \end{figure}
 
@@ -304,7 +304,7 @@ For both the PP and MP models, we iterated with and without data for the Sun inc
 
 \begin{table}
     \centering
-    \caption{Solar input data. The references correspond to the central values and the uncertainties are chosen to either be representative of the ANN accuracy or the spread of values in the literature (see text for details).}
+    \caption[Solar input data.]{Solar input data. The references correspond to the central values and the uncertainties are chosen to either be representative of the ANN accuracy or the spread of values in the literature (see text for details).}
     \label{tab:sun}
     \input{tables/sun_inputs.tex}
 \end{table}
@@ -336,7 +336,7 @@ In Table \ref{tab:np}, we present results for the 65 APOKASC stars from the NP m
 \begin{landscape}
 \begin{table*}
 	\centering
-	\caption{The median of the marginalised posterior samples for selected parameters output by the NP model, with their respective upper and lower 68 per cent credible intervals. The full table is available as supplementary material.}
+	\caption[The median of the marginalised posterior samples for selected parameters output by the NP model.]{The median of the marginalised posterior samples for selected parameters output by the NP model, with their respective upper and lower 68 per cent credible intervals. The full table is available as supplementary material in the original article \citep{Lyttle.Davies.ea2021}.}
 	\label{tab:np}
 	\input{tables/stars_outputs_NP.tex}
 \end{table*}
@@ -392,7 +392,7 @@ We obtained values for the hyperparameters for each of the models and present th
         \centering
         \includegraphics[width=\textwidth]{figures/corner_plot_pps.png}
     \end{subfigure}
-    \caption{Corner plots showing the joint and marginalised sampled posterior distributions for the hyperparameters for the PP (left) and PPS (right) models. The vertical dashed lines give the 16th, 50th and 84th percentiles.}
+    \caption[Corner plots showing the joint and marginalised sampled posterior distributions for the PP and PPS hyperparameters.]{Corner plots showing the joint and marginalised sampled posterior distributions for the hyperparameters for the PP (left) and PPS (right) models. The vertical dashed lines give the 16th, 50th and 84th percentiles.}
     \label{fig:corners-pp}
 \end{figure} 
 
@@ -416,7 +416,7 @@ Fig. \ref{fig:corners-pp} shows the joint and marginal distributions (corner plo
 \begin{figure}[tb]
     \centering
     \includegraphics{figures/zi_yi_results_plot.png}
-    \caption{The results for initial helium fraction ($Y_\mathrm{init}$) against initial heavy-element fraction ($Z_\mathrm{init}$) for each star from the PPS model are shown by the black markers. The mean helium enrichment, $\mu_Y = Y_P + (\Delta Y / \Delta Z) Z_\mathrm{init}$ with its 68 per cent credible interval are shown in blue by a solid line and shaded region respectively. The population spread, $\mu_Y \pm \sigma_Y$ and its 68 per cent credible interval are shown in orange by a dashed line and shaded region respectively. The individual results from the NP model are shown by the light grey markers.}
+    \caption[The results for initial helium fraction against initial heavy-element fraction for each star from the PPS model.]{The results for initial helium fraction ($Y_\mathrm{init}$) against initial heavy-element fraction ($Z_\mathrm{init}$) for each star from the PPS model are shown by the black markers. The mean helium enrichment, $\mu_Y = Y_P + (\Delta Y / \Delta Z) Z_\mathrm{init}$ with its 68 per cent credible interval are shown in blue by a solid line and shaded region respectively. The population spread, $\mu_Y \pm \sigma_Y$ and its 68 per cent credible interval are shown in orange by a dashed line and shaded region respectively. The individual results from the NP model are shown by the light grey markers.}
     \label{fig:helium}
 \end{figure}
 
@@ -485,7 +485,7 @@ Although updated, much of our observable data is comparable to that of \citetali
 \begin{figure}[!tb]
     \centering
     \includegraphics{figures/unc-comp.png}
-    \caption{Kernel density estimates (KDEs) of the distribution of statistical uncertainties in the results from each model compared with those of \citetalias{Serenelli.Johnson.ea2017} for the sample of APOKASC dwarfs and subgiants.}
+    \caption[Kernel density estimates of the distribution of statistical uncertainties in the results from each model.]{Kernel density estimates (KDEs) of the distribution of statistical uncertainties in the results from each model compared with those of \citetalias{Serenelli.Johnson.ea2017} for the sample of APOKASC dwarfs and subgiants.}
     \label{fig:unc-comp}
 \end{figure}
 
@@ -509,7 +509,7 @@ In Fig. \ref{fig:unc-comp} we compare our statistical uncertainties for $M$, $R$
 \begin{figure}[!tb]
     \centering
     \includegraphics{figures/param-comp.png}
-    \caption{The mean and standard deviation in age, mass and radius results from the PPS model compared with the results (using the photometric temperature scale) from \citetalias{Serenelli.Johnson.ea2017}.}
+    \caption[The mean and standard deviation in age, mass and radius results from the PPS model.]{The mean and standard deviation in age, mass and radius results from the PPS model compared with the results (using the photometric temperature scale) from \citetalias{Serenelli.Johnson.ea2017}.}
     \label{fig:comp}
 \end{figure}
 

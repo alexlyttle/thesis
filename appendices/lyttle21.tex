@@ -29,7 +29,7 @@ An ANN is a network of artificial \emph{neurons} which each transform some input
 \begin{figure}
     \centering
     \includegraphics{figures/network_10.png}
-    \caption{An artificial neural network comprising $H$ hidden layers with $N$ neurons per layer. Arrows connecting the nodes represent tunable weights.}
+    \caption[An artificial neural network comprising $H$ hidden layers with $N$ neurons per layer.]{An artificial neural network comprising $H$ hidden layers with $N$ neurons per layer. Arrows connecting the nodes represent tunable weights.}
     \label{fig:net}
 \end{figure}
 
@@ -100,7 +100,7 @@ We standardised the training dataset by subtracting the median, $\mu_{1/2}$ and 
 
 \begin{table}
     \centering
-    \caption{The median, $\mu_{1/2}$ and standard deviation, $\sigma$ for each parameter in the training data, used to standardise the dataset.}
+    \caption[The median and standard deviation for each parameter in the training data, used to standardise the dataset.]{The median, $\mu_{1/2}$ and standard deviation, $\sigma$ for each parameter in the training data, used to standardise the dataset.}
     \label{tab:std}
     \input{tables/standardisation.tex}
 \end{table}
@@ -135,7 +135,7 @@ The test dataset contained $\sim \num{2e6}$ stellar models evolved in the same w
 \begin{figure}[tb]
     \centering
     \includegraphics[width=\linewidth]{figures/test_random_wide.png}
-    \caption{\emph{Left}: the rolling error between a given parameter in the test dataset ($\mathbb{Y}$) and the ANN prediction for that parameter ($\widetilde{\mathbb{Y}}$) where $\delta \mathbb{Y} = \widetilde{\mathbb{Y}} - \mathbb{Y}$. \emph{Right}: a kernel density estimate (KDE) of the error and a normal distribution centred on the median, $\mu_{1/2}$ with an estimator for the standard deviation from the median absolute deviation, $\sigma_\mathrm{MAD}$.}
+    \caption[The error between a given parameter in the test dataset and the ANN prediction for that parameter.]{\emph{Left}: the rolling error between a given parameter in the test dataset ($\mathbb{Y}$) and the ANN prediction for that parameter ($\widetilde{\mathbb{Y}}$) where $\delta \mathbb{Y} = \widetilde{\mathbb{Y}} - \mathbb{Y}$. \emph{Right}: a kernel density estimate (KDE) of the error and a normal distribution centred on the median, $\mu_{1/2}$ with an estimator for the standard deviation from the median absolute deviation, $\sigma_\mathrm{MAD}$.}
     \label{fig:test}
 \end{figure}
 
@@ -143,7 +143,7 @@ We found good agreement between the test dataset and ANN predictions, within typ
 
 \begin{table}
 	\centering
-	\caption{The median error, $\mu_{1/2}$ and median absolute deviation of the error, $\sigma_\mathrm{MAD} = 1.4826\cdot\mathrm{median}(|E(\mathbb{Y}) - \mu_{1/2}|)$ for a given ANN output parameter, $\mathbb{Y}$ from the test dataset. The error, $E(\mathbb{Y})$, is given in the table header, where $\delta \mathbb{Y} = \widetilde{\mathbb{Y}} - \mathbb{Y}$.}
+	\caption[The median error and median absolute deviation of the error for each ANN output parameter from the test dataset.]{The median error, $\mu_{1/2}$ and median absolute deviation of the error, $\sigma_\mathrm{MAD} = 1.4826\cdot\mathrm{median}(|E(\mathbb{Y}) - \mu_{1/2}|)$ for a given ANN output parameter, $\mathbb{Y}$ from the test dataset. The error, $E(\mathbb{Y})$, is given in the table header, where $\delta \mathbb{Y} = \widetilde{\mathbb{Y}} - \mathbb{Y}$.}
 	\label{tab:test}
     \input{tables/test_random.tex}    
 \end{table}
@@ -155,7 +155,7 @@ To represent the accuracy of the ANN, we present the median, $\mu_{1/2}$ and MAD
 \begin{figure}[tb]
     \centering
     \includegraphics{figures/beta_distribution.png}
-    \caption{A beta distribution ($\mathcal{B}$) with $\alpha = \beta = 1.2$ for some parameter $x$ and a uniform distribution ($\mathcal{U}$) from 0 to 1.}
+    \caption[A beta distribution compared to a uniform distribution.]{A beta distribution ($\mathcal{B}$) with $\alpha = \beta = 1.2$ for some parameter $x$ and a uniform distribution ($\mathcal{U}$) from 0 to 1.}
     \label{fig:beta}
 \end{figure}
 
@@ -180,7 +180,7 @@ The PP model recovered true values for the synthetic stars with more reliable un
 \begin{figure}[tb]
     \centering
     \includegraphics[width=\textwidth]{figures/shrinkage.png}
-    \caption{Kernel density estimates (KDEs) of the distributions of statistical uncertainties from each model for the sample of synthetic stars. The PP model was run with 10, 50 and 100 stars and is denoted PP10, PP50, and PP100 respectively. The NP and MP models were both run with the full set of 100 stars.}
+    \caption[Kernel density estimates of the distributions of statistical uncertainties from each model for the sample of synthetic stars.]{Kernel density estimates (KDEs) of the distributions of statistical uncertainties from each model for the sample of synthetic stars. The PP model was run with 10, 50 and 100 stars and is denoted PP10, PP50, and PP100 respectively. The NP and MP models were both run with the full set of 100 stars.}
     \label{fig:shrinkage}
 \end{figure}
 
@@ -193,7 +193,7 @@ In Fig. \ref{fig:shrinkage} we also see a similar reduction in uncertainty for $
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{figures/corner_plot_pp_truths.png}
-    \caption{Corner plot showing the marginalised and joint posterior distributions between the PP model hyperparameters for 100 synthetic stars. The true values are shown by the blue lines.}  
+    \caption[Corner plot showing the marginalised and joint posterior distributions between the PP model hyperparameters for 100 synthetic stars.]{Corner plot showing the marginalised and joint posterior distributions between the PP model hyperparameters for 100 synthetic stars. The true values are shown by the blue lines.}  
     \label{fig:test-corners-pp}   
 \end{figure}
 
@@ -220,7 +220,7 @@ We found some differences between $\mlt$ from our solar model and solar calibrat
 
 \begin{table}
     \centering
-    \caption{Solar results from the NP model. The second column shows the median marginalised posterior samples for each parameter with their respective upper and lower 68 per cent credible intervals.}
+    \caption[Solar results from the NP model.]{Solar results from the NP model. The second column shows the median marginalised posterior samples for each parameter with their respective upper and lower 68 per cent credible intervals.}
     \label{tab:sun-out}
     \input{tables/sun_outputs.tex}
 \end{table}

@@ -47,7 +47,7 @@ In this section, we briefly outline the data used to compare our new method with
 
 \begin{table}
     \centering
-    \caption{Observations of radial mode frequency \(\nu_n\) at radial order \(n\) for model star S (\emph{left}) and 16 Cyg A (\emph{right}). \(N\) are the number of observed radial orders and the scale of the Gaussian noise added to each column is given by \(\sigma_\obs\) where appropriate. The values and their uncertainties for 16 Cyg A come from \citet{Lund.SilvaAguirre.ea2017}.}
+    \caption[Observations of radial mode frequency \(\nu_n\) at radial order \(n\) for model star S and 16 Cyg A.]{Observations of radial mode frequency \(\nu_n\) at radial order \(n\) for model star S (\emph{left}) and 16 Cyg A (\emph{right}). \(N\) are the number of observed radial orders and the scale of the Gaussian noise added to each column is given by \(\sigma_\obs\) where appropriate. The values and their uncertainties for 16 Cyg A come from \citet{Lund.SilvaAguirre.ea2017}.}
     \label{tab:glitch-obs}
     \input{tables/glitch-test-obs.tex}
 \end{table}
@@ -220,7 +220,7 @@ We sampled the posterior distribution using the nested sampling package \textsc{
 \begin{figure}[!tb]
     \centering
     \includegraphics{figures/glitch-test-signal.pdf}
-    \caption{50 random draws from the V19 and GP methods showing the total glitch signal, \(\delta\nu = \delta_\helium(\nu) + \delta_\bcz(\nu)\), as a function of frequency, \(\nu\). The data points plot in blue are the median smooth component model at \(\vect{n}\) subtracted from the observed modes \(\vect{\nu}_\obs\) with their observed uncertainty \(\sigma_\obs\).}
+    \caption[50 random draws from the V19 and GP methods showing the total glitch signal as a function of frequency.]{50 random draws from the V19 and GP methods showing the total glitch signal, \(\delta\nu = \delta_\helium(\nu) + \delta_\bcz(\nu)\), as a function of frequency, \(\nu\). The data points plot in blue are the median smooth component model at \(\vect{n}\) subtracted from the observed modes \(\vect{\nu}_\obs\) with their observed uncertainty \(\sigma_\obs\).}
     \label{fig:glitch-test-signal}
 \end{figure}
 
@@ -229,7 +229,7 @@ In Figure \ref{fig:glitch-test-signal}, we plot the predicted glitch component, 
 \begin{figure}[!tb]
     \centering
     \includegraphics{figures/glitch-test-tau.pdf}
-    \caption{Samples from the V19 and GP methods for the acoustic depths of the helium glitch (\(\tau_\helium\)) and base of the convective zone (\(\tau_\bcz\)). The sound-speed gradient from Figure \ref{fig:sound-speed-gradient} is over-plot with a grey dashed line.}
+    \caption[Samples from the V19 and GP methods for the acoustic depths of the helium glitch (\(\tau_\helium\)) and base of the convective zone (\(\tau_\bcz\))]{Samples from the V19 and GP methods for the acoustic depths of the helium glitch (\(\tau_\helium\)) and base of the convective zone (\(\tau_\bcz\)). The sound-speed gradient from Figure \ref{fig:sound-speed-gradient} is over-plot with a grey dashed line.}
     \label{fig:glitch-test-tau}
 \end{figure}
 
@@ -240,7 +240,7 @@ As predicted by \citet{Houdek.Gough2007} and shown in \citet{Verma.Faria.ea2014}
 \begin{figure}[tb]
     \centering
     \includegraphics{figures/glitch-test-amplitude.pdf}
-    \caption{Samples of the helium glitch amplitude at a reference frequency of \SI{3000}{\micro\hertz} fit with the V19 and GP methods for the worst-, better-, and best-case test data. The tallest bar in the V19 method panel is cropped with its value displayed in green text.}
+    \caption[Samples of the helium glitch amplitude at a reference frequency of \SI{3000}{\micro\hertz} fit with the V19 and GP methods for the worst-, better-, and best-case test data.]{Samples of the helium glitch amplitude at a reference frequency of \SI{3000}{\micro\hertz} fit with the V19 and GP methods for the worst-, better-, and best-case test data. The tallest bar in the V19 method panel is cropped with its value displayed in green text.}
     \label{fig:glitch-test-amplitude}
 \end{figure}
 
@@ -259,7 +259,7 @@ We calculated the helium glitch amplitude at a reference frequency of \SI{2188.5
 \begin{figure}[!tb]
     \centering
     \includegraphics{figures/glitch-16cyga.pdf}
-    \caption{Results for the glitch fit to 16 Cyg A using the \citetalias{Verma.Raodeo.ea2019} method (\emph{left}) and GP method (\emph{right}). The top panel shows 50 draws from the posterior prediction of \(\delta\nu = \delta\nu_\helium + \delta\nu_\bcz\) with the observed \(\nu_n\) minus the median smooth background component of the model. The middle and bottom panels shows the posterior sample probability density for the acoustic depths and reference amplitudes of the glitches respectively.}
+    \caption[Results for the glitch fit to 16 Cyg A using the V19 method and GP method.]{Results for the glitch fit to 16 Cyg A using the \citetalias{Verma.Raodeo.ea2019} method (\emph{left}) and GP method (\emph{right}). The top panel shows 50 draws from the posterior prediction of \(\delta\nu = \delta\nu_\helium + \delta\nu_\bcz\) with the observed \(\nu_n\) minus the median smooth background component of the model. The middle and bottom panels shows the posterior sample probability density for the acoustic depths and reference amplitudes of the glitches respectively.}
     \label{fig:glitch-16cyga}
 \end{figure}
 
@@ -270,16 +270,16 @@ We calculated the helium glitch amplitude at a reference frequency of \SI{2188.5
 \begin{figure}[tb]
     \centering
     \includegraphics{figures/glitch-test-smooth.pdf}
-    \caption{Echelle-like diagrams showing mode frequencies plot against their frequency modulo \SI{133}{\micro\hertz} for the best case scenario. The orange lines show 50 draws from the model posterior predictions with the glitch component removed (\(f(n) - \delta\nu\)) for both methods. The predictions are made from a lower radial order \(n=8\) than the observed modes. The true values from model S are shown for each mode. Some radial orders (\(n\)) are shown next to the modes for context.}
+    \caption[Echelle-like diagrams showing mode frequencies plot against their frequency modulo \SI{133}{\micro\hertz} for the best case scenario.]{Echelle-like diagrams showing mode frequencies plot against their frequency modulo \SI{133}{\micro\hertz} for the best case scenario. The orange lines show 50 draws from the model posterior predictions with the glitch component removed (\(f(n) - \delta\nu\)) for both methods. The predictions are made from a lower radial order \(n=8\) than the observed modes. The true values from model S are shown for each mode. Some radial orders (\(n\)) are shown next to the modes for context.}
     \label{fig:best-smooth}
 \end{figure}
 
 Throughout this work, we found a smaller \(\delta\nu\) amplitude at low frequency with the GP method than with the \citetalias{Verma.Raodeo.ea2019} method. This was particularly visible in the best case and in 16 Cyg A. We expected this was a result of the different smooth background models. In Figure \ref{fig:best-smooth} we plotted the smooth component of each model extended to lower order, unobserved modes. We found the GP background component has a turning point at \(\nu \approx \SI{1900}{\micro\hertz}\), higher than the \citetalias{Verma.Raodeo.ea2019} method at \(\nu \approx \SI{1500}{\micro\hertz}\). The smooth component of the \citetalias{Verma.Raodeo.ea2019} method was confidently incorrect outside of the observed frequencies. Conversely, the GP method predicted closer to the truth with increasing uncertainty further from the observations. Therefore, it appears that the GP provided a more accurate representation of the true underlying function than the polynomial.
 
-\begin{figure}[tb]
+\begin{figure}[!tb]
     \centering
     \includegraphics[trim={0.4in 0.2in 0 0},clip]{figures/glitch-res.pdf}
-    \caption{The difference between the model without the glitch components (\(f(n) - \delta\nu\)) predicted by the \citetalias{Verma.Raodeo.ea2019} method (A) and the GP method (B). The glitch components from the GP method are plot in gray for context. The 68 per cent confidence region is shaded for each line.}
+    \caption[The difference between the model without the glitch components predicted by theV19 method and the GP method.]{The difference between the model without the glitch components (\(f(n) - \delta\nu\)) predicted by the \citetalias{Verma.Raodeo.ea2019} method (A) and the GP method (B). The glitch components from the GP method are plot in gray for context. The 68 per cent confidence region is shaded for each line.}
     \label{fig:smooth-res}
 \end{figure}
 
