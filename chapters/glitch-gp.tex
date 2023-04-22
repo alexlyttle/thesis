@@ -10,7 +10,7 @@
 % all distributions of LaTeX version 2005/12/01 or later.
 %
 %
-\chapter[Modelling Glitches in Stellar Oscillations]{Modelling Glitches in Stellar Oscillations with a Gaussian Process}\label{chap:glitch-gp}
+\chapter[Modelling Acoustic Glitches with a Gaussian Process]{Modelling Acoustic Glitch Signatures in Stellar Oscillations with a Gaussian Process}\label{chap:glitch-gp}
 
 Let us consider a non-rotating star which oscillates at frequencies \(\nu_{nl}\), where \(n\) and \(l\) are the radial order and angular degree of the modes. We may model the modes as the sum of a smoothly-varying component, \(\tilde{f}(n, l)\), and quickly-varying, small change in frequency, \(\delta\nu\), arising from glitches in the stellar structure,
 %
@@ -35,7 +35,7 @@ Providing \(\tilde{f}(n, l)\) is a good approximation of the mode frequencies, w
     \tilde{f}(n, l) = \nu_0 \sum_{k=0}^{K} a_{lk} n^k. \label{eq:poly}
 \end{equation}
 %
-The linear component of this is equivalent to the asymptotic expression (cf. Equation \ref{}) and the remaining terms describe curvature in the mode frequencies \todo{refer to earlier echelle plot}. However, there are drawbacks to using a polynomial for \(\tilde{f}(n, l)\). Whilst a polynomial with \(K = \infty\) can represent any function, this is impractical here. If \(K\) is too low, then it will not be flexible enough, biasing \(\delta\nu_\helium\) and \(\delta\nu_\bcz\). Yet, if \(K\) is too high, then it will over-fit and the glitch component may be missed. Regularising the polynomial is one solution to over-fitting, but this adds extra parameters to tune. Additionally, a finite polynomial represents only a small fraction of function space, leading to our model to be systematically biased to a particular functional form of \(\tilde{f}\).
+The linear component of this is equivalent to the asymptotic expression (cf. Equation \ref{eq:asy}) and the remaining terms describe curvature in the mode frequencies. However, there are drawbacks to using a polynomial for \(\tilde{f}(n, l)\). Whilst a polynomial with \(K = \infty\) can represent any function, this is impractical here. If \(K\) is too low, then it will not be flexible enough, biasing \(\delta\nu_\helium\) and \(\delta\nu_\bcz\). Yet, if \(K\) is too high, then it will over-fit and the glitch component may be missed. Regularising the polynomial is one solution to over-fitting, but this adds extra parameters to tune. Additionally, a finite polynomial represents only a small fraction of function space, leading to our model to be systematically biased to a particular functional form of \(\tilde{f}\).
 
 \defcitealias{Verma.Raodeo.ea2019}{V19}
 
