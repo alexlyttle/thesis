@@ -1,0 +1,305 @@
+% chapters/glitch-gp.tex
+%
+% Copyright 2023 Alexander Lyttle.
+%
+% This work may be distributed and/or modified under the conditions of the
+% LaTeX Project Public License (LPPL) version 1.3 or later.
+%
+% The latest version of this license is in
+% https://www.latex-project.org/lppl.txt and version 1.3 or later is part of
+% all distributions of LaTeX version 2005/12/01 or later.
+%
+%
+\chapter[Modelling Glitches in Stellar Oscillations]{Modelling Glitches in Stellar Oscillations with a Gaussian Process}\label{chap:glitch-gp}
+
+Let us consider a non-rotating star which oscillates at frequencies \(\nu_{nl}\), where \(n\) and \(l\) are the radial order and angular degree of the modes. We may model the modes as the sum of a smoothly-varying component, \(\tilde{f}(n, l)\), and quickly-varying, small change in frequency, \(\delta\nu\), arising from glitches in the stellar structure,
+%
+\begin{equation}
+    f(n, l) = \tilde{f}(n, l) + \delta\nu,\label{eq:general-glitch}
+\end{equation}
+%
+where \(\delta\nu\) is some function of frequency which may, for example, be evaluated at \(\tilde{f}(n, l)\).
+
+In principle, \(\delta\nu\) could arise from any glitches expected for a particular star. For this work, we consider glitches in main sequence solar-like oscillators. Previously, we derived approximations for \(\delta\nu\) arising from acoustic glitches caused by the second ionisation of helium and the BCZ. Here, we choose to ignore contributions to \(\delta\nu\) from the first ionisation of helium. As a result, we let \(\delta\nu = \delta\nu_\helium + \delta\nu_\bcz\) where each component depends on parameters relating to properties of the glitches (cf. Equations \ref{eq:he-osc} and \ref{eq:bcz-osc}),
+%
+\begin{align}
+    \delta\nu_\helium &= \alpha_\helium \nu_0 \nu \, \ee^{-\beta_\helium \nu^2} \sin(4\pi\tau_\helium\nu + \phi_\helium), \label{eq:he-glitch}\\
+    \delta\nu_\bcz &= \alpha_\bcz \nu_0 \nu^{-2} \, \sin(4\pi\tau_\bcz\nu + \phi_\bcz). \label{eq:bcz-glitch}
+\end{align}
+%
+The parameters \(\alpha_\helium \cong \Gamma_\heII\) and \(\beta_\helium \propto \Delta_\heII^2\) relate to the area and variance of the Gaussian-like depression in \(\gamma\) caused by the second ionisation of helium. The amplitude parameter for the BCZ glitch, \(\alpha_\bcz \propto \Delta_{\bcz}\) is proportional to the difference in the second density derivative at the base of the convective zone and has units of frequency squared. The approximate acoustic depths of second helium ionisation and the BCZ are given by \(\tau_\helium\) and \(\tau_\bcz\) respectively, and \(\phi\) represents an arbitrary phase constant.
+
+Providing \(\tilde{f}(n, l)\) is a good approximation of the mode frequencies, we can calculate \(\delta\nu\) at \(\nu = \tilde{f}(n, l)\) to predict \(f(n, l)\). For example, \(\tilde{f}(n,l)\) could be a \(K\)-th order polynomial in \(n\) with coefficients \(a_{lk}\) \citep[e.g.][]{Kjeldsen.Bedding.ea2005,Ulrich1986},
+%
+\begin{equation}
+    \tilde{f}(n, l) = \nu_0 \sum_{k=0}^{K} a_{lk} n^k. \label{eq:poly}
+\end{equation}
+%
+The linear component of this is equivalent to the asymptotic expression (cf. Equation \ref{}) and the remaining terms describe curvature in the mode frequencies \todo{refer to earlier echelle plot}. However, there are drawbacks to using a polynomial for \(\tilde{f}(n, l)\). Whilst a polynomial with \(K = \infty\) can represent any function, this is impractical here. If \(K\) is too low, then it will not be flexible enough, biasing \(\delta\nu_\helium\) and \(\delta\nu_\bcz\). Yet, if \(K\) is too high, then it will over-fit and the glitch component may be missed. Regularising the polynomial is one solution to over-fitting, but this adds extra parameters to tune. Additionally, a finite polynomial represents only a small fraction of function space, leading to our model to be systematically biased to a particular functional form of \(\tilde{f}\).
+
+\defcitealias{Verma.Raodeo.ea2019}{V19}
+
+Directly fitting the glitch the above way has been done before \citep[e.g.][]{Verma.Faria.ea2014,Verma.Raodeo.ea2017,Mazumdar.Monteiro.ea2014}. In this work, we will compare the most recent version of this method \citep[][hereafter V19]{Verma.Raodeo.ea2019} with a new method defined in this work. Our method will make use of a Gaussian Process to marginalise over our uncertainty in the functional form of \(f\). In the next section, we introduce the data used in comparing the two methods. Then, we define both modelling methods being compared in Section \ref{sec:glitch-methods}. Finally, we apply the methods to the data and present the results and discussion in Sections \ref{sec:glitch-results} and \ref{sec:glitch-disc}.
+
+\section{Data}\label{sec:glitch-data}
+
+In this section, we briefly outline the data used to compare our new method with the \citetalias{Verma.Raodeo.ea2019} method. For simplicity, we only use observations of radial mode frequencies in this work. However, both methods can be extended to use higher-order modes.
+
+\begin{table}
+    \centering
+    \caption{Observations of radial mode frequency \(\nu_n\) at radial order \(n\) for model star S (\emph{left}) and 16 Cyg A (\emph{right}). \(N\) are the number of observed radial orders and the scale of the Gaussian noise added to each column is given by \(\sigma_\obs\) where appropriate. The values and their uncertainties for 16 Cyg A come from \citet{Lund.SilvaAguirre.ea2017}.}
+    \label{tab:glitch-obs}
+    \input{tables/glitch-test-obs.tex}
+\end{table}
+
+\begin{figure}[!tb]
+    \centering
+    \includegraphics{figures/glitch-test-obs.pdf}
+    \caption{Echelle plot of simulated true and `observed' radial mode frequency data from model star S for worst-, better-, and best-case scenarios.}
+    \label{fig:glitch-test-obs}
+\end{figure}
+
+\paragraph{Test Star} We created three sets of test data for worst-, better-, and best-case scenarios using stellar model S. We recall that stellar model S is similar to the Sun, with surface parameters of \(\teff = \SI{5682}{\kelvin}\), \(\log g = 4.426\) and \([\mathrm{Fe/H}] = 0.03\), and bulk parameters of \(M = \SI{1.00}{\solarmass}\), \(R = \SI{1.01}{\solarmass}\) and \(\mathrm{Age} = \SI{4.07}{\giga\year}\). We calculated radial order modes (\(l=0\)) for the test star using the \textsc{GYRE} oscillation code \citep{Townsend.Teitler2013}. We then selected different numbers of modes (\(N\)) symmetrically about a reference frequency, \(\nu_\mathrm{ref} = \SI{2900}{\micro\hertz}\) (close to the expected frequency at maximum power of the star). For each test case, we added differing amounts of Gaussian noise (scaled by \(\sigma_\obs\)) to the frequencies. The parameters and mode frequencies for each test case are shown in Table \ref{tab:glitch-obs} and the modes are plot in Figure \ref{fig:glitch-test-obs}. We can see the effect of the helium glitch in the echelle plots, where there is a large `wiggle' at low frequency. The effect of the glitch is visible in the better case and clearest in the best case scenario.
+
+\paragraph{16 Cyg A} We used the asteroseismic benchmark star 16 Cyg A as an example real star to test the methods. We adopted values for 16 radial mode frequencies identified by \citet{Lund.SilvaAguirre.ea2017} using observations from \emph{Kepler} \citep[][KIC 12069424]{Borucki.Koch.ea2010}. The mode frequencies and their associated uncertainties are given in Table \ref{tab:glitch-obs}. The glitch has been previously studied for 16 Cyg A with its binary companion 16 Cyg B in \citet{Verma.Faria.ea2014}, making it a useful subject for comparison. Similarly to model S, this target is a solar analogue. However, it is slightly hotter, more evolved and more metal-rich, with \(\teff = \SI{5825(50)}{\kelvin}\), \(\log g = \SI{4.33(7)}{\dex}\) and \([\mathrm{Fe/H}] = \SI{0.10(3)}{\dex}\) \citep{Ramirez.Melendez.ea2009}. Its bulk stellar parameters are \(M \approx \SI{1.1}{\solarmass}\), \(R \approx \SI{1.2}{\solarradius}\) and \(\mathrm{Age} \approx \SI{7}{\giga\year}\) \citep{SilvaAguirre.Lund.ea2017}.
+
+\section{Methods}\label{sec:glitch-methods}
+
+In this section, we describe the two models for radial mode frequency, \(\nu_n = f(n, l=0)\), and the fitting methods being compared in this work. The first is the \citetalias{Verma.Raodeo.ea2019} method, originally used in \citet{Verma.Faria.ea2014} to study the 16 Cyg binary star system. Secondly, we introduce our new `GP method'. Both methods use different statistical philosophy and formulation of the smoothly varying component, \(\tilde{f}(n)\). However, they both fit the same glitch component \(\delta\nu = \delta\nu_\helium + \delta\nu_\bcz\) as given in Equations \ref{eq:he-glitch} and \ref{eq:bcz-glitch}.
+
+\subsection{The V19 Method}
+
+The \citetalias{Verma.Raodeo.ea2019} method is a specific case of Equation \ref{eq:general-glitch}, where the smooth component is approximated by 4-th order polynomial,
+%
+\begin{equation}
+    f_A(n) = \tilde{f}_A(n) + \delta\nu_\helium + \delta\nu_\bcz; \quad \tilde{f}_A(n) = \sum_{k=0}^{4} b_k n^k,
+\end{equation}
+%
+\sloppy where \(b_k \equiv a_{0k} \nu_0\) from Equation \ref{eq:poly}. The model parameters are given by \(\vect{\theta}_A = (b_0, \dots, b_4, a_\helium, \beta_\helium, \tau_\helium, \phi_\helium, a_\bcz, \tau_\bcz, \phi_\bcz)\), where the glitch amplitude parameters are modified to include \(\nu_0\) such that \(a_i \equiv \alpha_i\nu_0\). The \(\nu_0\) parameter is not explicitly included in the \citetalias{Verma.Raodeo.ea2019} model, but we find it useful to keep the scaling in mind because \(\nu_0\) is included in the GP model. 
+
+The model parameters are optimised by minimising a \(\chi^2\) cost function with a regularisation term,
+%
+\begin{equation}
+    \chi^2 = \sum_n \left[ \frac{\nu_n^\obs - f_{A}(n)}{\sigma_n^\obs} \right]^2 + \lambda^2 \sum_n \left[ \frac{\dd^3}{\dd n^3} \tilde{f}_A(n)\right]^2.
+\end{equation}
+%
+where \(\nu_n^\obs\) and \(\sigma_n^\obs\) are the observed mode and its uncertainty at radial order \(n\), and \(\lambda\) is the regularisation parameter. The regularisation was introduced to avoid the polynomial over-fitting and absorbing the glitch terms.
+
+We fitted the model using the \textsc{GlitchPy} code\footnote{\url{https://github.com/alexlyttle/GlitchPy}, adapted from \url{https://github.com/kuldeepv89/GlitchPy}.}. The fitting method is described in \citet{Verma.Raodeo.ea2019}, in which we adopted the same value for \(\lambda=7\) and bounds for the selection of initial parameters. We chose the initial parameters randomly within their bounds and optimised them using a BFGS minimisation of \(\chi^2\) \citep{Fletcher1987}, repeated 200 times until a global minimum was found. We repeated this for 1000 realisations of the observed \(\nu_n\) with Gaussian noise scaled by \(\sigma_n^\obs\) to obtain a range of possible solutions.
+
+\subsection{The GP Method}
+
+In the second method, we used a Gaussian Process (GP) instead of a high-order polynomial to model the smooth varying component of the mode frequencies. The GP represents a probability distribution over function space, meaning that we can quantify the uncertainty associated with the functional form of $f$. We write our model for a set of modes \(\vect{n} = \{n_i\}_{i=1}^N\) as a random draw from a GP,
+%
+\begin{equation}
+    f_{B}(\vect{n}) \sim \mathcal{GP}\left[ m(\vect{n}), k(\vect{n}, \vect{n}') \right],\text{\footnotemark}
+\end{equation}
+%
+\footnotetext{In this section we use the convention that some random variable \(y\) drawn from a distribution \(q\) given parameters \(x\) may be written as \(y \sim q(x)\).}%
+where \(m\) and \(k\) are the mean and kernel functions, and \(\vect{n}'\) is any other set of radial orders, \(\vect{n}' = \{n'_j\}_{j=1}^M\). The mean function describes where we expect \(\nu_n\) to be given some approximate physical reasoning. Therefore, we define our mean function for any \(n\)-th order mode as,
+%
+\begin{equation}
+    m(n) = \tilde{f}_B(n) + \delta\nu_\helium + \delta\nu_\bcz; \quad \tilde{f}_B(n) = (n + \varepsilon) \nu_0, \label{eq:asy-glitch}
+\end{equation}
+%
+where \(\tilde{f}_B(n)\) is the asymptotic approximation of the mode frequency (cf. Equation \ref{eq:asy}).
+
+The kernel represents the expected covariance between the values of the function at different \(n\). We chose the squared exponential kernel function to be compatible with a smoothly-varying function of \(n\). Evaluating the kernel gives an \(N \times M\) matrix with element \((i,j)\) given by,
+%
+\begin{equation}
+    k(n_i, n'_j) = \alpha_k \nu_0 \, \ee^{- (n_i - n'_j)^2 / 2\lambda_k^2},
+\end{equation}
+%
+where \(\alpha_k\) is a dimensionless amplitude scale factor and \(\lambda_k\) is the length scale (in units of radial order). Both kernel parameters control the flexibility of the GP. The amplitude parameter scales the covariance and \(\lambda_k\) describes the breadth of correlation between different modes. As \(\lambda_k \rightarrow 0\), the off-diagonal terms of the kernel approach zero producing Gaussian noise with a variance of \(\alpha_k\nu_0\). We found values of \(\alpha_k = 0.5\) and \(\lambda_k = 5\) predicted smoothly varying functions compatible with our expectation.
+
+The GP likelihood for some set of observations \(\vect{\nu}_\obs = \{\nu_{n_i}^\obs\}_{i=1}^N\) is a multivariate normal distribution centred on the mean function with covariance provided by the kernel function. We added Gaussian noise terms to the diagonal of the covariance matrix,
+%
+\begin{equation}
+    \vect{\nu}_\obs \sim \mathcal{N}\left( \vect{\mu}, \,  \vect{\Sigma} \right); \quad \vect{\Sigma} = \vect{K} + \mathrm{diag}(\sigma^2 + \vect{\sigma}_\obs^2), \label{eq:gp-like}
+\end{equation}
+%
+where \(\vect{\mu} = m(\vect{n})\) and \(\vect{K} = k(\vect{n}, \vect{n})\). The scales of Gaussian noise in the model and observations are \(\sigma\) and \(\vect{\sigma}_\obs\) respectively. We included \(\sigma\) to account for noise in the model, for example from the difference between \(\delta\nu\) evaluated at \(\tilde{f}_B(n)\) and at the `true' mode frequencies.
+
+To make noiseless predictions of mode frequencies \(\vect{\nu}_\star\) at new radial orders \(\vect{n}_\star\), we drew from the following multivariate normal distribution \citep{Rasmussen.Williams2006},
+%
+\begin{equation}
+    \vect{\nu}_\star \mid \vect{\nu}_\obs \sim \mathcal{N} \left[ \vect{\mu}_\star + \vect{K}_\star^\mathsf{T} \, \vect{\Sigma}^{\,-1} \, (\vect{\nu}_\obs - \vect{\mu}), \, \vect{K}_{\star\star} - \vect{K}_\star^\mathsf{T} \, \vect{\Sigma}^{\,-1} \, \vect{K}_\star \right]
+\end{equation}
+%
+where,
+%
+\begin{equation*}
+    \vect{\mu}_\star = m(\vect{n}_\star), \quad \vect{K}_\star = k(\vect{n}, \vect{n}_\star), \quad \vect{K}_{\star\star} = k(\vect{n}_\star, \vect{n}_\star).
+\end{equation*}
+%
+% This satisfies the consistency requirement that GP must specify any mode \(\nu_n \sim \mathcal{N}(\mu_n, K_{nn})\) where \(K_{nn}\) is the sub-matrix of the covariance of 
+
+To estimate the probability of our model parameters, \(\vect{\theta}_B = (\nu_0, \varepsilon, \alpha_\helium, \beta_\helium, \tau_\helium, \phi_\helium, a_\bcz, \tau_\bcz, \phi_\bcz, \sigma)\), given observations of mode frequencies, we used Bayes' theorem. Hence, we write the posterior probability density as,
+%
+\begin{equation}
+    p(\vect{\theta}_B \mid \vect{\nu}_\obs) = \frac{p(\vect{\nu}_\obs \mid \vect{\theta}_B)\,p(\vect{\theta}_B)}{p(\vect{\nu}_\obs)} \equiv \frac{\mathcal{L}(\vect{\theta}_B)\,p(\vect{\theta}_B)}{\mathcal{Z}},
+\end{equation}
+%
+where \(\mathcal{L}(\vect{\theta}_B)\) is the likelihood of the data given the model, \(p(\vect{\theta}_B)\) is the prior probability density of the model parameters, and \(\mathcal{Z}\) is the `evidence' (or normalisation). The true posterior density function cannot be derived analytically, so we estimated it with the `nested sampling' algorithm \citep{Skilling2004}. By evaluating the prior volume at contours of constant likelihood, nested sampling estimates \(\mathcal{Z}\) to weight samples according to their posterior probability. This method requires functions for the log-likelihood and a transform which maps random samples in the unit hypercube to prior parameter space. 
+
+Following Equation \ref{eq:gp-like}, we defined the log-likelihood of the model as,
+%
+\begin{equation}
+    \ln\mathcal{L}_B = - \frac12 \left[ {(\vect{\nu}_\obs - \vect{\mu})^\mathsf{T} \vect{\Sigma}^{\,-1} (\vect{\nu}_\obs - \vect{\mu})} + \ln(2 \pi | \vect{\Sigma} | ) \right],
+\end{equation}
+%
+where \(\vect{\mu}\) and \(\vect{\Sigma}\) depend on \(\vect{\theta}_B\). The prior transform for \(\vect{\theta}_B\) is the inverse cumulative distribution function associated with the prior distribution \(p(\vect{\theta}_B)\). We defined the prior independently for each of \(\vect{\theta}_B\) such that the total prior is the product of prior distributions for each parameter, \(p(\vect{\theta}_B) = \prod_j p(\theta_{j})\). In the following paragraphs, we specify our choice of prior distributions for each model parameter.
+
+Starting with the parameters for \(\tilde{f}_B(n)\), we chose to sample them from normal distributions,
+%
+\begin{gather*}
+    \nu_0 \sim \mathcal{N}(\overline{\nu}_0, s_{\nu_0}^2), \quad \varepsilon \sim \mathcal{N}(\overline{\varepsilon}, s_\varepsilon^2),%\\
+    % \phi_\helium, \phi_\bcz \sim \mathcal{U}\left(0, 2\pi\right),
+\end{gather*}
+%
+centred on \(\overline{\nu}_0\) and \(\overline{\varepsilon}\) and scaled by \(s_{\nu_0}\) and \(s_\varepsilon\). In practice, the location and scale parameters could come from global estimates of \(\langle\Delta\nu_n\rangle\) or a linear fit to the modes. For the test stars, we determined \(\overline{\nu}_0\) and \(\overline{\varepsilon}\) from a linear fit to the true mode frequencies and added representative uncertainties of 10 and 5 per cent respectively. For 16 Cyg A, we used measurements of \(\langle\Delta\nu_n\rangle\) and \(\nu_{\max}\) from \citet{Lund.SilvaAguirre.ea2017} to estimate \(\overline{\nu}_0\) and \(\overline{\varepsilon}\).
+
+% Priors for the following parameters follow a log-normal distribution to ensure they are positive. We also exploit the property that the scale of a normal distribution in natural log-space is approximately the scale in real-space as a fraction of the distribution mean.
+
+We derived a prior on \(\tau_\helium \cong \tau_\heII\) and \(\tau_\bcz\) by observing how they scale with acoustic radius \(\tau_0\) in the grid of stellar models from \citet{Lyttle.Davies.ea2021} and in \citet{Verma.Rorsted.ea2022}. Typically, the fraction depth of He\,\textsc{ii} ionisation \(\tau_\heII/\tau_0 \approx 0.2\) and BCZ \(\tau_\bcz/\tau_0 \approx 0.6\) for main sequence solar-like oscillators (see, e.g. Figure \ref{fig:gamma-sound-speed}). Therefore, we form our prior distributions from these relations using the relation \({\tau}_0 = (2\nu_0)^{-1}\), with an additional spread of 20 per cent to account for variance with stellar properties. To ensure the parameters remain positive, we defined their priors in natural log-space,
+%
+\begin{gather*}
+    \ln\tau_\helium \sim \mathcal{N}\left[ \ln(\overline{\tau}_\helium), \, s_{\ln\tau}^2 \right], \quad \ln\tau_\bcz \sim \mathcal{N}\left[\ln(3\overline{\tau}_\helium), \, s_{\ln\tau}^2 \right],\\
+    \overline{\tau}_\helium = (10 \overline{\nu}_0)^{-1}, \quad s_{\ln\tau}^2 = (1/5)^2 + (s_{\nu_0}/\overline{\nu}_0)^2,
+\end{gather*}
+
+A prior on the glitch amplitude parameters is less trivial. By observing \(\gamma\) profiles in the grid of stellar models, we assume that the width of the helium ionisation region is about 8 per cent of the acoustic depth of the region, \(\Delta_\heII/\tau_\heII \approx 0.08\). Thus, we centre the prior on \(\overline{\beta}_\helium\) obtained from this assumption and the relation \(\beta_\helium = 8\pi^2\Delta_\heII^2\). We then propagate the variance from the prior on \(\tau_\helium\),
+%
+\begin{equation*}
+    \ln\beta_\helium \sim \mathcal{N}\left[ \ln(\overline{\beta}_\helium), \, 4 s_{\ln\tau}^2 \right], \quad \overline{\beta}_\helium = \frac{32}{625} \, \pi^2 \overline{\tau}_\helium^2.
+\end{equation*}
+%
+Then, we centre the prior for \(\alpha_\helium\) to satisfy a depth of 0.1 in \(\delta\gamma/\gamma\) caused by helium ionisation using Equation \ref{eq:he-gamma},
+%
+\begin{gather*}
+    \ln\alpha_\helium \sim \mathcal{N}\left[ 1/2 \, \ln({\overline{\beta}_\helium}/{400\pi}), \, s_{\ln\tau}^2 \right].
+\end{gather*}
+%
+We verified that the priors on \(\alpha_\helium\) and \(\beta_\helium\) are appropriate by checking that the prior amplitude at \(\nu_\mathrm{ref}\) peaks between \SIrange{0}{1}{\micro\hertz}, decaying thereafter.
+
+We chose to formulate the prior on \(\alpha_\bcz\) such that the BCZ glitch amplitude is approximately \SI{0.1}{\micro\hertz} at \(\nu_\mathrm{ref}\) (an order of magnitude smaller than the helium glitch). This occurs when \(\alpha_\bcz/\nu_0 \approx \SI{30}{\micro\hertz}\). We scaled the distribution by 80 per cent to account for uncertainty in our subjective choice of prior,
+%
+\begin{equation*}
+    \ln\alpha_\bcz \sim \mathcal{N}\left[ \ln 30\overline{\nu}_0, \, (4/5)^2 + (s_{\nu_0}/\overline{\nu}_0)^2\right].
+\end{equation*}
+%
+
+\begin{table}
+    \centering
+    \caption{The mean and variance for the prior normal distributions on each parameter where values are not explicitly given in the text.}
+    \label{tab:glitch-prior}
+    \input{tables/glitch-test-prior.tex}
+\end{table}
+
+The mean and variance for the aforementioned prior distributions are summarised in Table \ref{tab:glitch-prior} for the test star and 16 Cyg A. Prior distributions for the remaining parameters were the same for all stars. For example, the prior on the phase parameters \(\phi_\helium\) and \(\phi_\bcz\) was uniformly distributed from 0 to \(2\pi\). We also used an uninformative prior on the model uncertainty, \(\ln\sigma \sim \mathcal{N}( - \ln 100, 4)\), centred on an uncertainty of \SI{0.01}{\micro\hertz}.
+
+We sampled the posterior distribution using the nested sampling package \textsc{Dynesty} \citep{Speagle2020,Koposov.Speagle.ea2023}. We applied the multi-ellipsoid bounding method \citep{Feroz.Hobson.ea2009} with 500 live points and the random walk sampling method \citep{Skilling2006} with a minimum of 50 steps before proposing a new live point. We enabled periodic boundary conditions for \(\phi_\helium\) and \(\phi_\bcz\) with the prior transform projecting to periodic space using \(\phi = \phi'\,\mathrm{mod}\,2\pi\), where \(\phi'\) is unconstrained. Otherwise, the nested sampler ran with its default parameters. We used \textsc{jax} \citep{Bradbury.Frostig.ea2018} to make use of accelerated linear algebra (XLA) and just-in-time (JIT) compilation, and the \textsc{tinygp} package\footnote{\url{https://github.com/dfm/tinygp}} for building the GP. For analysis and comparison with the \citetalias{Verma.Raodeo.ea2019} method, we drew 1000 points randomly from the posterior samples according to their estimated weights.
+
+% Rearranged into dimensionless quantities, \(f = \nu/\nu_0\), \(t = \tau/\tau_0\), \(a_\helium = \nu_0\alpha_\helium\), \(b_\helium = \nu_0 \beta_\helium\), and \(a_\bcz = \alpha_\bcz/\nu_0^2\),
+% %
+% \begin{align}
+%     f_n &\simeq f_\asy + \delta f_\helium + \delta f_\bcz\\
+%     \delta f_\helium &= a_\helium f \, \ee^{-b_\helium f^2} \sin(2 \pi \, t_\helium f + \phi_\helium),\\
+%     \delta f_\bcz &= a_\bcz f^{-2} \, \sin(2\pi\,t_\bcz f + \phi_\bcz)
+% \end{align}
+% %
+
+\section{Results}\label{sec:glitch-results}
+
+% In this section, we compare the results from both methods on the test star and 16 Cyg A.
+
+% \todo{3 model stars with different helium abundance}.
+
+\subsection{Test Star}
+
+\begin{figure}[!tbp]
+    \centering
+    \includegraphics{figures/glitch-test-signal.pdf}
+    \caption{50 random draws from the V19 and GP methods showing the total glitch signal, \(\delta\nu = \delta_\helium(\nu) + \delta_\bcz(\nu)\), as a function of frequency, \(\nu\). The data points plot in blue are the median smooth component model at \(\vect{n}\) subtracted from the observed modes \(\vect{\nu}_\obs\) with their observed uncertainty \(\sigma_\obs\).}
+    \label{fig:glitch-test-signal}
+\end{figure}
+
+In Figure \ref{fig:glitch-test-signal}, we plot the predicted glitch component, \(\delta\nu\), using 50 draws from the posterior distribution on the model parameters for both methods. We subtracted the median background component from the observed \(\nu_n\) over-plot. For each scenario, both methods predicted similar median glitch components. However, the \citetalias{Verma.Raodeo.ea2019} method showed more extreme multimodality in all cases. For example, the better case showed a high-amplitude (\(\sim \SI{2}{\micro\hertz}\)) BCZ glitch solution which is not present with the GP method. Such a large signal would indicate a highly unlikely density discontinuity at the BCZ. Additionally, the two methods differed by \(\sim \SI{1}{\micro\hertz}\) at low frequency in the best case. Despite this, the \citetalias{Verma.Raodeo.ea2019} method appeared to be more confident in its glitch solutions compared to the GP method.
+
+\begin{figure}[!tbp]
+    \centering
+    \includegraphics{figures/glitch-test-tau.pdf}
+    \caption{Samples from the V19 and GP methods for the acoustic depths of the helium glitch (\(\tau_\helium\)) and base of the convective zone (\(\tau_\bcz\)). The sound-speed gradient from Figure \ref{fig:sound-speed-gradient} is over-plot with a grey dashed line.}
+    \label{fig:glitch-test-tau}
+\end{figure}
+
+We plotted posterior distributions of the glitch acoustic depths, \(\tau_\helium\) and \(\tau_\bcz\), in Figure \ref{fig:glitch-test-tau} and compared them to the sound speed gradient of the test star from Figure \ref{fig:sound-speed-gradient}. We expect the acoustic depths to approximately line up with the sharp structural changes. For the worst case, both methods gave broad distributions for the acoustic depths, compatible with their respective initial guesses and priors. The \citetalias{Verma.Raodeo.ea2019} method initial guesses appeared to underestimate \(\tau_\bcz\), whereas the GP method prior was broad enough to encompass a wide range of possible \(\tau_\bcz\). In the better and best cases, we found that the \citetalias{Verma.Raodeo.ea2019} had strong multimodality. For example, the better case found solutions for \(\tau_\helium\) far deeper into the star than we would expect, at around \SI{1500}{\second} and \SI{2500}{\second}.
+
+As predicted by \citet{Houdek.Gough2007} and shown in \citet{Verma.Faria.ea2014}, the the values for \(\tau_\helium\) obtained were under-predicted compared to the location of the trough due to the second ionisation of helium. This is because \(\delta\nu_\helium\) does not include the smaller glitch component due to the first ionisation of helium, located at a smaller \(\tau\). We can see this for the best star fit with the \citetalias{Verma.Raodeo.ea2019} method which finds \(\tau_\helium = \SI{619(15)}{\second}\). The depression in \(\gamma\) due to He\,\textsc{ii} ionisation in the respective stellar model is located at \SI{733}{\second}. On the other hand, the GP method was closer with \(\tau_\helium = \SI{696(19)}{\second}\).
+
+\begin{figure}[!tb]
+    \centering
+    \includegraphics{figures/glitch-test-amplitude.pdf}
+    \caption{Samples of the helium glitch amplitude at a reference frequency of \SI{3000}{\micro\hertz} fit with the V19 and GP methods for the worst-, better-, and best-case test data. The tallest bar in the V19 method panel is cropped with its value displayed in green text.}
+    \label{fig:glitch-test-amplitude}
+\end{figure}
+
+We compared helium glitch amplitudes at \(\nu_\mathrm{ref}\) from both methods in Figure \ref{fig:glitch-test-amplitude}. The \citetalias{Verma.Raodeo.ea2019} method preferred low-amplitude solutions for the worst and better cases than the best case compared to the GP method. On the other hand, the GP method reflects our prior in the worst case, with the width of the distribution shrinking as the data improves. The GP method does show some bi-modality in the better case, with a solution at \(A_\helium^\mathrm{ref} \approx 0.7\) which was not found by the \citetalias{Verma.Raodeo.ea2019} method. In the best case, the \citetalias{Verma.Raodeo.ea2019} method obtained \(A_\helium^\mathrm{ref} = 0.347_{-0.005}^{+0.006}\), whereas the GP method found \(A_\helium^\mathrm{ref} = 0.296_{-0.036}^{+0.042}\).
+
+% Why not use delta gamma / gamma as the probe of helium abundance? That is proportional to alpha / sqrt(beta). Then, an update to this method can use this and beta as a parameter and then work out alpha from that, since beta should scale with tau and the depth is a signature of helium abundance. Be careful as number of modes correlates with delta nu value of fit.
+
+\subsection{16 Cyg A}
+
+We compared the results from both methods applied to the 16 Cyg A data in Figure \ref{fig:glitch-16cyga}. We found that the \citetalias{Verma.Raodeo.ea2019} method predicted extreme solutions for the glitch where the GP method did not. There was also a difference of about \SI{1}{\micro\hertz} at the low frequency end such that the \citetalias{Verma.Raodeo.ea2019} predicted a larger glitch amplitude. Otherwise, the two methods gave similar predictions for the glitch function.
+
+Both methods found similar values for \(\tau_\helium\) but relatively different distributions for \(\tau_\bcz\). Regarding the helium glitch, the \citetalias{Verma.Raodeo.ea2019} method found \(\tau_\helium = 917_{-53}^{+50} \, \mathrm{s}\), and our GP method obtained \(\tau_\helium = 931_{-88}^{+59} \, \mathrm{s}\), within 1-\(\sigma\) of each other. As seen in the previous section, our method found a slightly larger value of \(\tau_\helium\) than the \citetalias{Verma.Raodeo.ea2019} method, although not significantly in this case. \citet{Verma.Faria.ea2014} fit the glitch with \(l=0,1,2\) modes and found an acoustic depth of \SI{930(14)}{\second}, within 1-\(\sigma\) of both methods in this work.
+
+We calculated the helium glitch amplitude at a reference frequency of \SI{2188.5}{\micro\hertz}, equivalent to the value of \(\nu_{\max}\) obtained by \citet{Lund.SilvaAguirre.ea2017}. Samples from both posteriors are shown in the bottom panel of Figure \ref{fig:glitch-16cyga}. We found \(A_\helium^\mathrm{ref} = 0.260_{-0.065}^{+0.050}\) for the \citetalias{Verma.Raodeo.ea2019} method, and \(A_\helium^\mathrm{ref} = 0.333_{-0.073}^{+0.081}\) for the GP method. Both values were about 1-\(\sigma\) apart. Additionally, both methods found \(A_\bcz^\mathrm{ref} \sim 0.1\), with the GP method favouring a smaller value. The \citetalias{Verma.Raodeo.ea2019} method found some solutions with \(A_\bcz^\mathrm{ref}\) larger than \(A_\helium^\mathrm{ref}\), something we would not expect because the modes are less sensitive to structural changes deeper in the star.
+
+\begin{figure}[!tb]
+    \centering
+    \includegraphics{figures/glitch-16cyga.pdf}
+    \caption{Results for the glitch fit to 16 Cyg A using the \citetalias{Verma.Raodeo.ea2019} method (\emph{left}) and GP method (\emph{right}). The top panel shows 50 draws from the posterior prediction of \(\delta\nu = \delta\nu_\helium + \delta\nu_\bcz\) with the observed \(\nu_n\) minus the median smooth background component of the model. The middle and bottom panels shows the posterior sample probability density for the acoustic depths and reference amplitudes of the glitches respectively.}
+    \label{fig:glitch-16cyga}
+\end{figure}
+
+\section{Discussion}\label{sec:glitch-disc}
+
+% Discuss major differences
+
+\begin{figure}[!tb]
+    \centering
+    \includegraphics{figures/glitch-test-smooth.pdf}
+    \caption{Echelle-like diagrams showing mode frequencies plot against their frequency modulo \SI{133}{\micro\hertz} for the best case scenario. The orange lines show 50 draws from the model posterior predictions with the glitch component removed (\(f(n) - \delta\nu\)) for both methods. The predictions are made from a lower radial order \(n=8\) than the observed modes. The true values from model S are shown for each mode. Some radial orders (\(n\)) are shown next to the modes for context.}
+    \label{fig:best-smooth}
+\end{figure}
+
+Throughout this work, we found a smaller \(\delta\nu\) amplitude at low frequency with the GP method than with the \citetalias{Verma.Raodeo.ea2019} method. This was particularly visible in the best case and in 16 Cyg A. We expected this was a result of the different smooth background models. In Figure \ref{fig:best-smooth} we plotted the smooth component of each model extended to lower order, unobserved modes. We found the GP background component has a turning point at \(\nu \approx \SI{1900}{\micro\hertz}\), higher than the \citetalias{Verma.Raodeo.ea2019} method at \(\nu \approx \SI{1500}{\micro\hertz}\). The smooth component of the \citetalias{Verma.Raodeo.ea2019} method was confidently incorrect outside of the observed frequencies. Conversely, the GP method predicted closer to the truth with increasing uncertainty further from the observations. Therefore, it appears that the GP provided a more accurate representation of the true underlying function than the polynomial.
+
+\begin{figure}[!tb]
+    \centering
+    \includegraphics[trim={0.4in 0.2in 0 0},clip]{figures/glitch-res.pdf}
+    \caption{The difference between the model without the glitch components (\(f(n) - \delta\nu\)) predicted by the \citetalias{Verma.Raodeo.ea2019} method (A) and the GP method (B). The glitch components from the GP method are plot in gray for context. The 68 per cent confidence region is shaded for each line.}
+    \label{fig:smooth-res}
+\end{figure}
+
+In the test star's best case and 16 Cyg A, the GP method found a higher \(\tau_\helium\) than the \citetalias{Verma.Raodeo.ea2019} method. The GP was possibly better able to distinguish between He\,\textsc{i} and He\,\textsc{ii} ionisation compared to the polynomial. To verify this, we plotted the difference between each model's predictions with the glitch subtracted in Figure \ref{fig:smooth-res}. We saw a clear oscillatory signal in the differences. The period of this signal in the test star corresponded to an acoustic depth of \(\sim \SI{500}{\second}\), matching the location of He\,\textsc{i} ionisation in model S. The oscillatory signal was less pronounced for 16 Cyg A, but corresponded to a plausible He\,\textsc{i} acoustic depth of \(\sim \SI{700}{\second}\). The polynomial was not flexible enough to pick up this signal, thus lowering its inferred value for \(\tau_\helium\). As a result, the GP method more accurately determined the acoustic depth of the second helium ionisation zone.
+
+% Discuss the prior
+
+The \citetalias{Verma.Raodeo.ea2019} method found several extreme solutions for \(\delta\nu\) whereas GP method did not. We expected this because the GP method used a prior on the model parameters. We tested relaxing the prior on \(\vect{\theta}_B\) and recovered similar solutions to the \citetalias{Verma.Raodeo.ea2019} method, showing that the prior helped eliminate unrealistic solutions. Therefore, care should be taken over the choice of prior on \(\vect{\theta}_B\) to realistically reflect our expectation. If some of our prior assumptions are incorrect they may bias the results. For example, the outer convective region gets shallower as stars get hotter (approaching \(\teff \approx \SI{7000}{\kelvin}\)) making the assumption that \(\tau_\bcz/\tau_0 \approx 0.6\) an overestimate in these cases. We accommodate for this with a wide prior on \(\tau_\bcz\), but this could be improved. There is a notable temperature dependence to \(\tau_\bcz/\tau_0\) observed in the grid of stellar models which could be exploited in the future when constructing the prior.
+
+Additionally, the samples for \(\alpha_\helium\) and \(\beta_\helium\) were correlated in both methods. This was expected, because larger values of \(\beta_\helium\) can be compensated for with a larger amplitude factor \(\alpha_\helium\). In the GP method, we did not include this expected correlation in our prior. Hence, we found that having broader priors on \(\alpha_\helium\) and \(\beta_\helium\) lead to the prior predicting unrealistic glitches. In future work, we could devise a multivariate prior for the amplitude parameters to account for this. However, we note that our approach still improves on the \citetalias{Verma.Raodeo.ea2019} method by using a prior.
+
+A potential limitation of the GP method is that we calculate the glitch at \(\tilde{f}_B(n)\) from the linear asymptotic equation (Equation \ref{eq:asy}). In regions where the gradient of \(\delta(\nu)\) is high, the difference between \(\tilde{f}_B(n)\) and the true frequency can be up to (\(\sim \SI{0.1}{\micro\hertz}\)). The GP kernel function cannot absorb this difference because is varies on a short length-scale. Instead, we accounted for this uncertainty by adding Gaussian noise to the model parametrised by \(\sigma\). However, for the best test star, we found \(\sigma \approx 0.05\), which was larger than the observational uncertainty, \(\sigma_\obs = 0.01\). This could limit our method's inference ability for the best asteroseismic targets. One solution is to replace \(\tilde{f}_B(n)\) with a quadratic \citep[e.g.][]{Nielsen.Davies.ea2021} which better approximates \(\nu_n\). However, the GP kernel would need to be adjusted to account for this. We leave this for the next iteration of this method.
+
+% Using the glitch parameters as a helium diagnostic could involve measuring the amplitude of the helium glitch at a reference frequency such as \(\nu_{\max}\). We should expect solutions for this reference amplitude (\(A_\mathrm{ref}\)) to converge on a value as the data quality increases from worst to best. It is also important that the uncertainty of the reference amplitude is accurate if using it to constrain helium abundance in a population of stars. If using V19 method on a population of stars, this could bias inference towards lower values of helium abundance.
+
+\section{Conclusion}
+
+We introduced a new method for modelling acoustic glitches in solar-like oscillators using a Gaussian Process. Testing the method on a model star, we found that it more accurately characterised the underlying, smoothly-varying functional form of the radial modes than the 
+\citetalias{Verma.Raodeo.ea2019} method. Furthermore, our method was able to absorb the glitch component from He\,\textsc{i} ionisation, for which the polynomial was not flexible enough.
+
+Additionally, the GP method provided more believable uncertainties on the glitch parameters, whereas the \citetalias{Verma.Raodeo.ea2019} method was over-confident with the best data and under-confident with the worst. This would become a problem if using the results to make further inference about helium enrichment. For example, the GP modelled correlated `noise' in the mode frequencies arising from He\,\textsc{i} ionisation, not possible with the polynomial in the \citetalias{Verma.Raodeo.ea2019} method. However, this raises the question of whether He\,\textsc{i} ionisation glitch should be included in the model --- this depends how much helium abundance is to be gained from its parameters.
+
+Future development of the method could involve building a prior for the glitch parameters. For example, we could start with fitting the model to simulated stars and using the results to build an empirical prior. Then, we could run the model on the full LEGACY asteroseismic sample of main sequence stars \citep{Lund.SilvaAguirre.ea2017} and compare our results to those from \citet{Verma.Raodeo.ea2019}. Consequently, we can add parameters carrying information about helium abundance to the hierarchical model introduced in \citet{Lyttle.Davies.ea2021}. Ultimately, our goal is to scale this method to the \(\sim \num{1000}\) high signal-to-noise solar-like oscillators expected to be observed by \emph{PLATO} \citep{Rauer.Catala.ea2014}.
