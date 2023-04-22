@@ -60,7 +60,7 @@ where \(n\) is a non-zero integer (the \(n=0\) solution would give \(\xi=0\) eve
     \centering
     % \includegraphics{figures/glitch-1d-example-diagram.pdf}
     \input{figures/glitch-1d-example.tex}
-    \caption[A diagram showing a one-dimensional medium with a small structural perturbation.]{\todo{Redo plots with new glitch location symbol} A diagram showing a one-dimensional medium split into three regions. 1: Fixed at \(x=0\) with a constant speed of sound \(c\); 2: A small structural perturbation centred at \(x=x_\glitch\) with width \(2\delta x\) and constant speed of sound \(c + \delta c\); 3: Fixed at \(x=L\) with a constant speed of sound \(c\).}
+    \caption[A diagram showing a one-dimensional medium with a small structural perturbation.]{A diagram showing a one-dimensional medium split into three regions. 1: Fixed at \(x=0\) with a constant speed of sound \(c\); 2: A small structural perturbation centred at \(x=x_\glitch\) with width \(2\delta x\) and constant speed of sound \(c + \delta c\); 3: Fixed at \(x=L\) with a constant speed of sound \(c\).}
     \label{fig:1d-diagram}
 \end{figure}
 
@@ -137,7 +137,7 @@ Finally, we can impose the boundary condition \(\xi_3(L, t) = 0\) to solve for \
 %
 The glitch affects the amplitude and phase of the wave. If we set \(\epsilon = 0\) and \(D = 1\) we recover the homogeneous frequency solutions (Equation \ref{eq:omega-n}). Unfortunately, solving Equation \ref{eq:1d-glitch-sol} for \(\omega\) is not possible analytically. However, we can find individual roots (or oscillation modes) numerically.
 
-\begin{figure}[!tbp]
+\begin{figure}
     \centering
     \includegraphics{figures/glitch-1d-example-results.pdf}
     \caption{The change in mode frequency induced by a change in sound speed of \(\delta c\) from \(x_\glitch - \delta x\) to \(x_\glitch + \delta x\) in a one-dimensional medium, bound such that \(x \in [0, 1]\) (see Figure \ref{fig:1d-diagram}). Outside of the perturbation the speed of sound, \(c=1\).
@@ -155,7 +155,7 @@ Furthermore, an increasing change in sound speed (\(\delta c\)) increases the am
 
 %This may be interpreted as the nodes of each standing wave passing in and out of region 2 with increasing \(n\). Where there is a node, the wave is least sensitive to a change in structure, and 
 
-\begin{figure}[!tbp]
+\begin{figure}
     \centering
     \includegraphics{figures/glitch-1d-example-phase.pdf}
     \caption{The same as Figure \ref{fig:1d-results} but showing the phase offset \(\epsilon\) required to satisfy the boundary conditions.}
@@ -172,7 +172,7 @@ Finding an approximate solution for \(\delta\omega\) is beyond the scope of this
 %
 where \(a_1\) and \(a_2\) are coefficients which are both functions of \(\delta x\) and \(\delta c\). Parameters \(\tau_1\) and \(\tau_2\) are the `frequencies' (with dimensionless units of time\footnote{An angular frequency in angular frequency space has units of time.}) of the periodic component to \(\delta\omega\), which are functions of \(\delta x\) and \(x_\glitch\) respectively.
 
-\begin{figure}[!tb]
+\begin{figure}[tb]
     \centering
     \includegraphics{figures/glitch-1d-fit.pdf}
     \caption{Best fit of Equation \ref{eq:1d-domega-func} to \(\delta\omega_n\) for \(n=1,\dots,50\), \(L=1\), and \(c=1\).}
@@ -215,7 +215,7 @@ Firstly, let us consider the sound speed profile of a Sun-like star. Particularl
 %
 where \(\tau_0\) is the acoustic radius of the star. We recall from Section \ref{sec:seismo} that \(\nu_0 \equiv (2\tau_0)^{-1}\) may be approximated by the large frequency separation (\(\Delta\nu_{nl}\)) in the asymptotic limit that \(l/n \rightarrow 0\).
 
-\begin{figure}[!tb]
+\begin{figure}[tb]
     \centering
     \includegraphics{figures/sound-speed-gradient.pdf}
     \caption{The sound speed gradient (\(\dd c/\dd \tau\)) of model S plot against the acoustic depth (\(\tau\)). The fractional radius to the photosphere base is given on the top axis. The convective envelope is shaded and the bases of the photosphere and convective zone are marked with dashed lines.}
@@ -236,7 +236,7 @@ In this section, we will first show how the sound speed inside a solar-like star
 
 In the outer convective envelope of Sun-like stars, the temperature (\(\SIrange{e4}{e5}{\kelvin}\)) and density (\(\SIrange{e-5}{e-3}{\gram\per\centi\metre\cubed}\)) is suitable for ionising hydrogen and helium \citep{Eggleton.Faulkner.ea1973}. As a given chemical species in the star ionises, the number of particles and hence chemical potential of the species changes. This induces a gradient in the thermal free energy of the gas which relates to the pressure and entropy of the gas. Thus, we expect ionisation to cause a change in the pressure-density gradient at constant entropy, \(\gamma\). Since \(\gamma\) relates to the sound speed from Equation \ref{eq:sound}, any sudden change in \(\gamma\) will induce a change in \(c\).
 
-\begin{figure}[!tb]
+\begin{figure}[tb]
     \centering
     \includegraphics{figures/adiabatic-ionisation-regions.pdf}
     \caption[The depressions in the first adiabatic exponent caused by the ionisation of hydrogen and helium.]{The depressions in the first adiabatic exponent (\(\gamma\)) caused by the ionisation of hydrogen (H), and the first and second ionisations of helium (He\,\textsc{i} and He\,\textsc{ii}). The horizonal axis is the fractional acoustic depth from the surface of the star, \(\tau/\tau_0\).}
@@ -245,7 +245,7 @@ In the outer convective envelope of Sun-like stars, the temperature (\(\SIrange{
 
 In Figure \ref{fig:gamma-zones}, we show \(\gamma\) for model S against fractional acoustic depth, shaded by regions of ionisation. For an ideal monatmoic gas, \(\gamma=5/3\), but \(\gamma < 5/3\) in regions where helium and hydrogen ionise. Close to the surface of the star, hydrogen ionisation has the largest effect on \(\gamma\) because it makes up the majority of stellar matter. The first (He\,\textsc{i}) and second (He\,\textsc{ii}) ionisations of helium occur deeper in the star. We can see that the second ionisation of helium has a greater affect on \(\gamma\) than the first. The effect of the second He ionisation causes a rapid changing in \(\gamma\) over a few per cent in \(\tau\) (equivalent to \(\sim \SI{50}{\second}\) in model S).
 
-\begin{figure}[tbp]
+\begin{figure}
     \centering
     \includegraphics{figures/adiabatic-ionisation-temp.pdf}
     \caption[Temperature-density profile for a Sun-like star.]{Temperature-density profile for a Sun-like star. \emph{Top:} The first adiabatic exponent \(\gamma\) as a function of temperature and density, calculated using Eq. 53 of \citet{Houdayer.Reese.ea2021} for a helium mass fraction, \(Y=0.25\). \emph{Bottom:} The change in \(\gamma\) induced by a change in helium abundance, \(\Delta Y = 0.1\). In both panels, the dashed line shows the temperature-density profile of model S.\\--- \emph{This figure is a recreation of Fig. 5 in \citet{Houdayer.Reese.ea2021}.}}
@@ -292,7 +292,7 @@ We were able to isolate the contributions to \(\gamma\) from ionisation using a 
 
 \subsubsection{The Effect of \(\gamma\) on p Mode Frequencies}
 
-\begin{figure}[tbp]
+\begin{figure}
     \centering
     \includegraphics{figures/helium-ionisation-sound-speed.pdf}
     \caption{The effect on the sound speed profile for three solar-like stars with initial helium mass fractions of 0.26 (\emph{solid}), 0.28 (\emph{dashed}), and 0.3 (\emph{dot-dashed}). The models were each evolved to a central helium mass fraction of 0.6. \emph{Top:} The first adiabatic exponent \(\gamma\). \emph{Bottom:} The sound speed gradient \(\dd c/\dd t\) where \(t = \tau/\tau_0\) is the fractional acoustic depth.}
@@ -321,7 +321,7 @@ to its inertia (\(\mathcal{E}\)). The mode inertia is,
 %
 where the amplitude and direction of a pressure wave at a given point in a star is given by the so-called Lagrangian perturbation vector \(\vect{\xi}\). 
 
-\begin{figure}[!tbp]
+\begin{figure}
     \centering
     \includegraphics{figures/kernels.pdf}
     \caption{Structure kernels (\(\mathcal{K}_{c^2,\rho}, \mathcal{K}_{\rho,c^2}\)) scaled by the stellar radius as a function of fractional acoustic depth. The kernels were computed for three radial oscillation modes (\(n=15,21,26\)) using oscillation calculations for stellar model S.}
@@ -459,7 +459,7 @@ where \(\phi_\heII = 2(\epsilon_\heII + \pi/4)\), and \(\nu_0 = (2 \tau_0)^{-1}\
 
 \subsection{Base of the Convective Zone Glitch}\label{sec:bcz-glitch}
 
-\begin{figure}[!tb]
+\begin{figure}[tb]
     \centering
     \includegraphics{figures/bcz-density-gradient.pdf}
     \caption{Discontinuity in the density gradient at the base of the convective zone for three solar-like stars with initial helium mass fractions of 0.26 (\emph{solid}), 0.28 (\emph{dashed}), and 0.3 (\emph{dot-dashed}).}

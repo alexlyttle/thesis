@@ -115,7 +115,7 @@ There are several ways to reduce over-fitting, from minimising the complexity of
 
 We compared the choice of two error functions: mean squared error (MSE) and mean absolute error (MAE). The former is widely used among ANNs because it is more sensitive to large errors. However, we tracked both metrics regardless of which was added to the loss function and found that MAE converged faster. Although MAE is less effective at large errors, we found that these were typically at the edges of the grid and the accuracy was good enough everywhere else.
 
-\begin{figure}[!tb]
+\begin{figure}[tb]
     \centering
     \includegraphics{figures/loss.png}
     \caption{The MAE as a function of epochs for the train and validation datasets.}
@@ -132,7 +132,7 @@ After extensive tuning, we opted for an ANN with $N=128$ neurons in each of $H=6
 
 The test dataset contained $\sim \num{2e6}$ stellar models evolved in the same way as the training dataset, but with initial conditions chosen randomly across the range of the grid. We made predictions for the test dataset, deriving luminosity from the output radius and effective temperature, using the final trained ANN as described in Appendix \ref{sec:opt}. We then evaluated the accuracy of the ANN by taking the difference between the test truth and ANN prediction, $x_\mathrm{true} - x_\mathrm{pred}$. 
 
-\begin{figure}
+\begin{figure}[tb]
     \centering
     \includegraphics[width=\linewidth]{figures/test_random_wide.png}
     \caption{\emph{Left}: the rolling error between a given parameter in the test dataset ($\mathbb{Y}$) and the ANN prediction for that parameter ($\widetilde{\mathbb{Y}}$) where $\delta \mathbb{Y} = \widetilde{\mathbb{Y}} - \mathbb{Y}$. \emph{Right}: a kernel density estimate (KDE) of the error and a normal distribution centred on the median, $\mu_{1/2}$ with an estimator for the standard deviation from the median absolute deviation, $\sigma_\mathrm{MAD}$.}
@@ -152,7 +152,7 @@ To represent the accuracy of the ANN, we present the median, $\mu_{1/2}$ and MAD
 
 \section{Prior Distributions}\label{sec:beta}
 
-\begin{figure}[!tb]
+\begin{figure}[tb]
     \centering
     \includegraphics{figures/beta_distribution.png}
     \caption{A beta distribution ($\mathcal{B}$) with $\alpha = \beta = 1.2$ for some parameter $x$ and a uniform distribution ($\mathcal{U}$) from 0 to 1.}
@@ -177,7 +177,7 @@ We found that the NP model recovered the true values for the individual stellar 
 
 The PP model recovered true values for the synthetic stars with more reliable uncertainty than the NP model. The addition of pooling $Y_\mathrm{init}$ and $\mlt$ between the stars improved their uncertainty which reduced the effects of the prior as seen in the NP model. We found little difference between the results of the PP and MP models.
 
-\begin{figure}
+\begin{figure}[tb]
     \centering
     \includegraphics[width=\textwidth]{figures/shrinkage.png}
     \caption{Kernel density estimates (KDEs) of the distributions of statistical uncertainties from each model for the sample of synthetic stars. The PP model was run with 10, 50 and 100 stars and is denoted PP10, PP50, and PP100 respectively. The NP and MP models were both run with the full set of 100 stars.}
@@ -201,7 +201,7 @@ In Fig. \ref{fig:test-corners-pp}, we see that the PP model also recovers the hy
 
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{figures/corner_plot_mp_truths.png}
+    \includegraphics[width=0.82\linewidth]{figures/corner_plot_mp_truths.png}
     \caption{The same as Fig. \ref{fig:test-corners-pp} but for the MP model.}
     \label{fig:test-corners-mp} 
 \end{figure}
