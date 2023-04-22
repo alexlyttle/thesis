@@ -10,9 +10,9 @@
 % all distributions of LaTeX version 2005/12/01 or later.
 %
 %
-\chapter[Acoustic Glitches]{Acoustic Glitches as a Signature of Helium Abundance}\label{chap:glitch}
+\chapter[Acoustic Glitches in Solar-Like Oscillators]{Acoustic Glitches in Solar-Like Oscillators as a Signature of Helium Abundance}\label{chap:glitch}
 
-\epigraph{\singlespacing``Ideals are like stars: you will not succeed in touching them with your hands, but like the seafaring man on the ocean desert of waters, you choose them as your guides, and following them, you reach your destiny.''}{\emph{Carl Schurz}}
+% \epigraph{\singlespacing``Ideals are like stars: you will not succeed in touching them with your hands, but like the seafaring man on the ocean desert of waters, you choose them as your guides, and following them, you reach your destiny.''}{\emph{Carl Schurz}}
 
 % So far in this thesis, we have shown that a hierarchical Bayesian model can be used to infer the helium abundance distribution in a stellar population. We also found how this improves the inference of fundamental stellar parameters. However, there is limited information about helium abundance in the stellar observables used (e.g. \(L, \teff, \Delta\nu\)).
 
@@ -20,11 +20,11 @@ An acoustic glitch is a sharp variation of the sound speed inside a medium. The 
 
 Acoustic glitches in Sun-like stars arise from sharp variations in their structure, such as the base of the convection zone (BCZ) and helium ionisation zones (He\,\textsc{i} and He\,\textsc{ii}). Early work identified glitches in solar oscillation modes by analysing their second differences, \(\Delta_2\nu_{nl} \equiv \nu_{n-1\,l} - 2\nu_{nl} + \nu_{n+1\,l}\). Second and higher-order differences remove some smoothly varying components to the mode frequencies and effectively amplify glitch signatures. Assuming a sharp localised discontinuity in sound speed at He\,\textsc{ii} ionisation and the BCZ, \citet{Basu.Antia.ea1994,Basu1997} were able to model these glitches and measure the extent of convective overshoot below the BCZ.
 
-\citet{Monteiro.Thompson1998} further developed a model of the He\,\textsc{ii} ionisation glitch signature by accounting for its finite width in the star, later applying it to study the Sun \citep{Monteiro.Thompson2005}. Around the same time, \citet{Basu.Mazumdar.ea2004} showed the amplitude of the He\,\textsc{ii} glitch signature correlated with the fractional helium abundance (\(Y\)) near the surface of Sun-like stars. Since helium ionises below the stellar atmosphere for these stars, asteroseismology was able to probe where spectroscopy could not. A few years later, \citet{Houdek.Gough2007} proposed a closer physical approximation of the He\,\textsc{ii} glitch. They derived the glitch signature which was later used in many studies of solar-like oscillators. In Section \ref{sec:glitch-star}, we show where their glitch model comes from.
+\citet{Monteiro.Thompson1998} further developed a model of the He\,\textsc{ii} ionisation glitch signature by accounting for its finite width in the star, later applying it to study the Sun \citep{Monteiro.Thompson2005}. Around the same time, \citet{Basu.Mazumdar.ea2004} showed the amplitude of the He\,\textsc{ii} glitch signature correlated with the fractional helium abundance (\(Y\)) near the surface of Sun-like stars. Since helium ionises below the stellar atmosphere for these stars, asteroseismology was able to probe where spectroscopy could not. A few years later, \citet{Houdek.Gough2007} proposed a closer physical approximation of the He\,\textsc{ii} glitch. They derived the glitch signature which was later used in many studies of solar-like oscillators.
 
 The glitch could be further studied in stars other than the Sun with the advent of space-based missions. With \emph{CoRoT} providing evidence of solar-like oscillations in red giants, \citet{Miglio.Montalban.ea2010,Mazumdar.Michel.ea2012} found evidence of glitch in red giants. Sample of \emph{Kepler} stars \citep{Mazumdar.Monteiro.ea2012,Mazumdar.Monteiro.ea2014,Verma.Raodeo.ea2017} compare fitting directly and to second differences. For example, 16 Cyg A and B \citet{Verma.Faria.ea2014}. Then \citet{Verma.Raodeo.ea2019} extended this to model to determine helium abundances. Using a variety of stellar models they were not able to find a consistent helium enrichment law.
 
-Finally, we introduce a new method for modelling the glitch signature in Section \ref{sec:glitch-model}. In particular, we focus on the statistical treatment of uncertainty in the glitch model and its parameters. We apply a Bayesian approach to fitting the glitch for the first time, using a Gaussia process to model correlated noise in the mode frequencies.
+In Section \ref{sec:glitch-star}, we demonstrate how glitches in stellar structure due to helium ionisation and the BCZ affect the mode frequencies of solar-like oscillators. Starting with the variational principle \citep{Chandrasekhar1964}, we show how to get to the He\,\textsc{ii} glitch signature formula from \citet{Houdek.Gough2007}. Hence, this chapter serves as a primer for Chapter \ref{chap:glitch-gp}, where we apply a new model for measuring acoustic glitches in \(\nu_{nl}\) using a Gaussian process.
 
 \section[1D example]{A One-Dimensional Example of a Glitch}\label{sec:1d-glitch}
 
@@ -179,13 +179,11 @@ where \(a_1\) and \(a_2\) are coefficients which are both functions of \(\delta 
     \label{fig:1d-fit}
 \end{figure}
 
-We fit Equation \ref{eq:1d-domega-func} to \(\delta\omega_n\) obtained from a glitch located at \(x_\glitch = 0.9\), with half-width \(\delta x = 0.02\), and change in sound speed \(\delta c = 0.03\). The best fitting line is shown in Figure \ref{fig:1d-fit}. We found \(\tau_1 \approx \num{0.0389}\) and \(\tau_2 \approx \num{0.199}\). This corresponded to \(\tau_1 \simeq 2\delta\tau\), where \(\delta\tau\) is half the acoustic width of the glitch --- the time at which sound takes to transverse the region. Since the speed of sound \(c \approx \num{1}\) throughout the medium, the true value of \(\delta\tau = 0.02\). We also found the second `frequency' \(\tau_2 \simeq 2\tau_\glitch\), where \(\tau_\glitch\) is the sound travel time from the nearest edge to the centre of the glitch (in this case \num{0.1}).
-
-\todo{Repeating this for different glitch parameters,  how the `frequencies' \(\tau_1\) and \(\tau_2\) relate to the half-width and location of the glitch respectively.}
+We fit Equation \ref{eq:1d-domega-func} to \(\delta\omega_n\) obtained from a glitch located at \(x_\glitch = 0.9\), with half-width \(\delta x = 0.02\), and change in sound speed \(\delta c = 0.03\). The best fitting line is shown in Figure \ref{fig:1d-fit}. We found \(\tau_1 \approx \num{0.0389}\) and \(\tau_2 \approx \num{0.199}\). This corresponded to \(\tau_1 \simeq 2\delta\tau\), where \(\delta\tau\) is half the acoustic width of the glitch --- the time at which sound takes to transverse the region. Since the speed of sound \(c \approx \num{1}\) throughout the medium, the true value of \(\delta\tau = 0.02\). We also found the second `frequency' \(\tau_2 \simeq 2\tau_\glitch\), where \(\tau_\glitch\) is the sound travel time from the nearest edge to the centre of the glitch (in this case \num{0.1}). Referring back to Figure \ref{fig:1d-results}, we can infer that the relation between parameters of Equation \ref{eq:1d-domega-func} and the glitch should approximately hold for different values of \(x_\glitch\), \(\delta x\), and \(\delta c\).
 
 % NOTE: Could take this further to show a1 = 2 dc dtau / L and a2 = dc / L
 
-It would not be hard to believe that a similar periodicity could be found in the mode frequencies of a star, although its structure is more complicated. We showed that fitting to \(\delta\omega\) we may can recover properties of a glitch. In the next section, we will build upon this analogy and explore acoustic glitches in stars.
+It would be tempting to test this further, but we have shown that modelling the signature of a glitch (\(\delta\omega\)) can help characterise its properties. Although the structure of a star is more complicated than this example, we can extend this principle to find glitch signatures in the mode frequencies of solar-like oscillators. Therefore, we will build upon this analogy and explore acoustic glitches in stars in the next section.
 
 % NOTES: Go slowly through this. The next step is to fit a simple mode to theses oscillations and show that we can find x0 and dx. And show how the amplitude scales with dc.
 
@@ -209,7 +207,7 @@ at constant entropy, \(S\). \citet{Chandrasekhar1939} introduced three adiabatic
 
 For the most part, \(\gamma\), \(P\), and \(\rho\) change smoothly with radius inside a star. However, a small structural glitch in these quantities would lead to a sudden change in sound speed. In the previous section, we showed how such a perturbation can lead to a periodic perturbation in the eigenfrequencies of pressure waves in a homogeneous medium. Characterising this signal allowed us to measure the properties of the glitch. If similar glitches were present in a star, then we might be able to do the same. In this section, we explore the origins of glitches inside a solar-like star. Then, we see what effect these have on the eigenfrequencies, a quantity we can measure through asteroseismology.
 
-Firstly, let us consider the sound speed profile of a Sun-like star. Particularly, we want to see how the sound speed changes on the timescale of a pressure wave moving through the star. As discovered in Section \ref{sec:1d-glitch}, a convenient timescale to work with is the acoustic depth, \(\tau\). This is not to be confused with the symbol for the age of the star in Chapter \ref{chap:hmd}. Here, we define \(\tau\) as the time taken for a pressure wave to travel from its surface (\(R\)) to some radius \(r\) under the assumption of spherical symmetry,
+Firstly, let us consider the sound speed profile of a Sun-like star. Particularly, we want to see how the sound speed changes on the timescale of a pressure wave moving through the star. As discovered in Section \ref{sec:1d-glitch}, a convenient timescale to work with is the acoustic depth, \(\tau\). This is not to be confused with the symbol for the age of the star in Chapter \ref{chap:hmd}. Here, we define \(\tau\) as the time taken for a pressure wave to travel from the surface (\(R\)) to some radius \(r\) in a star under the assumption of spherical symmetry,
 %
 \begin{equation}
     \tau(r) = \tau_0 - \int_0^{r} \frac{\dd r'}{c(r')},\label{eq:tau}
@@ -224,7 +222,7 @@ where \(\tau_0\) is the acoustic radius of the star. We recall from Section \ref
     \label{fig:sound-speed-gradient}
 \end{figure}
 
-In Figure \ref{fig:sound-speed-gradient}, we show the sound speed gradient with respect to \(\tau\) for a Sun-like stellar model (model S; see Section \ref{sec:model-s}). We see how the speed of sound changes smoothly throughout the star. In the convective envelope, where p-modes propagate, there is a noticeable wiggle around \SI{700}{\second} and a sharp change in direction at its base. The first is caused by the ionisation of helium, which affects \(\gamma\) by increasing the number of free electrons and thus modifying the free energy of the gas. We explore this further in Section \ref{sec:helium-glitch}. The second is due to a discontinuity in the second temperature gradient as the structure moves from convectively unstable to radiative, which will be discussed in Section \ref{sec:bcz-glitch} \todo{Put a few references here of work which has studied these before}.
+In Figure \ref{fig:sound-speed-gradient}, we show the sound speed gradient with respect to \(\tau\) for a Sun-like stellar model (model S; see Section \ref{sec:model-s}). We see how the speed of sound changes smoothly throughout the star. In the convective envelope, where p-modes propagate, there is a noticeable wiggle around \SI{700}{\second} and a sharp change in direction at its base. The first is caused by the ionisation of helium, which we will explore further in Section \ref{sec:helium-glitch}. The second is due to a discontinuity in the second temperature gradient as the stellar interior goes from convectively unstable to radiative. This will be discussed in Section \ref{sec:bcz-glitch}.
 
 \subsection{Sun-Like Model Star}\label{sec:model-s}
 
@@ -232,11 +230,11 @@ We computed a representative Sun-like model star (hereafter model S) using MESA 
 
 \subsection{Helium Ionisation Glitch}\label{sec:helium-glitch}
 
-In this section, we will first show how the sound speed inside a solar-like star is affected by the ionisation of hydrogen and helium. Then, we will see that an increase in helium abundance increases the effect of helium ionisation on the speed of sound. Starting with the variational principle, we derive a commonly used form of the glitch signature found in the mode frequencies. In the process, we show that the p modes are sensitive to changes in sound speed near the surface.
+In this section, we will first show how the sound speed inside a solar-like star is affected by the ionisation of hydrogen and helium. Then, we will see that an increase in helium abundance (\(Y\)) increases the effect of helium ionisation on the speed of sound. Starting with the variational principle, we derive a commonly used form of the glitch signature found in the mode frequencies. In the process, we show that the p modes are sensitive to rapid changes in sound speed near the surface.
 
 \subsubsection{The Effect of Helium Abundance on \(\gamma\)}
 
-In the outer convective envelope of Sun-like stars, the temperature (\(\SIrange{e4}{e5}{\kelvin}\)) and density (\(\SIrange{e-5}{e-3}{\gram\per\centi\metre\cubed}\)) is suitable for ionising hydrogen and helium \citep{Eggleton.Faulkner.ea1973}. As a given chemical species in the star ionises, the number of particles and hence chemical potential of the species changes. This induces a gradient in the thermal free energy of the gas which relates to the pressure and entropy of the gas. Therefore, we expect ionisation to cause a change in the pressure-density gradient at constant entropy, \(\gamma\). Since \(\gamma\) relates to the sound speed from Equation \ref{eq:sound}, any sudden change in \(\gamma\) will induce a change in \(c\).
+In the outer convective envelope of Sun-like stars, the temperature (\(\SIrange{e4}{e5}{\kelvin}\)) and density (\(\SIrange{e-5}{e-3}{\gram\per\centi\metre\cubed}\)) is suitable for ionising hydrogen and helium \citep{Eggleton.Faulkner.ea1973}. As a given chemical species in the star ionises, the number of particles and hence chemical potential of the species changes. This induces a gradient in the thermal free energy of the gas which relates to the pressure and entropy of the gas. Thus, we expect ionisation to cause a change in the pressure-density gradient at constant entropy, \(\gamma\). Since \(\gamma\) relates to the sound speed from Equation \ref{eq:sound}, any sudden change in \(\gamma\) will induce a change in \(c\).
 
 \begin{figure}[!tb]
     \centering
@@ -254,7 +252,7 @@ In Figure \ref{fig:gamma-zones}, we show \(\gamma\) for model S against fraction
     \label{fig:gamma-temp-density}
 \end{figure}
 
-We were able to isolate the contributions to \(\gamma\) from ionisation using a recent derivation by \citet{Houdayer.Reese.ea2021}. They obtained an approximate formula for \(\gamma\) as a function of temperature (\(T\)) and density valid for the outer convection zone of Sun-like stars. Using their formula, we plot \(\gamma\) for a range of \(T\) and \(\rho\) in Figure \ref{fig:gamma-temp-density}. The first panel illustrates the three ionisation regions of hydrogen and helium. The value of \(\gamma\) decreases when the ionisation reaction is occurring. The magnitude of the effect depends primarily on the temperature-density profile of the star which we can see over-plot for model S. We can imagine a hotter star shifting this line such that ionisation occurs closer to the surface. Additionally, in the second panel we see that an increase in helium abundance by 0.1 decreases \(\gamma\) by up to \(\sim 0.03\) in the helium ionisation region along the model S profile. This shows that a helium abundance correlates with the size of the glitch in \(\gamma\). However, there is clearly still some dependence on other stellar quantities.
+We were able to isolate the contributions to \(\gamma\) from ionisation using a recent derivation by \citet{Houdayer.Reese.ea2021}. They obtained an approximate formula for \(\gamma\) as a function of temperature (\(T\)) and density valid for the outer convective zone of Sun-like stars. Using their formula, we plot \(\gamma\) for a range of \(T\) and \(\rho\) in Figure \ref{fig:gamma-temp-density}. The first panel illustrates the three ionisation regions of hydrogen and helium. The value of \(\gamma\) decreases when the ionisation reaction is occurring. The magnitude of this effect depends on the temperature-density profile of the star which we can see over-plot for model S. We can imagine a hotter star shifting this line such that ionisation occurs closer to the surface. In the second panel, we see that an increase in helium abundance by 0.1 decreases \(\gamma\) by up to \(\sim 0.03\) in the He\,\textsc{ii} ionisation region along the model S profile. This shows that helium abundance correlates with the size of the glitch in \(\gamma\). However, there is clearly still some dependence on other stellar quantities.
 
 % The exact effect of ionisation on \(\gamma\) is not known analytically. However, \citet{Houdayer.Reese.ea2021} recently approximated \(\gamma\) for the convective zone of a Sun-like star in their study of the helium ionisation glitch. In this subsection, we combine the equations derived in their work to help us understand the relation between ionisation and \(\gamma\). Let us consider an \(M\) mass star with fractional hydrogen and helium abundances of \(X\) and \(Y\) respectively. From \citet{Houdayer.Reese.ea2021}, we approximate the first adiabatic exponent as,
 % %
@@ -301,9 +299,9 @@ We were able to isolate the contributions to \(\gamma\) from ionisation using a 
     \label{fig:gamma-sound-speed}
 \end{figure}
 
-To show the effect of small changes in \(\gamma\) on the sound speed, we plot the sound speed gradient in Figure \ref{fig:gamma-sound-speed}. The three models shown were evolved to the same central temperature as model S with different initial helium abundances. The dominant effect of helium abundance appears as a Gaussian-like depression in \(\gamma\) around the second ionisation of helium. We see how larger helium abundance increases the width and depression in \(\gamma\), which is reflected in the sound speed gradient. A larger \(Y\) also leads to a relative reduction in hydrogen abundance. This slightly shrinks the width of the hydrogen ionisation region.
+To show the effect of small changes in \(Y\) on the sound speed, we plot the sound speed gradient in Figure \ref{fig:gamma-sound-speed}. The three models shown were evolved to the same central temperature as model S with initial helium abundances of 0.26, 0.28, and, 0.3. The dominant effect of helium abundance appears as a Gaussian-like depression in \(\gamma\) around the second ionisation of helium. We see how larger helium abundance increases the width and depression in \(\gamma\), which is reflected in the sound speed gradient. A larger \(Y\) also leads to a relative reduction in hydrogen abundance (\(X\)) which shrinks the width of the hydrogen ionisation region.
 
-To see how a change in \(\gamma\) affects the mode frequencies, we will explore the sensitivity of a mode to structural changes in the star. Starting with the variational principle, we can approximate the characteristic frequencies of a spherically symmetric, slowly rotating star by \citep{Chandrasekhar1964},
+To see how a change in \(\gamma\) affects the mode frequencies, we explore the sensitivity of a mode to rapid structural changes in the star. Starting with the variational principle, we can approximate the characteristic frequencies of a spherically symmetric, slowly rotating star by \citep{Chandrasekhar1964},
 %
 \begin{equation}
     \omega^2 = \frac{\mathcal{E}}{\mathcal{I}}\label{eq:var-prin}
@@ -315,13 +313,13 @@ which is a ratio of \(\mathcal{E}\) (proportional to the mode's energy)
 %     \mathcal{E} = \int_0^R \left[\gamma P (\dive{\vect{\xi}})^2 + 2(\vect{\xi}\cdot \nabla P) \dive{\vect{\xi}} + (\vect{\xi}\cdot \nabla P) (\vect{\xi}\cdot\nabla\ln\rho)\right] r^2 \, \dd r.
 % \end{equation}
 %
-to its inertia,
+to its inertia (\(\mathcal{E}\)). The mode inertia is,
 %
 \begin{equation}
     \mathcal{I} = \int_0^R \vect{\xi} \cdot \vect{\xi} \, \rho r^2 \, \dd r.
 \end{equation}
 %
-The amplitude and direction of a pressure wave at a given point in a star are given by the so-called Lagrangian perturbation vector \(\vect{\xi}\). 
+where the amplitude and direction of a pressure wave at a given point in a star is given by the so-called Lagrangian perturbation vector \(\vect{\xi}\). 
 
 \begin{figure}[!tbp]
     \centering
@@ -337,15 +335,15 @@ A structural glitch in the star would cause a small change in frequency (\(\delt
     \frac{\delta\omega}{\omega} &= \frac{1}{2\,\mathcal{I}} \left(\frac{\delta\mathcal{E}}{\omega^2} - \delta\mathcal{I}\right).
 \end{align}
 %
-Perturbations \(\delta\mathcal{E}\) and \(\delta\mathcal{I}\) depend on changes in the state variables. By perturbing and substituting appropriate forms of \(\mathcal{E}\) and \(\mathcal{I}\), it is possible to rewrite this as a function of the so-called structural kernels \(\mathcal{K}_{a,b}\). For example,
+Small changes \(\delta\mathcal{E}\) and \(\delta\mathcal{I}\) depend on changes to the state variables. By perturbing and substituting appropriate forms of \(\mathcal{E}\) and \(\mathcal{I}\), it is possible to rewrite this as a function of the so-called structural kernels \(\mathcal{K}_{a,b}\). For example \citep{Christensen-Dalsgaard2014},
 %
 \begin{equation}
     \frac{\delta\omega}{\omega} = \int_0^R \left(\mathcal{K}_{c^2,\rho} \frac{\delta c^2}{c^2} + \mathcal{K}_{\rho,c^2} \frac{\delta \rho}{\rho} \right) \dd r.\label{eq:kernels}
 \end{equation}
 %
-where \(\mathcal{K}_{a, b}\) gives the relative effect on \(\omega\) due to a perturbation in a state variable \(a\) at fixed \(b\), at a given \(r\). These can show the sensitivity of the wave to a change in state in the star. The kernels are defined in detail in \citet{Gough.Thompson1991}. We plot examples of these kernels in Figure \ref{fig:kernels} for a few radial oscillation modes. Both decay through the star, meaning that the modes are less sensitive to structural changes deeper in the star. 
+where \(\mathcal{K}_{a, b}\) gives the relative effect on \(\omega\) due to a perturbation in a state variable \(a\) at fixed \(b\), at a given \(r\). The kernels, defined fully in \citet{Gough.Thompson1991}, can show the sensitivity of the wave to a change in state in the star. We plot \(\mathcal{K}_{c^2,\rho}\) and \(\mathcal{K}_{\rho,c^2}\) in Figure \ref{fig:kernels} for a few radial oscillation modes. Both decay through the star, meaning that the modes are less sensitive to structural changes deeper in the star. The kernels also oscillate at different frequencies, meaning that some modes will be more or less sensitive to a glitch than others.
 
-We can evaluate Equation \ref{eq:kernels} to find the effect on \(\omega\) due to a change in \(\gamma\) from helium ionisation. The first term can be easily rewritten in terms of a change in \(\gamma\) because \(c^2 \propto \gamma\), hence \(\mathcal{K}_{\gamma,\rho} \delta \gamma / \gamma \equiv \mathcal{K}_{c^2,\rho} \delta c^2 / c^2\). Helium ionisation mainly affects \(\gamma\) and barely affects the density, so we can assume \(\delta\rho/\rho \approx 0\) in the ionisation region. Therefore, we may rewrite Equation \ref{eq:kernels} due to a change in \(\gamma\) as,
+We can evaluate Equation \ref{eq:kernels} to find the effect on \(\omega\) due to a change in \(\gamma\) from helium ionisation. The first term can be easily rewritten in terms of a change in \(\gamma\) because \(c^2 \propto \gamma\), hence \(\mathcal{K}_{\gamma,\rho} \delta \gamma / \gamma \equiv \mathcal{K}_{c^2,\rho} \delta c^2 / c^2\). Helium ionisation has a negligible effect on density, so we can assume \(\delta\rho/\rho \approx 0\) in the ionisation region. Therefore, we may rewrite Equation \ref{eq:kernels} due to a change in \(\gamma\) as,
 %
 \begin{equation}
     \left.\frac{\delta\omega}{\omega}\right|_\gamma \simeq \int_0^R \mathcal{K}_{\gamma,\rho} \frac{\delta\gamma}{\gamma} \dd r,\label{eq:delta-omega}
@@ -358,13 +356,13 @@ where \(\mathcal{K}_{\gamma,\rho}\) is shown in \citet{Gough1993} to satisfy,
 \end{equation}
 %
 
-Let us first expand the mode inertia, \(\mathcal{I}\). The perturbation vector can be written in terms of a radial and horizontal component, \(\vect{\xi} = \xi_r \hat{r} + \vect{\xi}_h\). In the high-order limit where \(l/n \rightarrow 0\), the horizontal component \(\vect{\xi}_h\) is negligible. Therefore, we can rewrite the mode inertia as,
+Firstly, we expand the mode inertia, \(\mathcal{I}\). The Lagrangian perturbation vector can be written in terms of a radial and horizontal component, \(\vect{\xi} = \xi_r \hat{r} + \vect{\xi}_h\). In the high-order limit where \(l/n \rightarrow 0\), the horizontal component \(\vect{\xi}_h\) is negligible. Therefore, we can rewrite the mode inertia as,
 %
 \begin{equation}
     \mathcal{I} \simeq \int_0^R \xi_r^2 \rho r^2 \, \dd r.
 \end{equation}
 %
-We can use an approximation of \(\xi_r\) from \citet{Gough1993}, 
+Then, we use an approximation of \(\xi_r\) from \citet{Gough1993}, 
 %
 \begin{equation}
     \xi_r \simeq \frac{\psi_0}{r}\sqrt{\frac{K}{\rho}} \cos\psi,\label{eq:xi-r}
@@ -384,7 +382,7 @@ Finally, changing to an integral over the acoustic depth, \(\tau\) we can evalua
 \end{equation}
 %
 
-Secondly, we can substitute an approximation for \((\dive{\vect{\xi}})^2\) from \citet{Gough1993},
+Secondly, we substitute an approximation for \((\dive{\vect{\xi}})^2\) from \citet{Gough1993},
 %
 \begin{equation}
     (\dive{\vect{\xi}})^2 \simeq \frac{\psi_0^2 \omega^3}{\gamma P c r^2} \sin^2\psi, \label{eq:div-xi}
@@ -398,16 +396,16 @@ into Equation \ref{gamma-kernel} to get,
     &= \frac{\omega \psi_0^2}{4 \mathcal{I}} \int_0^{R} \frac{\delta\gamma}{\gamma}(1 - \cos 2\psi)\frac{\dd r}{c}.
 \end{align}
 %
-This integral is approximately valid providing the region where \(\delta\gamma/\gamma\) is in the asymptotic limit \todo{and other assumptions}. We can see that \(\delta\omega\) is split into a smooth and a periodic component. The smooth component can be treated later, but for now we focus on the oscillating part of \(\delta\omega\). Substituting for \(\mathcal{I}\) and \(\psi\), changing to an integral over acoustic depth we get,
+We can see that \(\delta\omega\) is split into a smooth and a periodic component. The smooth component may be treated later, but for now we focus on the oscillating part of \(\delta\omega\). Substituting for \(\mathcal{I}\) and \(\psi\), changing to an integral over acoustic depth we get,
 %
 \begin{equation}
-    \left.\frac{\delta\omega}{\omega}\right|_{\gamma,\mathrm{osc}} \simeq - \frac{1}{2\tau_0} \int_0^{\tau_0} \frac{\delta\gamma}{\gamma} \cos 2 (\omega\tau + \epsilon) \, \dd \tau.
+    \left.\frac{\delta\omega}{\omega}\right|_{\gamma,\mathrm{osc}} \simeq - \frac{1}{2\tau_0} \int_0^{\tau_0} \frac{\delta\gamma}{\gamma} \cos 2 (\omega\tau + \epsilon) \, \dd \tau. \label{eq:omega-osc}
 \end{equation}
 %
 
 \subsubsection{A Functional Form of the Helium Glitch Signature}
 
-We have shown that a perturbation in \(\gamma\) can induce a periodicity in \(\omega\). The functional from of this periodicity depends on \(\delta\gamma/\gamma\). As shown in Figures \ref{fig:gamma-zones} and \ref{fig:gamma-temp-density}, the dominant perturbation due to a change in helium abundance is from the second ionisation of helium. There have been different attempts to approximate \(\delta\gamma/\gamma\,|_\heII\) in the literature, for example using a Dirac delta function or a triangular function \citep{Monteiro.Christensen-Dalsgaard.ea1994, Monteiro.Thompson2005}. In recent years, work modelling the glitch has used the formulation from \citet{Houdek.Gough2007} where the perturbation is modelled with a Gaussian shape,
+We have shown that a change in \(\gamma\) can induce a periodicity in \(\omega\). The functional from of this periodicity depends on \(\delta\gamma/\gamma\). As shown in Figures \ref{fig:gamma-zones} and \ref{fig:gamma-temp-density}, the dominant perturbation due to a change in helium abundance is from the second ionisation of helium. There have been different attempts to approximate \(\delta\gamma/\gamma\,|_\heII\) in the literature, for example using a Dirac delta function or a triangular function \citep{Monteiro.Christensen-Dalsgaard.ea1994, Monteiro.Thompson2005}. In recent years, work modelling the glitch has used the formulation from \citet{Houdek.Gough2007} where the change in \(\gamma\) due to He\,\textsc{ii} ionisation is modelled with a Gaussian shape,
 %
 \begin{equation}
     \left.\frac{\delta\gamma}{\gamma}\right|_\heII \simeq - \frac{\Gamma_\heII}{\Delta_\heII \sqrt{2\pi}} \, \ee^{- \frac12{(\tau - \tau_\heII)^2}/{\Delta_\heII^2} }, \label{eq:he-gamma}
@@ -415,10 +413,10 @@ We have shown that a perturbation in \(\gamma\) can induce a periodicity in \(\o
 %
 where \(\Gamma_\heII\) is the area, \(\Delta_\heII\) is the characteristic width, and \(\tau_\heII\) is the center of the ionisation region.
 
-Combine the above two equations with a change of variables to \(x = (\tau - \tau_\heII)/\Delta_\heII\), we get,
+Here, we independetly verify result for \(\delta\omega\) due to He\,\textsc{ii} ionisation from \citet{Houdek.Gough2007}. Substituting Equation \ref{eq:he-gamma} into Equation \ref{eq:omega-osc} with a change of variables to \(x = (\tau - \tau_\heII)/\Delta_\heII\), we get,
 %
 \begin{equation}
-    \left.\frac{\delta\omega}{\omega}\right|_{\heII, \mathrm{osc}} \simeq \frac{\Gamma_\heII}{2\sqrt{2\pi} \, \tau_0} \, \int_{-\infty}^\infty \ee^{- x^2/2} \cos 2 (\Delta_\heII \omega x + \widetilde{\epsilon_\heII}) \, \dd x
+    \left.\frac{\delta\omega}{\omega}\right|_{\heII, \mathrm{osc}} \simeq \frac{\Gamma_\heII}{2\sqrt{2\pi} \, \tau_0} \, \int_{-\infty}^\infty \ee^{- x^2/2} \cos 2 (\Delta_\heII \omega x + \widetilde{\epsilon_\heII}) \, \dd x \label{eq:omega-ii-osc}
 \end{equation}
 %
 where \(\widetilde{\epsilon_\heII} = \omega\tau_\heII + \epsilon_\heII\) and the phase \(\epsilon=\epsilon_\heII\) is assumed constant accross the glitch region. We can solve the above integral analytically using differentiation under the integral sign by introducing an arbitrary variable \(a\),
@@ -445,13 +443,13 @@ which is a differential equation with the solution,
     \end{split}
 \end{equation}
 %
-Therefore, if we set \(a = 1\) for the case of the integral in Equation \ref{} we get the following for the periodic glitch signature \citep[cf.][]{Houdek.Gough2007},
+Therefore, if we set \(a = 1\) (to get back to the integral in Equation \ref{eq:omega-ii-osc}) we get the following for the periodic glitch signature \citep[cf.][Eq. 15]{Houdek.Gough2007},
 %
 \begin{equation}
     \left.\frac{\delta\omega}{\omega}\right|_{\heII, \mathrm{osc}} \simeq \frac{\Gamma_\heII}{2 \tau_0} \ee^{- 2 \Delta_\heII^2 \omega^2} \cos 2 (\tau_\heII\omega + \epsilon_\heII),
 \end{equation}
 %
-To get this in a more familiar form in terms of cyclic frequency \citep[e.g.][]{Verma.Faria.ea2014,Verma.Raodeo.ea2017}, we substitute \(\omega = 2\pi\nu\),
+We can rearrange this to a more familiar form in terms of cyclic frequency \citep[e.g.][]{Verma.Faria.ea2014,Verma.Raodeo.ea2017}, by substituting \(\omega = 2\pi\nu\),
 %
 \begin{equation}
     \left.\frac{\delta\nu}{\nu}\right|_{\heII, \mathrm{osc}} \simeq \nu_0 \Gamma_\heII \, \ee^{- 8 \pi^2 \Delta_\heII^2 \nu^2} \, \sin ( 4 \pi \tau_\heII \nu + \phi_\heII), \label{eq:he-osc}
@@ -461,8 +459,6 @@ where \(\phi_\heII = 2(\epsilon_\heII + \pi/4)\), and \(\nu_0 = (2 \tau_0)^{-1}\
 
 \subsection{Base of the Convective Zone Glitch}\label{sec:bcz-glitch}
 
-The sensitivity of p-modes to glitches gets smaller further into the star. However, we should not neglect the effect of a discontinuity at the base of the convective zone. This arises 
-
 \begin{figure}[!tb]
     \centering
     \includegraphics{figures/bcz-density-gradient.pdf}
@@ -470,8 +466,11 @@ The sensitivity of p-modes to glitches gets smaller further into the star. Howev
     \label{fig:bcz-density}
 \end{figure}
 
+The sensitivity of p-modes to glitches gets smaller further into the star. However, we should not neglect the effect of the near-discontinuity at the base of the convective zone (BCZ). This arises from a jump in the second derivative of temperature at the BCZ which translated to discontinuities in the second derivative of density and sound speed. In Figure \ref{fig:bcz-density} we can see a fast change in direction of the density gradient around \(\tau/\tau_0 \approx 0.6\) (or at about \SI{2200}{\second} for model S). We also see that the relative location of the BCZ changes a little with \(Y\).
 
-We can take a similar approach to the previous section but now considering the second kernel \(\mathcal{K}_{\rho,c^2}\) in Equation \ref{eq:kernels}. However, \citet{Houdek.Gough2007} take another approach by considering the discontinuity as it appears in the acoustic cut-off frequency, \(\omega_{ac}\). The details of this derivation are beyond the scope of this work. We quote their result for the change in frequency induced by a density discontinuity at the base of the convective zone located at an acoustic depth of \(\tau_\bcz\),
+% Overshoot actually causes discontinuity in first derivative, not second \citep{Zahn1991}.
+
+We could take a similar approach to the previous section but now considering the second kernel \(\mathcal{K}_{\rho,c^2}\) in Equation \ref{eq:kernels} since the discontinuity affects \(\rho\). However, \citet{Houdek.Gough2007} take another approach by considering the discontinuity as it appears in the acoustic cut-off frequency, \(\omega_{ac}\). The details of this derivation are beyond the scope of this work. Instead, we quote their result for the change in frequency induced by a density discontinuity at the base of the convective zone located at an acoustic depth of \(\tau_\bcz\) \citep[cf.][Eq. 17]{Houdek.Gough2007},
 %
 \begin{equation}
     \left.\frac{\delta\omega}{\omega}\right|_{\bcz,\mathrm{osc}} \simeq \frac{c_\bcz^2\Delta_\bcz}{8\tau_0 \omega^3} \left(1 + {1}/{4\tau_0^2\omega^2}\right)^{-1/2} \cos\left[2(\tau_\bcz \omega + \epsilon_\bcz) + \tan^{-1}(2\tau_0\omega)\right]
@@ -488,7 +487,9 @@ is the change in second derivative of density at the base of the convective zone
 For high-order modes, \(\tau_0 \omega \gg 1\) and thus \(\tan^{-1}(2\tau_0\omega) \simeq \pi/2\), and \((1 + {1}/{4\tau_0^2\omega^2})^{-1/2} \simeq 1\). Therefore, we can simplify this and write it in a more familiar form in terms of cyclic frequency,
 %
 \begin{equation}
-    \left.\frac{\delta\nu}{\nu}\right|_{\bcz,\mathrm{osc}} \simeq \frac{c_\bcz^2\Delta_\bcz\nu_0}{32\pi^3 \nu^3} \sin(4\pi\tau_\bcz\nu + \phi_\bcz) \label{eq:bcz-osc}
+    \left.\frac{\delta\nu}{\nu}\right|_{\bcz,\mathrm{osc}} \simeq \frac{c_\bcz^2\Delta_\bcz}{32\pi^3}\frac{\nu_0}{\nu^3} \sin(4\pi\tau_\bcz\nu + \phi_\bcz) \label{eq:bcz-osc}
 \end{equation}
 %
 where \(\phi_\bcz\) is some approximately constant phase term.
+
+Now we have equations for the effect of He\,\textsc{ii} ionisation and the BCZ for a given mode frequency \(\nu\), we can use them to model the glitch signatures as they appear in observed mode frequencies, \(\nu_{nl}\). Naturally, these equations are not exact. Several assumptions were made during their derivations. Therefore, if we want to model the glitch signature in \(\nu_{nl}\), we need some way of accounting for the uncertainty in the above equations. In the next chapter, we apply this model to characterise the glitch for a test star and real star. Although such models have been applied to other Sun-like stars before \citep[e.g.][]{Mazumdar.Monteiro.ea2014,Verma.Faria.ea2014}, we propose a new statistical model which uses a Gaussin process to account for the uncertainty in the functional form of \(\nu_{nl}\).
