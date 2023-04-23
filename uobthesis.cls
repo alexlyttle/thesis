@@ -41,6 +41,8 @@
   }{geometry}
 \RequirePackage{geometry}
 
+\RequirePackage{setspace}
+\doublespacing
 
 %% TITLE PAGE
 %
@@ -58,7 +60,7 @@
 \renewcommand*{\maketitle}{%
   % Title page
   \begin{titlepage}
-    \noindent
+    % \noindent
     \begin{center}
       \ifdefined\@logo%
         % Logo size in line with university guidelines
@@ -93,13 +95,14 @@
   \end{titlepage}
   
   % Copyright information
-  \thispagestyle{empty}
+  \thispagestyle{empty}{%
+  \setlength{\parindent}{0pt}
+  \singlespacing
   \hspace{0pt}
   \vfill
-  \begin{center}
-    \copyright~Copyright by \MakeUppercase{\@author},~\@year\\
-    \@license
-  \end{center}
+  \copyright~Copyright by \MakeUppercase{\@author},~\@year
+
+  \@license}
 }
 
 
@@ -121,11 +124,12 @@
 
   % Dedication
   \ifdefined\@dedication
-    \thispagestyle{empty}
+    \thispagestyle{empty}{%
+    \setlength{\parindent}{0pt}
     \hspace{0pt}\vfill%
     \@dedication
     \vfill\hspace{0pt}
-    \cleardoublepage
+    \cleardoublepage}
   \fi
 
   % Acknowledgements
