@@ -65,8 +65,8 @@
 \pagestyle{main}
 
 % Set spacing
-\usepackage{setspace}
-\doublespacing
+% \usepackage{setspace}
+% \doublespacing
 
 % Short titles only for headers, TOC use long titles
 % 'sf' option for sans-serif headings
@@ -74,11 +74,16 @@
 % \titleformat*{\subsubsection}{\sffamily\bfseries}  % modify subsubsection headings separately
 % \titleformat*{\paragraph}{\sffamily\bfseries}
 
+% \titleformat{\chapter}[display]
+% {\sffamily\bfseries\fontsize{64}{72}\selectfont}  % Careful with custom font if change size
+% {\filleft\thechapter}
+% {20pt}
+% {\filright\huge}
 \titleformat{\chapter}[display]
-{\sffamily\bfseries\fontsize{64}{72}\selectfont}  % Careful with custom font if change size
-{\filleft\thechapter}
+{\normalfont\LARGE\centering}  % Careful with custom font if change size
+{\chaptertitlename\ \thechapter}
 {20pt}
-{\filright\Huge}
+{\MakeUppercase}
 
 %% HYPERLINKS
 %
