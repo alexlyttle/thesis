@@ -76,16 +76,26 @@
 % \titleformat*{\subsubsection}{\sffamily\bfseries}  % modify subsubsection headings separately
 % \titleformat*{\paragraph}{\sffamily\bfseries}
 
+% OLD STYLE
 % \titleformat{\chapter}[display]
 % {\sffamily\bfseries\fontsize{64}{72}\selectfont}  % Careful with custom font if change size
 % {\filleft\thechapter}
 % {20pt}
 % {\filright\huge}
+
+% CENTERED NORMAL FONT
 \titleformat{\chapter}[display]
 {\normalfont\LARGE\centering}  % Careful with custom font if change size
 {\chaptertitlename\ \thechapter}
 {20pt}
 {\MakeUppercase}
+
+% CENTERED SANS SERIF
+% \titleformat{\chapter}[display]
+% {\sffamily\bfseries\LARGE\centering}  % Careful with custom font if change size
+% {\chaptertitlename\ \thechapter}
+% {20pt}
+% {\MakeUppercase}
 
 %% HYPERLINKS
 %
