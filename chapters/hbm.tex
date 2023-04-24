@@ -12,6 +12,10 @@
 %
 \chapter{Hierarchical Bayesian Models}\label{chap:hbm}
 
+\textit{In this chapter, we introduce the concept of a hierarchical Bayesian model in the context of determining stellar parameters. We use a simplified analogy for measuring distances to stars in an open cluster to demonstrate the advantages and usage of a hierarchical model in Section \ref{sec:hbm-dist}. Finally, we identify parameters which could be treated hierarchically when modelling the physical properties of many stars, priming the reader for Chapter \ref{chap:hmd}.}
+
+\section{Introduction}
+
 When modelling a single star, we can use a variant of Bayes' theorem (Equation \ref{eq:bayes}) to estimate the posterior probability of its parameters. We choose priors to represent our current knowledge. For example, if we observe a star in the Milky Way at random, we expect its mass to belong to an Initial Mass Function \citep[IMF; e.g.][]{Chabrier2003} without other prior knowledge. In fact, an IMF prior is an input option for BASTA \citep{AguirreBorsen-Koch.Rorsted.ea2022}. Other prior assumptions include a helium enrichment law which determines the star's initial helium abundance from its metallicity, or that its age must not be older than the universe.
 
 Let us consider modelling a large population of stars simultaneously. For example, we may want to create a catalogue of stellar parameters to use in exoplanet and galactic research. We could treat the parameters for each star independently, repeating the modelling procedure for each star in the sample. However, we know that stars belong to population distributions like the IMF. In some cases, these population distributions are not well understood and assuming one exactly can introduce bias into our model. Instead, it could be better to let the data inform such population priors.
