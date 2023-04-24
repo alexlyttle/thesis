@@ -29,22 +29,24 @@ Hierarchical (or multi-level) Bayesian models parametrise population-level prior
 
 In this section, we use the example of measuring distances to stars in an open cluster to demonstrate a hierarchical Bayesian model (HBM). This example is loosely based on the work of \citet{Leistedt.Hogg2017}, which presents a hierarchical model of the colour-magnitude diagram to improve distances from \emph{Gaia} \citep{GaiaCollaboration.Prusti.ea2016}. However, instead of considering the population distributions over magnitude and colour, we build a hierarchy over the stellar distances.
 
-We created a dataset analogous to an open cluster of \(N_\mathrm{stars}\) stars. We gave each \(i\)-th star a dimensionless distance (\(d_i\)) from the observer drawn randomly from a normal distribution with a mean of 10 and standard deviation of 0.1. Then, we converted these to dimensionless parallax using the relation \(\varpi = 1/d\). We also gave each star an absolute visual magnitude (\(\absmag_i\)) drawn randomly from a standard normal distribution. To get a quantity proportional to apparent magnitude (\(\appmag_i\)) for each star, we used the relation \(\appmag_i = \absmag_i + 5 \log_{10} d_i\). For the purpose of this example, we ignored additional real-world effects such as extinction and reddening.
+We created a dataset analogous to an open cluster of \(N_\mathrm{stars}=20\) stars. We gave each \(i\)-th star a dimensionless distance (\(d_i\)) from the observer drawn randomly from a normal distribution with a mean of 10 and standard deviation of 0.1. Then, we converted these to dimensionless parallax using the relation \(\varpi = 1/d\). We also gave each star an absolute visual magnitude (\(\absmag_i\)) drawn randomly from a standard normal distribution. To get a quantity proportional to apparent magnitude (\(\appmag_i\)) for each star, we used the relation \(\appmag_i = \absmag_i + 5 \log_{10} d_i\). For the purpose of this example, we ignored additional real-world effects such as extinction and reddening.
 
-\begin{table}[tb]
-    \centering
-    \caption{Simulated dimensionless distance, magnitudes and parallax for \(N_\mathrm{stars}=20\) belonging to an open cluster analogue.}
-    \label{tab:hbm-data}
-    \input{tables/hbm-data}
-\end{table}
+% \begin{table}[tb]
+%     \centering
+%     \caption{Simulated dimensionless distance, magnitudes and parallax for \(N_\mathrm{stars}=20\) belonging to an open cluster analogue.}
+%     \label{tab:hbm-data}
+%     \input{tables/hbm-data}
+% \end{table}
 
-We simulated noisy observations of \(\varpi_i\) and \(\appmag_i\) by randomly drawing from a normal distribution centred on their true values with standard deviations of \(\sigma_{\appmag,i} = 0.1\) and \(\sigma_{\varpi,i} = 0.01\) respectively. We repeated this for \(N_\mathrm{stars}=20\) stars and present the true values and observables in Table \ref{tab:hbm-data}. For real-world context, the uncertainties on \(\varpi\) from \emph{Gaia} \citep{GaiaCollaboration.Prusti.ea2016} Data Release 3 \citep[][]{GaiaCollaboration.Vallenari.ea2022} are approximately \SI{0.02}{\milli\aarcsec} for stars with \emph{Gaia} G-band magnitudes of less than 15. Therefore, if our choice of \(\sigma_{\varpi,i}\) was representative of \emph{Gaia} uncertainties, then the distance to our stellar cluster would be \(\sim \SI{5}{\kilo\parsec}\). An example open cluster at this distance is NGC 6791, at \SI{4}{\kilo\parsec} \citep{Brogaard.Bruntt.ea2011}. We note that by the same comparison, our chosen spread in dimensionless distances of 0.1 corresponds to an order of magnitude more than typical cluster sizes of a few parsecs.
+We simulated noisy observations of \(\varpi_i\) and \(\appmag_i\) by randomly drawing from a normal distribution centred on their true values with standard deviations of \(\sigma_{\appmag,i} = 0.1\) and \(\sigma_{\varpi,i} = 0.01\) respectively. 
+% We repeated this for \(N_\mathrm{stars}=20\) stars and present the true values and observables in Table \ref{tab:hbm-data}. 
+For real-world context, the uncertainties on \(\varpi\) from \emph{Gaia} \citep{GaiaCollaboration.Prusti.ea2016} Data Release 3 \citep[][]{GaiaCollaboration.Vallenari.ea2022} are approximately \SI{0.02}{\milli\aarcsec} for stars with \emph{Gaia} G-band magnitudes of less than 15. Therefore, if our choice of \(\sigma_{\varpi,i}\) was representative of \emph{Gaia} uncertainties, then the distance to our stellar cluster would be \(\sim \SI{5}{\kilo\parsec}\). An example open cluster at this distance is NGC 6791, at \SI{4}{\kilo\parsec} \citep{Brogaard.Bruntt.ea2011}. We note that by the same comparison, our chosen spread in dimensionless distances of 0.1 corresponds to an order of magnitude more than typical cluster sizes of a few parsecs. However, we chose to exaggerate the distance spread to make it easier to detect for the purpose of this example.
 
 In Section \ref{sec:simple-model}, we describe a simple Bayesian model for determining distances and absolute magnitudes of stars in the cluster. Then, we define the HBM in Section \ref{sec:hbm-model} which incorporates a population-level distribution over distance. We outline our method for inferring model parameters in Section \ref{sec:hbm-inf} and then compare results from the models in Section \ref{sec:hbm-comp}. Finally, we explore how the HBM scales with the number of stars observed in Section \ref{sec:hbm-scale}.
 
 \subsection{Simple Model}\label{sec:simple-model}
 
-We started with a simxple model which treats each star independently. Using Bayes' theorem, we write the posterior probability density of the model parameters, \(d_i, \absmag_i\) given the observed parameters \(\varpi_i, \appmag_i\) as,
+We started with a simple model which treats each star independently. Using Bayes' theorem, we write the posterior probability density of the model parameters, \(d_i, \absmag_i\) given the observed parameters \(\varpi_i, \appmag_i\) as,
 %
 \begin{equation}
     p(d_i, \absmag_i \mid \varpi_i, \appmag_i) \propto p(\varpi_i, \appmag_i \mid d_i, \absmag_i) \, p(d_i, \absmag_i).
@@ -60,18 +62,19 @@ We modelled the likelihood as the product of normal distributions, assuming \(\v
 %
 where \(\mathcal{N}(x \,|\, \mu, \sigma^2)\) is a normal distribution over \(x\) with a mean of \(\mu\) and variance of \(\sigma^2\).
 
-We assumed stars in the cluster were equally likely to be between a distance of 0 and 20. We also assumed the absolute magnitudes were likely to be normally distributed centred on 0 and scaled by 10. Therefore, the prior probability of the model parameters is,
+We assumed stars in the cluster were equally likely to be between a distance of 0 and 20. We also assumed the absolute magnitudes were likely to be normally distributed centred on 0 and scaled by 10. Therefore, the prior probability of the model parameters was,
 %
 \begin{equation}
     p(d_i, \absmag_i) = \mathcal{U}(d_i \mid 0, 20) \, \mathcal{N}(\absmag_i \mid 0, 100),
 \end{equation}
 %
-where \(\mathcal{U}(x \,|\, a, b)\) is a uniform distribution over \(x\) from \(a\) to \(b\). We chose weakly-informative priors on the parameters, given that we know the true values for this example. However, these priors are fairly unrealistic and should be adapted to represent our expectation in real-world cases. For example, the exponential prior from \citet{Bailer-Jones.Rybizki.ea2018} would me more appropriate when observing stars radially outward from the galactic disk.
+where \(\mathcal{U}(x \,|\, a, b)\) is a uniform distribution over \(x\) from \(a\) to \(b\). We chose wide, weakly-informative priors here because the focus of this example is on the hierarchical component introduced in the next section. However, the priors should be chosen more carefully in a real-world application.
+% However, these priors are fairly unrealistic and should be adapted to represent our expectation in real-world cases. For example, the exponential prior from \citet{Bailer-Jones.Rybizki.ea2018} would me more appropriate when observing stars radially outward from the galactic disk.
 
 \begin{figure}[tb]
     \centering
     \includegraphics{figures/simple-pgm.pdf}
-    \caption[Probabilistic graphical model for the simple (non-hierarchical) model]{Probabilistic graphical model for the simple (non-hierarchical) model. Parameters are given by circular nodes and connected by arrows showing the direction of dependency. Observed parameters are shaded, and fixed parameters are given by filled dots. The box represents a set of parameters belonging to the \(i\)-th star.}
+    \caption[Probabilistic graphical model for the simple (non-hierarchical) model]{Probabilistic graphical model for the simple (non-hierarchical) model. Parameters are given by circular nodes and connected by arrows showing the direction of dependency. Observed parameters are shaded, and fixed parameters are given by filled dots. The box represents a set of parameters belonging to the \(i\)-th star. \emph{This diagram was made using \textsc{Daft} \citep{Foreman-Mackey.Hogg.ea2021}.}}
     \label{fig:simple-pgm}
 \end{figure}
 
@@ -79,7 +82,7 @@ In Figure \ref{fig:simple-pgm}, we show a probabilistic graphical model of the s
 
 \subsection{Hierarchical Model}\label{sec:hbm-model}
 
-In this section, we present an HBM which includes the known correlation between distances to the stars in this open cluster analogue. We assumed the stars are all members of the same open cluster. Therefore, their distances can be modelled by some distribution. For this example, we assumed that each distance is drawn from a normal distribution characterised by new \emph{hyperparameters} \(\mu_d\) and \(\sigma_d\),
+In this section, we present an HBM which includes the known correlation between distances to the stars in this open cluster analogue. We assumed the stars are all members of the same open cluster. Therefore, their distances can be modelled by some tight distribution. For this example, we assumed that each distance is drawn from a normal distribution characterised by new \emph{hyperparameters} \(\mu_d\) and \(\sigma_d\),
 %
 \begin{equation}
     d_i \sim \mathcal{N}(\mu_d, \sigma_d^2).
@@ -87,7 +90,7 @@ In this section, we present an HBM which includes the known correlation between 
 %
 The hyperparameters are so-called because they take a single value for the population of stars. Hence, the hierarchy of the model arises as some parameters represent how individual parameters are distributed in the population.
 
-Each stellar distance, \(d_i\), is no longer independent. Hence, we modified the posterior probability distribution to account for this new correlation,
+Each stellar distance, \(d_i\), is no longer treated independently by the model. Hence, we modified the posterior probability distribution to account for this correlation,
 %
 \begin{equation}
     p(\mu_d, \sigma_d, \vect{d}, \vect{\absmag} \mid \vect{\varpi}, \vect{\appmag}) \propto p(\vect{\varpi}, \vect{\appmag} \mid \vect{d}, \vect{\absmag}) \, p(\vect{d} \mid \mu_d, \sigma_d) \, p(\mu_d, \sigma_d, \vect{\absmag}),
@@ -128,7 +131,7 @@ We show the probabilistic graphical model of the HBM in Figure \ref{fig:hbm-pgm}
 
 To infer the model parameters, we need to calculate the marginalised posterior distributions for each parameter. We could obtain these analytically by integrating the full posterior distribution over all model parameters except for the parameter of interest. Alternatively, we can approximate the marginalised posterior using a Markov Chain Monte Carlo (MCMC) sampling algorithm. We chose the latter approach because it is scalable to more complicated models where the marginalisation is not analytically solvable.
 
-We used the No U-Turn Sampler \citep[NUTS;][]{Hoffman.Gelman2014} as implemented in the \textsc{NumPyro} Python package \citep{Phan.Pradhan.ea2019,Bingham.Chen.ea2019} to sample from the approximate posterior distribution for both models. We took 1500 samples, with the first 500 samples discarded as `warmup' steps, repeated for 10 MCMC chains. We increased the target accept probability from 0.8 to 0.98 for the HBM, to minimise the number of divergences encountered during sampling. The resulting marginalised posterior samples amounted to \num{10000} per parameter.
+We used the No U-Turn Sampler \citep[NUTS;][]{Hoffman.Gelman2014} as implemented in the \textsc{NumPyro} Python package \citep{Phan.Pradhan.ea2019,Bingham.Chen.ea2019} to sample from the approximate posterior distribution for both models. We ran the sampler for 1000 steps following 500 `warmup' steps (used to adapt the sampling procedure) and repeated for 10 MCMC chains. To reduce the number of divergences encountered during sampling, we increased the target accept probability from 0.8 to 0.98 for the HBM. The resulting marginalised posterior samples amounted to \num{10000} per parameter.
 
 \subsection{Comparing the Models}\label{sec:hbm-comp}
 
@@ -139,7 +142,7 @@ We used the No U-Turn Sampler \citep[NUTS;][]{Hoffman.Gelman2014} as implemented
     \label{fig:hbm-results}
 \end{figure}
 
-We compared the difference between model parameters and their true values in Figure \ref{fig:hbm-results}. The HBM showed clear improvement over the simple model in all parameters except for apparent magnitude. Pooling the distances shrank their standard deviations by about one third and converged on their true values. This had the effect of removing the observational noise on \(\varpi\), as we can see the posterior predictions for parallax also approached their true values. Since apparent magnitude depended on both \(d\) and \(\absmag\), better distances also improved the absolute magnitudes.
+We compared the difference between model parameters and their true values in Figure \ref{fig:hbm-results}. The HBM showed clear improvement over the simple model in all parameters except for apparent magnitude. Pooling the distances reduced their standard deviations by about one third and converged on their true values. This had the effect of reducing the observational noise on \(\varpi\), as we can see the posterior predictions for parallax also approached their true values. Since apparent magnitude depended on both \(d\) and \(\absmag\), better distances also improved the absolute magnitudes.
 
 % \todo{Hand-wavy why apparent magnitude saw no improvement was because the observational noise on parallax had a larger impact on the distance than with apparent magnitude. \(\appmag \propto \log_{10}d\), whereas \(\varpi = d^{-1}\). Additionally, the fractional uncertainty on parallax was greater than that of apparent magnitude. The noise budget is dominated by the parallax, so this is the first to be improved by better distances. \(\sigma_\varpi/\varpi = \sigma_d \varpi\), but \(\sigma_\appmag / \appmag \propto \sigma_d \varpi / \appmag\)}
 
