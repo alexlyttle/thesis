@@ -93,7 +93,7 @@ We fitted the model using the \textsc{GlitchPy} code\footnote{\url{https://githu
 
 \subsection{The GP Method}
 
-In the second method, we used a Gaussian Process (GP) instead of a high-order polynomial to model the smoothly varying component of the mode frequencies. The GP represents a probability distribution in function-space, meaning that we can quantify the uncertainty associated with the functional form of $f$. We write our model for a set of modes \(\vect{n} = \{n_i\}_{i=1}^N\) as a random draw from a GP,
+In the second method, we used a Gaussian Process \citep[GP; see][for a recent review]{Aigrain.Foreman-Mackey2022} instead of a high-order polynomial to model the smoothly varying component of the mode frequencies. The GP represents a probability distribution in function-space, meaning that we can quantify the uncertainty associated with the functional form of $f$. We write our model for a set of modes \(\vect{n} = \{n_i\}_{i=1}^N\) as a random draw from a GP,
 %
 \begin{equation}
     f_{B}(\vect{n}) \sim \mathcal{GP}\left[ m(\vect{n}), k(\vect{n}, \vect{n}') \right],%\text{\footnotemark}
@@ -146,63 +146,73 @@ We used Bayes' theorem (see Equation \ref{eq:bayes}) to estimate the probability
 %
 where \(\mathcal{L}(\vect{\theta}_B)\) is the likelihood of the data given the model, \(p(\vect{\theta}_B)\) is the prior probability density of the model parameters, and \(\mathcal{Z}\) is the `evidence' (or normalisation). The true posterior density function cannot be derived analytically, so we estimated it with the `nested sampling' algorithm \citep{Skilling2004}. By evaluating the prior volume at contours of constant likelihood, nested sampling estimates \(\mathcal{Z}\) to weight samples according to their posterior probability. This method requires functions for the log-likelihood and a transform which maps random samples in the unit hypercube to prior parameter space. 
 
+\begin{table}
+    \centering
+    % \caption{The mean and variance for the prior normal distributions on each parameter where values are not explicitly given in the text.}
+    \caption[The GP model parameters and their prior distributions.]{The GP model parameters and their prior distributions. Normal distributions are parametrised by the mean and variance (i.e. \(\mathcal{N}(\mu,\sigma^2)\)). Uniform distributions are parametrised by their lower and uppower bounds.}
+    \label{tab:glitch-prior}
+    \input{tables/glitch-test-prior-2.tex}
+\end{table}
+
 Following Equation \ref{eq:gp-like}, we defined the log-likelihood of the model as,
 %
 \begin{equation}
     \ln\mathcal{L}_B = - \frac12 \left[ {(\vect{\nu}_\obs - \vect{\mu})^\mathsf{T} \vect{\Sigma}^{\,-1} (\vect{\nu}_\obs - \vect{\mu})} + \ln(| \vect{\Sigma} |) + N\ln(2 \pi) \right],
 \end{equation}
 %
-where \(\vect{\mu}\) and \(\vect{\Sigma}\) depend on \(\vect{\theta}_B\). The prior transform for \(\vect{\theta}_B\) is the inverse cumulative distribution function associated with the prior distribution \(p(\vect{\theta}_B)\). We defined the prior independently for each of \(\vect{\theta}_B\) such that the total prior is the product of prior distributions for each parameter, \(p(\vect{\theta}_B) = \prod_j p(\theta_{j})\). In the following paragraphs, we specify our choice of prior distributions for each model parameter. % We also summarise the prior distributions and their parameters in Table \todo{Table summary}
+where \(\vect{\mu}\) and \(\vect{\Sigma}\) depend on \(\vect{\theta}_B\). The prior transform for \(\vect{\theta}_B\) is the inverse cumulative distribution function associated with the prior distribution \(p(\vect{\theta}_B)\). We defined the prior independently for each of \(\vect{\theta}_B\). The total prior distribution is the product of prior distributions for each parameter, \(p(\vect{\theta}_B) = \prod_j p(\theta_{j})\). We give the prior distributions and their shape parameters in Table \ref{tab:glitch-prior}. In the following paragraphs, we justify our choice of prior distributions based on approximate scaling relations between the parameters. % We also summarise the prior distributions and their parameters in Table \todo{Table summary}
 
-\paragraph{Linear Background} Starting with the parameters for \(\tilde{f}_B(n)\), we chose to sample them from normal distributions,
+\paragraph{Smooth Component} Starting with the parameters for \(\tilde{f}_B(n)\), we chose to sample them from normal distributions,
 %
 \begin{gather*}
     \nu_0 \sim \mathcal{N}(\overline{\nu}_0, s_{\nu_0}^2), \quad \varepsilon \sim \mathcal{N}(\overline{\varepsilon}, s_\varepsilon^2),%\\
     % \phi_\helium, \phi_\bcz \sim \mathcal{U}\left(0, 2\pi\right),
 \end{gather*}
 %
-centred on \(\overline{\nu}_0\) and \(\overline{\varepsilon}\) and scaled by \(s_{\nu_0}\) and \(s_\varepsilon\). In practice, the location and scale parameters could come from global estimates of \(\langle\Delta\nu_n\rangle\) or a linear fit to the modes. For the test stars, we determined \(\overline{\nu}_0\) and \(\overline{\varepsilon}\) from a linear fit to the true mode frequencies and added representative uncertainties of 10 and 5 per cent respectively. For 16 Cyg A, we used measurements of \(\langle\Delta\nu_n\rangle\) and \(\nu_{\max}\) from \citet{Lund.SilvaAguirre.ea2017} to estimate \(\overline{\nu}_0\) and \(\overline{\varepsilon}\).
+centred on \(\overline{\nu}_0\) and \(\overline{\varepsilon}\) and scaled by \(s_{\nu_0}\) and \(s_\varepsilon\). For example, the location and scale parameters could come from global estimates of \(\langle\Delta\nu_n\rangle\) or a linear fit to the modes. For the test stars, we determined \(\overline{\nu}_0\) and \(\overline{\varepsilon}\) from a linear fit to the true mode frequencies and added representative uncertainties of 10 and 5 per cent respectively. For 16 Cyg A, we used measurements of \(\langle\Delta\nu_n\rangle\) and \(\nu_{\max}\) from \citet{Lund.SilvaAguirre.ea2017} to estimate \(\overline{\nu}_0\) and \(\overline{\varepsilon}\).
 
 % Priors for the following parameters follow a log-normal distribution to ensure they are positive. We also exploit the property that the scale of a normal distribution in natural log-space is approximately the scale in real-space as a fraction of the distribution mean.
 
-\paragraph{Acoustic Depths} We derived a prior on \(\tau_\helium \cong \tau_\heII\) and \(\tau_\bcz\) by observing how they scale with acoustic radius \(\tau_0\) in the grid of stellar models from \citet{Lyttle.Davies.ea2021} and in \citet{Verma.Rorsted.ea2022}. Typically, the fraction depth of He\,\textsc{ii} ionisation \(\tau_\heII/\tau_0 \approx 0.2\) and BCZ \(\tau_\bcz/\tau_0 \approx 0.6\) for main sequence solar-like oscillators (see, e.g. Figure \ref{fig:gamma-sound-speed}). Therefore, we form our prior distributions from these relations using the relation \({\tau}_0 = (2\nu_0)^{-1}\), with an additional spread of 20 per cent to account for variance with stellar properties. To ensure the parameters remain positive, we defined their priors in natural log-space,
+\paragraph{Acoustic Depths} We derived a prior on \(\tau_\helium\) and \(\tau_\bcz\) by observing how they scale with acoustic radius \(\tau_0\) in the grid of stellar models from \citet{Lyttle.Davies.ea2021} and in \citet{Verma.Rorsted.ea2022}. Typically, the fractional depth of He\,\textsc{ii} ionisation \(\tau_\heII/\tau_0 \approx 0.2\) and BCZ \(\tau_\bcz/\tau_0 \approx 0.6\) for main sequence solar-like oscillators (see, e.g. Figure \ref{fig:gamma-sound-speed}). We formed the prior distributions from these relations, estimating the acoustic radius from \({\tau}_0 = (2\nu_0)^{-1}\). To account for possible variance with stellar properties, we added a spread of 20 per cent. We defined their priors in natural log-space to ensure they remained positive,
 %
 \begin{gather*}
-    \ln\tau_\helium \sim \mathcal{N}\left[ \ln(\overline{\tau}_\helium), \, s_{\ln\tau}^2 \right], \quad \ln\tau_\bcz \sim \mathcal{N}\left[\ln(3\overline{\tau}_\helium), \, s_{\ln\tau}^2 \right],\\
-    \overline{\tau}_\helium = (10 \overline{\nu}_0)^{-1}, \quad s_{\ln\tau}^2 = (1/5)^2 + (s_{\nu_0}/\overline{\nu}_0)^2,
+    \ln\tau_\helium \sim \mathcal{N}\left[ \ln(\overline{\tau}_\helium), \, s_{\ln\tau}^2 \right], \quad \ln\tau_\bcz \sim \mathcal{N}\left[\ln(3\,\overline{\tau}_\helium), \, s_{\ln\tau}^2 \right],\\
+    \overline{\tau}_\helium = (10\,\overline{\nu}_0)^{-1}, \quad s_{\ln\tau}^2 = (1/5)^2 + (s_{\nu_0}/\overline{\nu}_0)^2,
 \end{gather*}
 
-\paragraph{Helium Glitch Amplitude} A prior on the glitch amplitude parameters is less trivial. By observing \(\gamma\) profiles in the grid of stellar models, we assume that the width of the helium ionisation region is about 8 per cent of the acoustic depth of the region, \(\Delta_\heII/\tau_\heII \approx 0.08\). Thus, we centre the prior on \(\overline{\beta}_\helium\) obtained from this assumption and the relation \(\beta_\helium = 8\pi^2\Delta_\heII^2\). We then propagate the variance from the prior on \(\tau_\helium\),
+\paragraph{Helium Glitch Amplitude} The prior on the glitch amplitude parameters was less trivial. By observing \(\gamma\) profiles in the grid of stellar models, we assumed that the width of the helium ionisation region was about 8 per cent of the acoustic depth of the region, \(\Delta_\heII/\tau_\heII \approx 0.08\). Thus, we centred the prior on \(\overline{\beta}_\helium\) obtained from this assumption and used the relation \(\beta_\helium = 8\pi^2\Delta_\heII^2\) from comparison to Equation \ref{eq:he-osc}. We then propagated the variance from the prior on \(\tau_\helium\),
 %
 \begin{equation*}
     \ln\beta_\helium \sim \mathcal{N}\left[ \ln(\overline{\beta}_\helium), \, 4 s_{\ln\tau}^2 \right], \quad \overline{\beta}_\helium = \frac{32}{625} \, \pi^2 \overline{\tau}_\helium^2.
 \end{equation*}
 %
-Then, we centre the prior for \(\alpha_\helium\) to satisfy a depth of 0.1 in \(\delta\gamma/\gamma\) caused by helium ionisation using Equation \ref{eq:he-gamma},
+Then, we centred the prior for \(\alpha_\helium\) to satisfy a depth of 0.1 in \(\delta\gamma/\gamma\) caused by helium ionisation using Equation \ref{eq:he-gamma},
 %
 \begin{gather*}
     \ln\alpha_\helium \sim \mathcal{N}\left[ 1/2 \, \ln({\overline{\beta}_\helium}/{400\pi}), \, s_{\ln\tau}^2 \right].
 \end{gather*}
 %
-We verified that the priors on \(\alpha_\helium\) and \(\beta_\helium\) are appropriate by checking that the prior amplitude at \(\nu_\mathrm{ref}\) peaks between \SIrange{0}{1}{\micro\hertz}, decaying thereafter.
+We verified that the priors on \(\alpha_\helium\) and \(\beta_\helium\) were appropriate by checking that the prior amplitude at \(\nu_\mathrm{ref}\) peaks from \SIrange{0}{1}{\micro\hertz}, decaying thereafter. This was compatible with our prior belief for the helium glitch amplitude.
 
-\paragraph{BCZ Glitch Amplitude} We chose to formulate the prior on \(\alpha_\bcz\) such that the BCZ glitch amplitude is approximately \SI{0.1}{\micro\hertz} at \(\nu_\mathrm{ref}\) (an order of magnitude smaller than the helium glitch). This occurs when \(\alpha_\bcz/\nu_0 \approx \SI{30}{\micro\hertz}\). We scaled the distribution by 80 per cent to account for uncertainty in our subjective choice of prior,
+\paragraph{BCZ Glitch Amplitude} We constructed the prior on \(\alpha_\bcz\) such that the BCZ glitch amplitude was approximately \SI{0.1}{\micro\hertz} at \(\nu_\mathrm{ref}\) (an order of magnitude smaller than the helium glitch). This occurred when \(\alpha_\bcz/\nu_0 \approx \SI{30}{\micro\hertz}\). We also scaled the distribution by an additional 80 per cent,
 %
 \begin{equation*}
-    \ln\alpha_\bcz \sim \mathcal{N}\left[ \ln 30\overline{\nu}_0, \, (4/5)^2 + (s_{\nu_0}/\overline{\nu}_0)^2\right].
+    \ln\alpha_\bcz \sim \mathcal{N}\left[ \ln(30\,\overline{\nu}_0), \, (4/5)^2 + (s_{\nu_0}/\overline{\nu}_0)^2\right].
 \end{equation*}
 %
 
-\begin{table}
-    \centering
-    \caption{The mean and variance for the prior normal distributions on each parameter where values are not explicitly given in the text.}
-    \label{tab:glitch-prior}
-    \input{tables/glitch-test-prior.tex}
-\end{table}
+% \begin{table}
+%     \centering
+%     % \caption{The mean and variance for the prior normal distributions on each parameter where values are not explicitly given in the text.}
+%     \caption[The GP model parameters and their prior distributions.]{The GP model parameters and their prior distributions. Normal distributions are parametrised by the mean and variance (i.e. \(\mathcal{N}(\mu,\sigma^2)\)). Uniform distributions are parametrised by their lower and uppower bounds.}
+%     \label{tab:glitch-prior}
+%     \input{tables/glitch-test-prior-2.tex}
+% \end{table}
 
-The mean and variance for the aforementioned prior distributions are summarised in Table \ref{tab:glitch-prior} for the test star and 16 Cyg A. Prior distributions for the remaining parameters were the same for all stars. For example, the prior on the phase parameters \(\phi_\helium\) and \(\phi_\bcz\) was uniformly distributed from 0 to \(2\pi\). We also used an uninformative prior on the model uncertainty, \(\ln\sigma \sim \mathcal{N}( - \ln 100, 4)\), centred on an uncertainty of \SI{0.01}{\micro\hertz}. \todo{Add these to table also?}
+% The mean and variance for the aforementioned prior distributions are summarised in Table \ref{tab:glitch-prior} for the test star and 16 Cyg A. 
+Prior distributions for the remaining parameters were the same for both stars. For example, the prior on the phase parameters \(\phi_\helium\) and \(\phi_\bcz\) was uniformly distributed from 0 to \(2\pi\). We also used a weakly informative prior on the model uncertainty, \(\ln\sigma \sim \mathcal{N}( - \ln 100, 4)\), centred on an uncertainty of \SI{0.01}{\micro\hertz}.
 
-We sampled the posterior distribution using the nested sampling package \textsc{Dynesty} \citep{Speagle2020,Koposov.Speagle.ea2023}. We applied the multi-ellipsoid bounding method \citep{Feroz.Hobson.ea2009} with 500 live points and the random walk sampling method \citep{Skilling2006} with a minimum of 50 steps before proposing a new live point. We enabled periodic boundary conditions for \(\phi_\helium\) and \(\phi_\bcz\) with the prior transform projecting to periodic space using \(\phi = \phi'\,\mathrm{mod}\,2\pi\), where \(\phi'\) is unconstrained. Otherwise, the nested sampler ran with its default parameters. We used \textsc{jax} \citep{Bradbury.Frostig.ea2018} to make use of accelerated linear algebra (XLA) and just-in-time (JIT) compilation, and the \textsc{tinygp} package\footnote{\url{https://github.com/dfm/tinygp}} for building the GP. For analysis and comparison with the \citetalias{Verma.Raodeo.ea2019} method, we drew 1000 points randomly from the posterior samples according to their estimated weights.
+We sampled the posterior distribution using the nested sampling package \textsc{Dynesty} \citep{Speagle2020,Koposov.Speagle.ea2023}. We applied the multi-ellipsoid bounding method \citep{Feroz.Hobson.ea2009} with 500 live points and the random walk sampling method \citep{Skilling2006} with a minimum of 50 steps before proposing a new live point. In addition, we enabled periodic boundary conditions for \(\phi_\helium\) and \(\phi_\bcz\) with the prior transform projecting to periodic space using \(\phi = \phi'\,\mathrm{mod}\,2\pi\), where \(\phi'\) is unconstrained. Otherwise, the nested sampler ran with its default parameters. We used \textsc{jax} \citep{Bradbury.Frostig.ea2018} to make use of accelerated linear algebra (XLA) and just-in-time (JIT) compilation, and \textsc{tinygp} \citep{Foreman-Mackey.Yadav.ea2022} to build the GP. For analysis and comparison with the \citetalias{Verma.Raodeo.ea2019} method, we drew 1000 points randomly from the posterior samples according to their estimated weights.
 
 % Rearranged into dimensionless quantities, \(f = \nu/\nu_0\), \(t = \tau/\tau_0\), \(a_\helium = \nu_0\alpha_\helium\), \(b_\helium = \nu_0 \beta_\helium\), and \(a_\bcz = \alpha_\bcz/\nu_0^2\),
 % %

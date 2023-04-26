@@ -146,7 +146,6 @@
   adsnote = {Provided by the SAO/NASA Astrophysics Data System},
   adsurl = {https://ui.adsabs.harvard.edu/abs/2020arXiv201215286A},
   archiveprefix = {arxiv},
-  eid = {arXiv:2012.15286},
   keywords = {Astrophysics - Instrumentation and Methods for Astrophysics}
 }
 
@@ -1397,7 +1396,6 @@
   abstract = {We introduce the "exponential linear unit" (ELU) which speeds up learning in deep neural networks and leads to higher classification accuracies. Like rectified linear units (ReLUs), leaky ReLUs (LReLUs) and parametrized ReLUs (PReLUs), ELUs alleviate the vanishing gradient problem via the identity for positive values. However, ELUs have improved learning characteristics compared to the units with other activation functions. In contrast to ReLUs, ELUs have negative values which allows them to push mean unit activations closer to zero like batch normalization but with lower computational complexity. Mean shifts toward zero speed up learning by bringing the normal gradient closer to the unit natural gradient because of a reduced bias shift effect. While LReLUs and PReLUs have negative values, too, they do not ensure a noise-robust deactivation state. ELUs saturate to a negative value with smaller inputs and thereby decrease the forward propagated variation and information. Therefore, ELUs code the degree of presence of particular phenomena in the input, while they do not quantitatively model the degree of their absence. In experiments, ELUs lead not only to faster learning, but also to significantly better generalization performance than ReLUs and LReLUs on networks with more than 5 layers. On CIFAR-100 ELUs networks significantly outperform ReLU networks with batch normalization while batch normalization does not improve ELU networks. ELU networks are among the top 10 reported CIFAR-10 results and yield the best published result on CIFAR-100, without resorting to multi-view evaluation or model averaging. On ImageNet, ELU networks considerably speed up learning compared to a ReLU network with the same architecture, obtaining less than 10\% classification error for a single crop, single model network.},
   adsnote = {Provided by the SAO/NASA Astrophysics Data System},
   archiveprefix = {arxiv},
-  eid = {arXiv:1511.07289},
   keywords = {Computer Science - Machine Learning}
 }
 
@@ -1412,7 +1410,6 @@
   abstract = {Primordial or Big Bang nucleosynthesis (BBN) is one of the three historical strong evidences for the Big-Bang model together with the expansion of the Universe and the Cosmic Microwave Background radiation (CMB). The recent results by the Planck mission have slightly changed the estimate of the baryonic density Omega\_b, compared to the previous WMAP value. This article updates the BBN predictions for the light elements using the new value of Omega\_b determined by Planck, as well as an improvement of the nuclear network and new spectroscopic observations. While there is no major modification, the error bars of the primordial D/H abundance (2.67+/-0.09) x 10\^\{-5\} are narrower and there is a slight lowering of the primordial Li/H abundance (4.89\^+0.41\_-0.39) x 10\^\{-10\}. However, this last value is still -0.5ex\textasciitilde 3 times larger than its observed spectroscopic abundance in halo stars of the Galaxy. Primordial Helium abundance is now determined to be Y\_p = 0.2463+/-0.0003.},
   adsnote = {Provided by the SAO/NASA Astrophysics Data System},
   archiveprefix = {arxiv},
-  eid = {arXiv:1307.6955},
   keywords = {Astrophysics - Cosmology and Extragalactic Astrophysics}
 }
 
@@ -1669,7 +1666,6 @@
   abstract = {The TensorFlow Distributions library implements a vision of probability theory adapted to the modern deep-learning paradigm of end-to-end differentiable computation. Building on two basic abstractions, it offers flexible building blocks for probabilistic computation. Distributions provide fast, numerically stable methods for generating samples and computing statistics, e.g., log density. Bijectors provide composable volume-tracking transformations with automatic caching. Together these enable modular construction of high dimensional distributions and transformations not possible with previous libraries (e.g., pixelCNNs, autoregressive flows, and reversible residual networks). They are the workhorse behind deep probabilistic programming systems like Edward and empower fast black-box inference in probabilistic models built on deep-network components. TensorFlow Distributions has proven an important part of the TensorFlow toolkit within Google and in the broader deep learning community.},
   adsnote = {Provided by the SAO/NASA Astrophysics Data System},
   archiveprefix = {arxiv},
-  eid = {arXiv:1711.10604},
   keywords = {Computer Science - Artificial Intelligence,Computer Science - Machine Learning,Computer Science - Programming Languages,Statistics - Machine Learning}
 }
 
@@ -2003,11 +1999,23 @@
 }
 
 @misc{Foreman-Mackey.Hogg.ea2021,
-  title = {Daft-Dev/Daft: Daft v0.1.2},
+  title = {{{daft-dev/daft: daft v0.1.2}}},
   author = {{Foreman-Mackey}, Dan and Hogg, David W. and Fulford, David S. and {daft-bot} and Dobos, L{\'a}szl{\'o} and McFee, Brian and Murphy, Kevin P and Lindemann, Oliver and Gerold, Pierre and Agrawal, Varun},
   year = {2021},
   month = mar,
   doi = {10.5281/zenodo.4615289},
+  howpublished = {Zenodo}
+}
+
+@misc{Foreman-Mackey.Yadav.ea2022,
+  title = {{{dfm/tinygp: v0.2.3}}},
+  shorttitle = {Dfm/Tinygp},
+  author = {{Foreman-Mackey}, Dan and Yadav, Sachin and {theorashid} and Fowlie, Andrew and Tronsgaard, Ren{\'e} and Schmerler, Steve and Killestein, Thomas},
+  year = {2022},
+  month = oct,
+  doi = {10.5281/zenodo.7269074},
+  urldate = {2023-04-26},
+  abstract = {What's Changed Fixing \#87 by @dfm in https://github.com/dfm/tinygp/pull/88 found two typos by @theorashid in https://github.com/dfm/tinygp/pull/92 Updating notebook execution config to remove warnings by @dfm in https://github.com/dfm/tinygp/pull/93 Minor Typos by @yadav-sachin in https://github.com/dfm/tinygp/pull/99 fix typo in docs by @andrewfowlie in https://github.com/dfm/tinygp/pull/107 Update tree\_map -{$>$} tree\_util.tree\_map to avoid FutureWarning by @tkillestein in https://github.com/dfm/tinygp/pull/114 Checking tree structure and shapes of X\_test input to condition by @dfm in https://github.com/dfm/tinygp/pull/119 Removing deprecation warning and jitting predict by @dfm in https://github.com/dfm/tinygp/pull/120 Fixing the gradient of the L2 distance at the origin by @dfm in https://github.com/dfm/tinygp/pull/121 Adding check for unsorted input coordinates when using QuasisepSolver by @dfm in https://github.com/dfm/tinygp/pull/123 Fixing behavior of DotProduct kernel on scalar inputs by @dfm in https://github.com/dfm/tinygp/pull/124 Release candidate v0.2.3 by @dfm in https://github.com/dfm/tinygp/pull/125 New Contributors @andrewfowlie made their first contribution in https://github.com/dfm/tinygp/pull/107 @tkillestein made their first contribution in https://github.com/dfm/tinygp/pull/114 Full Changelog: https://github.com/dfm/tinygp/compare/v0.2.2...v0.2.3},
   howpublished = {Zenodo}
 }
 
@@ -2336,7 +2344,7 @@
   title = {Linear Adiabatic Stellar Pulsation.},
   booktitle = {Astrophysical {{Fluid Dynamics}}. {{Les Houches Session LXVII}}},
   author = {Gough, D. O.},
-  editor = {Zahn, J. -P. and {Zinn-Justin}, J.},
+  editor = {Zahn, J.-P. and {Zinn-Justin}, J.},
   year = {1993},
   month = jan,
   series = {Lecture {{Notes}} of the {{Les Houches Summer School}}},
@@ -2764,7 +2772,6 @@
   abstract = {We go through the many considerations involved in fitting a model to data, using as an example the fit of a straight line to a set of points in a two-dimensional plane. Standard weighted least-squares fitting is only appropriate when there is a dimension along which the data points have negligible uncertainties, and another along which all the uncertainties can be described by Gaussians of known variance; these conditions are rarely met in practice. We consider cases of general, heterogeneous, and arbitrarily covariant two-dimensional uncertainties, and situations in which there are bad data (large outliers), unknown uncertainties, and unknown but expected intrinsic scatter in the linear relationship being fit. Above all we emphasize the importance of having a "generative model" for the data, even an approximate one. Once there is a generative model, the subsequent fitting is non-arbitrary because the model permits direct computation of the likelihood of the parameters or the posterior probability distribution. Construction of a posterior probability distribution is indispensible if there are "nuisance parameters" to marginalize away.},
   adsnote = {Provided by the SAO/NASA Astrophysics Data System},
   archiveprefix = {arxiv},
-  eid = {arXiv:1008.4686},
   keywords = {Astrophysics - Instrumentation and Methods for Astrophysics,Physics - Data Analysis,Statistics and Probability}
 }
 
@@ -2813,7 +2820,6 @@
   abstract = {In this pedagogical text aimed at those wanting to start thinking about or brush up on probabilistic inference, I review the rules by which probability distribution functions can (and cannot) be combined. I connect these rules to the operations performed in probabilistic data analysis. Dimensional analysis is emphasized as a valuable tool for helping to construct non-wrong probabilistic statements. The applications of probability calculus in constructing likelihoods, marginalized likelihoods, posterior probabilities, and posterior predictions are all discussed.},
   adsnote = {Provided by the SAO/NASA Astrophysics Data System},
   archiveprefix = {arxiv},
-  eid = {arXiv:1205.4446},
   keywords = {Astrophysics - Instrumentation and Methods for Astrophysics,Physics - Data Analysis,Statistics and Probability}
 }
 
@@ -3313,7 +3319,6 @@
   abstract = {We introduce Adam, an algorithm for first-order gradient-based optimization of stochastic objective functions, based on adaptive estimates of lower-order moments. The method is straightforward to implement, is computationally efficient, has little memory requirements, is invariant to diagonal rescaling of the gradients, and is well suited for problems that are large in terms of data and/or parameters. The method is also appropriate for non-stationary objectives and problems with very noisy and/or sparse gradients. The hyper-parameters have intuitive interpretations and typically require little tuning. Some connections to related algorithms, on which Adam was inspired, are discussed. We also analyze the theoretical convergence properties of the algorithm and provide a regret bound on the convergence rate that is comparable to the best known results under the online convex optimization framework. Empirical results demonstrate that Adam works well in practice and compares favorably to other stochastic optimization methods. Finally, we discuss AdaMax, a variant of Adam based on the infinity norm.},
   adsnote = {Provided by the SAO/NASA Astrophysics Data System},
   archiveprefix = {arxiv},
-  eid = {arXiv:1412.6980},
   keywords = {Computer Science - Machine Learning}
 }
 
@@ -3417,7 +3422,7 @@
 }
 
 @misc{Koposov.Speagle.ea2023,
-  title = {Joshspeagle/Dynesty: V2.1.0},
+  title = {{{joshspeagle/dynesty: v2.1.0}}},
   shorttitle = {Joshspeagle/Dynesty},
   author = {Koposov, Sergey and Speagle, Josh and Barbary, Kyle and Ashton, Gregory and Bennett, Ed and Buchner, Johannes and Scheffler, Carl and Cook, Ben and Talbot, Colm and Guillochon, James and Cubillos, Patricio and Ramos, Andr{\'e}s Asensio and Johnson, Ben and Lang, Dustin and Ilya and Dartiailh, Matthieu and Nitz, Alex and McCluskey, Andrew and Archibald, Anne and Deil, Christoph and {Foreman-Mackey}, Dan and Goldstein, Danny and Tollerud, Erik and Leja, Joel and Kirk, Matthew and Pitkin, Matt and Sheehan, Patrick and Cargile, Phillip and Patel, Ruskin and Angus, Ruth},
   year = {2023},
@@ -3816,7 +3821,6 @@
   abstract = {Modern deep neural network training is typically based on mini-batch stochastic gradient optimization. While the use of large mini-batches increases the available computational parallelism, small batch training has been shown to provide improved generalization performance and allows a significantly smaller memory footprint, which might also be exploited to improve machine throughput. In this paper, we review common assumptions on learning rate scaling and training duration, as a basis for an experimental comparison of test performance for different mini-batch sizes. We adopt a learning rate that corresponds to a constant average weight update per gradient calculation (i.e., per unit cost of computation), and point out that this results in a variance of the weight updates that increases linearly with the mini-batch size \$m\$. The collected experimental results for the CIFAR-10, CIFAR-100 and ImageNet datasets show that increasing the mini-batch size progressively reduces the range of learning rates that provide stable convergence and acceptable test performance. On the other hand, small mini-batch sizes provide more up-to-date gradient calculations, which yields more stable and reliable training. The best performance has been consistently obtained for mini-batch sizes between \$m = 2\$ and \$m = 32\$, which contrasts with recent work advocating the use of mini-batch sizes in the thousands.},
   adsnote = {Provided by the SAO/NASA Astrophysics Data System},
   archiveprefix = {arxiv},
-  eid = {arXiv:1804.07612},
   keywords = {Computer Science - Computer Vision and Pattern Recognition,Computer Science - Machine Learning,Statistics - Machine Learning}
 }
 
@@ -4193,7 +4197,7 @@
 }
 
 @misc{Morton2015a,
-  title = {Isochrones: {{Stellar}} Model Grid Package},
+  title = {{{isochrones: Stellar model grid package}}},
   author = {Morton, Timothy D.},
   year = {2015},
   month = mar,
@@ -4566,7 +4570,6 @@
   abstract = {I present a brief review on the determination of the primordial helium abundance by unit mass, Yp. I discuss the importance of the primordial helium abundance in: (a) cosmology, (b) testing the standard big bang nucleosynthesis, (c) studying the physical conditions in H II regions, (d) providing the initial conditions for stellar evolution models, and (e) testing the galactic chemical evolution models.},
   adsnote = {Provided by the SAO/NASA Astrophysics Data System},
   archiveprefix = {arxiv},
-  eid = {arXiv:0811.2980},
   keywords = {Astrophysics}
 }
 
@@ -4600,7 +4603,6 @@
   adsnote = {Provided by the SAO/NASA Astrophysics Data System},
   adsurl = {https://ui.adsabs.harvard.edu/abs/2019arXiv191211554P},
   archiveprefix = {arxiv},
-  eid = {arXiv:1912.11554},
   keywords = {Computer Science - Artificial Intelligence,Computer Science - Machine Learning,Computer Science - Programming Languages,G.3,I.2.5,Statistics - Machine Learning}
 }
 
@@ -4710,7 +4712,6 @@
   abstract = {The choice of activation functions in deep networks has a significant effect on the training dynamics and task performance. Currently, the most successful and widely-used activation function is the Rectified Linear Unit (ReLU). Although various hand-designed alternatives to ReLU have been proposed, none have managed to replace it due to inconsistent gains. In this work, we propose to leverage automatic search techniques to discover new activation functions. Using a combination of exhaustive and reinforcement learning-based search, we discover multiple novel activation functions. We verify the effectiveness of the searches by conducting an empirical evaluation with the best discovered activation function. Our experiments show that the best discovered activation function, \$f(x) = x \textbackslash cdot \textbackslash text\{sigmoid\}(\textbackslash beta x)\$, which we name Swish, tends to work better than ReLU on deeper models across a number of challenging datasets. For example, simply replacing ReLUs with Swish units improves top-1 classification accuracy on ImageNet by 0.9\textbackslash\% for Mobile NASNet-A and 0.6\textbackslash\% for Inception-ResNet-v2. The simplicity of Swish and its similarity to ReLU make it easy for practitioners to replace ReLUs with Swish units in any neural network.},
   adsnote = {Provided by the SAO/NASA Astrophysics Data System},
   archiveprefix = {arxiv},
-  eid = {arXiv:1710.05941},
   keywords = {Computer Science - Computer Vision and Pattern Recognition,Computer Science - Machine Learning,Computer Science - Neural and Evolutionary Computing}
 }
 
@@ -4939,7 +4940,6 @@
   abstract = {Gradient descent optimization algorithms, while increasingly popular, are often used as black-box optimizers, as practical explanations of their strengths and weaknesses are hard to come by. This article aims to provide the reader with intuitions with regard to the behaviour of different algorithms that will allow her to put them to use. In the course of this overview, we look at different variants of gradient descent, summarize challenges, introduce the most common optimization algorithms, review architectures in a parallel and distributed setting, and investigate additional strategies for optimizing gradient descent.},
   adsnote = {Provided by the SAO/NASA Astrophysics Data System},
   archiveprefix = {arxiv},
-  eid = {arXiv:1609.04747},
   keywords = {Computer Science - Machine Learning}
 }
 
