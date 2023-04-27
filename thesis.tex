@@ -46,6 +46,7 @@
   chapters/glitch,
   chapters/glitch-gp,
   chapters/conclusion,
+  chapters/software,
   appendices/lyttle21
 }
 
@@ -89,32 +90,27 @@
 %% ABSTRACT -------------------------------------------------------------------
 %
 \abstract{%
-As high-precision asteroseismology modelling of stars continues to advance, it is becoming increasingly important to account for the systematic effects that arise from our assumptions of the stellar helium abundance (\(Y\)) and the mixing-length theory parameter (\(\mlt\)). To address this issue, we present a novel approach for improving the inference of the fundamental parameters of a sample of Kepler dwarfs and subgiants with a narrow mass range of \(0.8 < M < 1.2 \mathrm{M}_{\odot}\). Our method includes a statistical treatment of \(Y\) and \(\mlt\) and employs a hierarchical Bayesian model that incorporates information about the distribution of these parameters in the population. Specifically, we fit a linear helium enrichment law that includes an intrinsic scatter and a normal distribution in \(\mlt\). We explore various levels of pooling parameters, with and without the Sun as a calibrator, and report \(\Delta Y/\Delta Z = 1.05^{+0.28}_{-0.25}\) and \(\mu_\alpha = 1.90^{+0.10}_{-0.09}\) when the Sun is included. Despite accounting for the uncertainties in \(Y\) and \(\mlt\), we are able to report statistical uncertainties of 2.5 per cent in mass, 1.2 per cent in radius, and 12 per cent in age. Moreover, our approach can be extended to larger samples, which would enable us to obtain more precise constraints on the fundamental parameters of individual stars and improve our understanding of the population-level inference.
-}
+  As high-precision asteroseismology modelling of stars continues to advance, it is becoming increasingly important to account for the systematic effects that arise from our assumptions of the stellar helium abundance (\(Y\)) and the mixing-length theory parameter (\(\mlt\)). To address this issue, we present a novel approach for improving the inference of the fundamental parameters of a sample of Kepler dwarfs and subgiants with a narrow mass range of \(0.8 < M < 1.2 \mathrm{M}_{\odot}\). Our method includes a statistical treatment of \(Y\) and \(\mlt\) and employs a hierarchical Bayesian model that incorporates information about the distribution of these parameters in the population. Specifically, we fit a linear helium enrichment law that includes an intrinsic scatter and a normal distribution in \(\mlt\). We explore various levels of pooling parameters, with and without the Sun as a calibrator, and report \(\Delta Y/\Delta Z = 1.05^{+0.28}_{-0.25}\) and \(\mu_\alpha = 1.90^{+0.10}_{-0.09}\) when the Sun is included. Despite accounting for the uncertainties in \(Y\) and \(\mlt\), we are able to report statistical uncertainties of 2.5 per cent in mass, 1.2 per cent in radius, and 12 per cent in age. Moreover, our approach can be extended to larger samples, which would enable us to obtain more precise constraints on the fundamental parameters of individual stars and improve our understanding of the population-level inference.
+
+  We present a new method for modelling acoustic glitch signatures in the radial mode frequencies of solar-like oscillators using a Gaussian Process. We compare our approach with another method using a model star with varying levels of noise and apply both methods to the star 16 Cyg A to provide a real-world example. Our results show that our method accurately determines the strength and location of glitches caused by the second ionisation of helium and the base of the convective zone. Moreover, we demonstrate that our Gaussian Process approach improves the treatment of the smoothly varying component of the mode frequencies, outperforming a 4th order polynomial in this regard. We also find that our method finds less multimodality in the posterior for acoustic depth by using a prior to inform the glitch parameters. However, the inclusion of the He\,\textsc{i} ionisation glitch in the model remains a question. Overall, our study suggests that the Gaussian Process method shows promise as a tool for modelling acoustic glitches in solar-like oscillators, with potential applications in asteroseismology and studies of stellar structure and evolution.}
 
 
 %% ACKNOWLEDGEMENTS -----------------------------------------------------------
 %
 \acknowledgements{%
+I am tremendously grateful to my PhD supervisor Guy R. Davies for his support and excellent mentorship throughout my postgraduate research. I also thank my first co-supervisor Andrea Miglio for his guidence before his move to the University of Bologna. I extend my thanks to Amaury Triaud, who took over from Andrea as my co-supervisor and has since been an inspiring mentor and leader of our research group. Additionally, I would like to thank in advance my PhD examiners Daniel Reese and Chris Moore, and viva chairperson Annelies Mortier.
+
 \begin{CJK*}{UTF8}{gbsn}
   % INTERNAL SUPPORT
-  I am tremendously grateful to my PhD supervisor Guy R. Davies for his support and excellent mentorship throughout my postgraduate research. I also thank my first co-supervisor Andrea Miglio for his guidence before his move to the University of Bologna. I extend my thanks to Amaury Triaud, who took over from Andrea as my co-supervisor and has since been an inspiring mentor and leader of our research group. It has been a pleasure to work with the Sun, Stars, and Exoplanets research group here at the University of Birmignham. Particularly, I would like to thank all of my fellow current and former PhD students with whom I have exchanged ideas, advice, laughs, and stories: T. Baycroft, L. Carboneau, Y. Davies, A. Dixon, G. Dransfield, A. Freckleton, O. Hall, E. Hatt, V. Hod\v{z}i\'{c}, S. Khan, E. Ross, O. Scutt, M. Standing, W. Van Rossem, and E. Willett. I also appreciate the support of other postdoctoral researchers in our group, notably M. Nielsen, Tanda Li (李坦达), and W. Ball. I extend my thanks to the support staff in the School of Physics and Astronomy, particularly our office secretary Lou for her unwavering support over a challenging few years.
+  It has been a pleasure to work with the Sun, Stars, and Exoplanets research group here at the University of Birmingham. I would like to thank all of my fellow current and former PhD students with whom I have exchanged ideas, advice, laughs, and stories.
+  % : T. Baycroft, L. Carboneau, Y. Davies, A. Dixon, G. Dransfield, A. Freckleton, O. Hall, E. Hatt, V. Hod\v{z}i\'{c}, S. Khan, E. Ross, O. Scutt, M. Standing, W. Van Rossem, and E. Willett. 
+  I also appreciate the support of the Head of School Bill Chaplin, and other postdoctoral researchers in our group, notably M. Nielsen, Tanda Li (李坦达), and W. Ball. I extend my thanks to the support staff in the School of Physics and Astronomy, particularly our office secretary Lou for her unwavering support over a challenging few years. I also thank my external collaborators, for example Nick Saunders at the University of Hawaii and Simon Murphy at the University of Southern Queensland, with whom I have worked during my graduate studies.
 \end{CJK*}
 
-% EXTERNAL COLLABORATORS
-I thank my external collaborators. Nick Saunders at the University of Hawaii. Simon Murphy at the University of Southern Queensland. Co-authors on my research publications.
+Last but not least, I am eternally grateful to the support of my loving family and friends. Particularly, I thank my fianc\'{e} Hannah, my parents Katy and Paul, and my brother Dom.
 
 % FUNDING
-I acknowledge the support of the public who have indirectly funded the research in this work via various public agencies. Particularly, I thank the Science and Technology Facilities Council who funded my PhD. I also acknowledge that this work is a part of a project that has received funding from the European Research Council (ERC) under the European Union's Horizon 2020 research and innovation programme (CartographY; grant agreement ID 804752). Finally, I am grateful for the financial and academic support from the Alan Turing Enrichment scheme. This scheme provided me the opportunity to learn from and collaborate with the wider world of machine learning in science.
-
-% DATA AND SOFTWARE
-The use of data and software. Open source community. This work made use of the \href{https://gaia-kepler.fun}{gaia-kepler.fun} crossmatch database created by Megan Bedell.
-
-% FAMILY AND FRIENDS
-Support of my loving family and friends.
-
-% THESIS EXAMINERS
-Finally, I would like to thank my PhD examiners Daniel Reese and Chris Moore, and viva chairperson Annelies Mortier.
+I acknowledge the support of the public who have indirectly funded the research in this work via various publicly funded agencies. Specifically, I thank the Science and Technology Facilities Council (STFC) who funded my PhD. I also acknowledge that this work is a part of a project that has received funding from the European Research Council (ERC) under the European Union's Horizon 2020 research and innovation programme (CartographY; grant agreement ID 804752). Finally, I am grateful for the financial and academic support from the Alan Turing Enrichment scheme. This scheme provided me the opportunity to learn from and collaborate with the wider world of machine learning in science.
 }
 
 
@@ -147,7 +143,8 @@ Finally, I would like to thank my PhD examiners Daniel Reese and Chris Moore, an
   \include{chapters/glitch}
   \include{chapters/glitch-gp}
   \include{chapters/conclusion}
-  
+  \include{chapters/software}
+
   %% BIBLIOGRAPHY -------------------------------------------------------------
   %
   \begin{refcontext}[sorting=nyt]
