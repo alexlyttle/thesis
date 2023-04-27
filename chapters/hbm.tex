@@ -74,7 +74,7 @@ where \(\mathcal{U}(x \,|\, a, b)\) is a uniform distribution over \(x\) from \(
 \begin{figure}[tb]
     \centering
     \includegraphics{figures/simple-pgm.pdf}
-    \caption[Probabilistic graphical model for the simple (non-hierarchical) model]{Probabilistic graphical model for the simple (non-hierarchical) model. Parameters are given by circular nodes and connected by arrows showing the direction of dependency. Observed parameters are shaded, and fixed parameters are given by filled dots. The box represents a set of parameters belonging to the \(i\)-th star. \emph{This diagram was made using \textsc{Daft} \citep{Foreman-Mackey.Hogg.ea2021}.}}
+    \caption[Probabilistic graphical model for the simple (non-hierarchical) model]{Probabilistic graphical model for the simple (non-hierarchical) model. Parameters are given by circular nodes and connected by arrows showing the direction of dependency. Observed parameters are shaded, and fixed parameters are given by filled dots. The box represents a set of parameters belonging to the \(i\)-th star. \emph{This diagram was made using the \textsc{Python} package \texttt{daft} \citep{Foreman-Mackey.Hogg.ea2021}.}}
     \label{fig:simple-pgm}
 \end{figure}
 
@@ -131,7 +131,7 @@ We show the probabilistic graphical model of the HBM in Figure \ref{fig:hbm-pgm}
 
 To infer the model parameters, we need to calculate the marginalised posterior distributions for each parameter. We could obtain these analytically by integrating the full posterior distribution over all model parameters except for the parameter of interest. Alternatively, we can approximate the marginalised posterior using a Markov Chain Monte Carlo (MCMC) sampling algorithm. We chose the latter approach because it is scalable to more complicated models where the marginalisation is not analytically solvable.
 
-We used the No U-Turn Sampler \citep[NUTS;][]{Hoffman.Gelman2014} as implemented in the \textsc{NumPyro} Python package \citep{Phan.Pradhan.ea2019,Bingham.Chen.ea2019} to sample from the approximate posterior distribution for both models. We ran the sampler for 1000 steps following 500 `warmup' steps (used to adapt the sampling procedure) and repeated for 10 MCMC chains. To reduce the number of divergences encountered during sampling, we increased the target accept probability from 0.8 to 0.98 for the HBM. The resulting marginalised posterior samples amounted to \num{10000} per parameter.
+We used the No U-Turn Sampler \citep[NUTS;][]{Hoffman.Gelman2014} as implemented in the \textsc{Python} package \texttt{numpyro} \citep{Phan.Pradhan.ea2019,Bingham.Chen.ea2019} to sample from the approximate posterior distribution for both models. We ran the sampler for 1000 steps following 500 `warmup' steps (used to adapt the sampling procedure) and repeated for 10 MCMC chains. To reduce the number of divergences encountered during sampling, we increased the target accept probability from 0.8 to 0.98 for the HBM. The resulting marginalised posterior samples amounted to \num{10000} per parameter.
 
 \subsection{Comparing the Models}\label{sec:hbm-comp}
 
