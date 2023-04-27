@@ -145,7 +145,7 @@ The glitch affects the amplitude and phase of the wave, because if we set \(\eps
 \begin{figure}
     \centering
     \includegraphics{figures/glitch-1d-example-results.pdf}
-    \caption[The change in mode frequency induced by a rapid change in sound speed for the 1D example.]{The change in mode frequency induced by a change in sound speed of \(\delta c\) from \(x_\glitch - \delta x\) to \(x_\glitch + \delta x\) in a one-dimensional medium, bound such that \(x \in [0, 1]\) (see Figure \ref{fig:1d-diagram}). Outside of the perturbation the speed of sound, \(c=1\). The frequency perturbations are offset by \(\omega_0\) given in the legend of the top panel. Points are joined by straight lines to guide the eye but do not represent real solutions.
+    \caption[The change in mode frequency induced by a rapid change in sound speed for the 1D example.]{The change in mode frequency induced by a change in sound speed of \(\delta c\) from \(x_\glitch - \delta x\) to \(x_\glitch + \delta x\) in a one-dimensional medium, bound such that \(x \in [0, 1]\) (see Figure \ref{fig:1d-diagram}). Outside the perturbation the speed of sound, \(c=1\). The frequency perturbations are offset by \(\omega_0\) given in the legend of the top panel. Points are joined by straight lines to guide the eye but do not represent real solutions.
     }
     \label{fig:1d-results}
 \end{figure}
@@ -154,7 +154,7 @@ Let us use \(\omega'_n\) to denote the solutions to Equation \ref{eq:1d-glitch-s
 
 % Physically, this arises from the change in phase required to satisfy the boundary conditions of the glitch region.
 
-The functional form of \(\delta\omega\) appears to have a linear component and a short periodicity modulated by a longer periodicity. As the location of the glitch (\(x_\glitch\)) gets smaller, the short period of \(\delta\omega\) decreases. If we imagine the spacial distribution of nodes in the system as a function of \(n\), the density of nodes is larger towards the centre of the system. The periodicity arises from the nodes passing in and out of the glitch region with changing \(n\). Therefore, where the density of wave nodes is higher, we expect the short period of \(\delta\omega\) to decrease. Similarly, as the the half-width of the glitch (\(\delta x\)) increases, the longer period increases. 
+The functional form of \(\delta\omega\) appears to have a linear component and a short periodicity modulated by a longer periodicity. As the location of the glitch (\(x_\glitch\)) gets smaller, the short period of \(\delta\omega\) decreases. If we imagine the spacial distribution of nodes in the system as a function of \(n\), the density of nodes is larger towards the centre of the system. The periodicity arises from the nodes passing in and out of the glitch region with changing \(n\). Therefore, where the density of wave nodes is higher, we expect the short period of \(\delta\omega\) to decrease. Similarly, as the half-width of the glitch (\(\delta x\)) increases, the longer period increases. 
 
 Furthermore, an increasing change in sound speed (\(\delta c\)) increases the amplitude of \(\delta\omega\). This result is intuitive, as we expect a larger change in \(c\) to correspond to a large change in \(\omega\). Finally, increasing both \(\delta x\) and \(\delta c\) increases the slope of \(\delta\omega\). The sensitivity of a mode to the glitch increases with \(n\) and depends on how much the wave changes in the glitch region. Modes of smaller \(n\) become more sensitive to the glitch region as \(\delta x\) and \(\delta c\) increase, thus increasing the linear slope of \(\delta\omega\).
 
@@ -167,7 +167,7 @@ Furthermore, an increasing change in sound speed (\(\delta c\)) increases the am
     \label{fig:1d-phase}
 \end{figure}
 
-The small phase offset \(\epsilon\) in Equation \ref{eq:1d-phase} is required for the wave function to satisfy the boundary conditions at \(x = 0\). However, adding \(\epsilon\) shifts the effective location of \(x_\glitch\) --- it changes the scale of the \(x\)-axis by a factor of \((1 + \epsilon)\). We plot \(\epsilon\) against \(\omega\) in Figure \ref{fig:1d-phase} and show that its magnitude is \(\sim 10^{-4}\), much smaller than the location and size of region 2. The periodicity caused by the glitch also shows up in Figure \ref{fig:1d-phase}, with its properties affected in a similar way to Figure \ref{fig:1d-results}. This is because the more a mode is affected by the glitch, the greater the phase offset required to satisfy the boundary conditions.
+The small phase offset \(\epsilon\) in Equation \ref{eq:1d-phase} is required for the wave function to satisfy the boundary conditions at \(x = 0\). However, adding \(\epsilon\) shifts the effective location of \(x_\glitch\) --- it changes the scale of the \(x\)-axis by a factor of \((1 + \epsilon)\). We plot \(\epsilon\) against \(\omega\) in Figure \ref{fig:1d-phase} and show that its magnitude is \(\sim 10^{-4}\), much smaller than the location and size of region 2. The periodicity caused by the glitch also shows up in Figure \ref{fig:1d-phase}, with its properties affected similarly to Figure \ref{fig:1d-results}. This is because the more a mode is affected by the glitch, the greater the phase offset required to satisfy the boundary conditions.
 
 Finding an approximate solution for \(\delta\omega\) is beyond the scope of this example. However, we can show that by modelling \(\delta\omega\), we can recover information about the structural glitch. Let us build a model \(\delta\omega = f(\omega)\). Looking at Figure \ref{fig:1d-results}, we propose a form for \(f\),
 %
@@ -246,7 +246,7 @@ In the outer convective envelope of Sun-like stars, the temperature (\(\SIrange{
     \label{fig:gamma-zones}
 \end{figure}
 
-In Figure \ref{fig:gamma-zones}, we show \(\gamma\) for model S against fractional acoustic depth, shaded by regions of ionisation. For an ideal monatomic gas, \(\gamma=5/3\), but we see that \(\gamma < 5/3\) in regions where helium and hydrogen ionise. Close to the surface of the star, hydrogen ionisation has the largest effect on \(\gamma\) because it makes up the majority of stellar matter. The first (He\,\textsc{i}) and second (He\,\textsc{ii}) ionisations of helium occur deeper in the star. We can see that the second ionisation of helium has a greater affect on \(\gamma\) than the first. The effect of the He\,\textsc{ii} ionisation causes a rapid change in \(\gamma\) over a few per cent in \(\tau\) (equivalent to \(\sim \SI{100}{\second}\) in model S).
+In Figure \ref{fig:gamma-zones}, we show \(\gamma\) for model S against fractional acoustic depth, shaded by regions of ionisation. For an ideal monatomic gas, \(\gamma=5/3\), but we see that \(\gamma < 5/3\) in regions where helium and hydrogen ionise. Close to the surface of the star, hydrogen ionisation has the largest effect on \(\gamma\) because it makes up the majority of stellar matter. The first (He\,\textsc{i}) and second (He\,\textsc{ii}) ionisations of helium occur deeper in the star. We can see that the second ionisation of helium has a greater effect on \(\gamma\) than the first. The effect of the He\,\textsc{ii} ionisation causes a rapid change in \(\gamma\) over a few per cent in \(\tau\) (equivalent to \(\sim \SI{100}{\second}\) in model S).
 
 \subsubsection{The Effect of Helium Abundance on \(\gamma\)}
 
@@ -321,7 +321,7 @@ which is a ratio of \(\mathcal{E}\) (proportional to the mode's energy)
 to its inertia (\(\mathcal{I}\)). The mode inertia is given by,
 %
 \begin{equation}
-    \mathcal{I} = \int_0^R \vect{\xi} \cdot \vect{\xi} \, \rho r^2 \, \dd r.
+    \mathcal{I} = \int_0^R \vect{\xi} \cdot \vect{\xi} \, \rho r^2 \, \dd r,
 \end{equation}
 %
 where the amplitude and direction of a pressure wave at a given point in a star is given by the so-called Lagrangian perturbation vector \(\vect{\xi}\). 
@@ -420,7 +420,7 @@ We have shown that a change in \(\gamma\) can induce a periodicity in \(\omega\)
     \left.\frac{\delta\gamma}{\gamma}\right|_\heII \simeq - \frac{\Gamma_\heII}{\Delta_\heII \sqrt{2\pi}} \, \ee^{- \frac12{(\tau - \tau_\heII)^2}/{\Delta_\heII^2} }, \label{eq:he-gamma}
 \end{equation}
 %
-where \(\Gamma_\heII\) is the area, \(\Delta_\heII\) is the characteristic width, and \(\tau_\heII\) is the center of the ionisation region.
+where \(\Gamma_\heII\) is the area, \(\Delta_\heII\) is the characteristic width, and \(\tau_\heII\) is the centre of the ionisation region.
 
 Here, we verify the result for \(\delta\omega\) due to He\,\textsc{ii} ionisation from \citet{Houdek.Gough2007}. Substituting Equation \ref{eq:he-gamma} into Equation \ref{eq:omega-osc} with a change of variables to \(x = (\tau - \tau_\heII)/\Delta_\heII\), we get,
 %
