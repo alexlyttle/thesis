@@ -71,12 +71,14 @@
 
       \vfill\LARGE%
       \MakeUppercase{\@title}%
+      % {\sffamily\bfseries\MakeUppercase{\@title}}%
 
       \vspace{0.5cm}\normalsize%
       by\LARGE%% Immediately switch back to large before new line 
 
       \vspace{0.5cm}%
       \MakeUppercase{\@author}%
+      % {\sffamily\bfseries\MakeUppercase{\@author}}%
 
       \vfill\normalsize%
       A thesis submitted to the University of Birmingham for the degree of\\

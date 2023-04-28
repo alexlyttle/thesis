@@ -28,8 +28,14 @@
 % Serif and math fonts
 \usepackage{newtxtext,newtxmath}
 % Sans-serif font
-\usepackage[scaled=.95]{FiraSans}
-% \usepackage[eulergreek]{sansmath}
+% \usepackage[scaled=0.95,book]{FiraSans}
+% \renewcommand*\oldstylenums[1]{{\firaoldstyle #1}}
+% \usepackage[oldstyle,scale=0.95]{opensans}
+% \usepackage{roboto}
+% \usepackage{noto}
+\usepackage[scaled=0.9]{inter}
+% Typewriter font
+\usepackage[zerostyle=b]{newtxtt}
 
 \usepackage{csquotes}  % When loading babel with biblatex
 \usepackage{anyfontsize}  % For custom font sizes
@@ -74,16 +80,33 @@
 % \titleformat*{\subsubsection}{\sffamily\bfseries}  % modify subsubsection headings separately
 % \titleformat*{\paragraph}{\sffamily\bfseries}
 
+% OLD STYLE
 % \titleformat{\chapter}[display]
 % {\sffamily\bfseries\fontsize{64}{72}\selectfont}  % Careful with custom font if change size
 % {\filleft\thechapter}
 % {20pt}
 % {\filright\huge}
+
+% CENTERED NORMAL FONT
 \titleformat{\chapter}[display]
 {\normalfont\LARGE\centering}  % Careful with custom font if change size
 {\chaptertitlename\ \thechapter}
 {20pt}
 {\MakeUppercase}
+
+% CENTERED SANS SERIF
+% \titleformat{\chapter}[display]
+% {\sffamily\bfseries\LARGE\centering}  % Careful with custom font if change size
+% {\chaptertitlename\ \thechapter}
+% {20pt}
+% {\MakeUppercase}
+
+% CENTERED NORMAL FONT + SANS
+% \titleformat{\chapter}[display]
+% {\sffamily\bfseries\LARGE\centering}  % Careful with custom font if change size
+% {\chaptertitlename\ \thechapter}
+% {20pt}
+% {\MakeUppercase}
 
 %% HYPERLINKS
 %
