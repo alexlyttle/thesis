@@ -175,7 +175,7 @@
   doi = {10.3847/1538-3881/aad7bf},
   urldate = {2020-05-27},
   abstract = {Converting a noisy parallax measurement into a posterior belief over distance requires inference with a prior. Usually, this prior represents beliefs about the stellar density distribution of the Milky Way. However, multiband photometry exists for a large fraction of the Gaia-TGAS Catalog and is incredibly informative about stellar distances. Here, we use 2MASS colors for 1.4 million TGAS stars to build a noise-deconvolved empirical prior distribution for stars in color-magnitude space. This model contains no knowledge of stellar astrophysics or the Milky Way but is precise because it accurately generates a large number of noisy parallax measurements under an assumption of stationarity; that is, it is capable of combining the information from many stars. We use the Extreme Deconvolution (XD) algorithm\textemdash which is an empirical-Bayes approximation to a full-hierarchical model of the true parallax and photometry of every star\textemdash to construct this prior. The prior is combined with a TGAS likelihood to infer a precise photometric-parallax estimate and uncertainty (and full posterior) for every star. Our parallax estimates are more precise than the TGAS catalog entries by a median factor of 1.2 (14\% are more precise by a factor {$>$}2) and they are more precise than the previous Bayesian distance estimates that use spatial priors. We validate our parallax inferences using members of the Milky Way star cluster M67, which is not visible as a cluster in the TGAS parallax estimates but appears as a cluster in our posterior parallax estimates. Our results, including a parallax posterior probability distribution function for each of 1.4 million TGAS stars, are available in companion electronic tables.},
-  keywords = {catalogs,Hertzsprung–Russell and C–M diagrams,methods: statistical,parallaxes}
+  keywords = {catalogs,Hertzsprung\textendash Russell and C\textendash M diagrams,methods: statistical,parallaxes}
 }
 
 @article{Ando.Osaki1975,
@@ -658,7 +658,7 @@
   doi = {10.1111/j.1365-2966.2012.21818.x},
   urldate = {2023-04-17},
   abstract = {Determining the physical characteristics of a star is an inverse problem consisting of estimating the parameters of models for the stellar structure and evolution, and knowing certain observable quantities. We use a Bayesian approach to solve this problem for {$\alpha$} Cen A, which allows us to incorporate prior information on the parameters to be estimated, in order to better constrain the problem. Our strategy is based on the use of a Markov chain Monte Carlo (MCMC) algorithm to estimate the posterior probability densities of the stellar parameters: mass, age, initial chemical composition, etc. We use the stellar evolutionary code ASTEC to model the star. To constrain this model both seismic and non-seismic observations were considered. Several different strategies were tested to fit these values, using either two free parameters or five free parameters in ASTEC. We are thus able to show evidence that MCMC methods become efficient with respect to more classical grid-based strategies when the number of parameters increases. The results of our MCMC algorithm allow us to derive estimates for the stellar parameters and robust uncertainties thanks to the statistical analysis of the posterior probability densities. We are also able to compute odds for the presence of a convective core in {$\alpha$} Cen A. When using core-sensitive seismic observational constraints, these can rise above {$\sim$}40 per cent. The comparison of results to previous studies also indicates that these seismic constraints are of critical importance for our knowledge of the structure of this star.},
-  keywords = {Astrophysics - Solar and Stellar Astrophysics,methods: numerical,methods: statistical,stars: evolution,stars: fundamental parameters,stars: individual: α Cen A,stars: oscillations},
+  keywords = {Astrophysics - Solar and Stellar Astrophysics,methods: numerical,methods: statistical,stars: evolution,stars: fundamental parameters,stars: individual: {$\alpha$} Cen A,stars: oscillations},
   annotation = {ADS Bibcode: 2012MNRAS.427.1847B}
 }
 
@@ -1967,7 +1967,7 @@
   doi = {10.1051/0004-6361:20034203},
   urldate = {2023-04-17},
   abstract = {Detailed models of {$\alpha$} Cen A and B based on new seismological data for {$\alpha$} Cen B by Carrier \& Bourban (\textbackslash cite\{ca03\}) have been computed using the Geneva evolution code including atomic diffusion. Taking into account the numerous observational constraints now available for the {$\alpha$} Cen system, we find a stellar model which is in good agreement with the astrometric, photometric, spectroscopic and asteroseismic data. The global parameters of the {$\alpha$} Cen system are now firmly constrained to an age of t=6.52 {$\pm$} 0.30 Gyr, an initial helium mass fraction Yi=0.275 {$\pm$} 0.010 and an initial metallicity (Z/X)i=0.0434 {$\pm$} 0.0020. Thanks to these numerous observational constraints, we confirm that the mixing-length parameter {$\alpha$} of the B component is larger than the one of the A component, as already suggested by many authors (Noels et al. \textbackslash cite\{no91\}; Fernandes \& Neuforge \textbackslash cite\{fe95\}; Guenther \& Demarque \textbackslash cite\{gu00\}): {$\alpha$}B is about 8\% larger than {$\alpha$}A ({$\alpha$}A=1.83 {$\pm$} 0.10 and {$\alpha$}B=1.97 {$\pm$} 0.10). Moreover, we show that asteroseismic measurements enable to determine the radii of both stars with a very high precision (errors smaller than 0.3\%). The radii deduced from seismological data are compatible with the new interferometric results of Kervella et al. (\textbackslash cite\{ke03\}) even if they are slightly larger than the interferometric radii (differences smaller than 1\%).},
-  keywords = {Astrophysics,stars: binaries: visual,stars: evolution,stars: individual: α Cen,stars: oscillations},
+  keywords = {Astrophysics,stars: binaries: visual,stars: evolution,stars: individual: {$\alpha$} Cen,stars: oscillations},
   annotation = {ADS Bibcode: 2004A\&A...417..235E}
 }
 
@@ -2159,6 +2159,19 @@
   urldate = {2023-04-26},
   abstract = {What's Changed Fixing \#87 by @dfm in https://github.com/dfm/tinygp/pull/88 found two typos by @theorashid in https://github.com/dfm/tinygp/pull/92 Updating notebook execution config to remove warnings by @dfm in https://github.com/dfm/tinygp/pull/93 Minor Typos by @yadav-sachin in https://github.com/dfm/tinygp/pull/99 fix typo in docs by @andrewfowlie in https://github.com/dfm/tinygp/pull/107 Update tree\_map -{$>$} tree\_util.tree\_map to avoid FutureWarning by @tkillestein in https://github.com/dfm/tinygp/pull/114 Checking tree structure and shapes of X\_test input to condition by @dfm in https://github.com/dfm/tinygp/pull/119 Removing deprecation warning and jitting predict by @dfm in https://github.com/dfm/tinygp/pull/120 Fixing the gradient of the L2 distance at the origin by @dfm in https://github.com/dfm/tinygp/pull/121 Adding check for unsorted input coordinates when using QuasisepSolver by @dfm in https://github.com/dfm/tinygp/pull/123 Fixing behavior of DotProduct kernel on scalar inputs by @dfm in https://github.com/dfm/tinygp/pull/124 Release candidate v0.2.3 by @dfm in https://github.com/dfm/tinygp/pull/125 New Contributors @andrewfowlie made their first contribution in https://github.com/dfm/tinygp/pull/107 @tkillestein made their first contribution in https://github.com/dfm/tinygp/pull/114 Full Changelog: https://github.com/dfm/tinygp/compare/v0.2.2...v0.2.3},
   howpublished = {Zenodo}
+}
+
+@article{Foreman-Mackey2016,
+  title = {{{corner.py}}: {{Scatterplot}} Matrices in {{Python}}},
+  author = {{Foreman-Mackey}, Daniel},
+  year = {2016},
+  month = jun,
+  journal = {J. Open Source Softw.},
+  volume = {1},
+  number = {2},
+  pages = {24},
+  publisher = {{The Open Journal}},
+  doi = {10.21105/joss.00024}
 }
 
 @article{Frankel.Sanders.ea2020,
@@ -3649,7 +3662,7 @@
   doi = {10.1086/497530},
   urldate = {2020-09-21},
   abstract = {We have made velocity observations of the star {$\alpha$} Centauri B from two sites, allowing us to identify 37 oscillation modes with l=0-3. Fitting to these modes gives the large and small frequency separations as a function of frequency. The mode lifetime, as measured from the scatter of the oscillation frequencies about a smooth trend, is similar to that in the Sun. Limited observations of the star {$\delta$} Pav show oscillations centered at 2.3 mHz, with peak amplitudes close to solar. We introduce a new method of measuring oscillation amplitudes from heavily smoothed power density spectra, from which we estimated amplitudes for {$\alpha$} Cen {$\alpha$} and B, {$\beta$} Hyi, {$\delta$} Pav, and the Sun. We point out that the oscillation amplitudes may depend on which spectral lines are used for the velocity measurements. Based on observations collected at the European Southern Observatory, Paranal, Chile (ESO Programme 71.D-0618).},
-  keywords = {stars: individual (δ Pavonis),Stars: Individual: Constellation Name: α Centauri A,Stars: Individual: Constellation Name: α Centauri B,Stars: Individual: Constellation Name: β Hydri,Stars: Oscillations,Sun: Helioseismology}
+  keywords = {stars: individual ({$\delta$} Pavonis),Stars: Individual: Constellation Name: {$\alpha$} Centauri A,Stars: Individual: Constellation Name: {$\alpha$} Centauri B,Stars: Individual: Constellation Name: {$\beta$} Hydri,Stars: Oscillations,Sun: Helioseismology}
 }
 
 @article{Kjeldsen.Bedding.ea2008,
@@ -3663,7 +3676,7 @@
   doi = {10.1086/591667},
   urldate = {2020-09-18},
   abstract = {In helioseismology, there is a well-known offset between observed and computed oscillation frequencies. This offset is known to arise from improper modeling of the near-surface layers of the Sun, and a similar effect must occur for models of other stars. Such an effect impedes progress in asteroseismology, which involves comparing observed oscillation frequencies with those calculated from theoretical models. Here, we use data for the Sun to derive an empirical correction for the near-surface offset, which we then apply to three other stars ({$\alpha$} Cen A, {$\alpha$} Cen B, and {$\beta$} Hyi). The method appears to give good results, in particular providing an accurate estimate of the mean density of each star.},
-  keywords = {stars: individual: β Hyi α Cen A α Cen B,stars: oscillations,Sun: helioseismology}
+  keywords = {stars: individual: {$\beta$} Hyi {$\alpha$} Cen A {$\alpha$} Cen B,stars: oscillations,Sun: helioseismology}
 }
 
 @article{Kjeldsen.Bedding1995,
@@ -3678,7 +3691,7 @@
   issn = {0004-6361},
   urldate = {2020-09-02},
   abstract = {There are no good predictions for the amplitudes expected from solar-like oscillations in other stars. In the absence of a definitive model for convection, which is thought to be the mechanism that excites these oscillations, the amplitudes for both velocity and luminosity measurements must be estimated by scaling from the Sun. In the case of luminosity measurements, even this is difficult because of disagreement over the solar amplitude. This last point has lead us to investigate whether the luminosity amplitude of oscillations {$\delta$}L/L can be derived from the velocity amplitude (v\_osc\_). Using linear theory and observational data, we show that p-mode oscillations in a large sample of pulsating stars satisfy ({$\delta$}L/L)\_bol\_\{prop.to\} v\_osc\_/T\_eff\_. Using this relationship, together with the best estimate of v\_osc\_,sun\_=(23.4+/-1.4)cm/s, we estimate the luminosity amplitude of solar oscillations at 550nm to be {$\delta$}L/L=(4.7+/-0.3)ppm. Next we discuss how to scale the amplitude of solar-like (i.e., convectively-powered) oscillations from the Sun to other stars. The only predictions come from model calculations by Christensen-Dalsgaard \& Frandsen (1983, Sol. Phys. 82, 469). However, their grid of stellar models is not dense enough to allow amplitude predictions for an arbitrary star. Nevertheless, although convective theory is complicated, we might expect that the general properties of convection - including oscillation amplitudes - should change smoothly through the colour-magnitude diagram. Indeed, we find that the velocity amplitudes predicted by the model calculations are well fitted by the relation v\_osc\_\{prop.to\}L/M. These two relations allow us to predict both the velocity and luminosity amplitudes of solar-like oscillations in any given star. We compare these predictions with published observations and evaluate claims for detections that have appeared in the literature. We argue that there is not yet good evidence for solar-like oscillations in any star except the Sun. For solar-type stars (e.g., {$\alpha$} Cen A and {$\beta$} Hyi), observations have not yet reached sufficient sensitivity to detect the amplitudes we predict. For some F-type stars, namely Procyon and several members of M67, detection sensitivities 30-40\% below the predicted amplitudes have been achieved. We conclude that these stars must oscillate with amplitudes less than has generally been assumed.},
-  keywords = {{DELTA} SCT,CEPHEIDS,STARS: INDIVIDUAL: {ALPHA} CEN,STARS: INDIVIDUAL: PROCYON,STARS: OSCILLATIONS,SUN: OSCILLATIONS}
+  keywords = {\{DELTA\} SCT,CEPHEIDS,STARS: INDIVIDUAL: \{ALPHA\} CEN,STARS: INDIVIDUAL: PROCYON,STARS: OSCILLATIONS,SUN: OSCILLATIONS}
 }
 
 @misc{Koposov.Speagle.ea2023,
@@ -4317,7 +4330,7 @@
   doi = {10.1051/0004-6361:20052988},
   urldate = {2023-04-17},
   abstract = {We apply the Levenberg-Marquardt minimization algorithm to seismic and classical observables of the {$\alpha$}Cen binary system in order to derive the fundamental parameters of {$\alpha$}CenA+B, and to analyze the dependence of these parameters on the chosen observables, on their uncertainty, and on the physics used in stellar modelling. We show that while the fundamental stellar parameters do not depend on the treatment of convection adopted (Mixing Length Theory - MLT - or ``Full Spectrum of Turbulence'' - FST), the age of the system depends on the inclusion of gravitational settling, and is deeply biased by the small frequency separation of component B. We try to answer the question of the universality of the mixing length parameter, and we find a statistically reliable dependence of the {$\alpha$}-parameter on the HR diagram location (with a trend similar to the predictions based on 2-D simulations). We propose the frequency separation ratios as better observables to determine the fundamental stellar parameters, and to use the large frequency separation and frequencies to extract information about the stellar structure. The effects of diffusion and equation of state on the oscillation frequencies are also studied, but present seismic data do not allow their determination.},
-  keywords = {Astrophysics,stars: fundamental parameters,stars: individual: α Cen,stars: interiors,stars: oscillations},
+  keywords = {Astrophysics,stars: fundamental parameters,stars: individual: {$\alpha$} Cen,stars: interiors,stars: oscillations},
   annotation = {ADS Bibcode: 2005A\&A...441..615M}
 }
 
@@ -4754,7 +4767,7 @@
   doi = {10.1093/mnrasl/sly092},
   urldate = {2023-04-17},
   abstract = {Understanding the physical process responsible for the transport of energy in the core of {$\alpha$} Centauri A is of the utmost importance if this star is to be used in the calibration of stellar model physics. Adoption of different parallax measurements available in the literature results in differences in the interferometric radius constraints used in stellar modelling. Further, this is at the origin of the different dynamical mass measurements reported for this star. With the goal of reproducing the revised dynamical mass derived by Pourbaix \& Boffin, we modelled the star using two stellar grids varying in the adopted nuclear reaction rates. Asteroseismic and spectroscopic observables were complemented with different interferometric radius constraints during the optimization procedure. Our findings show that best-fitting models reproducing the revised dynamical mass favour the existence of a convective core ({$\greaterequivlnt$}70 per cent of best-fitting models), a result that is robust against changes to the model physics. If this mass is accurate, then {$\alpha$} Centauri A may be used to calibrate stellar model parameters in the presence of a convective core.},
-  keywords = {Astrophysics - Solar and Stellar Astrophysics,method: asteroseismology,stars: convection and radiation,stars: fundamental parameters,stars: α Centauri A},
+  keywords = {Astrophysics - Solar and Stellar Astrophysics,method: asteroseismology,stars: convection and radiation,stars: fundamental parameters,stars: {$\alpha$} Centauri A},
   annotation = {ADS Bibcode: 2018MNRAS.479L..55N}
 }
 
