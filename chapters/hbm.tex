@@ -135,9 +135,9 @@ We show the probabilistic graphical model of the HBM in Figure \ref{fig:hbm-pgm}
 
 To infer the model parameters, we need to calculate the marginalised posterior distributions for each parameter. We could obtain these analytically by integrating the full posterior distribution over all model parameters except for the parameter of interest. Alternatively, we can approximate the marginalised posterior using a Markov Chain Monte Carlo (MCMC) sampling algorithm. We chose the latter approach because it is scalable to more complicated models where the marginalised posterior is not analytically solvable.
 
-To sample from the posterior distribution for both models, we used the No U-Turn Sampler \citep[NUTS;][]{Hoffman.Gelman2014} as implemented in the \textsc{Python} package \texttt{numpyro} \citep{Phan.Pradhan.ea2019,Bingham.Chen.ea2019}. We ran the sampler for 1000 steps following 500 warm-up steps (used to adapt the sampling procedure) and repeated for 10 MCMC chains. 
+To sample from the posterior distribution for both models, we used the No U-Turn Sampler \citep[NUTS;][]{Hoffman.Gelman2014} as implemented in the \textsc{Python} package \texttt{numpyro} \citep{Phan.Pradhan.ea2019,Bingham.Chen.ea2019}. The NUTS algorithm was chosen for its efficient exploration of parameter space when compared with other MCMC methods. We ran the sampler for 1000 steps following 500 warm-up steps (used to adapt the sampling procedure) and repeated for 10 MCMC chains.
 % To reduce the number of divergences encountered during sampling, we increased the target accept probability from 0.8 to 0.98 for the HBM. 
-The resulting marginalised posterior samples amounted to \num{10000} per parameter.
+This resulted in \num{10000} posterior samples obtained in few seconds on a modern laptop.
 
 \subsection{Comparing the Models}\label{sec:hbm-comp}
 
@@ -181,7 +181,7 @@ To test how the model scales with number of stars, we repeated the HBM method fo
     \label{fig:hbm-extended}
 \end{figure}
 
-Figure \ref{fig:hbm-extended} shows how the distance estimates improved with increasing number of stars observed, \(N_\mathrm{stars}=(20,80,320)\). Unsurprisingly, the standard deviation of \(\mu_d\) decreased by a factor of \(N_\mathrm{stars}^{1/2}\) each time, with \(s_{\mu_d} \approx (0.24, 0.12, 0.06)\). We also expected a similar reduction in uncertainty for individual distances, albeit limited by the observational noise. Typical standard deviations for \(d_i\) were \(s_{d,i} \approx (0.30, 0.17, 0.15)\). As expected, the distance uncertainties also halved from \(20\) to \(80\) stars. However, this effect lessened with 320 stars. This demonstrated the method is still limited by the error budget across all observed parameters. Despite this, the HBM proved to be a useful way of getting more information from a limited number of noisy observations. 
+Figure \ref{fig:hbm-extended} shows how the distance estimates improved with increasing number of stars observed, \(N_\mathrm{stars}=(20,80,320)\). Unsurprisingly, the standard deviation of \(\mu_d\) decreased by a factor of \(N_\mathrm{stars}^{1/2}\) each time, with \(s_{\mu_d} \approx (0.24, 0.12, 0.06)\). We also expected a similar reduction in uncertainty for individual distances, albeit limited by \(N_\mathrm{stars}\) and the observational noise. Typical standard deviations for \(d_i\) were \(s_{d,i} \approx (0.30, 0.17, 0.15)\). As expected, the distance uncertainties also halved from \(20\) to \(80\) stars. However, this effect lessened with 320 stars. This demonstrated the method is still limited by the error budget across all observed parameters. Despite this, the HBM proved to be a useful way of getting more information from a limited number of noisy observations. 
 
 \section[Stellar Properties]{Inferring Physical Properties of Stars}\label{sec:hbm-phys}
 
