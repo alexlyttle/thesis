@@ -138,7 +138,7 @@ where,
 %
 % This satisfies the consistency requirement that GP must specify any mode \(\nu_n \sim \mathcal{N}(\mu_n, K_{nn})\) where \(K_{nn}\) is the sub-matrix of the covariance of 
 
-We used Bayes' theorem (see Equation \ref{eq:bayes}) to estimate the probability of our model parameters, \(\vect{\theta}_B = (\nu_0, \varepsilon, \alpha_\helium, \beta_\helium, \tau_\helium, \phi_\helium, a_\bcz, \tau_\bcz, \phi_\bcz, \sigma)\), given observations of mode frequencies. Hence, we write the posterior probability density as,
+We used Bayes' theorem (see Equation \ref{eq:bayes-theorem}) to estimate the probability of our model parameters, \(\vect{\theta}_B = (\nu_0, \varepsilon, \alpha_\helium, \beta_\helium, \tau_\helium, \phi_\helium, a_\bcz, \tau_\bcz, \phi_\bcz, \sigma)\), given observations of mode frequencies. Hence, we write the posterior probability density as,
 %
 \begin{equation}
     p(\vect{\theta}_B \mid \vect{\nu}_\obs) = \frac{p(\vect{\nu}_\obs \mid \vect{\theta}_B)\,p(\vect{\theta}_B)}{p(\vect{\nu}_\obs)} \equiv \frac{\mathcal{L}(\vect{\theta}_B)\,p(\vect{\theta}_B)}{\mathcal{Z}},
@@ -162,7 +162,7 @@ Following Equation \ref{eq:gp-like}, we defined the log-likelihood of the model 
 %
 where \(\vect{\mu}\) and \(\vect{\Sigma}\) depend on \(\vect{\theta}_B\). The prior transform for \(\vect{\theta}_B\) is the inverse cumulative distribution function associated with the prior distribution \(p(\vect{\theta}_B)\). We treated the prior for each of \(\vect{\theta}_B\) independently. The total prior distribution is the product of distributions for each parameter, \(p(\vect{\theta}_B) = \prod_j p(\theta_{j})\). We give the prior distributions and their shape parameters in Table \ref{tab:glitch-prior}. In the following paragraphs, we justify our choice of prior distributions based on approximate scaling relations between the parameters. % We also summarise the prior distributions and their parameters in Table \todo{Table summary}
 
-\paragraph{Smooth Component} Starting with the parameters for \(\tilde{f}_B(n)\), we chose to sample them from normal distributions,
+\paragraph{Smooth Component} Starting with priors for the parameters in \(\tilde{f}_B(n)\), we chose normal distributions,
 %
 \begin{gather}
     \nu_0 \sim \mathcal{N}(\overline{\nu}_0, s_{\nu_0}^2), \quad \varepsilon \sim \mathcal{N}(\overline{\varepsilon}, s_\varepsilon^2),%\\
@@ -173,7 +173,7 @@ centred on \(\overline{\nu}_0\) and \(\overline{\varepsilon}\) and scaled by \(s
 
 % Priors for the following parameters follow a log-normal distribution to ensure they are positive. We also exploit the property that the scale of a normal distribution in natural log-space is approximately the scale in real-space as a fraction of the distribution mean.
 
-\paragraph{Acoustic Depths} We derived a prior on \(\tau_\helium\) and \(\tau_\bcz\) by observing how they scale with acoustic radius (\(\tau_0\)) in the grid of stellar models from \citet{Lyttle.Davies.ea2021} and in \citet{Verma.Rorsted.ea2022}. Typically, the fractional depth of He\,\textsc{ii} ionisation and the BCZ are \(\tau_\heII/\tau_0 \approx 0.2\) and \(\tau_\bcz/\tau_0 \approx 0.6\), for main sequence solar-like oscillators (see, e.g. Figure \ref{fig:gamma-sound-speed}). We formed the prior distributions from these relations, estimating the acoustic radius from \({\tau}_0 = (2\nu_0)^{-1}\). To account for possible variance with stellar properties, we added a spread of 20 per cent. We defined their priors in natural log-space to ensure they remained positive,
+\paragraph{Acoustic Depths} We derived a prior on \(\tau_\helium\) and \(\tau_\bcz\) by observing how they scale with acoustic radius (\(\tau_0\)) in the grid of stellar models from \citet{Lyttle.Davies.ea2021} and the results of \citet{Verma.Rorsted.ea2022}. Typically, the fractional depth of He\,\textsc{ii} ionisation and the BCZ are \(\tau_\heII/\tau_0 \approx 0.2\) and \(\tau_\bcz/\tau_0 \approx 0.6\), for main sequence solar-like oscillators (see, e.g. Figure \ref{fig:gamma-sound-speed}). We formed the prior distributions from these relations, estimating the acoustic radius from \({\tau}_0 = (2\nu_0)^{-1}\). To account for possible variance with stellar properties, we added a spread of 20 per cent. We defined their priors in natural log-space to ensure they remained positive,
 %
 \begin{gather}
     \ln\tau_\helium \sim \mathcal{N}\left[ \ln(\overline{\tau}_\helium), \, s_{\ln\tau}^2 \right], \quad \ln\tau_\bcz \sim \mathcal{N}\left[\ln(3\,\overline{\tau}_\helium), \, s_{\ln\tau}^2 \right],\\
@@ -188,9 +188,9 @@ centred on \(\overline{\nu}_0\) and \(\overline{\varepsilon}\) and scaled by \(s
 %
 Then, we centred the prior for \(\alpha_\helium\) to satisfy a depth of 0.1 in \(\delta\gamma/\gamma\) caused by helium ionisation using Equation \ref{eq:he-gamma},
 %
-\begin{gather*}
+\begin{gather}
     \ln\alpha_\helium \sim \mathcal{N}\left[ 1/2 \, \ln({\overline{\beta}_\helium}/{400\pi}), \, s_{\ln\tau}^2 \right].
-\end{gather*}
+\end{gather}
 %
 We verified that the priors on \(\alpha_\helium\) and \(\beta_\helium\) were compatible with our prior belief by checking that the amplitude at \(\nu_\mathrm{ref}\) peaked from \SIrange{0}{1}{\micro\hertz}, decaying thereafter.
 
