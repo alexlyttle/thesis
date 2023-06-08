@@ -46,7 +46,11 @@ def load_details(filenames, xcol="x", ncol="n_pg", lcol="l"):
     icol = "index"
     details = []
     for filename in filenames:
-        d = load_detail(filename, xcol=xcol)
+        try:
+            d = load_detail(filename, xcol=xcol)
+        except OSError:
+            print(f"Failed to load {filename}")
+            continue
         d = d.assign_coords({
             icol: pd.MultiIndex.from_tuples(
                 [(d.attrs[ncol], d.attrs[lcol])], names=(ncol, lcol)
