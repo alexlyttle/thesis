@@ -183,12 +183,12 @@ For a subset of these stars, the SNR was high enough to identify many individual
 Modelling stars `the Bayesian way' involves estimating the probability distributions of stellar parameters (\(\vect{\theta}\)) given observed parameters (\(\vect{y}\)). For example, the parameters of interest might be the age, mass and initial fractional heavy-element abundance of the star (\(\vect{\theta} = t_\star, M, Z\)) and we might observe the effective temperature, luminosity, and large frequency spacing (\(\vect{y} = \teff, L, \Delta\nu\)). We can do this starting with Bayes' theorem for the \emph{posterior} probability density,
 %
 \begin{equation}
-    p(\vect{\theta} \mid \vect{y}) = \frac{p(\vect{y} \mid \vect{\theta})\,p(\vect{\theta})}{p(\vect{y})},
+    p(\vect{\theta} \mid \vect{y}) = \frac{p(\vect{y} \mid \vect{\theta})\,p(\vect{\theta})}{p(\vect{y})},\label{eq:bayes-theorem}
 \end{equation}
 %
 where \(p(\vect{y} \mid \vect{\theta})\) is the \emph{likelihood}, \(p(\vect{\theta})\) is the \emph{prior}, and \(p(\vect{y})\) is the \emph{evidence}. We should choose a prior to represent our expectation for \(\vect{\theta}\). The prior dominates if the observations are bad (i.e. have a small likelihood) and we return our current `belief' (or expectation). However, if the observations are good enough, the likelihood has more influence on the posterior and our belief is updated. As a result, we can use the Bayesian methodology to systematically update our beliefs. This provides a statistical scheme from which to build our stellar models.
 
-Let us consider a stellar model with three parameters, \(\vect{\theta} = t_\star, M, Z\). For instance, we might want the age of a star to help date a galactic merger, or its mass to characterise an exoplanetary system. To get the probability over age given our observations, we must \emph{marginalise} over the joint posterior with respect to all other parameters. The marginal posterior probability distribution for \(t_\star\) is,
+Let us consider a stellar model with three parameters, \(\vect{\theta} = t_\star, M, Z\). For instance, we might want the age of a star to help date a galactic merger, or its mass to characterise an exoplanetary system. To get the probability distribution of age given our observations, we must \emph{marginalise} over the joint posterior with respect to all other parameters. The marginal posterior probability distribution for \(t_\star\) is,
 %
 \begin{equation}
     p(t_\star \mid \vect{y}) = \int\limits_0^\infty \int\limits_0^1 p(\vect{\theta} \mid \vect{y}) \, \dd M \dd Z,
