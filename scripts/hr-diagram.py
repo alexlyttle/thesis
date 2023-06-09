@@ -161,6 +161,8 @@ axins.hist2d(r['bp']-r['rp'], G, cmap=cmap, bins=200, cmin=10, norm=PowerNorm(ga
 cmap = cm.devon
 axins.plot(df['bp_rp'], kG, '.', c=cmap.colors[0], ms=2, alpha=0.2, rasterized=True, zorder=0)
 axins.hist2d(df['bp_rp'], kG, cmap=cmap, bins=200, cmin=10, norm=PowerNorm(gamma=1/3), rasterized=True, zorder=1)
+
+axins.axvspan(0, 2, color="white", alpha=0.2, transform=axins.transAxes)
 for mass in [0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4]:
     _, _, _, mags = tracks.interp_mag([mass] + params, bands)
     axins.plot(mags[:, 1]-mags[:, 2], mags[:, 0], "-", color="k")
@@ -188,6 +190,8 @@ axins.invert_yaxis()
 
 c = cmap.colors[len(cmap.colors)//2]
 ax.legend(handles=[ls, ld, ll], loc="lower right", facecolor=c, edgecolor=c)
+# ax.legend(handles=[ls, ld, ll], loc="upper left", facecolor=c, edgecolor=c)
+# ax.legend(handles=[ls, ld, ll], loc="upper left")
 plt.show()
 print("Saving plot.")
 fig.tight_layout()
