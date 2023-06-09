@@ -16,15 +16,15 @@
 
 \section{Introduction}
 
-Let us consider a non-rotating star which oscillates at frequencies \(\nu_{nl}\), where \(n\) and \(l\) are the radial order and angular degree of the modes. We may model the modes as the sum of a smoothly-varying component, \(\tilde{f}(n, l)\), and quickly-varying, small change in frequency, \(\delta\nu\), arising from glitches in the stellar structure,
+Let us consider a non-rotating star which oscillates at frequencies \(\nu_{nl}\), where \(n\) and \(l\) are the radial order and angular degree of the modes. We may model the modes as the sum of a smoothly-varying component, \(\tilde{f}(n, l)\), and quickly-varying, small change in frequency, \(\delta\nu_{nl}\), arising from glitches in the stellar structure,
 %
 \begin{equation}
-    f(n, l) = \tilde{f}(n, l) + \delta\nu,\label{eq:general-glitch}
+    f(n, l) = \tilde{f}(n, l) + \delta\nu_{nl},\label{eq:general-glitch}
 \end{equation}
 %
-where \(\delta\nu\) is some function of frequency which may be evaluated at \(\tilde{f}(n, l)\).
+where \(\delta\nu_{nl}\) is some function of frequency which may be evaluated at \(\tilde{f}(n, l)\).
 
-In principle, \(\delta\nu\) could arise from any glitches expected in a particular star. Here, we consider glitches in main sequence solar-like oscillators. In Chapter \ref{chap:glitch}, we derived approximations for \(\delta\nu\) arising from acoustic glitches caused by the second ionisation of helium and the BCZ. We choose to ignore contributions to \(\delta\nu\) from the first ionisation of helium. Consequently, we let \(\delta\nu = \delta\nu_\helium + \delta\nu_\bcz\) where each component depends on parameters relating to properties of the glitches (cf. Equations \ref{eq:he-osc} and \ref{eq:bcz-osc}),
+In principle, \(\delta\nu\) could arise from any glitches expected in a particular star. Here, we consider glitches in main sequence solar-like oscillators. In Chapter \ref{chap:glitch}, we derived approximations for \(\delta\nu_{nl}\) arising from acoustic glitches caused by the second ionisation of helium and the BCZ. We choose to ignore contributions to \(\delta\nu_{nl}\) from the first ionisation of helium. Consequently, we let \(\delta\nu_{nl} = \delta\nu_\helium + \delta\nu_\bcz\) where each component depends on parameters relating to properties of the glitches (cf. Equations \ref{eq:he-osc} and \ref{eq:bcz-osc}),
 %
 \begin{align}
     \delta\nu_\helium &= \alpha_\helium \nu_0 \nu \, \ee^{-\beta_\helium \nu^2} \sin(4\pi\tau_\helium\nu + \phi_\helium), \label{eq:he-glitch}\\
@@ -33,7 +33,7 @@ In principle, \(\delta\nu\) could arise from any glitches expected in a particul
 %
 The parameters \(\alpha_\helium \simeq \Gamma_\heII\) and \(\beta_\helium \propto \Delta_\heII^2\) relate to the area and variance of the Gaussian-like depression in \(\gamma\) caused by the second ionisation of helium (see Equation \ref{eq:he-gamma}). The amplitude parameter for the BCZ glitch is proportional to the difference in the second density derivative at the base of the convective zone (\(\alpha_\bcz \propto \Delta_{\bcz}\)) with units of frequency squared. The approximate acoustic depths of second helium ionisation and the BCZ are given by \(\tau_\helium\) and \(\tau_\bcz\) respectively, and \(\phi_\helium\) and \(\phi_\bcz\) are arbitrary phase constants.
 
-Providing \(\tilde{f}(n, l)\) is a good approximation of the mode frequencies, we can calculate \(\delta\nu\) at \(\nu = \tilde{f}(n, l)\) to predict \(f(n, l)\). For example, \(\tilde{f}(n,l)\) could be a \(K\)-th order polynomial in \(n\) with coefficients \(a_{lk}\) \citep[e.g.][]{Kjeldsen.Bedding.ea2005,Ulrich1986},
+Providing \(\tilde{f}(n, l)\) is a good approximation of the mode frequencies, we can calculate \(\delta\nu_{nl}\) at \(\tilde{f}(n, l)\) to predict \(f(n, l)\). For example, \(\tilde{f}(n,l)\) could be a \(K\)-th order polynomial in \(n\) with coefficients \(a_{lk}\) \citep[e.g.][]{Kjeldsen.Bedding.ea2005,Ulrich1986},
 %
 \begin{equation}
     \tilde{f}(n, l) = \nu_0 \sum_{k=0}^{K} a_{lk} n^k. \label{eq:poly}
