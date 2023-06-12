@@ -1,17 +1,29 @@
-# uob-thesis-template
+# thesis
 
-My thesis submitted to the University of Birmingham for the degree of Doctor of Philosophy.
+[![DOI](https://zenodo.org/badge/553046417.svg)](https://zenodo.org/badge/latestdoi/553046417)
 
-## Getting Started
+My thesis submitted to the University of Birmingham for the degree of Doctor of Philosophy. 
 
-The easiest way to compile the PDF is to [view my thesis on Overleaf](https://www.overleaf.com/read/zxqsqrzymxvn). Here you can leave comments if you have an Overleaf account.
+Download the PDF my thesis by visiting the [latest release](https://github.com/alexlyttle/thesis/releases/latest) page.
 
-Alternatively, the PDF may be compiled locally on your machine in a GUI or using the scripts as a part of an up-to-date TeX installation. This may be done manually with `pdflatex`, `biber` (for the bibliography) and `makeglossaries` for the glossaries,
+## Install Locally
+
+Alternatively, you can clone this repository to compile it from source and use the Python package.
+
+Download or clone the repository and change directory to it.
+
+```bash
+git clone https://github.com/alexlyttle/thesis.git
+cd thesis
+```
+
+### Compile PDF
+
+To compile the PDF with LaTeX:
 
 ```bash
 pdflatex thesis
 biber thesis
-makeglossaries thesis
 pdflatex thesis
 pdflatex thesis
 ```
@@ -22,12 +34,28 @@ or automatically with `latexmk`,
 latexmk -pdf thesis.tex
 ```
 
-although to generate the glossaries you must configure `latexmk` with a `.latexmkrc` file. Consider the following solution on [tex.stackexchange](https://tex.stackexchange.com/a/44316).
+### Install Python Package
+
+To install the Python package used for this work use `pip`:
+
+```bash
+pip install .
+```
 
 ## License
 
-Copyright 2022 Alexander Lyttle.
+Copyright by Alexander Lyttle, 2023.
+
+### Thesis PDF
+
+This work is licensed under a [Creative Commons 'Attribution 4.0 International'](https://creativecommons.org/licenses/by/4.0/deed.en) license.
+
+### LaTeX
 
 This work may be distributed and/or modified under the conditions of the LaTeX Project Public License (LPPL) version 1.3 or later.
 
 The latest version of this license is in https://www.latex-project.org/lppl.txt and version 1.3 or later is part of all distributions of LaTeX version 2005/12/01 or later.
+
+### Remaining Work
+
+TBC.
