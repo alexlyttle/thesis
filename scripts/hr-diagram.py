@@ -15,7 +15,7 @@ from astroquery.vizier import Vizier
 # from scipy.interpolate import LinearNDInterpolator
 
 GAIA_FILENAME = 'data/gaia_200pc.npy'
-KPLR_FILENAME = 'data/gaia_kplr_1arcsec.fits'
+KPLR_FILENAME = os.path.expanduser('~/OneDrive/Data/Kepler/kepler_dr2_4arcsec.fits')
 # BC_FILENAME = "data/bc.csv"
 # GRID_FILENAME = "/var/local/Scratch/shared/data/mesa_grids/grid2p5a/grid.h5"
 
@@ -128,18 +128,34 @@ params = [
     np.zeros(num_points)        # Av (mag)
 ]
 bands = ["G", "BP", "RP"]
+rlim = [
+    [min((r['bp']-r['rp']).min(), df['bp_rp'].min()), max((r['bp']-r['rp']).max(), df['bp_rp'].max())],
+    [min(G.min(), kG.min()), max(G.max(), kG.max())]
+]
 
 print("Making plot.")
 fig = plt.figure(figsize=(6, 6))
 ax = fig.add_subplot()
+ax.set_xlabel(r'$\mathrm{G_{BP}}-\mathrm{G_{RP}}$')
+ax.set_ylabel(r'$M_\mathrm{G}$')
+ax.set_facecolor('black')
 
-cmap = cm.grayC_r
-ax.plot(r['bp']-r['rp'], G, '.', c=cmap.colors[0], ms=1, alpha=0.2, rasterized=True, zorder=0)
-ax.hist2d(r['bp']-r['rp'], G, cmap=cmap, bins=200, cmin=10, norm=PowerNorm(gamma=1/3), rasterized=True, zorder=1)
+cmap = cm.grayC
+# ax.plot(r['bp']-r['rp'], G, '.', c=cmap.colors[0], ms=1, alpha=0.2, rasterized=True, zorder=0)
+ax.hist2d(r['bp']-r['rp'], G, cmap=cmap, bins=200, range=rlim, norm=PowerNorm(gamma=1/3), rasterized=True, zorder=1)
+
+ax.invert_yaxis()
+fig.tight_layout()
+fig.savefig("../figures/hr-diagram-1.png", format="png", dpi=300)
+ax.invert_yaxis()
 
 cmap = cm.devon
 ax.plot(df['bp_rp'], kG, '.', c=cmap.colors[0], ms=1, alpha=0.2, rasterized=True, zorder=1)
-ax.hist2d(df['bp_rp'], kG, cmap=cmap, bins=200, cmin=10, norm=PowerNorm(gamma=1/3), rasterized=True, zorder=2)
+ax.hist2d(df['bp_rp'], kG, cmap=cmap, bins=200, range=rlim, cmin=10, norm=PowerNorm(gamma=1/3), rasterized=True, zorder=2)
+
+ax.invert_yaxis()
+fig.savefig("../figures/hr-diagram-2.png", format="png", dpi=300)
+# ax.invert_yaxis()
 
 # mask = df["kepid"].isin(s17) & ~df["kepid"].isin(d16) & ~df["kepid"].isin(l17)
 # ax.plot(df.loc[mask, 'bp_rp'], kG.loc[mask], "o", c="k", alpha=0.5, markerfacecolor="none")
@@ -149,30 +165,46 @@ ax.hist2d(df['bp_rp'], kG, cmap=cmap, bins=200, cmin=10, norm=PowerNorm(gamma=1/
 # ax.plot(df.loc[mask, 'bp_rp'], kG.loc[mask], "s", c="C2", markerfacecolor="none")
 
 # Instead, draw a inset plot and do tracks here
-ax.set_xlabel(r'$\mathrm{G_{BP}}-\mathrm{G_{RP}}$')
-ax.set_ylabel(r'$M_\mathrm{G}$')
-ax.invert_yaxis()
 
 axins = ax.inset_axes([0.45, 0.45, 0.53, 0.53])
 
-cmap = cm.grayC_r
-axins.plot(r['bp']-r['rp'], G, '.', c=cmap.colors[0], ms=2, alpha=0.2, rasterized=True, zorder=0)
-axins.hist2d(r['bp']-r['rp'], G, cmap=cmap, bins=200, cmin=10, norm=PowerNorm(gamma=1/3), rasterized=True, zorder=1)
+cmap = cm.grayC
+# axins.plot(r['bp']-r['rp'], G, '.', c=cmap.colors[0], ms=2, alpha=0.2, rasterized=True, zorder=0)
+axins.hist2d(r['bp']-r['rp'], G, cmap=cmap, bins=200, range=rlim, norm=PowerNorm(gamma=1/3), rasterized=True, zorder=1)
 cmap = cm.devon
 axins.plot(df['bp_rp'], kG, '.', c=cmap.colors[0], ms=2, alpha=0.2, rasterized=True, zorder=0)
-axins.hist2d(df['bp_rp'], kG, cmap=cmap, bins=200, cmin=10, norm=PowerNorm(gamma=1/3), rasterized=True, zorder=1)
+axins.hist2d(df['bp_rp'], kG, cmap=cmap, bins=200, range=rlim, cmin=10, norm=PowerNorm(gamma=1/3), rasterized=True, zorder=1)
 
-axins.axvspan(0, 2, color="white", alpha=0.2, transform=axins.transAxes)
+# axins.axvspan(0, 2, color="white", alpha=0.2, transform=axins.transAxes)
+axins.set_xlim(0.4, 1.4)
+axins.set_ylim(1.5, 6.0)
+axins.set_xticks([])
+axins.set_yticks([])
+ax.indicate_inset_zoom(axins, edgecolor="white")
+axins.invert_yaxis()
+for spine in axins.spines.values():
+    spine.set_edgecolor("white")
+
+fig.savefig("../figures/hr-diagram-3.png", format="png", dpi=300)
+
 for mass in [0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4]:
     _, _, _, mags = tracks.interp_mag([mass] + params, bands)
     axins.plot(mags[:, 1]-mags[:, 2], mags[:, 0], "-", color="k")
 
+fig.savefig("../figures/hr-diagram-4.png", format="png", dpi=300)
+
 mask = df["kepid"].isin(s17) & ~df["kepid"].isin(d16) & ~df["kepid"].isin(l17)
 ls, = axins.plot(df.loc[mask, 'bp_rp'], kG.loc[mask], "o", ms=4, c="k", markerfacecolor="none", label="Chaplin et al. (2011)")
+legcolor = cmap.colors[len(cmap.colors)//2]
+ax.legend(handles=[ls], loc="lower right", facecolor=legcolor, edgecolor=legcolor)
+fig.savefig("../figures/hr-diagram-5.png", format="png", dpi=300)
 
 c = cm.buda.resampled(2).colors
 mask = df["kepid"].isin(l17)
 ll, = axins.plot(df.loc[mask, 'bp_rp'], kG.loc[mask], "s", ms=4, c=c[0], markerfacecolor="none", label="Lund et al. (2017)")
+ax.legend(handles=[ls, ll], loc="lower right", facecolor=legcolor, edgecolor=legcolor)
+fig.savefig("../figures/hr-diagram-6.png", format="png", dpi=300)
+
 mask = df["kepid"].isin(d16)
 ld, = axins.plot(df.loc[mask, 'bp_rp'], kG.loc[mask], "^", ms=4, c=c[1], markerfacecolor="none", label="Davies et al. (2016)")
 
@@ -180,21 +212,12 @@ ld, = axins.plot(df.loc[mask, 'bp_rp'], kG.loc[mask], "^", ms=4, c=c[1], markerf
 axins.scatter(0.772, 4.542, marker="o", s=64, color=c[1], zorder=4, facecolor="none")
 axins.scatter(0.772, 4.542, marker=".", s=16, color=c[1], zorder=4)
 
-axins.set_xlim(0.4, 1.4)
-axins.set_ylim(1.5, 6.0)
-axins.set_xticks([])
-axins.set_yticks([])
-
-ax.indicate_inset_zoom(axins, edgecolor="black")
-axins.invert_yaxis()
-
-c = cmap.colors[len(cmap.colors)//2]
-ax.legend(handles=[ls, ld, ll], loc="lower right", facecolor=c, edgecolor=c)
+ax.legend(handles=[ls, ld, ll], loc="lower right", facecolor=legcolor, edgecolor=legcolor)
 # ax.legend(handles=[ls, ld, ll], loc="upper left", facecolor=c, edgecolor=c)
 # ax.legend(handles=[ls, ld, ll], loc="upper left")
 plt.show()
 print("Saving plot.")
-fig.tight_layout()
-fig.savefig("../figures/hr-diagram.pdf", format="pdf", dpi=300)
+# fig.tight_layout()
+fig.savefig("../figures/hr-diagram-7.png", format="png", dpi=300)
 
 print("Done.")
